@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+
+	<select id="list" resultType="ReviewDto">
+		select * from review
+	</select>
+	
+	<!-- <insert id="insert" parameterType="ReviewDto">
+		insert into review()
+		values(#{}, #{}, #{})
+	</insert> -->
+	
+	<select id="get" parameterType="int" resultType="ReviewDto">
+		select * from review where review_no = #{no}
+	</select>
+	
+	<!-- <update id="edit" parameterType="ReviewDto">
+		update review
+			set 
+			where review_no = #{no}
+	</update> -->
+	
+	<delete id="delete" parameterType="int">
+		delete review where review_no = #{no}
+	</delete>
+	
+</mapper>
