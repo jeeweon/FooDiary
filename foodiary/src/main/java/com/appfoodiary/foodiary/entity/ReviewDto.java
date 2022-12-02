@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class ReviewDto {
+public class ReviewDto { //리뷰 기대됩니다~
 
 	private int reviewNo;
 	private int memNo;
