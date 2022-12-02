@@ -55,6 +55,7 @@
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -86,6 +87,24 @@
 		    <artifactId>jsoup</artifactId>
 		    <version>1.15.3</version>
 		</dependency>
+		<!-- 의존성 추가 -->		
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.11.0</version>
+		</dependency>
+		<!-- 암호화 라이브러리 추가 -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		</dependency>
+		<!--REST API 문서화를 위한 의존성 -->
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-ui</artifactId>
+		    <version>1.6.12</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
