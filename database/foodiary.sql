@@ -168,7 +168,7 @@ create sequence areas_seq;
 CREATE TABLE  areas  (
          area_no number primary key,
          area_city varchar2(30) not null,
-         area_district varchar2(30) not null,
+         area_district varchar2(30),
          area_nearby1 varchar2(30),
          area_nearby2 varchar2(30)
 );
