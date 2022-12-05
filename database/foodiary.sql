@@ -164,16 +164,17 @@ CREATE TABLE notice_email  (
          email_when date default sysdate
 );
 
-create sequence nearby_areas_seq;
-CREATE TABLE  nearby_areas  (
+create sequence areas_seq;
+CREATE TABLE  areas  (
          area_no number primary key,
-         area_name varchar2(30) not null,
-         area_nearby varchar2(30) not null
+         area_city varchar2(30) not null,
+         area_district varchar2(30) not null,
+         area_nearby1 varchar2(30),
+         area_nearby2 varchar2(30)
 );
 
 CREATE TABLE  interest_areas  (
-         area_no references nearby_areas(area_no) on delete cascade,
+         area_no references areas(area_no) on delete cascade,
          mem_no  references mem(mem_no) on delete cascade
 );
-
 commit;
