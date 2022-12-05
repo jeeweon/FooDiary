@@ -5,9 +5,10 @@ import java.util.List;
 import com.appfoodiary.foodiary.entity.ReviewDto;
 
 public interface ReviewDao {
+	int newReviewNo();
 	List<ReviewDto> list();
-	void insert(ReviewDto dto);
-	ReviewDto find(int no);
+	void write(ReviewDto dto);
+	ReviewDto find(int reviewNo);
 	boolean edit(ReviewDto dto);
-	boolean delete(int no);
+	boolean delete(int reviewNo);
 }
