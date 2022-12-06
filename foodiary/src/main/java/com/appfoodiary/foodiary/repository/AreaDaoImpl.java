@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.AreaDto;
 import com.appfoodiary.foodiary.entity.InterestAreaDto;
+import com.appfoodiary.foodiary.vo.InterestAreaVO;
 
 @Repository
 public class AreaDaoImpl implements AreaDao{
@@ -22,5 +23,15 @@ public class AreaDaoImpl implements AreaDao{
 	@Override
 	public void addInterest(InterestAreaDto interestAreaDto) {
 		sqlSession.insert("area.add-interest", interestAreaDto);
+	}
+	
+	@Override
+	public List<InterestAreaVO> myAreas(int memNo) {
+		return sqlSession.selectList("area.list-interest", memNo);
+	}
+	
+	@Override
+	public void deleteInterest(InterestAreaDto interestAreaDto) {
+		sqlSession.delete("area.delete-interest", interestAreaDto);
 	}
 }

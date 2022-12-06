@@ -9,9 +9,21 @@
 		select * from areas order by area_no
 	</select>
 	
-	<!-- 관심 지역 등록 -->
+	<!-- 관심지역 등록 -->
 	<insert id="add-interest" parameterType="InterestAreaDto">
 		insert into interest_areas(area_no, mem_no)
 		values(#{areaNo}, #{memNo})
 	</insert>
+	
+	<!-- 관심지역 목록 조회 -->
+	<select id="list-interest" parameterType="int" resultType="InterestAreaVO">
+		select I.mem_no, A.* from interest_areas I 
+		inner join areas A on I.area_no = A.area_no 
+		where I.mem_no = #{memNo}
+	</select>
+	
+	<!-- 관심지역 삭제 -->
+	<delete id="delete-interest" parameterType="InterestAreaDto">
+		delete interest_areas where mem_no = #{memNo} and area_no = #{areaNo}
+	</delete>
 </mapper>
