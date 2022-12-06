@@ -16,6 +16,8 @@ public interface ReviewDao {
 	boolean delete(int reviewNo);
 	
 	//리뷰 첨부파일
-	void addReviewAttach(ReviewAttachDto dto);
-	List<AttachDto> findReviewAttachViewList(int reviewNo);
+	void addReviewAttach(ReviewAttachDto dto);	//파일첨부
+	List<AttachDto> findReviewAttachViewList(int reviewNo);	//전체 조회
+	AttachDto findReviewAttachView(int reviewNo);	//대표파일 조회
+	
 }

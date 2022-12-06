@@ -60,5 +60,10 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<AttachDto> findReviewAttachViewList(int reviewNo) {
 		return sqlSession.selectList("review.findAttach", reviewNo);
 	}
+	//리뷰 대표파일 조회
+	@Override
+	public AttachDto findReviewAttachView(int reviewNo) {
+		return sqlSession.selectOne("review.findAttachRep", reviewNo);
+	}
 
 }

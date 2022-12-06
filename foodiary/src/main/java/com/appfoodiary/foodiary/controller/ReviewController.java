@@ -54,7 +54,8 @@ public class ReviewController {
 		return "review/write";
 	}
 	@PostMapping("/write")
-	public String write(HttpSession session, @ModelAttribute ReviewDto dto, 
+	public String write(HttpSession session, 
+			@ModelAttribute ReviewDto dto, 
 			@RequestParam List<MultipartFile> attachments, RedirectAttributes attr) 
 															throws IllegalStateException, IOException {
 		session.removeAttribute(SessionConstant.NO);	//★로그인 구현시 삭제예정
@@ -84,15 +85,21 @@ public class ReviewController {
 	}
 	
 	@GetMapping("/detail")
-	public String detail(Model model, @RequestParam int reviewNo,
-			HttpSession session) {
+	public String detail(HttpSession session,
+			Model model, @RequestParam int reviewNo) {
+		//리뷰정보
 		ReviewDto dto = reviewDao.find(reviewNo);
 		model.addAttribute("reviewDto", dto);
+		
+		//첨부파일 조회, 첨부
+		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
 		return "review/detail";
 	}
 	
 	@GetMapping("/edit")
 	public String edit(Model model, @RequestParam int reviewNo) {
+		ReviewDto reviewDto = reviewDao.find(reviewNo);
+		model.addAttribute("reviewDto", reviewDto);
 		return "review/edit";
 	}
 	@PostMapping("/edit")
