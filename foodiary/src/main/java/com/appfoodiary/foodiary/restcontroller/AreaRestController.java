@@ -2,6 +2,8 @@ package com.appfoodiary.foodiary.restcontroller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,9 @@ public class AreaRestController {
 	}
 	
 	@PostMapping("/area/interest")
-	public void insert(@RequestBody InterestAreaDto dto) {
+	public void insert(@RequestBody InterestAreaDto dto, 
+			HttpSession session) {
+		dto.setMemNo(0);
 		areaDao.addInterest(dto);
 	} 
 }
