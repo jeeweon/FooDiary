@@ -12,7 +12,8 @@ create table mem (
          mem_login_date  date
 );
 
-alter table mem modify mem_intro varchar2(300) default null;
+alter table mem modify mem_intro varchar2(300) default null; --자기소개 default null
+alter table mem modify mem_pw varchar2(60); -- 비밀번호 암호화를 위해 60자로 변경
 
 drop table drop_wait;
 create sequence drop_wait_seq;
