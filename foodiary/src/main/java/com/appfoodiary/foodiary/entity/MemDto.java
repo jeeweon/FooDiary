@@ -15,7 +15,7 @@ public class MemDto {
 	private String memPw;
 	private String memNick;
 	private String memIntro;
-	private String memBirth;
+	private Date memBirth;
 	private String memLevel;
 	private int memPoint;
 	private Date memJoinDate;

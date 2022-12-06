@@ -8,13 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class ReviewDto { 
-
-	private int reviewNo;
-	private int memNo;
-	private String reviewContent;
-	private Date reviewWriteTime;
-	private float starScore;
-	private String reviewPlace;
-	private int reviewReportCnt;
+public class BookmarkDto {
+ private int menNo, reivewNo;
+ private Date bookmarkNo;
 }

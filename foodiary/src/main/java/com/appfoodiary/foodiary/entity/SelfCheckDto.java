@@ -8,13 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class ReviewDto { 
+public class SelfCheckDto {
+	
+	private String who;
+	private String serial;
+	private Date when;
 
-	private int reviewNo;
-	private int memNo;
-	private String reviewContent;
-	private Date reviewWriteTime;
-	private float starScore;
-	private String reviewPlace;
-	private int reviewReportCnt;
 }

@@ -5,12 +5,15 @@ create table mem (
          mem_pw         varchar2(20) not null,
          mem_nick         varchar2(30) unique not null check(regexp_like(mem_nick, '^[가-힣][가-힣0-9]{0,9}$')),
          mem_intro         varchar2(300),
-         mem_birth         varchar2(8)         not null,
+         mem_birth         varchar2(8) not null,
          mem_level         char(3) default 1 not null check(mem_level in(1,2,3,4,5,6,444)),
-         mem_point         number        default 0 not null check(mem_point>=0),
+         mem_point         number default 0 not null check(mem_point>=0),
          mem_join_date date default sysdate not null,
          mem_login_date  date
 );
+
+alter table mem modify mem_intro varchar2(300) default null; --자기소개 default null
+alter table mem modify mem_pw varchar2(60); -- 비밀번호 암호화를 위해 60자로 변경
 
 drop table drop_wait;
 create sequence drop_wait_seq;
@@ -20,6 +23,7 @@ create table drop_wait (
           wait_mem_email          varchar2(60) unique not null,
           wait_mem_pw          varchar2(20) not null,
           wait_mem_nick          varchar2(30) default null, -- 대기였던 동안 닉네임 누가 가져갈 수 있으니 닉네임은 null 처리
+          wait_mem_intro         varchar2(300),
           wait_mem_birth          varchar2(8) not null,
           wait_mem_level          char(3) default 1 not null check(wait_mem_level in(1,2,3,4,5,6,444)),
           wait_mem_point          number not null,
@@ -168,7 +172,7 @@ create sequence areas_seq;
 CREATE TABLE  areas  (
          area_no number primary key,
          area_city varchar2(30) not null,
-         area_district varchar2(30) not null,
+         area_district varchar2(30),
          area_nearby1 varchar2(30),
          area_nearby2 varchar2(30)
 );
