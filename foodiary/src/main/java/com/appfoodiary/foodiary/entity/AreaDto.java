@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class AreaDto {
 	private int areaNo;
-	private String area_city;
+	private String areaCity;
 	private String areaDistrict;
 	private String areaNearby1;
 	private String areaNearby2;
