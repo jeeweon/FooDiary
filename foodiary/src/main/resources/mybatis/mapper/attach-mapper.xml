@@ -16,10 +16,6 @@
 			#{attachNo}, #{attachName}, #{attachType}, #{attachSize})
 	</insert>
 	
-	<select id="list" resultType="AttachDto">
-		select * from attach
-	</select>
-	
 	<select id="get" parameterType="int" resultType="AttachDto">
 		select * from attach where attach_no = #{attachNo}
 	</select>

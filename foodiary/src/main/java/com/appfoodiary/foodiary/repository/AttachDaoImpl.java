@@ -1,7 +1,5 @@
 package com.appfoodiary.foodiary.repository;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,11 +21,6 @@ public class AttachDaoImpl implements AttachDao{
 	@Override
 	public void insert(AttachDto dto) {
 		sqlSession.insert("attach.insert", dto);
-	}
-
-	@Override
-	public List<AttachDto> selectList() {
-		return sqlSession.selectList("attach.list");
 	}
 
 	@Override

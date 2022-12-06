@@ -2,11 +2,15 @@ package com.appfoodiary.foodiary.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +25,7 @@ public class AttachmentServiceImpl implements AttachmentService{
 	@Autowired
 	private AttachDao attachDao;
 	
+	//업로드
 	@Override
 	public int attachmentsUp(List<MultipartFile> attachments, MultipartFile file) 
 														throws IllegalStateException, IOException {
@@ -41,6 +46,40 @@ public class AttachmentServiceImpl implements AttachmentService{
 		return attachNo;
 	}
 
+	//다운로드(미리보기)
+	@Override
+	public ResponseEntity<ByteArrayResource> attachmentsDownloadList(int attachNo) throws IOException {
+		//파일탐색(DB)
+		AttachDto attachDto = attachDao.selectOne(attachNo);
+		if(attachDto == null) {
+			return null;
+		}
+		
+		//파일 가져오기
+		File target = new File(dir, String.valueOf(attachNo));
+		byte[] data = FileUtils.readFileToByteArray(target);
+		ByteArrayResource resource = new ByteArrayResource(data);
+		
+		//응답객체 만들어서 데이터 전송
+		return ResponseEntity.ok()
+//						.header("Content-Encoding", "UTF-8")
+				.header(HttpHeaders.CONTENT_ENCODING, 
+						StandardCharsets.UTF_8.name())
+//						.header("Content-Length", String.valueOf(data.length))
+				.contentLength(attachDto.getAttachSize())
+//						.contentType(MediaType.APPLICATION_OCTET_STREAM)			//다운로드해라
+				.header(HttpHeaders.CONTENT_TYPE, attachDto.getAttachType())	//열든지 다운로드하든지 맘대로
+//						.header("Content-Disposition", "attachment;filename=" + String.valueOf(imageNo))
+				.header(HttpHeaders.CONTENT_DISPOSITION, 
+						ContentDisposition.attachment()
+								.filename(
+										attachDto.getAttachName(), 
+										StandardCharsets.UTF_8)
+								.build().toString())
+				.body(resource);
+	}
+	
+	//삭제
 	@Override
 	public void attachmentsDelete(List<AttachDto> attachments) {
 		for(AttachDto attachDto : attachments) {

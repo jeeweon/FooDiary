@@ -1,16 +1,17 @@
 package com.appfoodiary.foodiary.repository;
 
-import java.util.List;
-
 import com.appfoodiary.foodiary.entity.AttachDto;
 
+//첨부파일
 public interface AttachDao {
-	
-//	첨부파일 데이터
+
+//	번호 생성
 	int newAttachNo();
+//	파일 추가
 	void insert(AttachDto dto);	
-	List<AttachDto> selectList();
+//	파일 탐색
 	AttachDto selectOne(int attachNo);
+//	파일 삭제
 	boolean delete(int attachNo);
 
 }
