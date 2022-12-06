@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -35,5 +34,16 @@
 	<delete id="delete" parameterType="int">
 		delete review where review_no = #{reviewNo}
 	</delete>
+	
+	
+	<!-- 리뷰 파일첨부 -->
+	<insert id="insertAttach" parameterType="ReviewAttachDto">
+		insert into review_attach values(#{attachNo}, #{reviewNo})
+	</insert>
+	<!-- 리뷰 파일조회 -->
+	<select id="findAttach" parameterType="int" resultType="AttachDto">
+		select * from review_attach_view
+		where review_no = #{review_no} order by attach_no asc
+	</select>
 	
 </mapper>

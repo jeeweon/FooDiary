@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.appfoodiary.foodiary.entity.AttachDto;
+import com.appfoodiary.foodiary.entity.ReviewAttachDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
 
 @Repository
@@ -14,6 +16,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//리뷰
 	@Override
 	public int newReviewNo() {
 		int reviewNo = sqlSession.selectOne("review.seq");
@@ -45,6 +48,17 @@ public class ReviewDaoImpl implements ReviewDao {
 	public boolean delete(int reviewNo) {
 		int count = sqlSession.delete("review.delete", reviewNo);
 		return count >0;
+	}
+
+	//리뷰 파일첨부
+	@Override
+	public void addReviewAttach(ReviewAttachDto dto) {
+		sqlSession.insert("review.insertAttach", dto);
+	}
+	//리뷰 파일조회
+	@Override
+	public List<AttachDto> findReviewAttachViewList(int reviewNo) {
+		return sqlSession.selectList("review.findAttach", reviewNo);
 	}
 
 }
