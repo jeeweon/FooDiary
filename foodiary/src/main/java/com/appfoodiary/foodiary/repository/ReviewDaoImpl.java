@@ -15,18 +15,24 @@ public class ReviewDaoImpl implements ReviewDao {
 	private SqlSession sqlSession;
 	
 	@Override
+	public int newReviewNo() {
+		int reviewNo = sqlSession.selectOne("review.seq");
+		return reviewNo;
+	}
+	
+	@Override
 	public List<ReviewDto> list() {
 		return sqlSession.selectList("review.list");
 	}
 
 	@Override
-	public void insert(ReviewDto dto) {
+	public void write(ReviewDto dto) {
 		sqlSession.insert("review.insert", dto);
 	}
 
 	@Override
-	public ReviewDto find(int no) {
-		return sqlSession.selectOne("review.get", no);
+	public ReviewDto find(int reviewNo) {
+		return sqlSession.selectOne("review.get", reviewNo);
 	}
 
 	@Override
@@ -36,8 +42,8 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	@Override
-	public boolean delete(int no) {
-		int count = sqlSession.delete("review.delete", no);
+	public boolean delete(int reviewNo) {
+		int count = sqlSession.delete("review.delete", reviewNo);
 		return count >0;
 	}
 
