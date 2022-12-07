@@ -17,6 +17,10 @@
         .search-list = <div<li + span(.btn-add-area)>> * addressList.length
         .my-area = <div<li + span(.btn-delete-area)>> * interestList.length
     */
+    .search-form {
+        margin: 0;
+    }
+    
     .search-view{
         width: 400px; 
         margin: 0 auto;
@@ -192,17 +196,77 @@
         border: none;
         border-radius: 6px;
         font-size: 16px;
+        text-align: center;
+    }
+    
+    .recommend-area{
+        width:600px;
+        margin: 0 auto;
+        margin-top: 140px;
+        position: relative;
+    }
+    
+    .recommend-area.none .none-interest {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .recommend-list{
+	    margin: 0;
+	    padding: 0;
+	    list-style: none;
+	    width: 100%;
+	    border: none;
+	    font-size: 16px;
+	    position: absolute;
+	    background-color: white;
+	    display: flex;
+	    flex-wrap: wrap;
+    }
+    
+    .recommend-list div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FEF7F2;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        width: 100px;
+        height: 50px;
+        padding: 0.5em;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .recommend-list li {
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        padding: 0.5em;
+        color: #E27C5E;
+        font-weight: bold;
+    }
+    
+    .sub-title {
+    	display: block;
+        margin-bottom: 14px;
+    }
+    
+    .selected-area {
+    	border: 2px solid #E27C5E;
     }
 </style>
 </head>
-<body>  
+<body>
 <h1 class="title">관심지역을 설정해주세요</h1>
 
 <!-- 검색 -->
 <div class="search-view">
     <form class="search-form">
         <div class="search-bar">
-            <input type="text" name="keyword" class="search-input" placeholder="시/도, 시/군/구 검색(ex.서울 영등포구)" autocomplete="off">
+            <input type="text" name="keyword" class="search-input" placeholder="시/도, 시/군/구 검색(ex.영등포구)" autocomplete="off">
             <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button> 
         </div>  
     </form>
@@ -221,8 +285,8 @@
 <div class="my-area">
     <h2>내 관심지역</h2>
     
-    <pre><p class="none-interest">자주 찾는 동네, 가고 싶은 여행지를 추가하고
-    최신 리뷰를 모아보세요!</p></pre>
+    <p class="none-interest">자주 찾는 동네, 가고 싶은 여행지를 추가하고<br>
+    최신 리뷰를 모아보세요!</p>
 
     <ul class="my-area-list">
     </ul>
@@ -230,9 +294,12 @@
 
 <!-- 인근지역 추천 목록 -->
 <div class="recommend-area">
-    <h2>이런 지역 어때요?</h2>
-    <span>👀 닉네임님의 관심지역 주변</span>
-
+    <h2>이런 지역 어때요</h2>
+    <span class="sub-title">👀 ${loginNick}님의 관심지역 주변</span>
+    
+	<p class="none-interest">관심지역을 추가하면<br>
+	주변지역을 추천해드려요</p>
+    
     <ul class="recommend-list">
     </ul>
 </div>
@@ -253,6 +320,7 @@
                 success : function(resp) {
                     interestList = resp;
                     showMyArea();
+                    showRecommendArea();
                 }
             });
         };
@@ -276,7 +344,7 @@
                     span.click(function(e){
                         e.stopPropagation(); //전파 중지
 
-                        var areaNo = $(".btn-delete-area").data("no");
+                        var areaNo = $(this).data("no");
                         deleteMyArea(areaNo);
                     });
 
@@ -285,7 +353,64 @@
                 });    
             }
         };
+		
+      //추천지역 목록 출력
+        function showRecommendArea(){
+            $(".recommend-list").empty();
+            $(".recommend-area").removeClass("none");
+            if(interestList.length == 0) {
+                $(".recommend-area").addClass("none");
+            } else {
+                $.each(interestList, function(index, value){
+                	if(value.areaNearby1 == null) {
+                		return;
+                	} else {
+                		//인근지역1 리스트
+                        var nearby1 = $("<li>").text(value.areaNearby1);
+                        //등록 버튼
+                        var span1 = $("<span>").html("<i class='fa-solid fa-magnifying-glass'></i>").attr("data-name", value.areaNearby1);
+                        span1.addClass("btn-add-area");
+                        
+                        //등록 버튼 클릭 시, 검색바에 지역이름 입력 후 검색버튼 클릭
+                   		span1.click(function(e){
+                            e.stopPropagation(); //전파 중지
 
+                            if(interestList.length < 3) {
+                                var areaDistrict = $(this).data("name");
+                                $(".search-input").val(areaDistrict);
+                                $(".btn-search").trigger("click");
+                            } else {
+                                alert('관심지역은 세 개까지 추가할 수 있어요'); //모달로 변경?
+                            }
+                    	});
+                   		var div1 = $("<div>").append(nearby1).append(span1); //주소, 추가 버튼을 세트로 묶기
+                        $(".recommend-list").append(div1); //세트를 결과 목록 영역에 추가
+                	}
+                	if(value.areaNearby2 == null) {
+                		return;
+                	} else {
+                		//인근지역2 리스트 
+                		var nearby2 = $("<li>").text(value.areaNearby2);
+                        var span2 = $("<span>").html("<i class='fa-solid fa-magnifying-glass'></i>").attr("data-name", value.areaNearby2);
+                        span2.addClass("btn-add-area");
+                   		span2.click(function(e){
+                            e.stopPropagation(); //전파 중지
+                            
+                            if(interestList.length < 3) {
+                                var areaDistrict = $(this).data("name");
+                                $(".search-input").val(areaDistrict);
+                                $(".btn-search").trigger("click");
+                            } else {
+                                alert('관심지역은 세 개까지 추가할 수 있어요'); //모달로 변경?
+                            }
+                    	});
+                        var div2 = $("<div>").append(nearby2).append(span2); //주소, 추가 버튼을 세트로 묶기
+                        $(".recommend-list").append(div2); //세트를 결과 목록 영역에 추가        		
+                	}
+                });    
+            }
+        };
+        
         //지역 정보 목록 조회
         let addressList = [];
         $.ajax({
@@ -320,8 +445,6 @@
             
             //출력할 결과 목록 태그로 생성
             $.each(filterList, function(index, value){
-                //$(".search-list").append("<li>" + value.areaCity + " " + value.areaDistrict + "</li>");
-                
                 var li = $("<li>").text(
                     value.areaCity + " " + value.areaDistrict
                 )
@@ -334,9 +457,9 @@
                 //추가 버튼 클릭 시, 내 관심지역에 추가
                 span.click(function(e){
                     e.stopPropagation(); //전파 중지
-
+					
                     if(interestList.length < 3) {
-                        var areaNo = $(".btn-add-area").data("no");
+                        var areaNo = $(this).data("no");
                         addMyArea(areaNo);
                     } else {
                         alert('관심지역은 세 개까지 추가할 수 있어요'); //모달로 변경?
