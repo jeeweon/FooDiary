@@ -21,10 +21,21 @@
 					<a href="detail?reviewNo=${reviewDto.reviewNo}">
 						${reviewDto.reviewNo}
 					</a>
-				<!-- 사진을 누르면 상세 페이지로 이동하도록 처리 -->
-				<%-- <a href="detail?reviewNo=${reviewDto.reviewNo}">
-					<!-- 사진 미리보기 -->
-				</a> --%>
+				
+				<c:set var="current">
+					<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
+				</c:set>
+				<c:choose>
+					<c:when test="${today == current}">
+						작성일 : 
+						<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
+					</c:when>
+					<c:otherwise>
+						작성일 : 
+						<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
+					</c:otherwise>
+				</c:choose>
+				<%-- 조회수 : ${reviewDto.reviewRead} --%>
 				
 				<%-- <!-- 댓글 개수 출력 -->
 				<c:if test="${reviewDto.replyCount > 0}">
@@ -35,22 +46,14 @@
 				<c:if test="${reviewDto.reviewLike > 0}">
 					♥ ${reviewDto.reviewLike}
 				</c:if> --%>
-				<c:set var="current">
-					<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
-				</c:set>
-				<c:choose>
-					<c:when test="${today == current}">
-						작성일 : 
-						<fmt:formatDate value="${reviewDto.reviewWriteTime}" 
-													pattern="HH:mm"/>
-					</c:when>
-					<c:otherwise>
-						작성일 : 
-						<fmt:formatDate value="${reviewDto.reviewWriteTime}" 
-													pattern="yyyy-MM-dd"/>
-					</c:otherwise>
-				</c:choose>
-				<%-- 조회수 : ${reviewDto.reviewRead} --%>
-			</c:forEach>
-		</div>
+				
+				<!-- 사진을 누르면 상세 페이지로 이동하도록 처리 -->
+				<div>
+					<a href="detail?reviewNo=${reviewDto.reviewNo}">
+						<!-- 미리보기 -->
+						<img src="/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="100" height="100">
+					</a>
+				</div>
+			</div><br>
+		</c:forEach>
 	</div>

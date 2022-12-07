@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="like">
+	<select id="cert" parameterType="int" resultType="int">
+		select 
+			count(*) 
+		from 
+			like 
+		where 
+			review_no=#{reviewNo} and mem_no=#{memNo};
+	</select>
+	<insert id="insert" parameterType="int">
+		insert into like(reivew_no,mem_no) 
+		values(#{reviewNo},#{memNo});
+	</insert>
+	<delete id="delete" parameterType="int">
+		delete 
+		from 
+			like 
+		where 
+			review_no=#{reviewNo} and mem_no=#{memNo};
+	</delete>
+</mapper>

@@ -62,6 +62,12 @@ CREATE TABLE review (
         review_place varchar2(120),
         review_report_cnt number default 0 not null check(review_report_cnt>=0)
 );
+create view review_attach_view as
+select
+    R.review_no, A.*
+from
+    review_attach R inner join attach A
+    on R.attach_no = A.attach_no;
 
 create sequence mem_noti_seq;
 create table  mem_noti  (
