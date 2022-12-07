@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class AreaDto {
-	private int areaNo;
-	private String areaCity;
-	private String areaDistrict;
-	private String areaNearby1;
-	private String areaNearby2;
+public class ReviewAttachDto {
+	private int attachNo;
+	private int reviewNo;
 }

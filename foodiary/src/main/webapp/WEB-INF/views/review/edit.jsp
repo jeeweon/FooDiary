@@ -33,11 +33,12 @@
 	});
 </script>
 
-<form action="write" method="post" enctype="multipart/form-data">
+<form action="edit" method="post">
+	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
 	
 	<div>
 		<label>내용</label>
-		<textarea name="reviewContent"></textarea>
+		<textarea name="reviewContent">${reviewDto.reviewContent}</textarea>
 	</div>
 	
 	<div>
