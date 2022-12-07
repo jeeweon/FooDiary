@@ -42,7 +42,7 @@
 	
 	<div>
 		<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-		<input type="file" name="attachment" multiple>
+		<input type="file" name="attachments" multiple>
 	</div>
 	
 	<div>
