@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.appfoodiary.foodiary.entity.AreaDto;
 import com.appfoodiary.foodiary.entity.InterestAreaDto;
+import com.appfoodiary.foodiary.vo.CntInterestAreaVO;
 import com.appfoodiary.foodiary.vo.InterestAreaVO;
 
 public interface AreaDao {
@@ -11,4 +12,5 @@ public interface AreaDao {
 	void addInterest(InterestAreaDto interestAreaDto);
 	List<InterestAreaVO> myAreas(int memNo);
 	void deleteInterest(InterestAreaDto interestAreaDto);
+	CntInterestAreaVO selectCnt(int memNo);
 }

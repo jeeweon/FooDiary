@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.AreaDto;
 import com.appfoodiary.foodiary.entity.InterestAreaDto;
+import com.appfoodiary.foodiary.vo.CntInterestAreaVO;
 import com.appfoodiary.foodiary.vo.InterestAreaVO;
 
 @Repository
@@ -33,5 +34,10 @@ public class AreaDaoImpl implements AreaDao{
 	@Override
 	public void deleteInterest(InterestAreaDto interestAreaDto) {
 		sqlSession.delete("area.delete-interest", interestAreaDto);
+	}
+	
+	@Override
+	public CntInterestAreaVO selectCnt(int memNo) {	
+		return sqlSession.selectOne("area.count-interest", memNo);
 	}
 }

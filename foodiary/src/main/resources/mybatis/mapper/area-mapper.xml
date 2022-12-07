@@ -22,6 +22,16 @@
 		where I.mem_no = #{memNo}
 	</select>
 	
+	<!-- 관심지역 설정 개수 조회 -->
+	<select id="count-interest" parameterType="int" resultType="CntInterestAreaVO">
+		select mem_no, count(*) 
+		from (
+			select I.mem_no, A.* from interest_areas I 
+			inner join areas A on I.area_no = A.area_no 
+			where I.mem_no = #{memNo}
+		) group by mem_no
+	</select>
+	
 	<!-- 관심지역 삭제 -->
 	<delete id="delete-interest" parameterType="InterestAreaDto">
 		delete interest_areas where mem_no = #{memNo} and area_no = #{areaNo}
