@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="attach">
+
+	<select id="seq" resultType="int">
+		select attach_seq.nextval from dual
+	</select>
+	
+	<insert id="insert" parameterType="AttachDto">
+		insert into 
+		attach(
+			attach_no, attach_name, attach_type, attach_size)
+		values(
+			#{attachNo}, #{attachName}, #{attachType}, #{attachSize})
+	</insert>
+	
+	<select id="get" parameterType="int" resultType="AttachDto">
+		select * from attach where attach_no = #{attachNo}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete attach where attach_no = #{attachNo}
+	</delete>
+
+</mapper>
