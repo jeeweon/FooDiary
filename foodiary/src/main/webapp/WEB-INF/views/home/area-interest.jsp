@@ -457,12 +457,16 @@
                 //추가 버튼 클릭 시, 내 관심지역에 추가
                 span.click(function(e){
                     e.stopPropagation(); //전파 중지
-					
+                    
                     if(interestList.length < 3) {
                         var areaNo = $(this).data("no");
-                        addMyArea(areaNo);
+                       	if(interestList.some(v => v.areaNo === areaNo)) {
+                			alert('이미 추가된 관심지역이에요 😲'); //모달로 변경?                        		
+                       	} else {
+   		                    addMyArea(areaNo);                        		
+                        }
                     } else {
-                        alert('관심지역은 세 개까지 추가할 수 있어요'); //모달로 변경?
+                        alert('관심지역은 세 개까지 추가할 수 있어요.️'); //모달로 변경?
                     }
                 });
                 var div = $("<div>").append(li).append(span); //주소, 추가 버튼을 세트로 묶기

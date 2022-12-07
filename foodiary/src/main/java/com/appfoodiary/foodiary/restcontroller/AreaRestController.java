@@ -44,8 +44,13 @@ public class AreaRestController {
 		dto.setMemNo(memNo);
 		CntInterestAreaVO cntVO = areaDao.selectCnt(memNo);
 		int myAreaCnt = cntVO.getCount();
-		if(myAreaCnt < 3) {			
-			areaDao.addInterest(dto);
+		if(myAreaCnt < 3) {
+			List<InterestAreaDto> list = areaDao.myAreasDto(memNo);
+			if(!list.contains(dto)) {
+				areaDao.addInterest(dto);	
+			} else {
+				log.debug("이미 추가된 관심지역");
+			}
 		} else {
 			log.debug("관심지역 설정 개수 제한 초과(최대 3개)");
 		}
@@ -60,7 +65,7 @@ public class AreaRestController {
 	@DeleteMapping("/area/interest")
 	public void delete(@RequestBody InterestAreaDto dto,
 			HttpSession session) {
-		int memNo = (Integer)session.getAttribute("loginNo"); //회원가입 기능구현 완료 시 이 구문 사용
+		int memNo = (Integer)session.getAttribute("loginNo");
 		dto.setMemNo(memNo);
 		areaDao.deleteInterest(dto);
 	}
