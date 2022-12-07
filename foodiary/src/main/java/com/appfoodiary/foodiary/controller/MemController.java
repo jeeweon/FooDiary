@@ -58,17 +58,25 @@ public class MemController {
 			HttpSession session) {
 				
 		boolean judge = memDao.login(inputDto);
+		MemDto findDto = memDao.findByEmail(inputDto.getMemEmail());
 		
 		if(judge){
-			session.setAttribute(SessionConstant.NO, inputDto.getMemNo());
-			session.setAttribute(SessionConstant.NICK, inputDto.getMemNick());
+			session.setAttribute(SessionConstant.NO, findDto.getMemNo());
+			session.setAttribute(SessionConstant.NICK, findDto.getMemNick());
 			
-			return "redirect:/";
+			return "redirect:/home";
 		}
 		else {
 			return "redirect:login?error";
-		}
-		
+		}	
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		//세션에서 loginNo, loginNick 데이터 삭제
+		session.removeAttribute(SessionConstant.NO);
+		session.removeAttribute(SessionConstant.NICK);
+		return "redirect:/home";
 	}
 	
 

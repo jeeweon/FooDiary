@@ -52,5 +52,8 @@ public class MemDaoImpl implements MemDao {
 		boolean judge = encoder.matches(memDto.getMemPw(), findDto.getMemPw());
 		return judge;
 	}
+	
+	
+	
 
 }
