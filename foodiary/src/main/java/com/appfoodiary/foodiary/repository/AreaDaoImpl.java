@@ -32,6 +32,11 @@ public class AreaDaoImpl implements AreaDao{
 	}
 	
 	@Override
+	public List<InterestAreaDto> myAreasDto(int memNo) {
+		return sqlSession.selectList("area.list-interest-dto", memNo);
+	}
+	
+	@Override
 	public void deleteInterest(InterestAreaDto interestAreaDto) {
 		sqlSession.delete("area.delete-interest", interestAreaDto);
 	}
