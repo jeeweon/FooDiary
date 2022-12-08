@@ -1,4 +1,4 @@
-package com.appfoodiary.foodiary.controller;
+package com.appfoodiary.foodiary.restcontroller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

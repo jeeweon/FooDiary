@@ -34,5 +34,10 @@
 		select * from mem where mem_nick = #{memNick}
 	</select>
 
+	<update id="loginDate" parameterType="int">
+		update mem set 
+			mem_login_date = sysdate 
+		where mem_no = #{memNo}
+	</update>
 
 </mapper>
