@@ -35,18 +35,7 @@
 						<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
 					</c:otherwise>
 				</c:choose>
-				<%-- 조회수 : ${reviewDto.reviewRead} --%>
-				
-				<%-- <!-- 댓글 개수 출력 -->
-				<c:if test="${reviewDto.replyCount > 0}">
-					[${reviewDto.replyCount}]
-				</c:if>
-				
-				<!-- 좋아요 개수 출력 -->
-				<c:if test="${reviewDto.reviewLike > 0}">
-					♥ ${reviewDto.reviewLike}
-				</c:if> --%>
-				
+	
 				<!-- 사진을 누르면 상세 페이지로 이동하도록 처리 -->
 				<div>
 					<a href="detail?reviewNo=${reviewDto.reviewNo}">
@@ -54,6 +43,27 @@
 						<img src="/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="100" height="100">
 					</a>
 				</div>
+				
+				<!-- 별점 개수 출력 -->
+				<c:choose>
+					<c:when test="${reviewDto.starScore ==0}">
+						★-
+					</c:when>
+					<c:otherwise>
+						★${reviewDto.starScore}
+					</c:otherwise>
+				</c:choose> 
+				
+				<%-- <!-- 좋아요 개수 출력 -->
+				<c:if test="${reviewDto.reviewLike > 0}">
+					♥ ${reviewDto.reviewLike}
+				</c:if>
+				
+				<!-- 댓글 개수 출력 -->
+				<c:if test="${reviewDto.replyCount > 0}">
+					[${reviewDto.replyCount}]
+				</c:if> --%>
+				
 			</div><br>
 		</c:forEach>
 	</div>
