@@ -13,7 +13,7 @@
     }
     /* 
         .search-view = .search-bar + .search-list
-        .search-bar = .search-input + .btn-search
+        .search-bar = .search-input + .search-btn
         .search-list = <div<li + span(.btn-add-area)>> * addressList.length
         .my-area = <div<li + span(.btn-delete-area)>> * interestList.length
     */
@@ -48,7 +48,7 @@
         box-sizing: border-box;
     }
 
-    .btn-search {
+    .search-btn {
         position: absolute;
         top: 0;
         right: 0;
@@ -267,7 +267,7 @@
     <form class="search-form">
         <div class="search-bar">
             <input type="text" name="keyword" class="search-input" placeholder="시/도, 시/군/구 검색(ex.영등포구)" autocomplete="off">
-            <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button> 
+            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
         </div>  
     </form>
 
@@ -378,7 +378,7 @@
                             if(interestList.length < 3) {
                                 var areaDistrict = $(this).data("name");
                                 $(".search-input").val(areaDistrict);
-                                $(".btn-search").trigger("click");
+                                $(".search-btn").trigger("click");
                             } else {
                                 alert('관심지역은 세 개까지 추가할 수 있어요'); //모달로 변경?
                             }
@@ -399,7 +399,7 @@
                             if(interestList.length < 3) {
                                 var areaDistrict = $(this).data("name");
                                 $(".search-input").val(areaDistrict);
-                                $(".btn-search").trigger("click");
+                                $(".search-btn").trigger("click");
                             } else {
                                 alert('관심지역은 세 개까지 추가할 수 있어요'); //모달로 변경?
                             }
@@ -502,15 +502,9 @@
 
         //관심 지역 DB 삭제
         function deleteMyArea(areaNo){
-            var data = {
-                areaNo:areaNo
-            };
-
             $.ajax({
-                url : "http://localhost:8888/rest/area/interest",
+                url : "http://localhost:8888/rest/area/interest/"+areaNo,
                 method : "delete",
-                contentType:"application/json",
-			    data:JSON.stringify(data),
                 success : function(resp) {
                     loadMyArea();
                 }
