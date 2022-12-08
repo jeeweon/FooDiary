@@ -40,9 +40,9 @@ public class AreaRestController {
 	@PostMapping("/area/interest")
 	public void insert(@RequestBody InterestAreaDto dto, 
 			HttpSession session) {
-		//int memNo = ((Integer)session.getAttribute("loginNo")); //회원가입 기능구현 완료 시 이 구문 사용
-		dto.setMemNo(1);
-		CntInterestAreaVO cntVO = areaDao.selectCnt(1);
+		int memNo = (Integer)session.getAttribute("loginNo");
+		dto.setMemNo(memNo);
+		CntInterestAreaVO cntVO = areaDao.selectCnt(memNo);
 		int myAreaCnt = cntVO.getCount();
 		if(myAreaCnt < 3) {			
 			areaDao.addInterest(dto);
@@ -53,15 +53,15 @@ public class AreaRestController {
 	
 	@GetMapping("/area/interest")
 	public List<InterestAreaVO> myAreas(HttpSession session) {
-		//int memNo = ((Integer)session.getAttribute("loginNo")); //회원가입 기능구현 완료 시 이 구문 사용
-		return areaDao.myAreas(1);
+		int memNo = (Integer)session.getAttribute("loginNo");
+		return areaDao.myAreas(memNo);
 	}
 	
 	@DeleteMapping("/area/interest")
 	public void delete(@RequestBody InterestAreaDto dto,
 			HttpSession session) {
-		//dto.setMemNo((Integer)session.getAttribute("loginNo")); //회원가입 기능구현 완료 시 이 구문 사용
-		dto.setMemNo(1);
+		int memNo = (Integer)session.getAttribute("loginNo"); //회원가입 기능구현 완료 시 이 구문 사용
+		dto.setMemNo(memNo);
 		areaDao.deleteInterest(dto);
 	}
 }
