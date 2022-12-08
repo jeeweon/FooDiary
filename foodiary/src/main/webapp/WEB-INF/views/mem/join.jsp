@@ -47,6 +47,7 @@
 	</div>
 
 <form action="join" class="join-form" method="post" autocomplete="off">
+	
 	<div>
 		<label>
 			이메일
@@ -218,10 +219,10 @@ $(function(){
 			var failMessage = $("#fail-message");
 			var button = $("<button>").attr("type","button").text("인증번호 확인");
 			
-			input.blur(function(){
-				if(judge.memEmailValid !=true) 
-					return $(".serial").addClass("fail").after(failMessage);
-			});	
+// 			input.blur(function(){
+// 				if(judge.memEmailValid !=true) 
+// 					return $(".serial").addClass("fail").after(failMessage);
+// 			});	
 			
 			button.click(function(){
 				var serial = input.val(); //변수 input의 value 값 

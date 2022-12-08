@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.MemDto;
@@ -79,6 +81,53 @@ public class MemController {
 		session.removeAttribute(SessionConstant.NICK);
 		return "redirect:/home";
 	}
+	
+	//비밀번호 찾기 
+	//1.연결된 계정 있는지 이메일 체크
+	@GetMapping("/email_check")
+	public String emailCheck() {
+		return "mem/email-check";
+	}
+	
+	@PostMapping("/email_check")
+	public String emailCheck(@RequestParam String memEmail,
+								RedirectAttributes attr) {
+		
+		MemDto findDto = memDao.findByEmail(memEmail);
+		
+		if(findDto==null) {
+			return "redirect:email_check?error";
+		}
+		else {
+			attr.addAttribute("memEmail", memEmail);
+			return "redirect:email_send";			
+		}
+	}
+	
+//	2. 이메일 본인인증
+	@GetMapping("/email_send")
+	public String emailSend() {
+		return "mem/email-send";
+	}
+	
+	@PostMapping("/email_send")
+	public String emailSend(@RequestParam String memEmail,
+							RedirectAttributes attr) {
+		attr.addAttribute("memEmail",memEmail);
+		return "redirect:reset_pw";
+	}
+	
+//	3. 비밀번호 변경
+	@GetMapping("/reset_pw")
+	public String resetPw(@RequestParam String memEmail) {
+		return "mem/reset-pw";
+	}
+	
+//	@PostMapping("/edit_pw")
+//	public String editPw() {
+//		
+//		return "redirect:mem/login";
+//	}
 	
 
 }
