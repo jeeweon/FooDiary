@@ -454,8 +454,11 @@
                 var span = $("<span>").html("<i class='fa-solid fa-plus'></i>").attr("data-no", value.areaNo);
                 span.addClass("btn-add-area");
                 
+                var div = $("<div>").attr("data-no", value.areaNo).append(li).append(span); //주소, 추가 버튼을 세트로 묶기
+                $(".search-list").append(div); //세트를 결과 목록 영역에 추가
+                
                 //추가 버튼 클릭 시, 내 관심지역에 추가
-                span.click(function(e){
+                div.click(function(e){
                     e.stopPropagation(); //전파 중지
                     
                     if(interestList.length < 3) {
@@ -469,8 +472,7 @@
                         alert('관심지역은 세 개까지 추가할 수 있어요.️'); //모달로 변경?
                     }
                 });
-                var div = $("<div>").append(li).append(span); //주소, 추가 버튼을 세트로 묶기
-                $(".search-list").append(div); //세트를 결과 목록 영역에 추가
+                
             });    
         });
 
