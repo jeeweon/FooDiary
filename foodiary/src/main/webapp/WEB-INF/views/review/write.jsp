@@ -6,9 +6,11 @@
 <link href="/css/summernote-lite.min.css" rel="stylesheet" type="text/css" >
 <script src="/js/summernote-lite.min.js"></script>
 <script src="/js/summernote-ko-KR.min.js"></script>
+<script src="/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
 
 <script type="text/javascript">
 	$(function(){
+		//summernote 옵션 수정
 		$("textarea[name=reviewContent]").summernote({
 			width:700,	//가로
 			height:200,	//높이
@@ -30,10 +32,26 @@
 			fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 		});
+		//별점 옵션 수정
+		$(".star-score-edit").score({
+            editable:true,//수정 가능하도록 설정
+            zeroAvailable:true,//0 설정 가능 여부
+            integerOnly:false,//정수만 가능
+            display:{
+                showNumber:true,//설정된 숫자 표시 가능 여부
+                placeLimit:1,//소수점 자리수
+                textColor:"black",//숫자 색상(기본 : 금색)
+            },
+            send: {
+                sendable:true,//전송가능 설정
+                name:"starScore"//전송 파라미터 명 설정
+            }
+        });
 	});
 </script>
 
 <form action="write" method="post" enctype="multipart/form-data">
+	별점 : <div class="star-score-edit" data-max="5"></div>
 	
 	<div>
 		<label>내용</label>
@@ -51,4 +69,3 @@
 	</div>
 
 </form>
-
