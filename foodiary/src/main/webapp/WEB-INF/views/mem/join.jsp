@@ -35,6 +35,9 @@
    .input.NNNNN ~ .NNNNN-message{
    		display : block;
    }
+   .input.NNNNN ~ .success-message{
+   		display : none;
+   }
 	           
 </style>
 </head>
@@ -153,7 +156,7 @@ $(function(){
 	//이메일 중복 검사
 	$("input[name=memEmail]").blur(function(){
 		var memEmail = $(this).val();
-		$(this).removeClass("fail NNNNN NNNNY");
+		$(this).removeClass("success fail NNNNN NNNNY");
 		
 		if(validChecker.memEmailValid){
 			var that = this;//this 보관
