@@ -11,6 +11,7 @@ public interface AreaDao {
 	List<AreaDto> selectList();
 	void addInterest(InterestAreaDto interestAreaDto);
 	List<InterestAreaVO> myAreas(int memNo);
+	List<InterestAreaDto> myAreasDto(int memNo);
 	void deleteInterest(InterestAreaDto interestAreaDto);
 	CntInterestAreaVO selectCnt(int memNo);
 }
