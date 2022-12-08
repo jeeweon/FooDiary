@@ -53,6 +53,13 @@ public class MemDaoImpl implements MemDao {
 		return judge;
 	}
 	
+	@Override
+	public boolean updateLoginDate(int memNo) {
+		
+		boolean judge = sqlSession.update("mem.loginDate", memNo)>0;
+		return judge;
+	}
+	
 	
 	
 
