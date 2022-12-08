@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <head>
@@ -92,6 +91,17 @@
 </style>
 </head>
 <body>
+<!-- 임시 로그인 메뉴 -->
+<c:set var="login" value="${loginNo != null}"></c:set>
+<c:choose>
+	<c:when test="${login}">
+		<a href="mem/logout">로그아웃</a>
+	</c:when>
+	<c:otherwise>
+		<a href="mem/login">로그인</a>	
+	</c:otherwise>
+</c:choose>
+
 <div class="container">
 	<div class="home-title">
 		<span class="title-nickname">${loginNick}</span><span>님을 위한 리뷰 피드</span>
@@ -149,5 +159,4 @@
 </script>
 </body>
 </html>
-
 

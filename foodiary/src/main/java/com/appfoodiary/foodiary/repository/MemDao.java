@@ -15,4 +15,7 @@ public interface MemDao {
 	
 	//로그인
 	boolean login(MemDto memDto);
+	
+	//로그인 날짜 업데이트
+	boolean updateLoginDate(int memNo);
 }
