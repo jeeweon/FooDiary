@@ -2,12 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<head>
+    <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
    .success-message,
    .fail-message,
    .NNNNN-message,
-   .NNNNY-message { 
+   .NNNNY-message,
+   .wait-message { 
            display: none;
         }
    .input.success ~ .success-message{
@@ -31,9 +34,14 @@
    }	   
    .input.NNNNN ~ .NNNNN-message{
    		display : block;
-   }	   
-        
-</style>	
+   }
+   .input.NNNNN ~ .success-message{
+   		display : none;
+   }
+	           
+</style>
+</head>
+<body>
 	<div>
 		<h1>회원가입</h1>
 	</div>
@@ -44,16 +52,17 @@
 			이메일
 			<i class="fa-solid fa-asterisk"></i>
 		</label>
-		<input type="text" class="input" name="memEmail" placeholder="?">
-        <div class="success-message">올바른 이메일 형식입니다</div>
-        <div class="fail-message">올바르지 않은 이메일 형식입니다</div>
-        <div class="NNNNN-message">이미 사용중인 이메일입니다</div>
-		<div><button class="send-btn" type="button" hidden>인증번호 보내기</button></div>
+		<input type="text" class="input" name="memEmail" placeholder="사용 가능한 이메일을 입력해주세요">
+        <div class="success-message">사용 가능한 이메일입니다. 인증번호를 전송해주세요.</div>
+        <div class="fail-message">올바르지 않은 이메일 형식입니다.</div>
+        <div class="NNNNN-message">이미 사용중인 이메일입니다.</div>
+		<div><button class="send-btn" type="button" hidden="true">인증번호 보내기</button></div>
+		<div class="wait-message">인증번호 전송중</div>
 	</div>
 	
         <div class="email-check">
-	        <div id="success-message">올바른 인증번호입니다</div>
-	     	<div id="fail-message">인증번호를 다시 확인해주세요</div>
+	        <div id="success-message">인증번호가 확인되었습니다.</div>
+	     	<div id="fail-message">인증번호가 확인되지 않았습니다.</div>
         </div>
 
 	
@@ -62,9 +71,9 @@
 			비밀번호
 			<i class="fa-solid fa-asterisk"></i>
 		</label>
-		<input type="text" class="input" name="memPw" placeholder="?">
-        <div class="success-message">올바른 비밀번호 형식입니다</div>
-        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요</div>		
+		<input type="password" class="input" name="memPw" placeholder="비밀번호">
+        <div class="success-message">사용 가능한 비밀번호입니다.</div>
+        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
 	</div>
 	
 	<div>
@@ -72,9 +81,9 @@
 			비밀번호 확인
 			<i class="fa-solid fa-asterisk"></i>
 		</label>
-		<input type="text" class="input" id="pw-re" placeholder="?">
-		<div class="success-message">비밀번호가 일치합니다</div>
-        <div class="fail-message">비밀번호가 일치하지 않습니다</div>		
+		<input type="password" class="input" id="pw-re" placeholder="비밀번호 확인">
+		<div class="success-message">비밀번호가 일치합니다.</div>
+        <div class="fail-message">비밀번호가 일치하지 않습니다.</div>		
 	</div>
 	
 	<div>
@@ -82,10 +91,10 @@
 			닉네임
 			<i class="fa-solid fa-asterisk"></i>
 		</label>
-		<input type="text" class="input" name="memNick" placeholder="?" >
-		<div class="success-message">멋진 닉네임이에요</div>
-        <div class="fail-message">닉네임은 한글과 숫자를 이용하여 2~10글자로 작성해주세요</div>
-        <div class="NNNNN-message">이미 사용중인 닉네임입니다</div>		
+		<input type="text" class="input" name="memNick" placeholder="닉네임" >
+		<div class="success-message">사용 가능한 닉네임입니다.</div>
+        <div class="fail-message">닉네임은 한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
+        <div class="NNNNN-message">이미 사용중인 닉네임입니다.</div>		
 	</div>
 	
 	<div>
@@ -93,12 +102,13 @@
 			생일
 			<i class="fa-solid fa-asterisk"></i>
 		</label>		
-		<input type="date" class="input" name="memBirth" id="memBirth" placeholder="?">
-        <div class="fail-message">생년월일을 선택해주세요</div>
+		<input type="date" class="input" name="memBirth" id="memBirth" placeholder="생일">
+		<div class="birth">생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요.</div>
+        <div class="fail-message">생년월일을 선택해주세요.</div>
 	</div>
 	
 	<div>
-		<button type="submit" >가입하기</button>
+		<button type="submit" id="form-button">가입하기</button>
 	</div>		
 </form>
 
@@ -106,6 +116,8 @@
 <script type="text/javascript">
 
 $(function(){
+	
+	//본인 인증 확인
 	var judge = {
 			memEmailValid : false,
 	};
@@ -144,7 +156,7 @@ $(function(){
 	//이메일 중복 검사
 	$("input[name=memEmail]").blur(function(){
 		var memEmail = $(this).val();
-		$(this).removeClass("fail NNNNN NNNNY");
+		$(this).removeClass("success fail NNNNN NNNNY");
 		
 		if(validChecker.memEmailValid){
 			var that = this;//this 보관
@@ -160,6 +172,7 @@ $(function(){
 						$(that).addClass("NNNNN");
 						validChecker.memEmailValid = false;	
 						$(this).removeClass("success fail").addClass("NNNNN");
+						$(".send-btn").prop("hidden",true);
 					}
 					else if(resp="NNNNY"){
 						$(that).addClass("NNNNY");
@@ -173,7 +186,8 @@ $(function(){
 		}
 		else{
 			$(this).addClass("fail");
-			validChecker.memEmailValid = false;	
+			validChecker.memEmailValid = false;
+			$(".send-btn").prop("hidden",true);
 		}
 		
 		
@@ -187,22 +201,32 @@ $(function(){
 		var btn =$(this);
 		btn.prop("disabled",true);
 		
+		var waitMessage=$(".wait-message");
+		waitMessage.css("display","block");
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/rest/mem/email_check1",
 			method: "post",
 			data : {who:email},
 			success : function(){
 				btn.prop("disabled",false);
-				
+			
+			waitMessage.css("display","none");	
 			var div = $("<div>");
-			var input = $("<input>").addClass("serial");
+			var input = $("<input>").addClass("serial input").attr("placeholder","인증번호");
 			var successMessage = $("#success-message");
 			var failMessage = $("#fail-message");
-			var button = $("<button>").attr("type","button").text("인증번호 확인")
-						
+			var button = $("<button>").attr("type","button").text("인증번호 확인");
+			
+			input.blur(function(){
+				if(judge.memEmailValid !=true) 
+					return $(".serial").addClass("fail").after(failMessage);
+			});	
+			
 			button.click(function(){
 				var serial = input.val(); //변수 input의 value 값 
-				if(serial.length !=6) return;
+				if(serial.length !=6) 
+				return  $(".serial").addClass("fail").after(failMessage);
 				
 				$.ajax({
 					url : "${pageContext.request.contextPath}/rest/mem/email_check2",
@@ -212,16 +236,13 @@ $(function(){
 						serial : serial //지금 불러온 serial
 					},
 					success:function(resp){
-						judge.emailValid = resp;
-						
-						//버튼 잠금
-// 						btn.prop("disabled",true);
-// 						button.prop("disabled",true);
+						judge.memEmailValid = resp;
 						
 						if(resp) {
 							$(".serial").removeClass("success fail").addClass("input success");
 							$(".serial").after(successMessage);
-// 							button.remove;
+							button.prop("hidden",true);
+							btn.prop("hidden",true);
 						}
 				        else {
 				            $(".serial").removeClass("success fail").addClass("input fail");
@@ -240,6 +261,7 @@ $(function(){
 	$("input[name=memNick]").blur(function(){
 		var memNick = $(this).val();
 		$(this).removeClass("fail NNNNN NNNNY");
+		$(this).removeClass("success fail")
 		
 		if(validChecker.memNickValid){
 			var that = this;//this 보관
@@ -288,7 +310,7 @@ $(function(){
 	$("#pw-re").blur(function(){
 		var origin = $("input[name=memPw]").val();
 		var repeat = $(this).val();
-
+		$(this).removeClass("success fail");
 		if(origin==repeat){
 			validChecker.memPwReValid = true;
 			$(this).addClass("success");
@@ -302,6 +324,7 @@ $(function(){
 	
 	$("input[name=memBirth]").blur(function(){
 		var memBirth = $(this).val();
+		$(this).removeClass("success fail");
 		if(memBirth.length>0){
 			validChecker.memBirthValid = true;
 		}
@@ -311,23 +334,19 @@ $(function(){
 		}
 	});
 	
+	
 	$(".join-form").submit(function(e){
 		e.preventDefault();
 		
+		if(!judge.memEmailValid) return alert('이메일 인증을 완료해주세요'); //모달로 바꾸기(?)
 		$(this).find("input, textarea, select").blur();
 
-		if(validChecker.isAllValid()){
-				this.submit();			
+		if(validChecker.isAllValid()&&judge.memEmailValid){
+			this.submit();			
 		}
 		
-		console.log('이메일',validChecker.memEmailValid);
-		console.log('본인이메일',judge.memEmailValid);
-		console.log('비번',validChecker.memPwValid);
-		console.log('비번확인',validChecker.memPwReValid);
-		console.log('닉',validChecker.memNickValid);
-		console.log('생일',validChecker.memBirthValid);
 	});
 });
 
 </script>
-
+</body>	

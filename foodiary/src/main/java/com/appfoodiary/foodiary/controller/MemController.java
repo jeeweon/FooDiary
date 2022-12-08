@@ -54,8 +54,7 @@ public class MemController {
 	
 	@PostMapping("/login")
 	public String login(
-			@ModelAttribute MemDto inputDto,
-			HttpSession session) {
+			@ModelAttribute MemDto inputDto, HttpSession session) {
 				
 		boolean judge = memDao.login(inputDto);
 		MemDto findDto = memDao.findByEmail(inputDto.getMemEmail());
@@ -64,6 +63,8 @@ public class MemController {
 			session.setAttribute(SessionConstant.NO, findDto.getMemNo());
 			session.setAttribute(SessionConstant.NICK, findDto.getMemNick());
 			
+			//로그인 시간 업데이트
+			memDao.updateLoginDate(findDto.getMemNo());
 			return "redirect:/home";
 		}
 		else {
