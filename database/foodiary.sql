@@ -190,4 +190,8 @@ CREATE TABLE  interest_areas  (
          area_no references areas(area_no) on delete cascade,
          mem_no  references mem(mem_no) on delete cascade
 );
+
+alter table interest_areas
+add constraint interest_areas_pk primary key (area_no, mem_no);
+
 commit;
