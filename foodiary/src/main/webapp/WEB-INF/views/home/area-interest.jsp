@@ -502,15 +502,9 @@
 
         //관심 지역 DB 삭제
         function deleteMyArea(areaNo){
-            var data = {
-                areaNo:areaNo
-            };
-
             $.ajax({
-                url : "http://localhost:8888/rest/area/interest",
+                url : "http://localhost:8888/rest/area/interest/"+areaNo,
                 method : "delete",
-                contentType:"application/json",
-			    data:JSON.stringify(data),
                 success : function(resp) {
                     loadMyArea();
                 }
