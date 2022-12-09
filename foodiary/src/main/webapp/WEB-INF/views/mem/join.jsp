@@ -2,9 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<html>
 <head>
     <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+
 <style>
    .success-message,
    .fail-message,
@@ -35,10 +39,16 @@
    .input.NNNNN ~ .NNNNN-message{
    		display : block;
    }
+   .input.NNNNN ~ .success-message{
+   		display : none;
+   }
 	           
 </style>
 </head>
 <body>
+	
+    
+
 	<div>
 		<h1>회원가입</h1>
 	</div>
@@ -153,7 +163,7 @@ $(function(){
 	//이메일 중복 검사
 	$("input[name=memEmail]").blur(function(){
 		var memEmail = $(this).val();
-		$(this).removeClass("fail NNNNN NNNNY");
+		$(this).removeClass("success fail NNNNN NNNNY");
 		
 		if(validChecker.memEmailValid){
 			var that = this;//this 보관
@@ -347,3 +357,4 @@ $(function(){
 
 </script>
 </body>	
+</html>
