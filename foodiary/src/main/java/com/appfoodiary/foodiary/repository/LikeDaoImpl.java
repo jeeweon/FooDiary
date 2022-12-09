@@ -23,6 +23,10 @@ public class LikeDaoImpl implements LikeDao{
 	@Override
 	public void insert(LikeDto dto) {
 		sqlSession.insert("like.insert",dto);
+	}
+	@Override
+	public int count(int reviewNo) {
+		return sqlSession.selectOne("like.count",reviewNo);
 		
 	}
 }

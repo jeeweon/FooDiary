@@ -8,19 +8,23 @@
 		select 
 			count(*) 
 		from 
-			like 
+			likes 
 		where 
-			review_no=#{reviewNo} and mem_no=#{memNo};
+			review_no=#{reviewNo} and mem_no=#{memNo}
 	</select>
 	<insert id="insert" parameterType="int">
-		insert into like(reivew_no,mem_no) 
-		values(#{reviewNo},#{memNo});
+		 insert into likes(review_no,mem_no) 
+		 values(#{reviewNo},#{memNo})
 	</insert>
 	<delete id="delete" parameterType="int">
 		delete 
 		from 
-			like 
+			likes
 		where 
-			review_no=#{reviewNo} and mem_no=#{memNo};
+			review_no=#{reviewNo} and mem_no=#{memNo}
 	</delete>
+	<!-- 리뷰 좋아요 갯수 count -->
+	<select id="count" parameterType="int" resultType="int">
+		select count(review_no) from likes where review_no=#{reviewNo}
+	</select>
 </mapper>
