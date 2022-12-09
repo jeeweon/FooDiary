@@ -3,10 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<link href="/css/summernote-lite.min.css" rel="stylesheet" type="text/css" >
-<script src="/js/summernote-lite.min.js"></script>
-<script src="/js/summernote-ko-KR.min.js"></script>
-<script src="/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
+<link href="${pageContext.request.contextPath}/css/summernote-lite.min.css" rel="stylesheet" type="text/css" >
+<script src="${pageContext.request.contextPath}/js/summernote-lite.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/summernote-ko-KR.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
 
 <script type="text/javascript">
 	$(function(){

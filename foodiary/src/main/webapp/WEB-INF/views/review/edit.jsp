@@ -3,9 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<link href="/css/summernote-lite.min.css" rel="stylesheet" type="text/css" >
-<script src="/js/summernote-lite.min.js"></script>
-<script src="/js/summernote-ko-KR.min.js"></script>
+<link href="${pageContext.request.contextPath}/css/summernote-lite.min.css" rel="stylesheet" type="text/css" >
+<script src="${pageContext.request.contextPath}/js/summernote-lite.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/summernote-ko-KR.min.js"></script>
 
 <script type="text/javascript">
 	$(function(){

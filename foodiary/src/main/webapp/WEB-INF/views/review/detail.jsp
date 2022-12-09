@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
+<script src="${pageContext.request.contextPath}/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
 
 <script type="text/javascript">
 	$(function(){
@@ -32,7 +32,7 @@
 			<div>
 				사진 <br>
 				<c:forEach var="attachDto" items="${attachments}">
-					<img src="/attach/download/${attachDto.attachNo}" width="100" height="100">
+					<img src="${pageContext.request.contextPath}/attach/download/${attachDto.attachNo}" width="100" height="100">
 				</c:forEach>
 			</div>
 		</c:if>

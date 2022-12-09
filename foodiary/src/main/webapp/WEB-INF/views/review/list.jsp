@@ -40,7 +40,7 @@
 				<div>
 					<a href="detail?reviewNo=${reviewDto.reviewNo}">
 						<!-- 미리보기 -->
-						<img src="/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="100" height="100">
+						<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="100" height="100">
 					</a>
 				</div>
 				
