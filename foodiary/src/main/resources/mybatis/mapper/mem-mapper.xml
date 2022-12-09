@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mem">
+	
+	<select id="sequence" resultType="int">
+		select mem_seq.nextval from dual
+	</select>
+	
+	<insert id="join" parameterType="MemDto">
+		insert into mem(
+				mem_no, mem_email, 
+				mem_pw, mem_nick, 
+				mem_birth
+			)
+		values(
+				#{memNo}, #{memEmail},
+				#{memPw}, #{memNick},
+				#{memBirth}
+			)
+	</insert>
+	
+	<select id="one" parameterType="int" resultType="MemDto" >
+		select * from mem where mem_no = #{memNo}
+	</select>
+	
+	<select id="email" parameterType="String" resultType="MemDto">
+		select * from mem where mem_email = #{memEmail}
+	</select>
+	
+	<select id="nick" parameterType="String" resultType="MemDto">
+		select * from mem where mem_nick = #{memNick}
+	</select>
+
+	<update id="loginDate" parameterType="int">
+		update mem set 
+			mem_login_date = sysdate 
+		where mem_no = #{memNo}
+	</update>
+
+</mapper>
