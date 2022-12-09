@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper > div.inner{
+    display: flex; 
+    gap: 50px;
+    justify-content: space-between;
+}
+
+.boardM{
+    position: relative;
+    top: 100px;
+    border: 1px solid black;
+}
+
+.boardM img {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    left: 180px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.boardT {
+    position: relative;
+    bottom: 250px;
+    margin-left: 660px;
+}
+
+.boardT .boardT1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid pink;
+    margin-bottom: 50px;
+}
+
+.boardT1 li {
+    font-size: 30px;
+    width: 100%;
+}
+
+.boardT1 button {
+    width: 200px;
+    height: 30px;
+    border: 1px solid pink;
+    border-radius: 10px 10px;
+}
+.boardT1 #Ta1{
+    padding-left: 10px;
+    width: 100px;
+}
+.boardT1 #Timg1{
+    width: 25px;
+    padding-left: 5px;
+}
+.boardT img{
+    width: 100px;
+    
+}
+
+.boardT .boardT2 {
+    margin-bottom: 50px;
+}
+
+.boardT2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.boardT2 li {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.boardT p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 600px;
+    height: 145px;
+}
+
+.boardA{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+    margin-top: -100px;
+}
+.boardA ul{
+    border-bottom: 1px solid black;
+}
+
+.boardA ul li {
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    
+}
+.boardA ul li a{
+    margin-left: 120px;
+    margin-right: 120px;
+}
+.feed div{
+    margin-bottom: 7px;
+}
+
+.feed ul{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex: 1;
+    
+}
+@media screen and (max-width: 1420px) {
+    .inner {
+        width: 100%; 
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+}
+@media screen and (max-width: 1240px) {
+    .wrapper > div.inner {
+        display: block;
+    }
+    .boardF{
+        width: 100%;
+        height: 105px;
+        margin-bottom: 15px;
+    }
+    .boardM img{
+        left: 30px;
+        width: 300px;
+        height: 300px;
+    }
+    .boardT .boardT1{
+        position: relative;
+        right: 300px;
+        bottom: -50px;
+        width: 500px;
+    }
+    .boardT .boardT1 li{
+        font-size: 23px;
+    }
+    .boardT .boardT1 button{
+        width: 130px;
+    }
+    .boardT .boardT1 button a{
+        font-size: 10px;
+    }
+    .boardT2{
+        position: relative;
+        right: 300px;
+        top: 20px;
+    }
+    .boardT2 li{
+        font-size: 12px;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+    p{
+        position: relative;
+        top: 20px;
+        right: 300px;
+        font-size: 12px;
+    }
+    .boardA{
+        position: relative;
+        bottom: 80px;
+        right: 60px;
+    }
+    .boardA ul li a{
+        font-size: 15px;
+    }
+
+    .section1{
+        position: relative;
+        top: 420px;
+        right: 60px;
+        width: 100%;
+    }
+    
+    
+}
+@media screen and (max-width: 768px) {
+    .inner {
+        padding: 0 20px;
+    }
+    .boardF{
+        width: 100%;
+    }
+    .boardM img{
+        width: 200px;
+        height: 200px;
+    }
+    
+    .section1{
+        display: none;
+    }
+
+}
