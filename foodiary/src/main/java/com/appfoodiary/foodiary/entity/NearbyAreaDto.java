@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class NearbyAreasDto {
+public class NearbyAreaDto {
 	private int areaNo;
 	private int nearbyNo;
 }
