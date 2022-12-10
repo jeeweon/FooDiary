@@ -53,7 +53,7 @@
 		</div>
 	</form>
 		<hr>
-		<p><a href="#">비밀번호 찾기</a>ㅣ<a href="#">회원가입 하기</a></p>
+		<p><a href="email_check">비밀번호 찾기</a>ㅣ<a href="join">회원가입 하기</a></p>
 </body>
 </html>
 

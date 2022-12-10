@@ -4,8 +4,7 @@
 
 <html>
 <head>
-	<title>비밀번호 재설정</title>
-	
+	<title>비밀번호 변경</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <style>
    .success-message,
@@ -23,13 +22,10 @@
 </head>
 <body>
 	<div>
-		<h1>비밀번호 재설정</h1>
+		<h1>비밀번호 변경</h1>
 	</div>
 	
-	<form action="reset_pw" method="post" class="pw-form">
-		<div>
-			<input name="memNo" value="${memDto.memNo}" hidden="true">
-		</div>
+	<form action="edit_pw" method="post" class="pw-form">
 		<div>
 			<label>
 				비밀번호

@@ -19,6 +19,10 @@ public interface MemDao {
 	//로그인 날짜 업데이트
 	boolean updateLoginDate(int memNo);
 	
+	//비밀번호 확인
+//	boolean checkPw(MemDto memDto);
+	
 	//비밀번호 재설정
 	boolean resetPw(MemDto memDto);
+	
 }

@@ -53,6 +53,14 @@ public class MemDaoImpl implements MemDao {
 		return judge;
 	}
 	
+//	@Override
+//	public boolean checkPw(String pw) {
+//		MemDto findDto = sqlSession.selectOne("mem.one",memDto.getMemNo());
+//		if(findDto==null) return false;
+//		boolean judge = encoder.matches(memDto.getMemPw(), findDto.getMemPw());
+//		return judge;
+//	}
+	
 	@Override
 	public boolean updateLoginDate(int memNo) {
 		
@@ -70,6 +78,17 @@ public class MemDaoImpl implements MemDao {
 		boolean judge = sqlSession.update("mem.pw",memDto)>0;
 		return judge;
 	}
+	
+//	@Override
+//	public boolean editPw(MemDto memDto) {
+//		
+//		String pw = memDto.getMemPw();
+//		String enc = encoder.encode(pw);
+//		memDto.setMemPw(enc);
+//		
+//		boolean judge = sqlSession.update("mem.pw",memDto)>0;
+//		return judge;
+//	}
 	
 	
 

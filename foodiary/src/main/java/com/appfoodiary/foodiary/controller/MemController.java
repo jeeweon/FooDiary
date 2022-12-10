@@ -3,6 +3,7 @@ package com.appfoodiary.foodiary.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ public class MemController {
 	
 	@Autowired
 	private MemDao memDao;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -131,7 +135,50 @@ public class MemController {
 			return "redirect:login";
 		}
 		else {
-			return "redirect:/reset_pw?error";
+			return "redirect:reset_pw?error";
+		}
+	}
+	
+	@GetMapping("/check_pw")
+	public String checkPw() {
+		return "mem/check-pw";
+	}
+	
+	@PostMapping("/check_pw")
+	public String checkPw(HttpSession session,
+						@RequestParam String beforePw) {
+		int memNo = (int) session.getAttribute(SessionConstant.NO);
+		MemDto loginDto = memDao.selectOne(memNo);
+		boolean judge = encoder.matches(beforePw, loginDto.getMemPw());
+		
+		if(judge) {
+			return "mem/edit-pw";
+		}
+		else {
+			return "redirect:check_pw?error"; 
+		}
+	}
+
+	@GetMapping("/edit_pw")
+	public String editPw() {
+		return "";
+	}
+	@PostMapping("/edit_pw")
+	public String editPw(HttpSession session,
+							@RequestParam String memPw) {
+		
+		int memNo = (int) session.getAttribute(SessionConstant.NO);
+		MemDto loginDto = memDao.selectOne(memNo);
+		
+		loginDto.setMemPw(memPw);
+		boolean result = memDao.resetPw(loginDto);
+		
+		
+		if(result) {			
+			return "redirect:login"; //마이 프로필 이동으로 수정하기
+		}
+		else {
+			return "redirect:edit_pw?error";
 		}
 	}
 	
