@@ -42,6 +42,8 @@
 	    <div id="fail-message">인증번호가 확인되지 않았습니다.</div>
     </div>	
     
+    <div class="email-check-btn"></div>
+    
     <div>
     	<button>다음</button>
     </div>
@@ -75,12 +77,19 @@ $(function(){
 				
 				waitMessage.css("display","none");	
 				var div = $("<div>");
+				var div2= $("<div>");
 				var input = $("<input>").addClass("serial input").attr("placeholder","인증번호");
 				var successMessage = $("#success-message");
 				var failMessage = $("#fail-message");
 				var button = $("<button>").attr("type","button").text("인증번호 확인");
 				var ment = $("<p>").text("이메일을 확인해보세요!")
 				var ment2 =$("<p>").text("인증번호를 입력 후 비밀번호를 재설정할 수 있습니다.")
+				
+				//인증번호 input,button 생성
+				$(".email-check").html(div);	
+				div.append(ment).append(ment2).append(input);
+				$(".email-check-btn").html(div2);
+				div2.append(button);				
 								
 				button.click(function(){
 					var serial = input.val(); //변수 input의 value 값 
@@ -111,8 +120,8 @@ $(function(){
 					});
 				});
 				
-				$(".email-check").html(div);		
-				div.append(ment).append(ment2).append(input).append(button);
+// 				$(".email-check").html(div);		
+// 				div.append(ment).append(ment2).append(input).append(button);
 				}
 			});
 		});

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.repository.MemDao;
-import com.appfoodiary.foodiary.service.EmailService;
 
 @Controller
 @RequestMapping("/mem")
@@ -22,9 +22,6 @@ public class MemController {
 	
 	@Autowired
 	private MemDao memDao;
-	
-	@Autowired
-	private EmailService emailService;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -82,7 +79,7 @@ public class MemController {
 		return "redirect:/home";
 	}
 	
-	//비밀번호 찾기 
+	//비밀번호 재설정
 	//1.연결된 계정 있는지 이메일 체크
 	@GetMapping("/email_check")
 	public String emailCheck() {
@@ -104,7 +101,7 @@ public class MemController {
 		}
 	}
 	
-//	2. 이메일 본인인증
+	//2. 이메일 본인인증
 	@GetMapping("/email_send")
 	public String emailSend() {
 		return "mem/email-send";
@@ -117,17 +114,26 @@ public class MemController {
 		return "redirect:reset_pw";
 	}
 	
-//	3. 비밀번호 변경
+	//3. 비밀번호 재설정
 	@GetMapping("/reset_pw")
-	public String resetPw(@RequestParam String memEmail) {
+	public String resetPw(@RequestParam String memEmail,Model model) {
+		MemDto memDto = memDao.findByEmail(memEmail);
+		model.addAttribute("memDto",memDto);
 		return "mem/reset-pw";
 	}
 	
-//	@PostMapping("/edit_pw")
-//	public String editPw() {
-//		
-//		return "redirect:mem/login";
-//	}
+	@PostMapping("/reset_pw")
+	public String resetPw(@ModelAttribute MemDto memDto) {
+		
+		boolean result = memDao.resetPw(memDto);
+		
+		if(result) {			
+			return "redirect:login";
+		}
+		else {
+			return "redirect:/reset_pw?error";
+		}
+	}
 	
 
 }

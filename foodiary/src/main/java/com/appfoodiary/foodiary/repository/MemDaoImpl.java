@@ -60,6 +60,16 @@ public class MemDaoImpl implements MemDao {
 		return judge;
 	}
 	
+	@Override
+	public boolean resetPw(MemDto memDto) {
+		
+		String pw = memDto.getMemPw();
+		String enc = encoder.encode(pw);
+		memDto.setMemPw(enc);
+		
+		boolean judge = sqlSession.update("mem.pw",memDto)>0;
+		return judge;
+	}
 	
 	
 
