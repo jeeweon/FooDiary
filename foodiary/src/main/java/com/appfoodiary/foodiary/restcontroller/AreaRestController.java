@@ -19,6 +19,7 @@ import com.appfoodiary.foodiary.entity.InterestAreaDto;
 import com.appfoodiary.foodiary.repository.AreaDao;
 import com.appfoodiary.foodiary.vo.CntInterestAreaVO;
 import com.appfoodiary.foodiary.vo.InterestAreaVO;
+import com.appfoodiary.foodiary.vo.NearbyAreaVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -69,5 +70,11 @@ public class AreaRestController {
 				.memNo(memNo)
 				.areaNo(areaNo)
 				.build());
+	}
+	
+	@PostMapping("/area/nearby")
+	public List<NearbyAreaVO> nearbyAreas(@RequestBody List<InterestAreaVO> areas) {
+		log.debug("areas"+areas);
+		return areaDao.nearbyAreas(areas);
 	}
 }
