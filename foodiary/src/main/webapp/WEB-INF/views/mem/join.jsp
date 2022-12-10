@@ -2,9 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<html>
 <head>
     <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+
 <style>
    .success-message,
    .fail-message,
@@ -42,6 +46,9 @@
 </style>
 </head>
 <body>
+	
+    
+
 	<div>
 		<h1>회원가입</h1>
 	</div>
@@ -364,3 +371,4 @@ $(function(){
 
 </script>
 </body>	
+</html>

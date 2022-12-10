@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.morebtn {
+    display: none;
+}
+
+li {
+    list-style: none;
+}
+
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper>div.inner {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+
+.Mplus{
+    position: relative;
+}
+.Lhead{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Lhead img{
+    width: 400px;
+    height: 250px;
+    margin: 30px;
+}
+
+.Lbody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Lbody input{
+    width: 450px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 10px 10px;
+    margin: 30px;
+    padding-left: 15px;
+}
+.Lbody button{
+    width: 455px;
+    height: 50px;
+    margin: 30px;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px 10px;
+    background-color: #ffe9b1;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.Lfoot{
+    display: flex;
+    justify-content: center;
+}
+#Lfootsub{
+    width: 400px;
+    height: 60px;
+}
+.Lfoot ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-top: 1px solid gray;
+}
+.Lfoot ul li {
+    font-size: 15px;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+.Lfoot ul li #a1{
+    border-right: 1px solid gray;
+    padding-right: 15px;
+}
+.Lfoot ul li #a2{
+    padding-right: 14px;
+}
+
+@media screen and (max-width: 1420px) {
+    .inner {
+        width: 100%; 
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+}
+@media screen and (max-width: 1240px) {
+    .wrapper > div.inner {
+        display: block;
+    }
+    .Mlogin{
+        width: 100%;
+        height: 105px;
+        margin-bottom: 15px;
+    }
+    .Lhead{
+        position: unset;
+        padding: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+ 
+    .Lbody{
+        position: relative;
+    }
+    .Lbody input button{
+        width: 100%;
+    } 
+    .Lfoot{
+        position: relative;
+    }
+    .Lfoot ul li{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 768px) {
+    .inner {
+        padding: 0 20px;
+    }
+    .Lhead  img{
+        width: 250px;
+    }
+    .Lbody input{
+        width: 100%;
+    }
+    .Lbody button{
+        width: 105%;
+    }
+}
