@@ -2,22 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="${pageContext.request.contextPath}/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
-
-<script type="text/javascript">
-	$(function(){
-		//별점 옵션 수정
-		$(".star-score").score({
-			display: {
-				showNumber:true,//설정된 숫자 표시 가능 여부
-                placeLimit:1,//소수점 자리수
-                textColor:"black",//숫자 색상(기본 : 금색)
-		    }
-        });
-	});
-</script>
-
 	<div>
 		<h1>리뷰 상세</h1>
 	</div>
@@ -51,3 +35,21 @@
 			<a href="list">목록으로</a>
 		</div>
 	</div>
+
+
+	
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
+
+<script type="text/javascript">
+	$(function(){
+		//별점 옵션 수정
+		$(".star-score").score({
+			display: {
+				showNumber:true,//설정된 숫자 표시 가능 여부
+                placeLimit:1,//소수점 자리수
+                textColor:"black",//숫자 색상(기본 : 금색)
+		    }
+        });
+	});
+</script>

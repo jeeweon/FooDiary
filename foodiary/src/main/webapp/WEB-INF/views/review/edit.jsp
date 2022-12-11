@@ -2,6 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<form action="edit" method="post">
+	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
+	
+	<div>
+		<label>내용</label>
+		<textarea name="reviewContent">${reviewDto.reviewContent}</textarea>
+	</div>
+	
+	<div>
+		<a href="list">목록으로</a>
+		<button type="submit">등록하기</button>
+	</div>
+
+</form>
+
+
+
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <link href="${pageContext.request.contextPath}/css/summernote-lite.min.css" rel="stylesheet" type="text/css" >
 <script src="${pageContext.request.contextPath}/js/summernote-lite.min.js"></script>
@@ -32,19 +49,3 @@
 		});
 	});
 </script>
-
-<form action="edit" method="post">
-	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
-	
-	<div>
-		<label>내용</label>
-		<textarea name="reviewContent">${reviewDto.reviewContent}</textarea>
-	</div>
-	
-	<div>
-		<a href="list">목록으로</a>
-		<button type="submit">등록하기</button>
-	</div>
-
-</form>
-

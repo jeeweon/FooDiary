@@ -2,11 +2,33 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<form action="write" method="post" enctype="multipart/form-data">
+	별점 : <div class="star-score-edit" data-max="5"></div>
+	
+	<div>
+		<label>내용</label>
+		<textarea name="reviewContent"></textarea>
+	</div>
+	
+	<div>
+		<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
+		<input type="file" name="attachments" multiple>
+	</div>
+	
+	<div>
+		<a href="list">목록으로</a>
+		<button type="submit">등록하기</button>
+	</div>
+
+</form>
+
+
+
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
 <link href="${pageContext.request.contextPath}/css/summernote-lite.min.css" rel="stylesheet" type="text/css" >
 <script src="${pageContext.request.contextPath}/js/summernote-lite.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/summernote-ko-KR.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/score.min.js"></script> <!-- 수정본 js파일 : 별점단위 0.5로 변경 -->
 
 <script type="text/javascript">
 	$(function(){
@@ -49,23 +71,3 @@
         });
 	});
 </script>
-
-<form action="write" method="post" enctype="multipart/form-data">
-	별점 : <div class="star-score-edit" data-max="5"></div>
-	
-	<div>
-		<label>내용</label>
-		<textarea name="reviewContent"></textarea>
-	</div>
-	
-	<div>
-		<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-		<input type="file" name="attachments" multiple>
-	</div>
-	
-	<div>
-		<a href="list">목록으로</a>
-		<button type="submit">등록하기</button>
-	</div>
-
-</form>
