@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
+import com.appfoodiary.foodiary.vo.ReviewSearchVO;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
@@ -65,5 +66,16 @@ public class ReviewDaoImpl implements ReviewDao {
 	public AttachDto findReviewAttachView(int reviewNo) {
 		return sqlSession.selectOne("review.findAttachRep", reviewNo);
 	}
+	
+	//홈 > 리뷰(전체/관심지역) 조회
+	@Override
+	public List<ReviewSearchVO> homeSearchList(ReviewSearchVO vo) {	
+		return sqlSession.selectList("review.home-list", vo);
+	}
 
+	//홈 > 리뷰(팔로우) 조회
+	@Override
+	public List<ReviewSearchVO> homeFollowList(int memNo) {
+		return sqlSession.selectList("review.home-follow", memNo);
+	}
 }

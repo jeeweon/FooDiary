@@ -55,4 +55,24 @@
 		)where RN =1
 	</select>
 	
+	<!-- 홈 > 리뷰(전체/관심지역) 조회 -->
+	<select id="home-list" parameterType="ReviewSearchVO" resultType="ReviewSearchVO">
+		select R.*, M.mem_nick from review R
+		left outer join mem M on R.mem_no = M.mem_no
+		<where>
+			R.mem_no not in(#{memNo})
+			<if test="interestArea != null">
+				and	instr(review_place, #{interestArea}) > 0 
+			</if>
+		</where>
+		order by review_no desc
+	</select>
+	
+	<!-- 홈 > 리뷰(팔로우) 조회 -->
+	<select id = "home-follow" parameterType="int" resultType="ReviewSearchVO">
+		select R.*, M.mem_nick from review R
+		left outer join follow F on R.mem_no = F.passive_mem_no 
+		left outer join mem M on R.mem_no = M.mem_no
+		where F.active_mem_no = #{memNo} order by review_no desc
+	</select>
 </mapper>

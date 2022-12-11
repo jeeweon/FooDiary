@@ -114,18 +114,11 @@
 	<!-- 관심지역 설정 유도 배너 -->
 	<div class="set-area-banner hide">
 	</div>
-	<%-- <c:if test="${fn:length(myAreasList) == 0}">
-		<div class="set-area-banner">
-			<span class="banner-title exp1">${loginNick}님의 관심지역 정보가 아직 없어요.</span>
-			<span class="banner-title exp2">내 관심지역 고르러 가볼까요?</span>
-			<span class="ic-go exp2"><i class="fa-solid fa-circle-chevron-right"></i></span>
-		</div>
-	</c:if> --%>
 
 	<!-- 리뷰 필터 버튼 -->
 	<div class="filter-btn">
         <span class="label label-all">전체</span>
-        <span class="label">팔로우</span>
+        <span class="label label-follow">팔로우</span>
         <!-- 관심지역이 있으면 지역 버튼 노출 -->
     </div>
 </div>
@@ -133,7 +126,8 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(function() {
-		loadInterestArea()
+		loadInterestArea();
+		loadReviewAll();
 		
 		$(".label-all").addClass("label-selected");
 		
@@ -179,7 +173,7 @@
             	$.each(interestList, function(index, value){
             		var span = $("<span>").text(value.areaDistrict)
             		.attr("data-address", value.areaCity+" "+value.areaDistrict);
-            		span.addClass("label");
+            		span.addClass("label label-area");
             		$(".filter-btn").append(span); //내 관심지역 목록을 filter-btn 영역에 추가
             	});
             	var btn = $("<span>").html("<i class='fa-solid fa-gear'></i>"+" 설정");
@@ -198,6 +192,54 @@
             	$(".set-area-banner").append(exp1).append(exp2).append(btnGo);
             }
         };
+        
+      	//리뷰 전체 목록 조회
+        let reviewAllList = [];
+        function loadReviewAll(){
+            $.ajax({
+                url : "http://localhost:8888/rest/home/review",
+                method : "get",
+                dataType : "json",
+                success : function(resp) {
+                    reviewAllList = resp;
+                    console.log(reviewAllList);
+                    //showReview();
+                }
+            });
+        };
+        
+        //클릭한 관심지역 리뷰 목록 조회
+        $(document).on("click",".label-area",function() {        	
+	        let reviewAreaList = [];
+	        let interestArea = $(this).data("address");
+			$.ajax({
+	            url : "http://localhost:8888/rest/home/review/"+interestArea,
+	            method : "get",
+	            dataType : "json",
+	            success : function(resp) {
+	                reviewAreaList = resp;
+	                
+	                console.log(reviewAreaList);
+	                //showReview();
+	            }
+	        });
+		});
+        
+      //내 팔로워 리뷰 목록 조회
+        $(document).on("click",".label-follow",function() {        	
+	        let reviewFollowList = [];
+			$.ajax({
+	            url : "http://localhost:8888/rest/home/review/follow",
+	            method : "get",
+	            dataType : "json",
+	            success : function(resp) {
+	                reviewFollowList = resp;
+	                
+	                console.log(reviewFollowList);
+	                //showReview();
+	            }
+	        });
+		});
 	});
 </script>
 </body>
