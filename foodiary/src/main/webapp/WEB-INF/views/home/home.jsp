@@ -13,6 +13,10 @@
 	margin: 0 auto;
 }
 
+.set-area-banner.hide {
+	display: none;
+}
+
 .set-area-banner {
 	width: 100%;
 	border: 1px solid #18253D;
@@ -108,30 +112,29 @@
 	</div>
 
 	<!-- 관심지역 설정 유도 배너 -->
-	<c:if test="${fn:length(myAreasList) == 0}">
+	<div class="set-area-banner hide">
+	</div>
+	<%-- <c:if test="${fn:length(myAreasList) == 0}">
 		<div class="set-area-banner">
 			<span class="banner-title exp1">${loginNick}님의 관심지역 정보가 아직 없어요.</span>
 			<span class="banner-title exp2">내 관심지역 고르러 가볼까요?</span>
 			<span class="ic-go exp2"><i class="fa-solid fa-circle-chevron-right"></i></span>
 		</div>
-	</c:if>
+	</c:if> --%>
 
 	<!-- 리뷰 필터 버튼 -->
 	<div class="filter-btn">
         <span class="label label-all">전체</span>
         <span class="label">팔로우</span>
-        <c:if test="${fn:length(myAreasList) != 0}">
-        	<c:forEach var="myArea" items="${myAreasList}">
-        		<span class="label">${myArea.areaDistrict}</span>
-        	</c:forEach>
-        	<span class="label set-area-btn"><i class="fa-solid fa-gear"></i> 설정</span>
-        </c:if>
+        <!-- 관심지역이 있으면 지역 버튼 노출 -->
     </div>
 </div>
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(function() {
+		loadInterestArea()
+		
 		$(".label-all").addClass("label-selected");
 		
 		//뒤로가기로 돌아왔을 때, 필터 설정 초기화를 위해 새로고침
@@ -141,20 +144,60 @@
 	        }
 	    });
 		
-		//관심지역 설정 화면으로 이동(배너, 설정 버튼)
-		$(".set-area-banner").click(function() {
+	  	//관심지역 설정 화면으로 이동(배너, 설정 버튼)
+      	$(document).on("click",".set-area-banner",function() {
 			window.location = "${pageContext.request.contextPath}/home/area/interest";
 		});
 		
-		$(".set-area-btn").click(function(){
+		$(document).on("click",".set-area-btn",function() {
 			window.location = "${pageContext.request.contextPath}/home/area/interest";
 		});
 		
 		//클릭한 필터 버튼 활성화 표시
-		$(".label").click(function(){
+		$(document).on("click",".label",function() {
 			$(".label").removeClass("label-selected");
 			$(this).addClass("label-selected");
 		});
+		
+		//관심지역 목록 조회
+        let interestList=[];
+        function loadInterestArea(){
+            $.ajax({
+                url : "http://localhost:8888/rest/area/interest",
+                method : "get",
+                dataType : "json",
+                success : function(resp) {
+                    interestList = resp;
+                    showInterestArea();
+                }
+            });
+        };
+        
+      	//관심지역 목록 출력
+        function showInterestArea(){
+            if(interestList.length != 0) {
+            	$.each(interestList, function(index, value){
+            		var span = $("<span>").text(value.areaDistrict)
+            		.attr("data-address", value.areaCity+" "+value.areaDistrict);
+            		span.addClass("label");
+            		$(".filter-btn").append(span); //내 관심지역 목록을 filter-btn 영역에 추가
+            	});
+            	var btn = $("<span>").html("<i class='fa-solid fa-gear'></i>"+" 설정");
+            	btn.addClass("label set-area-btn");
+            	$(".filter-btn").append(btn); //설정 버튼을 filter-btn 영역에 추가
+            } else {
+            	$(".set-area-banner").removeClass("hide");
+            	var exp1 = $("<span>").text("관심지역을 추가하면 최신 리뷰를 모아보기 쉬워져요.");
+            	var exp2 = $("<span>").text("내 관심지역 고르러 가볼까요?");
+            	exp1.addClass("banner-title exp1");
+            	exp2.addClass("banner-title exp2");
+            	
+            	var btnGo = $("<span>").html("<i class='fa-solid fa-circle-chevron-right'></i>");
+            	btnGo.addClass("ic-go exp2");
+            	
+            	$(".set-area-banner").append(exp1).append(exp2).append(btnGo);
+            }
+        };
 	});
 </script>
 </body>
