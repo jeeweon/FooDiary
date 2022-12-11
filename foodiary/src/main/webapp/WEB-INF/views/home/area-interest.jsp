@@ -202,8 +202,12 @@
     .nearby-area{
         width:600px;
         margin: 0 auto;
-        margin-top: 140px;
+        margin-top: 120px;
         position: relative;
+    }
+    
+    .nearby-area.none{
+        margin-top: 50px;
     }
     
     .nearby-area.none .none-interest {
@@ -336,9 +340,11 @@
                     showMyArea();
                     if(interestList.length == 0) {
                     	$(".nearby-area").addClass("none");
+                    	$(".nearby-list").hide();
                     } else  {
                     	$(".nearby-area").removeClass("none");
 	                   	loadNearbyArea();                    	
+                    	$(".nearby-list").show();
                     }
                 }
             });
