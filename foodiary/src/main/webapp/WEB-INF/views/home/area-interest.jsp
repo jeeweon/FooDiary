@@ -24,7 +24,7 @@
     .search-view{
         width: 400px; 
         margin: 0 auto;
-        margin-top: 50px;
+        margin-top: 30px;
     }
 
     .search-bar { 
@@ -160,7 +160,7 @@
         border: none;
         border-radius: 6px;
         font-size: 16px;
-        width: 100px;
+        width: 140px;
         height: 50px;
         padding: 0.5em;
         margin-right: 10px;
@@ -233,7 +233,7 @@
         border: none;
         border-radius: 6px;
         font-size: 16px;
-        width: 100px;
+        width: 140px;
         height: 50px;
         padding: 0.5em;
         margin-right: 10px;
@@ -256,6 +256,10 @@
     
     .selected-area {
     	border: 2px solid #E27C5E;
+    }
+    
+    h2 {
+	    margin-bottom: 10px; 
     }
 </style>
 </head>
@@ -281,14 +285,22 @@
     </ul>
 </div>
 
+<!-- 홈으로 돌아가기 버튼으로 디자인 필요 -->
+<div align="center">
+	<br>
+	<a href="${pageContext.request.contextPath}/home">홈으로 돌아가기</a>
+</div>
+
 <!-- 관심지역 목록  -->
 <div class="my-area">
     <h2>내 관심지역</h2>
+    <span class="sub-title">📌 자동으로 저장돼요</span>
     
     <p class="none-interest">자주 찾는 동네, 가고 싶은 여행지를 추가하고<br>
     최신 리뷰를 모아보세요!</p>
 
     <ul class="my-area-list">
+    <!-- 관심지역이 있을 때, 지역 목록 출력 / 없을 때, 안내 문구 노출 -->
     </ul>
 </div>
 
@@ -301,6 +313,7 @@
 	주변지역을 추천해드려요</p>
     
     <ul class="nearby-list">
+    <!-- 관심지역 & 인근지역이 있을 때, 지역 목록 출력 / 없을 때, 안내 문구 노출 -->
     </ul>
 </div>
 
@@ -349,7 +362,7 @@
                 $(".my-area").addClass("none");
             } else {
                 $.each(interestList, function(index, value){
-                    var li = $("<li>").text(value.areaDistrict)
+                    var li = $("<li>").text(value.areaCity+" "+value.areaDistrict)
                     .attr("data-no", value.areaNo);
 
                     //삭제 버튼
@@ -377,7 +390,7 @@
                 $(".nearby-area").addClass("none");
             } else {
             	$.each(nearbyList, function(index, value){
-                    var li = $("<li>").text(value.areaDistrict)
+                    var li = $("<li>").text(value.areaCity+" "+value.areaDistrict)
                     .attr("data-no", value.areaNo);
 
                     //추가 버튼
