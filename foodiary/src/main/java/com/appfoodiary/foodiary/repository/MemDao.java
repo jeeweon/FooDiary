@@ -25,4 +25,7 @@ public interface MemDao {
 	//비밀번호 재설정
 	boolean resetPw(MemDto memDto);
 	
+	//프로필 수정
+	boolean editProfile(MemDto memDto);
+	
 }

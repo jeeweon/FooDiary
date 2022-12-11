@@ -90,6 +90,11 @@ public class MemDaoImpl implements MemDao {
 //		return judge;
 //	}
 	
+	@Override
+	public boolean editProfile(MemDto memDto) {
+		return sqlSession.update("mem.profile",memDto)>0;
+	}
+	
 	
 
 }

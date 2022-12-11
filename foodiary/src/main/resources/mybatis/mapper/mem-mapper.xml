@@ -45,5 +45,12 @@
 			mem_pw = #{memPw}
 		where mem_no = #{memNo}
 	</update>
+	
+	<update id="profile" parameterType="MemDto">
+		update mem set 
+			mem_nick =#{memNick}, 
+			mem_intro =#{memIntro} 
+		where mem_no = #{memNo}
+	</update>
 
 </mapper>

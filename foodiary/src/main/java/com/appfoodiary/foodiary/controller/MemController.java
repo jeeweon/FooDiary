@@ -182,5 +182,30 @@ public class MemController {
 		}
 	}
 	
+	@GetMapping("/edit_profile")
+	public String editProfile(HttpSession session,
+								Model model) {
+		int memNo = (int) session.getAttribute(SessionConstant.NO);
+		MemDto memDto = memDao.selectOne(memNo);
+		model.addAttribute("memDto",memDto);
+		return "mem/edit-profile";
+		
+	}
+	
+	@PostMapping("/edit_profile")
+	public String editProfile(HttpSession session,
+								@ModelAttribute MemDto inputDto){
+		int memNo = (int) session.getAttribute(SessionConstant.NO);
+		inputDto.setMemNo(memNo);
+		
+		if(memDao.editProfile(inputDto)) {
+			return "redirect:/home";//마이 프로필 이동으로 수정하기
+		}
+		else {
+			return "redirect:edit_profile?error";
+		}
+		
+	}
+	
 
 }
