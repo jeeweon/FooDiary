@@ -211,6 +211,7 @@
         align-items: center;
         justify-content: center;
     }
+    
     .nearby-list{
 	    margin: 0;
 	    padding: 0;
@@ -333,13 +334,20 @@
                 success : function(resp) {
                     interestList = resp;
                     showMyArea();
-                    loadNearbyArea();
+                    if(interestList.length == 0) {
+                    	$(".nearby-area").addClass("none");
+                    } else  {
+                    	$(".nearby-area").removeClass("none");
+	                   	loadNearbyArea();                    	
+                    }
                 }
             });
         };
 
+		//인근지역 목록 조회
         let nearbyList=[];
         function loadNearbyArea(){
+        	if(interestList.length == 0) return;
             $.ajax({
             	url : "http://localhost:8888/rest/area/nearby",
                 method : "post",
@@ -385,33 +393,28 @@
         //인근지역 목록 출력
         function showNearbyArea(){
             $(".nearby-list").empty();
-            $(".nearby-area").removeClass("none");
-            if(nearbyList.length == 0) {
-                $(".nearby-area").addClass("none");
-            } else {
-            	$.each(nearbyList, function(index, value){
-                    var li = $("<li>").text(value.areaCity+" "+value.areaDistrict)
-                    .attr("data-no", value.areaNo);
+        	$.each(nearbyList, function(index, value){
+                var li = $("<li>").text(value.areaCity+" "+value.areaDistrict)
+                .attr("data-no", value.areaNo);
 
-                    //추가 버튼
-                    var span = $("<span>").html("<i class='fa-solid fa-plus'></i>").attr("data-no", value.areaNo);
-                	span.addClass("btn-add-area");
+                //추가 버튼
+                var span = $("<span>").html("<i class='fa-solid fa-plus'></i>").attr("data-no", value.areaNo);
+            	span.addClass("btn-add-area");
 
-                    //추가 버튼 클릭 시, 내 관심지역에 추가
-                    span.click(function(e){
-                        e.stopPropagation(); //전파 중지
-                        
-                        if(interestList.length < 3) {
-                        	var areaNo = $(this).data("no");
-                            addMyArea(areaNo);
-                        } else {
-                            alert('관심지역은 세 개까지 추가할 수 있어요'); //모달로 변경?
-                        }
-                    });
-                    var div = $("<div>").append(li).append(span); //주소, 추가 버튼을 세트로 묶기
-                    $(".nearby-list").append(div); //세트를 인근지역 목록 영역에 추가
-                });    
-            }
+                //추가 버튼 클릭 시, 내 관심지역에 추가
+                span.click(function(e){
+                    e.stopPropagation(); //전파 중지
+                    
+                    if(interestList.length < 3) {
+                    	var areaNo = $(this).data("no");
+                        addMyArea(areaNo);
+                    } else {
+                        alert('관심지역은 세 개까지 추가할 수 있어요'); //모달로 변경?
+                    }
+                });
+                var div = $("<div>").append(li).append(span); //주소, 추가 버튼을 세트로 묶기
+                $(".nearby-list").append(div); //세트를 인근지역 목록 영역에 추가
+            });    
         };
         
         //지역 정보 목록 조회
