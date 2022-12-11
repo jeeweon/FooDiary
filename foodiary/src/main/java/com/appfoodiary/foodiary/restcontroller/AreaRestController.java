@@ -73,7 +73,7 @@ public class AreaRestController {
 	}
 	
 	@PostMapping("/area/nearby")
-	public List<NearbyAreaVO> nearbyAreas(@RequestBody List<InterestAreaVO> areas) {
+	public List<NearbyAreaVO> nearbyAreas(@RequestBody(required=false) List<InterestAreaVO> areas) {
 		return areaDao.nearbyAreas(areas);
 	}
 }
