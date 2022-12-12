@@ -20,8 +20,9 @@ import com.appfoodiary.foodiary.repository.AttachDao;
 @Service
 public class AttachmentServiceImpl implements AttachmentService{
 
-	private final File dir = new File("D:\\upload\\kh10g");	 //파일경로
-	
+	//private final File dir = new File("D:\\upload\\kh10g");	 //파일경로
+	//맥용
+	private final File dir = new File("/Users/naeljung/fproject");	 //파일경로
 	@Autowired
 	private AttachDao attachDao;
 	

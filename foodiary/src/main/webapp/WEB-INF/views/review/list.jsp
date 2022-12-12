@@ -31,7 +31,7 @@ li{ list-style: none; }
 }
 
 .gallery figure{
-  width: 100%; height: 100%;
+  width: 100px; height: 100px;
 }
 .gallery figcaption{
   width: 100%; height: 100%;
@@ -179,7 +179,7 @@ position:absolute; top:50%; left:50%;
                 		<li>
                     		<a href="detail?reviewNo=${reviewDto.reviewNo}">
                         		<figure>
-                            		<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="100" height="100">
+                            		<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
                             		<figcaption class="hover-btn">♥${reviewDto.likeCnt}</figcaption>
                         		</figure>
                     		</a>
