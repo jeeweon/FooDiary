@@ -113,20 +113,23 @@ function displayPlaces(places) {
             };
 
             var moveMap = new kakao.maps.LatLng(places[i].y, places[i].x);
-            var playCopy = getplayCopy(i, places[i]);
+            var addressCopy = getAddressCopy(i, places[i]);
+            var playCopy = getPlayCopy(i, places[i]);
 
             //마커 클릭 이벤트
             kakao.maps.event.addListener(marker, 'click', function() {
                 //클릭한 항목으로 중심위치 변경
                 map.panTo(moveMap);
-                //(review place) input에 복사할 주소를 넣는다
+                //input에 복사할 주소, 장소를 넣는다
+                $("input[id=reviewAddress]").val(addressCopy);
                 $("input[id=reviewPlace]").val(playCopy);
             });
             //검색결과 항목 클릭 이벤트
             itemEl.onclick =  function () {
                 //클릭한 항목으로 중심위치 변경
                 map.panTo(moveMap);
-                //(review place) input에 복사할 주소를 넣는다
+                //input에 복사할 주소, 장소를 넣는다
+                $("input[id=reviewAddress]").val(addressCopy);
                 $("input[id=reviewPlace]").val(playCopy);
             };
         })(marker, places[i].place_name);
@@ -143,8 +146,12 @@ function displayPlaces(places) {
 }
 
 //검색결과 항목 중, 복사할 주소를 반환하는 함수
-function getplayCopy(index, places) {
-     itemStr = places.address_name + ' , ' + places.place_name;
+function getAddressCopy(index, places) {
+     itemStr = places.address_name;
+     return itemStr;
+}
+function getPlayCopy(index, places) {
+     itemStr = places.place_name;
      return itemStr;
 }
 

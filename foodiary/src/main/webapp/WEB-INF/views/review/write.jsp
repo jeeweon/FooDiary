@@ -46,7 +46,8 @@
 	<div class="right">
     <div>
     	<label>리뷰 장소</label><br>
-        <input type="text" id="reviewPlace" placeholder="(지도에서 장소를 선택하세요)">
+        <input type="text" id="reviewAddress" placeholder=" 주소 : 지도에서 주소를 선택하세요" readonly>
+        <input type="text" id="reviewPlace" placeholder=" 장소명 : 추가 입력 가능">
     </div>
     <br>
 	<div class="map_wrap">
@@ -87,7 +88,7 @@
 <script src="${pageContext.request.contextPath}/js/summernote-ko-KR.min.js"></script>
 <!-- 지도 키워드검색 -->
 <link href="${pageContext.request.contextPath}/css/kakao-keyword.css" rel="stylesheet" type="text/css" >
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppkey}&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4cf30cac0d3ce8aa9755ab5c3966513d&libraries=services"></script>
 <script src="${pageContext.request.contextPath}/js/kakao-keyword.js"></script>
 
 <script type="text/javascript">
