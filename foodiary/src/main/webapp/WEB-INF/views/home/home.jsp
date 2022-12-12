@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <head>
 <title>홈</title>
 
@@ -11,6 +10,10 @@
 .container {
 	width: 600px;
 	margin: 0 auto;
+}
+
+.set-area-banner.hide {
+	display: none;
 }
 
 .set-area-banner {
@@ -88,6 +91,16 @@
 	background-color: #E27C5E;
 	color: white;
 }
+
+.writer-avatar {
+	width: 50px;
+	height: 50px;
+}
+
+.thumbnail {
+	width: 100px;
+	height: 100px;
+}
 </style>
 </head>
 <body>
@@ -108,53 +121,224 @@
 	</div>
 
 	<!-- 관심지역 설정 유도 배너 -->
-	<c:if test="${fn:length(myAreasList) == 0}">
-		<div class="set-area-banner">
-			<span class="banner-title exp1">${loginNick}님의 관심지역 정보가 아직 없어요.</span>
-			<span class="banner-title exp2">내 관심지역 고르러 가볼까요?</span>
-			<span class="ic-go exp2"><i class="fa-solid fa-circle-chevron-right"></i></span>
-		</div>
-	</c:if>
+	<div class="set-area-banner hide">
+	</div>
 
 	<!-- 리뷰 필터 버튼 -->
 	<div class="filter-btn">
         <span class="label label-all">전체</span>
-        <span class="label">팔로우</span>
-        <c:if test="${fn:length(myAreasList) != 0}">
-        	<c:forEach var="myArea" items="${myAreasList}">
-        		<span class="label">${myArea.areaDistrict}</span>
-        	</c:forEach>
-        	<span class="label set-area-btn"><i class="fa-solid fa-gear"></i> 설정</span>
-        </c:if>
+        <span class="label label-follow">팔로우</span>
+        <!-- 관심지역이 있으면 지역 버튼 노출 -->
     </div>
+    
+    <!-- 리뷰 목록 -->
+    <div class="review-list">
+    </div>
+    
 </div>
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(function() {
+		loadInterestArea();
+		loadReviewAll();
+
 		$(".label-all").addClass("label-selected");
-		
+
 		//뒤로가기로 돌아왔을 때, 필터 설정 초기화를 위해 새로고침
-	    $(window).bind("pageshow", function (event) {
-	        if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
-	             location.href = location.href;
-	        }
-	    });
-		
+		$(window).bind("pageshow", function(event) {
+			if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type == 2)) {
+				location.href = location.href;
+			}
+		});
+
 		//관심지역 설정 화면으로 이동(배너, 설정 버튼)
-		$(".set-area-banner").click(function() {
+		$(document).on("click", ".set-area-banner", function() {
 			window.location = "${pageContext.request.contextPath}/home/area/interest";
 		});
-		
-		$(".set-area-btn").click(function(){
+
+		$(document).on("click", ".set-area-btn", function() {
 			window.location = "${pageContext.request.contextPath}/home/area/interest";
 		});
-		
+
+		//관심지역 목록 조회
+		let interestList = [];
+		function loadInterestArea() {
+			$.ajax({
+				url : "http://localhost:8888/rest/area/interest",
+				method : "get",
+				dataType : "json",
+				success : function(resp) {
+					interestList = resp;
+					showInterestArea();
+				}
+			});
+		};
+
+		//관심지역 목록 출력
+		function showInterestArea() {
+			if (interestList.length != 0) {
+				$.each(interestList, function(index, value) {
+					var span = $("<span>").text(value.areaDistrict)
+					.attr("data-address", value.areaCity + " " + value.areaDistrict);
+					span.addClass("label label-area");
+					$(".filter-btn").append(span); //내 관심지역 목록을 filter-btn 영역에 추가
+				});
+				var btn = $("<span>").html("<i class='fa-solid fa-gear'></i>" + " 설정");
+				btn.addClass("label set-area-btn");
+				$(".filter-btn").append(btn); //설정 버튼을 filter-btn 영역에 추가
+			} else {
+				$(".set-area-banner").removeClass("hide");
+				var exp1 = $("<span>").text("관심지역을 추가하면 최신 리뷰를 모아보기 쉬워져요.");
+				var exp2 = $("<span>").text("내 관심지역 고르러 가볼까요?");
+				exp1.addClass("banner-title exp1");
+				exp2.addClass("banner-title exp2");
+
+				var btnGo = $("<span>").html("<i class='fa-solid fa-circle-chevron-right'></i>");
+				btnGo.addClass("ic-go exp2");
+
+				$(".set-area-banner").append(exp1).append(exp2).append(btnGo);
+			}
+		};
+	
+		let reviewList = [];
+		//리뷰 전체 목록 조회
+		function loadReviewAll() {
+			$.ajax({
+				url : "http://localhost:8888/rest/home/review",
+				method : "get",
+				dataType : "json",
+				success : function(resp) {
+					reviewList = resp;
+					console.log(reviewList);
+					renderList();
+				}
+			});
+		};
+
 		//클릭한 필터 버튼 활성화 표시
-		$(".label").click(function(){
+		$(document).on("click", ".label", function() {
 			$(".label").removeClass("label-selected");
 			$(this).addClass("label-selected");
 		});
+		
+		//전체 버튼 클릭 시, 리뷰 목록 조회
+		$(document).on("click", ".label-all", function() {
+			$(".review-list").empty();
+			loadReviewAll();
+		});
+		
+		//클릭한 관심지역 리뷰 목록 조회
+		$(document).on("click", ".label-area", function() {
+			$(".review-list").empty();
+			let interestArea = $(this).data("address");
+			$.ajax({
+				url : "http://localhost:8888/rest/home/review/"+ interestArea,
+				method : "get",
+				dataType : "json",
+				success : function(resp) {
+					reviewList = resp;
+					console.log(reviewList);
+					renderList();
+				}
+			});
+		});
+
+		//내 팔로워 리뷰 목록 조회
+		$(document).on("click", ".label-follow", function() {
+			$(".review-list").empty();
+			$.ajax({
+				url : "http://localhost:8888/rest/home/review/follow",
+				method : "get",
+				dataType : "json",
+				success : function(resp) {
+					reviewList = resp;
+					console.log(reviewList);
+					renderList();
+				}
+			});
+		});
+		
+		//리뷰 목록 출력
+		function renderList(){
+			if(reviewList.length != 0) {
+				$.each(reviewList, function(index, value) {
+					//프로필 이미지 다운로드 기능 구현 후, 주소 변경 예정(프사 있으면 다운로드, 없으면 기본 이미지)
+					var writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
+					writerAvatar.addClass("writer-avatar");
+					
+					var writerNick = $("<span>").text(value.memNick);
+					writerNick.addClass("writer-nick");
+					
+					var reviewCnt = $("<span>").text("리뷰 " + value.memReviewCnt);
+					reviewCnt.addClass("review-cnt");
+					
+					var writeTime = $("<span>").text(value.reviewWriteTime);
+					writeTime.addClass("write-time");
+					
+					var infoDiv = $("<div>").append(writerAvatar).append(writerNick).append(reviewCnt).append(writeTime);
+					infoDiv.addClass("review-write-info");
+					
+					var thumbnail = $("<img>").attr("src", "${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+					thumbnail.addClass("thumbnail");
+					
+					var moreIc;
+					var moreCnt;
+					var imgMore;
+					if(value.imgCnt > 1) {
+						moreIc = $("<span>").html("<i class='fa-solid fa-plus'></i>");
+						moreCnt = $("<span>").text(value.imgCnt-1);
+						imgMore = $("<div>").append(moreIc).append(moreCnt);
+						imgMore.addClass("img-more");
+					}
+					
+					var address;
+					if(value.reviewPlace != null) {
+						address = $("<span>").text(value.reviewPlace);
+						address.addClass("address");
+					}
+					
+					var content;
+					if(value.reviewContent != null) {
+						content = $("<span>").text(value.reivewContent);
+						content.addClass("content"); //text-overflow: ellipsis 옵션 설정 필요						
+					}
+					
+					var mainDiv = $("<div>").append(thumbnail).append(imgMore).append(address).append(content);
+					mainDiv.addClass("review-main");
+					
+					var scoreIc = $("<span>").html("<i class='fa-solid fa-star'></i>");
+					var score = $("<span>").text(value.starScore);
+					scoreIc.addClass("score-ic");
+					score.addClass("score");
+					
+					var scoreDiv = $("<div>").append(scoreIc).append(score); //별점 아이콘, 별점 묶기
+					
+					var likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>"); //내가 좋아요 눌렀는지 확인 필요
+					var likeCnt = $("<span>").text("도움됐어요"+ " " +value.likeCnt);
+					likeIc.addClass("like-ic")
+					likeCnt.addClass("like-cnt");
+					
+					var likeDiv = $("<div>").append(likeIc).append(likeCnt); //좋아요 아이콘, 좋아요 수 묶기
+					
+					var replyIc = $("<span>").html("<i class='fa-regular fa-comment'></i>");
+					var replyCnt = $("<span>").text(value.replyCnt);
+					replyIc.addClass("reply-ic");
+					replyCnt.addClass("reply-cnt");
+					
+					var replyDiv = $("<div>").append(replyIc).append(replyCnt); //댓글 아이콘, 댓글 수 묶기
+					
+					var bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>"); //내가 북마크 눌렀는지 확인 필요
+					bookmarkIc.addClass("bookmark-ic");
+					
+					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv);
+					actionDiv.addClass("review-action");
+					$(".review-list").append(infoDiv).append(mainDiv).append(actionDiv);
+				});
+			} else {
+				$(".review-list").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
+			}
+		};
 	});
 </script>
 </body>

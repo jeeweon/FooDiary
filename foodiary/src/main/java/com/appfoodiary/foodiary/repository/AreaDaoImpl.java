@@ -10,6 +10,7 @@ import com.appfoodiary.foodiary.entity.AreaDto;
 import com.appfoodiary.foodiary.entity.InterestAreaDto;
 import com.appfoodiary.foodiary.vo.CntInterestAreaVO;
 import com.appfoodiary.foodiary.vo.InterestAreaVO;
+import com.appfoodiary.foodiary.vo.NearbyAreaVO;
 
 @Repository
 public class AreaDaoImpl implements AreaDao{
@@ -44,5 +45,10 @@ public class AreaDaoImpl implements AreaDao{
 	@Override
 	public CntInterestAreaVO selectCnt(int memNo) {	
 		return sqlSession.selectOne("area.count-interest", memNo);
+	}
+	
+	@Override
+	public List<NearbyAreaVO> nearbyAreas(List<InterestAreaVO> areas) {	
+		return sqlSession.selectList("area.list-nearby", areas);
 	}
 }
