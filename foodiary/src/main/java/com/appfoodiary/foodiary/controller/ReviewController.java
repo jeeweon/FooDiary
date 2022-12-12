@@ -31,7 +31,8 @@ import com.appfoodiary.foodiary.service.AttachmentService;
 @RequestMapping("/review")
 public class ReviewController {
 	
-	private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
+	//private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
+	private final File dir = new File(System.getProperty("user.home") + "/upload"); //OS 무관 파일 경로(배포 시, 삭제 예정)
 	@PostConstruct	//최초 실행 시, 딱 한번만 실행
 	public void prepare() {
 		dir.mkdirs();	//파일 생성
@@ -62,8 +63,8 @@ public class ReviewController {
 			@ModelAttribute ReviewDto dto, 
 			@RequestParam List<MultipartFile> attachments, RedirectAttributes attr) 
 															throws IllegalStateException, IOException {
-		session.removeAttribute(SessionConstant.NO);	//★로그인기능 연결시 삭제예정
-		session.setAttribute(SessionConstant.NO, 1);	//★로그인기능 연결시 삭제예정
+		session.removeAttribute(SessionConstant.NO);	//★로그인 구현시 삭제예정
+		session.setAttribute(SessionConstant.NO, 14);	//★로그인 구현시 삭제예정
 		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
 		dto.setMemNo(memNo);	//세션값을 dto.memNo에 저장
 		
