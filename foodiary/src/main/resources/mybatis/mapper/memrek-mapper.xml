@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memrek">
+
+	<select id="list"  resultType="MemDto">
+
+select 
+*
+from 
+(select *from(
+select TMP.*, rownum rn from(
+    select *
+        from(
+            select 
+                    mem_no,mem_login_date 
+                from 
+                    mem 
+                where 
+                    10>=(select count(*) from review)
+    minus
+         select active_mem_no, sysdate as  mem_join_date 
+         from
+            follow
+            )
+    order by mem_login_date
+    )TMP
+) where rn between 1 and 3) 
+R left outer join mem M
+on R.mem_no=M.mem_no
+order by DBMS_RANDOM.RANDOM
+
+
+	</select>
+</mapper>
