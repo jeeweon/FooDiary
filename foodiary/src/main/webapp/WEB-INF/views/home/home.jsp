@@ -101,6 +101,10 @@
 	width: 100px;
 	height: 100px;
 }
+
+.like-ic {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -334,7 +338,7 @@
 						.attr("data-rno", value.reviewNo); //내가 북마크 눌렀는지 확인 필요
 					bookmarkIc.addClass("bookmark-ic");
 					
-					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv);
+					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv).append(bookmarkIc);
 					actionDiv.addClass("review-action");
 					$(".review-list").append(infoDiv).append(mainDiv).append(actionDiv);
 				});
@@ -343,18 +347,38 @@
 			}
 		};
 		
-		//좋아요 버튼 클릭 이벤트
+		//좋아요 버튼 클릭 이벤트 -> 아이콘 활성화 여부 적용 필요
 		$(document).on("click", ".like-ic", function() {
+			var clickedHeart = $(this);
 			$.ajax({
 				url : "${pageContext.request.contextPath}/rest/review/like",
                 method : "post",
-                dataType : "json",
-                traditional: true,
-                contentType:"application/json",
-			    data:JSON.stringify(interestList),
+			    data : {
+	        	   reviewNo:$(this).data("rno")
+	           	},
                 success : function(resp) {
-                    nearbyList = resp;
-                	showNearbyArea();
+                	clickedHeart.next().text("도움됐어요"+ " " +resp);    
+                }
+			});
+		});
+		
+		//북마크 버튼 클릭 이벤트 -> 수정 필요(현재 동작 안함) 
+		$(document).on("click", ".bookmark-ic", function() {
+			var reviewNo = $(this).data("rno");
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rest/review/like",
+                method : "post",
+			    data : {
+	        	   reviewNo:reviewNo
+	           	},
+                success : function(resp) {
+                	if(resp) {
+                		$(this).html("<i class='fa-solid fa-bookmark'></i>")
+                			.attr("data-rno", reviewNo);
+                	} else {
+                		$(this).html("<i class='fa-regular fa-bookmark'></i>")
+                			.attr("data-rno", reviewNo);
+                	}   
                 }
 			});
 		});
