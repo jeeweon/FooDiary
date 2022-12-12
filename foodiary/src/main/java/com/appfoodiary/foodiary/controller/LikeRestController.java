@@ -123,4 +123,11 @@ public class LikeRestController {
 			return true;
 		}
 	}
+	//hover시 비동기 
+	@PostMapping("/hover")
+	public int hover(
+			@RequestParam int reviewNo
+			) {
+		return likeDao.count2(reviewNo);
+	}
 }
