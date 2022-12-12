@@ -18,4 +18,8 @@ public class ReviewSearchVO {
 	private String reviewPlace;
 	private int reviewReportCnt;
 	private String interestArea;
+	private int likeCnt;
+	private int replyCnt;
+	private int memReviewCnt;
+	private int imgCnt;
 }
