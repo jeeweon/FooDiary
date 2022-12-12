@@ -1,13 +1,15 @@
 package com.appfoodiary.foodiary.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.BookmarkDto;
 import com.appfoodiary.foodiary.entity.FollowDto;
 import com.appfoodiary.foodiary.entity.LikeDto;
@@ -15,7 +17,6 @@ import com.appfoodiary.foodiary.repository.BookmarkDao;
 import com.appfoodiary.foodiary.repository.FollowDao;
 import com.appfoodiary.foodiary.repository.LikeDao;
 
-import ch.qos.logback.classic.Logger;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -35,27 +36,36 @@ public class LikeRestController {
 	@PostMapping("/like")
 	public int like(
 			@RequestParam int reviewNo,
-			@RequestParam int memNo,
-			Model model
+			Model model,
+			HttpSession session
 			) {
 		//우선 값을 넣어놓고 확인하겠다.
 		//목표
 		//(1): 프론트로부터 데이터를 받는다.
 		//(2): 받은 데이터 값을 dto에 담에서 cert에 넣는다. 
 		//(3)cert값이 있으면 지우고 없으면 넣는다.
+		
+		session.removeAttribute(SessionConstant.NO);
+		session.setAttribute(SessionConstant.NO, 14);
+		int memNo=(int)session.getAttribute(SessionConstant.NO);
 		LikeDto dto =LikeDto.builder()
 					.reviewNo(reviewNo)
 					.memNo(memNo)
 					.build();
+		
 		if(likeDao.cert(dto)) {
 			//값이 존재 데이터를 삭제
 			likeDao.delete(dto);
+			//리뷰갯수 하나 지운다.
+			likeDao.minus(reviewNo);
 			
 		}else {
 			//값이 없음 데이터를 삽입
 			likeDao.insert(dto);
+			//리뷰갯수증가
+			likeDao.plus(reviewNo);
 		}
-		return likeDao.count(reviewNo);
+		return likeDao.count2(reviewNo);
 	}
 	
 	
@@ -63,9 +73,13 @@ public class LikeRestController {
 	@PostMapping("/bookmark")
 	public boolean bookmark(
 			@RequestParam int reviewNo,
-			@RequestParam int memNo
+			HttpSession session
+			
 			)
 		{
+		session.removeAttribute(SessionConstant.NO);
+		session.setAttribute(SessionConstant.NO, 14);
+		int memNo=(int)session.getAttribute(SessionConstant.NO);
 		//dto에 값을 넣는다.
 		BookmarkDto dto=BookmarkDto.builder()
 					.reviewNo(reviewNo)

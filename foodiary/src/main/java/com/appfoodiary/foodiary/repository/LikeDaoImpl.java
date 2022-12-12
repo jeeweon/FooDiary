@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.LikeDto;
+import com.appfoodiary.foodiary.entity.ReviewDto;
 
 @Repository
 public class LikeDaoImpl implements LikeDao{
@@ -26,7 +27,20 @@ public class LikeDaoImpl implements LikeDao{
 	}
 	@Override
 	public int count(int reviewNo) {
-		return sqlSession.selectOne("like.count",reviewNo);
+		return sqlSession.selectOne("like.count",reviewNo);	
+	}
+	@Override
+	public void plus(int reviewNo) {
+		 sqlSession.update("like.plus",reviewNo);
 		
 	}
+	@Override
+	public void minus(int reviewNo) {
+		 sqlSession.update("like.minus",reviewNo);
+	}
+	@Override
+	public int count2(int reviewNo) {
+		return sqlSession.selectOne("like.count2",reviewNo);
+	}
+	
 }
