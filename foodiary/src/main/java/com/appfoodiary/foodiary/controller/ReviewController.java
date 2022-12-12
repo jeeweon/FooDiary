@@ -22,6 +22,7 @@ import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
+import com.appfoodiary.foodiary.repository.LikeDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.service.AttachmentService;
 
@@ -30,7 +31,8 @@ import com.appfoodiary.foodiary.service.AttachmentService;
 @RequestMapping("/review")
 public class ReviewController {
 	
-	private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
+	//private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
+	private final File dir = new File(System.getProperty("user.home") + "/upload"); //OS 무관 파일 경로(배포 시, 삭제 예정)
 	@PostConstruct	//최초 실행 시, 딱 한번만 실행
 	public void prepare() {
 		dir.mkdirs();	//파일 생성
@@ -40,11 +42,14 @@ public class ReviewController {
 	private ReviewDao reviewDao;
 	@Autowired
 	private AttachmentService attachmentService;
+	@Autowired
+	private LikeDao likeDao;
 	
 	@GetMapping("/list")
 	public String list(@ModelAttribute ReviewDto dto,
 			Model model) {
 		List<ReviewDto> list = reviewDao.list();
+		model.addAttribute("likecnt",likeDao.count(dto.getReviewNo()));
 		model.addAttribute("list", list);
 		return "review/list";
 	}
@@ -58,8 +63,7 @@ public class ReviewController {
 			@ModelAttribute ReviewDto dto, 
 			@RequestParam List<MultipartFile> attachments, RedirectAttributes attr) 
 															throws IllegalStateException, IOException {
-		session.removeAttribute(SessionConstant.NO);	//★로그인기능 연결시 삭제예정
-		session.setAttribute(SessionConstant.NO, 1);	//★로그인기능 연결시 삭제예정
+
 		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
 		dto.setMemNo(memNo);	//세션값을 dto.memNo에 저장
 		

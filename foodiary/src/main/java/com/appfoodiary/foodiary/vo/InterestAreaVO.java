@@ -11,6 +11,4 @@ public class InterestAreaVO {
 	private int areaNo;
 	private String areaCity;
 	private String areaDistrict;
-	private String areaNearby1;
-	private String areaNearby2;
 }
