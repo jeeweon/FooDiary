@@ -45,8 +45,8 @@ public class LikeRestController {
 		//(2): 받은 데이터 값을 dto에 담에서 cert에 넣는다. 
 		//(3)cert값이 있으면 지우고 없으면 넣는다.
 		
-		session.removeAttribute(SessionConstant.NO);
-		session.setAttribute(SessionConstant.NO, 14);
+		//session.removeAttribute(SessionConstant.NO);
+		//session.setAttribute(SessionConstant.NO, 14);
 		int memNo=(int)session.getAttribute(SessionConstant.NO);
 		LikeDto dto =LikeDto.builder()
 					.reviewNo(reviewNo)
@@ -77,8 +77,8 @@ public class LikeRestController {
 			
 			)
 		{
-		session.removeAttribute(SessionConstant.NO);
-		session.setAttribute(SessionConstant.NO, 14);
+		//session.removeAttribute(SessionConstant.NO);
+		//session.setAttribute(SessionConstant.NO, 14);
 		int memNo=(int)session.getAttribute(SessionConstant.NO);
 		//dto에 값을 넣는다.
 		BookmarkDto dto=BookmarkDto.builder()
