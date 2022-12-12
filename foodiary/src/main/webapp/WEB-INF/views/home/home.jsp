@@ -356,8 +356,13 @@
 					
 					var scoreDiv = $("<div>").append(scoreIc).append(score); //별점 아이콘, 별점 묶기
 					
-					var likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>")
-						.attr("data-rno", value.reviewNo);; //내가 좋아요 눌렀는지 확인 필요
+					var likeIc;					
+					if(value.likeCheck) {
+						likeIc = $("<span>").html("<i class='fa-solid fa-heart'></i>");
+					} else {						
+						likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>");
+					}
+						likeIc.attr("data-rno", value.reviewNo);
 					var likeCnt = $("<span>").text("도움됐어요"+ " " +value.likeCnt);
 					likeIc.addClass("like-ic")
 					likeCnt.addClass("like-cnt");
@@ -390,7 +395,7 @@
 			}
 		};
 		
-		//좋아요 버튼 클릭 이벤트 -> 아이콘 활성화 여부 적용 필요
+		//좋아요 버튼 클릭 이벤트
 		$(document).on("click", ".like-ic", function() {
 			var clickedHeart = $(this);
 			$.ajax({
@@ -400,6 +405,11 @@
 	        	   reviewNo:$(this).data("rno")
 	           	},
                 success : function(resp) {
+                	if(clickedHeart.find("i").hasClass("fa-solid")) {
+                		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
+                	} else {
+                		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
+                	}
                 	clickedHeart.next().text("도움됐어요"+ " " +resp);    
                 }
 			});
@@ -417,12 +427,9 @@
 	           	},
                 success : function(resp) {
                 	if(resp) {
-                		clickedBm.find("i").addClass("fa-solid");
-                		clickedBm.find("i").removeClass("fa-regular");
+                		clickedBm.find("i").addClass("fa-solid").removeClass("fa-regular");
                 	} else {
-                		//clickedBm.innerHtml("<i class='fa-regular fa-bookmark'></i>");
-                		clickedBm.find("i").addClass("fa-regular");
-                		clickedBm.find("i").removeClass("fa-solid");
+                		clickedBm.find("i").addClass("fa-regular").removeClass("fa-solid");
                 	}   
                 }
 			});
