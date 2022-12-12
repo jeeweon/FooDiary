@@ -101,6 +101,10 @@
 	width: 100px;
 	height: 100px;
 }
+
+.like-ic {
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -165,7 +169,7 @@
 		let interestList = [];
 		function loadInterestArea() {
 			$.ajax({
-				url : "http://localhost:8888/rest/area/interest",
+				url : "${pageContext.request.contextPath}/rest/area/interest",
 				method : "get",
 				dataType : "json",
 				success : function(resp) {
@@ -205,7 +209,7 @@
 		//리뷰 전체 목록 조회
 		function loadReviewAll() {
 			$.ajax({
-				url : "http://localhost:8888/rest/home/review",
+				url : "${pageContext.request.contextPath}/rest/home/review",
 				method : "get",
 				dataType : "json",
 				success : function(resp) {
@@ -233,7 +237,7 @@
 			$(".review-list").empty();
 			let interestArea = $(this).data("address");
 			$.ajax({
-				url : "http://localhost:8888/rest/home/review/"+ interestArea,
+				url : "${pageContext.request.contextPath}/rest/home/review/"+ interestArea,
 				method : "get",
 				dataType : "json",
 				success : function(resp) {
@@ -248,7 +252,7 @@
 		$(document).on("click", ".label-follow", function() {
 			$(".review-list").empty();
 			$.ajax({
-				url : "http://localhost:8888/rest/home/review/follow",
+				url : "${pageContext.request.contextPath}/rest/home/review/follow",
 				method : "get",
 				dataType : "json",
 				success : function(resp) {
@@ -314,7 +318,8 @@
 					
 					var scoreDiv = $("<div>").append(scoreIc).append(score); //별점 아이콘, 별점 묶기
 					
-					var likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>"); //내가 좋아요 눌렀는지 확인 필요
+					var likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>")
+						.attr("data-rno", value.reviewNo);; //내가 좋아요 눌렀는지 확인 필요
 					var likeCnt = $("<span>").text("도움됐어요"+ " " +value.likeCnt);
 					likeIc.addClass("like-ic")
 					likeCnt.addClass("like-cnt");
@@ -326,12 +331,14 @@
 					replyIc.addClass("reply-ic");
 					replyCnt.addClass("reply-cnt");
 					
-					var replyDiv = $("<div>").append(replyIc).append(replyCnt); //댓글 아이콘, 댓글 수 묶기
+					var replyDiv = $("<div>").append(replyIc).append(replyCnt)
+						.attr("data-rno", value.reviewNo); //댓글 아이콘, 댓글 수 묶기
 					
-					var bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>"); //내가 북마크 눌렀는지 확인 필요
+					var bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>")
+						.attr("data-rno", value.reviewNo); //내가 북마크 눌렀는지 확인 필요
 					bookmarkIc.addClass("bookmark-ic");
 					
-					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv);
+					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv).append(bookmarkIc);
 					actionDiv.addClass("review-action");
 					$(".review-list").append(infoDiv).append(mainDiv).append(actionDiv);
 				});
@@ -339,6 +346,42 @@
 				$(".review-list").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
 			}
 		};
+		
+		//좋아요 버튼 클릭 이벤트 -> 아이콘 활성화 여부 적용 필요
+		$(document).on("click", ".like-ic", function() {
+			var clickedHeart = $(this);
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rest/review/like",
+                method : "post",
+			    data : {
+	        	   reviewNo:$(this).data("rno")
+	           	},
+                success : function(resp) {
+                	clickedHeart.next().text("도움됐어요"+ " " +resp);    
+                }
+			});
+		});
+		
+		//북마크 버튼 클릭 이벤트 -> 수정 필요(현재 동작 안함) 
+		$(document).on("click", ".bookmark-ic", function() {
+			var reviewNo = $(this).data("rno");
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rest/review/like",
+                method : "post",
+			    data : {
+	        	   reviewNo:reviewNo
+	           	},
+                success : function(resp) {
+                	if(resp) {
+                		$(this).html("<i class='fa-solid fa-bookmark'></i>")
+                			.attr("data-rno", reviewNo);
+                	} else {
+                		$(this).html("<i class='fa-regular fa-bookmark'></i>")
+                			.attr("data-rno", reviewNo);
+                	}   
+                }
+			});
+		});
 	});
 </script>
 </body>
