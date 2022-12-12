@@ -67,6 +67,7 @@ CREATE TABLE review (
 );
 alter table review add  reply_cnt number default 0;
 alter table review modify reply_cnt not null check (reply_cnt>=0);
+alter table review add  review_address varchar2(120);
 create view review_attach_view as
 select
     R.review_no, A.*
