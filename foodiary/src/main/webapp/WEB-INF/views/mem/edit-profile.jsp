@@ -35,9 +35,22 @@
 	<div>
 		<h1>프로필 수정</h1>
 	</div>
-
-	<form action ="edit_profile" method="post" class="edit-form">
-		
+	
+	<form action ="edit_profile" method="post" class="edit-form" enctype="multipart/form-data">
+			<c:choose>
+				<c:when test="${empty profile}">
+					<img class="preview" src="${pageContext.request.contextPath}/images/Foodiary-logo.png" width="100" height="100">
+				</c:when>
+				<c:otherwise>
+				<c:forEach var="profile" items="${profile}">
+						<img class="preview" src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}" width="100" height="100">
+				</c:forEach>
+				</c:otherwise>		
+			</c:choose>
+		<div>
+			<input type="text" name="attachNo" hidden="true">
+			<input type="file" name="profile" class="profile-input" accept=".jpg, .png, .gif">
+		</div>
 		<div>
 			<label>
 				닉네임
@@ -68,6 +81,34 @@
 <script type="text/javascript">
 
 $(function(){
+	$(".profile-input").change(function(){
+		if(this.files.length>0){
+			
+	// 서버에 비동기로 파일을 업로드하는 코드를 사용해야 함(ajax를 이용해서 multipart 전송 구현)
+    // - 반드시 contentType, processData를 false로 설정해야 한다
+    // - FormData 객체를 만들어 전송할 내용을 담아서 data에 설정한다
+			var fd = new FormData();
+			fd.append("attach",this.files[0]);
+
+			$.ajax({
+				url: "${pageContext.request.contextPath}/attach/upload",
+				method : "post",
+				data : fd,
+				processData : false,
+				contentType : false,
+				success:function(resp){
+					 $(".preview").attr("src", resp).attr("width","200").attr("height","200");
+					var check = resp.lastIndexOf("/")//경로에서 /위치 찾기
+					var attachNo = resp.substr(check+1);
+					$("[name=attachNo]").val(attachNo);
+				}
+			});
+		}
+		else{
+			$(".preview").attr("src","${pageContext.request.contextPath}/images/Foodiary-logo.png");
+		}
+	});
+	
 	//input 상태객체
 	var validChecker = {
 			memNickValid : false, memNickRegex : /^[가-힣0-9]{2,10}$/

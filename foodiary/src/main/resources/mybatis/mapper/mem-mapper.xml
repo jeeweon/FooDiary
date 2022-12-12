@@ -52,5 +52,19 @@
 			mem_intro =#{memIntro} 
 		where mem_no = #{memNo}
 	</update>
-
+	
+	<!-- 파일첨부 -->
+	<insert id="profileAttach" parameterType="ProfileAttachDto">
+		insert into Profile_attach values(#{attachNo}, #{memNo})
+	</insert>
+	
+	<select id="findProfile" parameterType="int" resultType="AttachDto">
+		select * from profile_attach where mem_no = #{memNo} order by attach_no asc
+	</select>
+	
+	<delete id="deleteProfile" parameterType="int">
+		delete from profile_attach where mem_no =#{memNo}
+	</delete>
+	
+	
 </mapper>

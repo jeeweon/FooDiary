@@ -1,11 +1,15 @@
 package com.appfoodiary.foodiary.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.MemDto;
+import com.appfoodiary.foodiary.entity.ProfileAttachDto;
 
 @Repository
 public class MemDaoImpl implements MemDao {
@@ -95,6 +99,21 @@ public class MemDaoImpl implements MemDao {
 		return sqlSession.update("mem.profile",memDto)>0;
 	}
 	
+	@Override
+	public void profileImage(ProfileAttachDto profileAttachDto) {
+		sqlSession.insert("mem.profileAttach",profileAttachDto);
+		
+	}
+	
+	@Override
+	public List<AttachDto> findProfile(int memNo) {
+		return sqlSession.selectList("mem.findProfile",memNo);
+	}
+	
+	@Override
+	public boolean deleteProfile(int memNo) {
+		return sqlSession.delete("mem.deleteProfile",memNo)>0;
+	}
 	
 
 }

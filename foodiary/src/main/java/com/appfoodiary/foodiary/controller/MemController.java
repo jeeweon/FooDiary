@@ -1,5 +1,8 @@
 package com.appfoodiary.foodiary.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
+import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.MemDto;
+import com.appfoodiary.foodiary.entity.ProfileAttachDto;
+import com.appfoodiary.foodiary.repository.AttachDao;
 import com.appfoodiary.foodiary.repository.MemDao;
+import com.appfoodiary.foodiary.service.AttachmentService;
 
 @Controller
 @RequestMapping("/mem")
@@ -26,6 +34,9 @@ public class MemController {
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@Autowired
+	private AttachmentService attachmentService;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -184,21 +195,29 @@ public class MemController {
 	
 	@GetMapping("/edit_profile")
 	public String editProfile(HttpSession session,
-								Model model) {
+								Model model ) throws IOException {
 		int memNo = (int) session.getAttribute(SessionConstant.NO);
 		MemDto memDto = memDao.selectOne(memNo);
 		model.addAttribute("memDto",memDto);
+		model.addAttribute("profile",memDao.findProfile(memNo));			
+
 		return "mem/edit-profile";
 		
 	}
 	
 	@PostMapping("/edit_profile")
 	public String editProfile(HttpSession session,
-								@ModelAttribute MemDto inputDto){
+								@ModelAttribute MemDto inputDto,
+								@RequestParam int attachNo ) {
 		int memNo = (int) session.getAttribute(SessionConstant.NO);
 		inputDto.setMemNo(memNo);
-		
+		ProfileAttachDto profileAttachDto = new ProfileAttachDto(attachNo, memNo);
+
 		if(memDao.editProfile(inputDto)) {
+			List<AttachDto> attachments = memDao.findProfile(memNo);
+			attachmentService.attachmentsDelete(attachments);
+			memDao.deleteProfile(memNo);
+			memDao.profileImage(profileAttachDto);
 			return "redirect:/home";//마이 프로필 이동으로 수정하기
 		}
 		else {

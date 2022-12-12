@@ -45,6 +45,26 @@ public class AttachmentServiceImpl implements AttachmentService{
 		
 		return attachNo;
 	}
+	
+	//1개 업로드
+	@Override
+	public int attachUp(MultipartFile attach) throws IllegalStateException, IOException {
+		//DB 등록 (DB: attach테이블)
+		int attachNo = attachDao.newAttachNo();
+		attachDao.insert(
+				AttachDto.builder()
+					.attachNo(attachNo)
+					.attachName(attach.getOriginalFilename())
+					.attachType(attach.getContentType())
+					.attachSize(attach.getSize())
+					.build());
+		
+		//target에 파일저장
+		File target = new File(dir, String.valueOf(attachNo)); //파일이름 지정
+		attach.transferTo(target);	//저장!
+		
+		return attachNo;
+	}
 
 	//다운로드(미리보기)
 	@Override
