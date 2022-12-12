@@ -51,6 +51,11 @@ li {
     flex-direction: column;
     align-items: center;
 }
+.Lbody form fieldset legend{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .Lbody input{
     width: 450px;
     height: 50px;
