@@ -312,7 +312,12 @@
 					mainDiv.addClass("review-main");
 					
 					var scoreIc = $("<span>").html("<i class='fa-solid fa-star'></i>");
-					var score = $("<span>").text(value.starScore);
+					var score;
+					if(value.starScore == 0) {
+						score = $("<span>").text("-");
+					} else {
+						score = $("<span>").text(value.starScore);
+					}
 					scoreIc.addClass("score-ic");
 					score.addClass("score");
 					
