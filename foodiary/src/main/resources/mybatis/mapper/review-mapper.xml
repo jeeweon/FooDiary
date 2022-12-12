@@ -62,7 +62,8 @@
 			M.mem_nick,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt,
-			decode(L.review_no, null, 'false', 'true') like_check
+			decode(L.review_no, null, 'false', 'true') like_check,
+			decode(BM.review_no, null, 'false', 'true') bookmark_check
 		from review R
 		left outer join mem M on R.mem_no = M.mem_no
 		left outer join(
@@ -80,6 +81,11 @@
 			from likes 
 			where mem_no = #{memNo}
 		) L on R.review_no = L.review_no
+		left outer join(
+			select review_no 
+			from bookmark 
+			where mem_no = #{memNo}
+		) BM on R.review_no = BM.review_no
 		<where>
 			R.mem_no not in(#{memNo})
 			<if test="interestArea != null">
@@ -94,7 +100,8 @@
 		select 
 			R.*, 
 			M.mem_nick, 
-			decode(L.review_no, null, 'false', 'true') like_check
+			decode(L.review_no, null, 'false', 'true') like_check,
+			decode(BM.review_no, null, 'false', 'true') bookmark_check
 		from review R
 		left outer join follow F on R.mem_no = F.passive_mem_no 
 		left outer join mem M on R.mem_no = M.mem_no
@@ -103,6 +110,11 @@
 			from likes 
 			where mem_no = #{memNo}
 		) L on R.review_no = L.review_no
+		left outer join(
+			select review_no 
+			from bookmark 
+			where mem_no = #{memNo}
+		) BM on R.review_no = BM.review_no
 		where F.active_mem_no = #{memNo} order by R.review_no desc
 	</select>
 </mapper>
