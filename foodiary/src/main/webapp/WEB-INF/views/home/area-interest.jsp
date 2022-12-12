@@ -332,7 +332,7 @@
         let interestList=[];
         function loadMyArea(){
             $.ajax({
-                url : "http://localhost:8888/rest/area/interest",
+                url : "${pageContext.request.contextPath}/rest/area/interest",
                 method : "get",
                 dataType : "json",
                 success : function(resp) {
@@ -355,7 +355,7 @@
         function loadNearbyArea(){
         	if(interestList.length == 0) return;
             $.ajax({
-            	url : "http://localhost:8888/rest/area/nearby",
+            	url : "${pageContext.request.contextPath}/rest/area/nearby",
                 method : "post",
                 dataType : "json",
                 traditional: true,
@@ -426,7 +426,7 @@
         //지역 정보 목록 조회
         let addressList = [];
         $.ajax({
-            url : "http://localhost:8888/rest/area",
+            url : "${pageContext.request.contextPath}/rest/area",
             method : "get",
             dataType : "json",
             success : function(resp) {
@@ -502,7 +502,7 @@
             };
 
             $.ajax({
-                url : "http://localhost:8888/rest/area/interest",
+                url : "${pageContext.request.contextPath}/rest/area/interest",
                 method : "post",
                 contentType:"application/json",
 			    data:JSON.stringify(data),
@@ -515,7 +515,7 @@
         //관심 지역 DB 삭제
         function deleteMyArea(areaNo){
             $.ajax({
-                url : "http://localhost:8888/rest/area/interest/"+areaNo,
+                url : "${pageContext.request.contextPath}/rest/area/interest/"+areaNo,
                 method : "delete",
                 success : function(resp) {
                     loadMyArea();
