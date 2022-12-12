@@ -362,7 +362,7 @@
 					} else {						
 						likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>");
 					}
-						likeIc.attr("data-rno", value.reviewNo);
+					likeIc.attr("data-rno", value.reviewNo);
 					var likeCnt = $("<span>").text("도움됐어요"+ " " +value.likeCnt);
 					likeIc.addClass("like-ic")
 					likeCnt.addClass("like-cnt");
@@ -377,8 +377,13 @@
 					var replyDiv = $("<div>").append(replyIc).append(replyCnt)
 						.attr("data-rno", value.reviewNo); //댓글 아이콘, 댓글 수 묶기
 					
-					var bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>")
-						.attr("data-rno", value.reviewNo); //내가 북마크 눌렀는지 확인 필요
+					var bookmarkIc;
+					if(value.bookmarkCheck) {
+						bookmarkIc = $("<span>").html("<i class='fa-solid fa-bookmark'></i>");
+					} else {
+						bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>")						
+					}
+					bookmarkIc.attr("data-rno", value.reviewNo);
 					bookmarkIc.addClass("bookmark-ic");
 					
 					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv).append(bookmarkIc);
