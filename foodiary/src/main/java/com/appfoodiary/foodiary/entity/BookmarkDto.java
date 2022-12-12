@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class BookmarkDto {
- private int menNo, reivewNo;
- private Date bookmarkNo;
+ private int memNo;
+ private int reviewNo;
+ private Date bookmarkTime;
 }

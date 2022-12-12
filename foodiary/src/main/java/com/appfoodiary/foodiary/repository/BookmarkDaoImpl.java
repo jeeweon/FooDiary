@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.BookmarkDto;
+import com.appfoodiary.foodiary.entity.ReviewDto;
 
 @Repository
 public class BookmarkDaoImpl implements BookmarkDao{
@@ -23,8 +24,8 @@ public class BookmarkDaoImpl implements BookmarkDao{
 		sqlSession.delete("bookmark.delete",dto);
 	}
 	@Override
-	public List<BookmarkDto> list(BookmarkDto dto) {
-		return sqlSession.selectList("bookmark.list",dto);
+	public List<ReviewDto> list(int memNo) {
+		return sqlSession.selectList("bookmark.list",memNo);
 	}
 	@Override
 	public boolean cert(BookmarkDto dto) {

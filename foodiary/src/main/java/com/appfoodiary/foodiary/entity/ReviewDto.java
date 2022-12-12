@@ -17,4 +17,5 @@ public class ReviewDto {
 	private float starScore;
 	private String reviewPlace;
 	private int reviewReportCnt;
+	private int likeCnt;
 }

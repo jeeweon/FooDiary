@@ -1,7 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+	$(function(){
+		$()
+		
+		//좋아요 
+		 $(".like-btn").click(function(e){
+	           e.preventDefault();
+	           var that=$(this);
+	           
+	           $.ajax({
+	           url:"${pageContext.request.contextPath}/rest/review/like",
+	           method:"post",
+	           data:{
+	        	   reviewNo:$(this).data("review-no")
+	           },
+	           success:function(resp){
+	        	   console.log(resp);
+	        	   if(resp>0){
+	               		$(that).text("♥"+resp);
+	        	   }else{
+	        			$(that).text("♡");
+	        			
+	        	   }
+	           }
+	           })
+	        });
+		
 
+	        //북마크
+	        $(".bookmark-btn").click(function(e){
+	     		e.preventDefault();
+	     		var that=$(this);
+	     		
+	     		$.ajax({
+					url:"${pageContext.request.contextPath}/rest/review/bookmark",
+					method:"post",
+					data:{
+			        	   reviewNo:$(this).data("review-no"),
+			           },
+					success:function(resp){
+						if(resp){
+							
+							$(that).text("북마크해제");
+
+						}else{
+							
+							$(that).text("북마크");
+							
+						}
+					}
+	     		});
+	        });
+	});
+</script>
 <!-- 현재 시간 구하기 -->
 <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 <c:set var="today">
@@ -52,7 +107,20 @@
 					<c:otherwise>
 						★${reviewDto.starScore}
 					</c:otherwise>
-				</c:choose> 
+				</c:choose>
+				<!-- 좋아요버튼(내가 눌렀는지 안눌렀는지 확인 --> 
+				<c:choose>
+					<c:when test="${reviewDto.likeCnt>0}">
+						<a class="like-btn" data-review-no="${reviewDto.reviewNo}">♥${reviewDto.likeCnt}</a>
+					</c:when>
+					<c:otherwise>
+						<a class="like-btn" data-review-no="${reviewDto.reviewNo}">♡</a>
+					</c:otherwise>
+				</c:choose>
+				
+				
+				<!--북마크 버튼 --> 
+				<a class="bookmark-btn" data-review-no="${reviewDto.reviewNo}">북마크</a>
 				
 				<%-- <!-- 좋아요 개수 출력 -->
 				<c:if test="${reviewDto.reviewLike > 0}">

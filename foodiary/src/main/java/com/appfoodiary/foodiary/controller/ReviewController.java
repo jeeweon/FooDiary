@@ -22,6 +22,7 @@ import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
+import com.appfoodiary.foodiary.repository.LikeDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.service.AttachmentService;
 
@@ -41,11 +42,14 @@ public class ReviewController {
 	private ReviewDao reviewDao;
 	@Autowired
 	private AttachmentService attachmentService;
+	@Autowired
+	private LikeDao likeDao;
 	
 	@GetMapping("/list")
 	public String list(@ModelAttribute ReviewDto dto,
 			Model model) {
 		List<ReviewDto> list = reviewDao.list();
+		model.addAttribute("likecnt",likeDao.count(dto.getReviewNo()));
 		model.addAttribute("list", list);
 		return "review/list";
 	}
