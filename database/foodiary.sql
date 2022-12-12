@@ -181,17 +181,19 @@ create sequence areas_seq;
 CREATE TABLE  areas  (
          area_no number primary key,
          area_city varchar2(30) not null,
-         area_district varchar2(30),
-         area_nearby1 varchar2(30),
-         area_nearby2 varchar2(30)
+         area_district varchar2(30)
 );
+
+create table nearby_areas(
+area_no references areas(area_no) on delete cascade,
+nearby_no references areas(area_no) on delete cascade,
+primary key (area_no, nearby_no)
+);
+
 
 CREATE TABLE  interest_areas  (
          area_no references areas(area_no) on delete cascade,
          mem_no  references mem(mem_no) on delete cascade
 );
-
-alter table interest_areas
-add constraint interest_areas_pk primary key (area_no, mem_no);
 
 commit;
