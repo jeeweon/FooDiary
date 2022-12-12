@@ -43,14 +43,14 @@
 	<!-- 리뷰 파일 전체조회 -->
 	<select id="findAttach" parameterType="int" resultType="AttachDto">
 		select * from review_attach_view
-		where review_no = #{review_no} order by attach_no asc
+		where review_no = #{reviewNo} order by attach_no asc
 	</select>
 	<!-- 리뷰 대표파일 조회 -->
 	<select id="findAttachRep" parameterType="int" resultType="AttachDto">
 		select * from (
 			select tmp.*,rownum RN from (
 				select * from review_attach_view
-				where review_no = #{review_no} order by attach_no asc
+				where review_no = #{reviewNo} order by attach_no asc
 			)TMP
 		)where RN =1
 	</select>
