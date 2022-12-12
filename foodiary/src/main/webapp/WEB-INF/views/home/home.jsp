@@ -92,6 +92,16 @@
 	color: white;
 }
 
+.no-review {
+	margin-top: 100px;
+	text-align: center;
+	color: gray;
+}
+
+.list-item {
+	margin-top: 40px;
+}
+
 .writer-avatar {
 	width: 50px;
 	height: 50px;
@@ -104,6 +114,29 @@
 
 .like-ic {
 	cursor: pointer;
+}
+
+.bookmark-ic {
+	cursor: pointer;
+}
+
+.review-write-info {
+	width: 300px;
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.review-action {
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookmark-ic {
+	margin-left: 300px;
 }
 </style>
 </head>
@@ -345,10 +378,15 @@
 					
 					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv).append(bookmarkIc);
 					actionDiv.addClass("review-action");
-					$(".review-list").append(infoDiv).append(mainDiv).append(actionDiv);
+					
+					var itemDiv = $("<div>").append(infoDiv).append(mainDiv).append(actionDiv);
+					itemDiv.addClass("list-item");
+					$(".review-list").append(itemDiv);
 				});
 			} else {
-				$(".review-list").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
+				var noReviewDiv = $("<div>").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
+				noReviewDiv.addClass("no-review");
+				$(".review-list").append(noReviewDiv);
 			}
 		};
 		
@@ -367,26 +405,31 @@
 			});
 		});
 		
-		//북마크 버튼 클릭 이벤트 -> 수정 필요(현재 동작 안함) 
+		//북마크 버튼 클릭 이벤트
 		$(document).on("click", ".bookmark-ic", function() {
+			var clickedBm = $(this);
 			var reviewNo = $(this).data("rno");
 			$.ajax({
-				url : "${pageContext.request.contextPath}/rest/review/like",
+				url : "${pageContext.request.contextPath}/rest/review/bookmark",
                 method : "post",
 			    data : {
-	        	   reviewNo:reviewNo
+	        	   reviewNo:$(this).data("rno")
 	           	},
                 success : function(resp) {
                 	if(resp) {
-                		$(this).html("<i class='fa-solid fa-bookmark'></i>")
-                			.attr("data-rno", reviewNo);
+                		clickedBm.find("i").addClass("fa-solid");
+                		clickedBm.find("i").removeClass("fa-regular");
                 	} else {
-                		$(this).html("<i class='fa-regular fa-bookmark'></i>")
-                			.attr("data-rno", reviewNo);
+                		//clickedBm.innerHtml("<i class='fa-regular fa-bookmark'></i>");
+                		clickedBm.find("i").addClass("fa-regular");
+                		clickedBm.find("i").removeClass("fa-solid");
                 	}   
                 }
 			});
 		});
+		
+		//이미지 클릭 시, 리뷰 상세로 이동
+		
 	});
 </script>
 </body>
