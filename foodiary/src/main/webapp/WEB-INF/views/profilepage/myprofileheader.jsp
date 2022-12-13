@@ -51,7 +51,7 @@
                 <div class="boardA">
                     <ul>
                         <li>
-                            <a href="board">게시물</a>
+                            <a href="board2">게시물</a>
                             <a href="bookmark">북마크</a>
                             <a href="like">좋아요</a>
                         </li>

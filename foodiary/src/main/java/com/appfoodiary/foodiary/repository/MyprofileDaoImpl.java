@@ -6,10 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.appfoodiary.foodiary.entity.BookmarkDto;
-import com.appfoodiary.foodiary.entity.LikeDto;
 import com.appfoodiary.foodiary.entity.MyprofileDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
+import com.appfoodiary.foodiary.vo.ProfileBookmarkVO;
+import com.appfoodiary.foodiary.vo.ProfileLikeVO;
 
 @Repository
 public class MyprofileDaoImpl implements MyprofileDao{
@@ -29,11 +29,11 @@ public class MyprofileDaoImpl implements MyprofileDao{
 		return sqlSession.selectList("myprofile.review",memNo);
 	}
 	@Override
-	public List<BookmarkDto> bookmarkList(int memNo) {
+	public List<ProfileBookmarkVO> bookmarkList(int memNo) {
 		return sqlSession.selectList("myprofile.bookmark", memNo);
 	}
 	@Override
-	public List<LikeDto> likeList(int memNo) {
+	public List<ProfileLikeVO> likeList(int memNo) {
 		return sqlSession.selectList("myprofile.like",memNo);
 	}
 }
