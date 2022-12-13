@@ -15,9 +15,9 @@
 	<insert id="insert" parameterType="ReviewDto">
 		insert into 
 		review(
-			review_no, mem_no, review_content, star_score, review_place)
+			review_no, mem_no, review_content, star_score, review_address, review_place)
 		values(
-			#{reviewNo}, #{memNo}, #{reviewContent}, #{starScore}, #{reviewPlace, jdbcType=VARCHAR}
+			#{reviewNo}, #{memNo}, #{reviewContent}, #{starScore}, #{reviewAddress, jdbcType=VARCHAR}, #{reviewPlace, jdbcType=VARCHAR}
 		)
 	</insert>
 	

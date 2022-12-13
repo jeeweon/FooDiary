@@ -49,7 +49,6 @@
         <input type="text" id="reviewAddress" placeholder=" 주소 : 지도에서 주소를 선택하세요" readonly>
         <input type="text" id="reviewPlace" placeholder=" 장소명 : 추가 입력 가능">
     </div>
-    <br>
 	<div class="map_wrap">
     	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 	    <div id="menu_wrap" class="bg_white">
