@@ -57,7 +57,7 @@ li{ list-style: none; }
   line-height: 200px;
 
   opacity: 0; /* 처음엔 안보이고 */
-
+ 
   transition: 0.3s;
 }
 
@@ -67,7 +67,7 @@ li{ list-style: none; }
 }
 </style> 
 
-<p>내가 선택한 좋아요</p>
+<p>내가 올린 게시물</p>
 <%-- <c:forEach var="bookmarkdto" items="${list}">
 	<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${bookmarkdto.reviewNo}">
 		<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${bookmarkDto.reviewNo}" width="300" height="200">
@@ -75,15 +75,15 @@ li{ list-style: none; }
 </c:forEach> --%>
 
 	<div class="gallery">
-		<c:forEach var="likedto" items="${list}">
+		<c:forEach var="reviewDto" items="${list}">
             	<ul>
                 	<li>
-                    	<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${likedto.reviewNo}">
+                    	<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${reviewDto.reviewNo}">
                         	<figure>
-                            	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${likedto.reviewNo}" width="300" height="200">
+                            	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
                             		<c:choose>
-                            			<c:when test="${likedto.likeCnt>0}">
-                            				<figcaption>🧡${likedto.likeCnt}</figcaption>
+                            			<c:when test="${reviewDto.likeCnt>0}">
+                            				<figcaption>🧡${reviewDto.likeCnt}</figcaption>
                             			</c:when>
                             		<c:otherwise>
                             			<figcaption>♡</figcaption>

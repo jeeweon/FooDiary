@@ -34,7 +34,7 @@ public class MemberPageController {
 		//model.addAttribute("memdao",memDao.selectOne(loginId));
 		return "profilepage/myprofile";
 	}
-	@GetMapping("/board")
+	@GetMapping("/board2")
 	public String board(
 			Model model,
 			HttpSession session
@@ -42,7 +42,7 @@ public class MemberPageController {
 		//한회원에 대해하여 리뷰 정보를 가지고 온다.
 		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
 		model.addAttribute("list",myprofileDao.reviewList(memNo));
-		return "profilepage/board";
+		return "profilepage/board2";
 	}
 	@GetMapping("/like")
 	public String like(
