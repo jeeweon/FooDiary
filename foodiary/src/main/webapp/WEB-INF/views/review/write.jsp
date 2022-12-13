@@ -2,33 +2,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!-- summernote(좌측), 리뷰장소(우측) 구분용 style -->
 <style>
-      div.total {
-        width: 850px;
-        height: 400px;
-        /*border: 1px solid #003458; : 영역확인용*/
-      }
-      div.left {
-        width: 500px;
-        float: left;
-        box-sizing: border-box;
-        /*background: #8977ad;*/
-      }
-      div.right {
-        width: 350px;
-        float: right;
-        box-sizing: border-box;
-        /*background: #ece6cc;*/
-      }
-      .btn-xmark {
-      	padding: 0px;
-	  	border: none;
-      	background: none;
-      }
-      .fa-rectangle-xmark {
-      	font-size: 18px;
-      }
+<!-- summernote(좌측), 리뷰장소(우측) 구분용 style -->
+	div.total {
+		width: 850px;
+		height: 400px;
+		/*border: 1px solid #003458; : 영역확인용*/
+	}
+	div.left {
+		width: 500px;
+		float: left;
+		box-sizing: border-box;
+		/*background: #8977ad;*/
+	}
+	div.right {
+		width: 350px;
+		float: right;
+		box-sizing: border-box;
+		/*background: #ece6cc;*/
+	}
+<!-- 주소입력창 초기화 x버튼 -->
+	.btn-xmark {
+		padding: 0px;
+		border: none;
+		background: none;
+	}
+	.fa-rectangle-xmark {
+		font-size: 18px;
+	}
 </style>
 
 
