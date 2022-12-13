@@ -89,7 +89,7 @@
 		<where>
 			R.mem_no not in(#{memNo})
 			<if test="interestArea != null">
-				and	instr(review_place, #{interestArea}) > 0 
+				and	instr(review_address, #{interestArea}) > 0 
 			</if>
 		</where>
 		order by R.review_no desc
