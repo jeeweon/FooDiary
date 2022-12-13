@@ -57,7 +57,7 @@ li{ list-style: none; }
   line-height: 200px;
 
   opacity: 0; /* 처음엔 안보이고 */
-
+ 
   transition: 0.3s;
 }
 
