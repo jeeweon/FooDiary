@@ -45,11 +45,21 @@ public class MemberPageController {
 		return "profilepage/board";
 	}
 	@GetMapping("/like")
-	public String like() {
+	public String like(
+			Model model,
+			HttpSession session
+			) {
+		int memNo=(Integer)session.getAttribute(SessionConstant.NO);
+		model.addAttribute("list",myprofileDao.likeList(memNo));
 		return "profilepage/like";
 	}
 	@GetMapping("/bookmark")
-	public String bookmark() {
+	public String bookmark(
+			Model model,
+			HttpSession session
+			) {
+		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
+		model.addAttribute("list",myprofileDao.bookmarkList(memNo));
 		return "profilepage/bookmark";
 	}
 	

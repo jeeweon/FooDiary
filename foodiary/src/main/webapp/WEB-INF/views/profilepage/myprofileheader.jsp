@@ -22,7 +22,8 @@
         <div class="boardF">
             <div class="inner">
                 <div class="boardM">
-                    <img src="${pageContext.request.contextPath}/images/프로필임시.png">
+                    <%-- <img src="${pageContext.request.contextPath}/images/프로필임시.png"> --%>
+                    <img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${list.memNo}" width="300" height="200">
                 </div>
                 <!--boardM-->
                 <div class="boardT">

@@ -35,14 +35,14 @@
 		                </div> <!--Lbody-->
 		                <div class="Lfoot">
 		                    <ul id="Lfootsub">
-		                        <li><a href="" id="a1">비밀번호 찾기</a></li>
-		                        <li><a href="" id="a2">회원가입 하기</a></li>
+		                        <li><a href="email_check" id="a1">비밀번호 찾기</a></li>
+		                        <li><a href="join" id="a2">회원가입 하기</a></li>
 		                    </ul> <!--Lfootsub-->
 		                </div> <!--Lfoot-->
 		            </div> <!--inner-->
 		        </div> <!--Mlogin-->
 		    </div> <!--wrapper-->
-				 
+
 </body>
 </html>
 

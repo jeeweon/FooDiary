@@ -181,10 +181,14 @@ li{ list-style: none; }
                 </li>
             </ul>
 <<<<<<< HEAD
+<<<<<<< HEAD
         </div> 
 =======
         </div>
 >>>>>>> refs/remotes/origin/jeeweon
+=======
+        </div> 
+>>>>>>> refs/remotes/origin/main
     
     <script>
         $(function(){
