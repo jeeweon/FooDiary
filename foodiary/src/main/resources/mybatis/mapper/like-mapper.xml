@@ -25,7 +25,12 @@
 	</delete>
 	<!-- 리뷰 좋아요 갯수 count -->
 	<select id="count" parameterType="int" resultType="int">
-		 select count(*) from likes where review_no=#{reviewNo} 
+		 select 
+		 	count(*)
+		  from 
+		  	likes 
+		  where 
+		  	review_no=#{reviewNo} 
 	</select>
 	
 	<!-- 좋아요 + -->
@@ -47,11 +52,11 @@
 		 		review_no=#{reviewNo} 
 	</update>
 	<select id="count2" parameterType="int" resultType="int">
-		select
+		select 
 			like_cnt 
 		from 
-			review 
-		where 
-			review_no=#{reviewNo}
+			review
+		 where 
+		 	review_no=#{reviewNo}
 	</select>
 </mapper>

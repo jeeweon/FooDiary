@@ -123,11 +123,35 @@ public class LikeRestController {
 			return true;
 		}
 	}
-	//hover시 비동기 
-	@PostMapping("/hover")
-	public int hover(
-			@RequestParam int reviewNo
+	//like2
+	@PostMapping("/like2")
+	public int like2(
+			@RequestParam int reviewNo,
+			HttpSession session
 			) {
-		return likeDao.count2(reviewNo);
+		int memNo=(int)session.getAttribute(SessionConstant.NO);
+		LikeDto dto =LikeDto.builder()
+					.reviewNo(reviewNo)
+					.memNo(memNo)
+					.build();
+		if(likeDao.cert(dto)) {
+			//삭제 
+			likeDao.delete(dto);
+			//리뷰갯수 하나 지운다.
+			likeDao.minus(reviewNo);
+			return 0;
+		}else {
+			//입력
+			likeDao.insert(dto);
+			//추가
+			likeDao.plus(reviewNo);
+			return 1;
+		}
+	}
+	//리뷰 갯수 구하기 
+	@PostMapping("/count")
+	public int count(@RequestParam int reviewNo) 
+	{
+		return likeDao.count(reviewNo);
 	}
 }
