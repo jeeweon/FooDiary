@@ -15,9 +15,9 @@
 	<insert id="insert" parameterType="ReviewDto">
 		insert into 
 		review(
-			review_no, mem_no, review_content, star_score, review_place)
+			review_no, mem_no, review_content, star_score, review_address, review_place)
 		values(
-			#{reviewNo}, #{memNo}, #{reviewContent}, #{starScore}, #{reviewPlace, jdbcType=VARCHAR}
+			#{reviewNo}, #{memNo}, #{reviewContent}, #{starScore}, #{reviewAddress, jdbcType=VARCHAR}, #{reviewPlace, jdbcType=VARCHAR}
 		)
 	</insert>
 	
@@ -43,16 +43,78 @@
 	<!-- 리뷰 파일 전체조회 -->
 	<select id="findAttach" parameterType="int" resultType="AttachDto">
 		select * from review_attach_view
-		where review_no = #{review_no} order by attach_no asc
+		where review_no = #{reviewNo} order by attach_no asc
 	</select>
 	<!-- 리뷰 대표파일 조회 -->
 	<select id="findAttachRep" parameterType="int" resultType="AttachDto">
 		select * from (
 			select tmp.*,rownum RN from (
 				select * from review_attach_view
-				where review_no = #{review_no} order by attach_no asc
+				where review_no = #{reviewNo} order by attach_no asc
 			)TMP
 		)where RN =1
 	</select>
 	
+	<!-- 홈 > 리뷰(전체/관심지역) 조회 -->
+	<select id="home-list" parameterType="ReviewSearchVO" resultType="ReviewSearchVO">
+		select 
+			R.*,
+			M.mem_nick,
+			coalesce(B.cnt, 0) mem_review_cnt, 
+			coalesce(C.cnt2, 0) img_cnt,
+			decode(L.review_no, null, 'false', 'true') like_check,
+			decode(BM.review_no, null, 'false', 'true') bookmark_check
+		from review R
+		left outer join mem M on R.mem_no = M.mem_no
+		left outer join(
+			select mem_no, count(mem_no) cnt
+			from review
+			group by mem_no
+		)B on R.mem_no = B.mem_no
+		left outer join(
+			select review_no, count(review_no) cnt2
+			from review_attach
+			group by review_no
+		)C on R.review_no = C.review_no
+		left outer join(
+			select review_no 
+			from likes 
+			where mem_no = #{memNo}
+		) L on R.review_no = L.review_no
+		left outer join(
+			select review_no 
+			from bookmark 
+			where mem_no = #{memNo}
+		) BM on R.review_no = BM.review_no
+		<where>
+			R.mem_no not in(#{memNo})
+			<if test="interestArea != null">
+				and	instr(review_address, #{interestArea}) > 0 
+			</if>
+		</where>
+		order by R.review_no desc
+	</select>
+	
+	<!-- 홈 > 리뷰(팔로우) 조회 -->
+	<select id = "home-follow" parameterType="int" resultType="ReviewSearchVO">
+		select 
+			R.*, 
+			M.mem_nick, 
+			decode(L.review_no, null, 'false', 'true') like_check,
+			decode(BM.review_no, null, 'false', 'true') bookmark_check
+		from review R
+		left outer join follow F on R.mem_no = F.passive_mem_no 
+		left outer join mem M on R.mem_no = M.mem_no
+		left outer join(
+			select review_no 
+			from likes 
+			where mem_no = #{memNo}
+		) L on R.review_no = L.review_no
+		left outer join(
+			select review_no 
+			from bookmark 
+			where mem_no = #{memNo}
+		) BM on R.review_no = BM.review_no
+		where F.active_mem_no = #{memNo} order by R.review_no desc
+	</select>
 </mapper>

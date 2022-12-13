@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.appfoodiary.foodiary.configuration.MapProperties;
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
@@ -31,7 +32,8 @@ import com.appfoodiary.foodiary.service.AttachmentService;
 @RequestMapping("/review")
 public class ReviewController {
 	
-	private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
+	//private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
+	private final File dir = new File(System.getProperty("user.home") + "/upload"); //OS 무관 파일 경로(배포 시, 삭제 예정)
 	@PostConstruct	//최초 실행 시, 딱 한번만 실행
 	public void prepare() {
 		dir.mkdirs();	//파일 생성
@@ -43,6 +45,8 @@ public class ReviewController {
 	private AttachmentService attachmentService;
 	@Autowired
 	private LikeDao likeDao;
+	@Autowired
+	private MapProperties mapProperties;
 	
 	@GetMapping("/list")
 	public String list(@ModelAttribute ReviewDto dto,
@@ -54,7 +58,9 @@ public class ReviewController {
 	}
 
 	@GetMapping("/write")
-	public String write() {
+	public String write(Model model) {
+		//appkey 가져와서 model에 저장
+		model.addAttribute("appkey", mapProperties.getAppkey());
 		return "review/write";
 	}
 	@PostMapping("/write")
@@ -62,8 +68,7 @@ public class ReviewController {
 			@ModelAttribute ReviewDto dto, 
 			@RequestParam List<MultipartFile> attachments, RedirectAttributes attr) 
 															throws IllegalStateException, IOException {
-		session.removeAttribute(SessionConstant.NO);	//★로그인기능 연결시 삭제예정
-		session.setAttribute(SessionConstant.NO, 19);	//★로그인기능 연결시 삭제예정
+
 		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
 		dto.setMemNo(memNo);	//세션값을 dto.memNo에 저장
 		
@@ -76,12 +81,10 @@ public class ReviewController {
 		
 		//파일 첨부
 		for(MultipartFile file : attachments) {
-			if(!file.isEmpty()) {	//파일이 있다면
-				int attachNo = attachmentService.attachmentsUp(attachments, file);	//attach 추가
-				
-				ReviewAttachDto reviewAttachDto = new ReviewAttachDto(attachNo, reviewNo);	
-				reviewDao.addReviewAttach(reviewAttachDto);	//reviewAttach DB 저장
-			}
+			int attachNo = attachmentService.attachmentsUp(attachments, file);	//attach 추가
+			
+			ReviewAttachDto reviewAttachDto = new ReviewAttachDto(attachNo, reviewNo);	
+			reviewDao.addReviewAttach(reviewAttachDto);	//reviewAttach DB 저장
 		}
 		
 		attr.addAttribute("reviewNo", reviewNo);
