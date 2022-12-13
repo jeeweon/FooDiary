@@ -35,22 +35,31 @@
 			mem_no=#{memNo}
 	</select>
 	<!-- 북마크 --> 
-	<select id="bookmark" parameterType="int" resultType="BookmarkDto">
-		select 
-			* 
-		from 
-			bookmark 
-		where
-			 mem_no=#{mem_no}
+	<select id="bookmark" parameterType="int" resultType="ProfileBookmarkVO">
+		select
+    		B.*,R.like_cnt
+		from
+    		bookmark B
+		inner join
+    		review R
+		on
+			B.review_no=R.review_no
+		where 
+			B.mem_no=#{memNo}
+		order by B.bookmark_time
 	</select>
 	<!-- 좋아요 -->
-	<select id="like" parameterType="int" resultType="LikeDto">
+	<select id="like" parameterType="int" resultType="ProfileLikeVO">
 		select 
-			* 
+    		L.*,R.like_cnt 
 		from 
-			likes 
-		where
-			 mem_no=#{mem_no}
+    		likes L
+		left outer join 
+    		review R
+		on
+			L.review_no=R.review_no
+		where 
+			L.mem_no=#{memNo}
 	</select>
 
 </mapper>

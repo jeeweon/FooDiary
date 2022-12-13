@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -66,7 +67,7 @@ li{ list-style: none; }
 }
 </style> 
 
-<p>북마크페이지입니다.</p>
+<p>내가 선택한 북마크</p>
 <%-- <c:forEach var="bookmarkdto" items="${list}">
 	<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${bookmarkdto.reviewNo}">
 		<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${bookmarkDto.reviewNo}" width="300" height="200">
@@ -79,8 +80,15 @@ li{ list-style: none; }
                 	<li>
                     	<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${bookmarkdto.reviewNo}">
                         	<figure>
-                            	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${bookmarkDto.reviewNo}" width="300" height="200">
-                            	<figcaption>🧡23 ❤34</figcaption>
+                            	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${bookmarkdto.reviewNo}" width="300" height="200">
+                            		<c:choose>
+                            			<c:when test="${bookmarkdto.likeCnt>0}">
+                            				<figcaption>🧡${bookmarkdto.likeCnt}</figcaption>
+                            			</c:when>
+                            		<c:otherwise>
+                            			<figcaption>♡</figcaption>
+                            		</c:otherwise>                    
+                            	</c:choose>
                         	</figure>
                     	</a>
                 	</li>
