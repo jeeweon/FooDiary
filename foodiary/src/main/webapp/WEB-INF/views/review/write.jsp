@@ -21,6 +21,14 @@
         box-sizing: border-box;
         /*background: #ece6cc;*/
       }
+      .btn-xmark {
+      	padding: 0px;
+	  	border: none;
+      	background: none;
+      }
+      .fa-rectangle-xmark {
+      	font-size: 18px;
+      }
 </style>
 
 
@@ -48,6 +56,9 @@
 	    <div>
 	    	<label>리뷰 장소</label><br>
 	        <input type="text" name="reviewAddress" placeholder=" 주소 : 지도에서 주소를 선택하세요" readonly>
+	        <button class="btn-xmark" type="button">
+	        	<i class="fa-regular fa-rectangle-xmark"></i>
+        	</button>
 	        <input type="text" name="reviewPlace" placeholder=" 장소명 : 추가 입력 가능">
 	    </div>
 		<div class="map_wrap">
@@ -90,7 +101,9 @@
 <link href="${pageContext.request.contextPath}/css/kakao-keyword.css" rel="stylesheet" type="text/css" >
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appkey}&libraries=services"></script>
 <script src="${pageContext.request.contextPath}/js/kakao-keyword.js"></script>
-
+<!-- font-awesome -->   
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    
 <script type="text/javascript">
 	$(function(){
 		//summernote 옵션 수정
@@ -131,5 +144,10 @@
                 name:"starScore"//전송 파라미터 명 설정
             }
         });
+		
+		//주소 : x버튼 초기화
+		$(".btn-xmark").click(function(){
+			$("input[name=reviewAddress]").val("");
+		});
 	});
 </script>
