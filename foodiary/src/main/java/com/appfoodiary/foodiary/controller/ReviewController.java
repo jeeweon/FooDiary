@@ -72,12 +72,10 @@ public class ReviewController {
 		
 		//파일 첨부
 		for(MultipartFile file : attachments) {
-			if(!file.isEmpty()) {	//파일이 있다면
-				int attachNo = attachmentService.attachmentsUp(attachments, file);	//attach 추가
-				
-				ReviewAttachDto reviewAttachDto = new ReviewAttachDto(attachNo, reviewNo);	
-				reviewDao.addReviewAttach(reviewAttachDto);	//reviewAttach DB 저장
-			}
+			int attachNo = attachmentService.attachmentsUp(attachments, file);	//attach 추가
+			
+			ReviewAttachDto reviewAttachDto = new ReviewAttachDto(attachNo, reviewNo);	
+			reviewDao.addReviewAttach(reviewAttachDto);	//reviewAttach DB 저장
 		}
 		
 		attr.addAttribute("reviewNo", reviewNo);
