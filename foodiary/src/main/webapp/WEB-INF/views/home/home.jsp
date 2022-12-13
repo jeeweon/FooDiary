@@ -92,6 +92,9 @@
 	color: white;
 }
 
+.review-list {
+	width: 600px;
+}
 .no-review {
 	margin-top: 100px;
 	text-align: center;
@@ -102,30 +105,85 @@
 	margin-top: 40px;
 }
 
+.review-write-info {
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.info-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+.sub-info-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-itmes: center;
+	font-size: 14px;
+	color: #707070;
+	margin-top: 3px;
+}
+
 .writer-avatar {
 	width: 50px;
 	height: 50px;
 }
 
-.thumbnail {
-	width: 100px;
-	height: 100px;
+.writer-nick {
+	font-weight: bold;
 }
 
-.like-ic {
-	cursor: pointer;
+.write-time {
+	margin-left: 10px;
 }
 
-.bookmark-ic {
-	cursor: pointer;
+.place {
+	font-weight: bold;
+	font-size: 18px;
 }
 
-.review-write-info {
-	width: 300px;
+.address {
+	color: #707070;
+	margin-top: 3px;
+}
+
+.loca-div {
 	display: flex;
 	flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    margin: 10px 0;
+}
+
+.loca-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.place {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.address {
+	color: #707070;
+}
+
+.thumbnail {
+	width: 300px;
+	height: 300px;
+	cursor: pointer;
+	margin-top: 10px;
+	border-radius: 6px;
 }
 
 .review-action {
@@ -133,10 +191,43 @@
 	flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    color: #707070;
+    margin-top: 20px;
+}
+
+.score-ic {
+	color: #FFC107;
+	margin-right: 5px;
+}
+
+.like-ic {
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+.like-ic > .fa-solid {
+	color: #E27C5E;
+}
+
+.reply-ic {
+	margin-right: 5px;
 }
 
 .bookmark-ic {
-	margin-left: 300px;
+	margin-left: 350px;
+	cursor: pointer;
+}
+
+.content p {
+	display: inline;
+}
+
+.review-main {
+	width: 600px;
+	white-space: nowrap;
+	overflow: hidden;
+	word-break: break-all;
+	text-overflow: ellipsis;  /* 말줄임 적용 */
 }
 </style>
 </head>
@@ -179,7 +270,7 @@
 	$(function() {
 		loadInterestArea();
 		loadReviewAll();
-
+		
 		$(".label-all").addClass("label-selected");
 
 		//뒤로가기로 돌아왔을 때, 필터 설정 초기화를 위해 새로고침
@@ -313,7 +404,12 @@
 					var writeTime = $("<span>").text(value.reviewWriteTime);
 					writeTime.addClass("write-time");
 					
-					var infoDiv = $("<div>").append(writerAvatar).append(writerNick).append(reviewCnt).append(writeTime);
+					var subInfoText = $("<div>").append(reviewCnt).append(writeTime);
+					subInfoText.addClass("sub-info-text");
+					var infoText = $("<div>").append(writerNick).append(subInfoText);
+					infoText.addClass("info-text");
+					
+					var infoDiv = $("<div>").append(writerAvatar).append(infoText);
 					infoDiv.addClass("review-write-info");
 					
 					var thumbnail = $("<img>").attr("src", "${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
@@ -328,20 +424,36 @@
 						imgMore = $("<div>").append(moreIc).append(moreCnt);
 						imgMore.addClass("img-more");
 					}
+				
+					var locationIc;
+					if(value.reviewPlace != null || value.reviewAddress != null) {
+						locationIc = $("<span>").html("<i class='fa-solid fa-location-dot fa-2x'></i>")
+					}
+					
+					var place;
+					if(value.reviewPlace != null) {
+						place = $("<span>").text(value.reviewPlace);
+						place.addClass("place");
+					}
 					
 					var address;
-					if(value.reviewPlace != null) {
-						address = $("<span>").text(value.reviewPlace);
+					if(value.reviewAddress != null) {
+						address = $("<span>").text(value.reviewAddress);
 						address.addClass("address");
 					}
 					
+					var locaInfoDiv = $("<div>").append(place).append(address);
+					var locationDiv = $("<div>").append(locationIc).append(locaInfoDiv);
+					locaInfoDiv.addClass("loca-info");
+					locationDiv.addClass("loca-div");
+					
 					var content;
 					if(value.reviewContent != null) {
-						content = $("<span>").text(value.reivewContent);
-						content.addClass("content"); //text-overflow: ellipsis 옵션 설정 필요						
+						content = $("<span>").text(value.reviewContent);
+						content.addClass("content"); //영역 넘치면 첫 줄에서 말줄임표로 자르기(.review-main)
 					}
 					
-					var mainDiv = $("<div>").append(thumbnail).append(imgMore).append(address).append(content);
+					var mainDiv = $("<div>").append(thumbnail).append(imgMore).append(locationDiv).append(content);
 					mainDiv.addClass("review-main");
 					
 					var scoreIc = $("<span>").html("<i class='fa-solid fa-star'></i>");
@@ -393,6 +505,7 @@
 					itemDiv.addClass("list-item");
 					$(".review-list").append(itemDiv);
 				});
+				
 			} else {
 				var noReviewDiv = $("<div>").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
 				noReviewDiv.addClass("no-review");
@@ -440,8 +553,8 @@
 			});
 		});
 		
-		//이미지 클릭 시, 리뷰 상세로 이동
-		
+		//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
+		$(document).on("click")
 	});
 </script>
 </body>
