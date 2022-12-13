@@ -16,6 +16,7 @@ public class ReviewSearchVO {
 	private Date reviewWriteTime;
 	private float starScore;
 	private String reviewPlace;
+	private String reviewAddress;
 	private int reviewReportCnt;
 	private String interestArea;
 	private int likeCnt;
