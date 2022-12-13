@@ -453,7 +453,8 @@
 						content.addClass("content"); //영역 넘치면 첫 줄에서 말줄임표로 자르기(.review-main)
 					}
 					
-					var mainDiv = $("<div>").append(thumbnail).append(imgMore).append(locationDiv).append(content);
+					var mainDiv = $("<div>").append(thumbnail).append(imgMore).append(locationDiv).append(content)
+						.attr("data-rno", value.reviewNo);
 					mainDiv.addClass("review-main");
 					
 					var scoreIc = $("<span>").html("<i class='fa-solid fa-star'></i>");
@@ -554,7 +555,9 @@
 		});
 		
 		//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
-		$(document).on("click")
+		$(document).on("click", ".review-main", function(){
+			window.location = "${pageContext.request.contextPath}/review/detail?reviewNo="+$(this).data("rno");
+		});
 	});
 </script>
 </body>
