@@ -18,4 +18,7 @@ public interface AttachmentService {
 																										throws IOException;
 	//삭제
 	public void attachmentsDelete(List<AttachDto> attachments);
+
+	//파일 1개 업로드
+	public int attachUp(MultipartFile attach) throws IllegalStateException, IOException;
 }

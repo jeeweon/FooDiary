@@ -58,5 +58,10 @@ public class MemRestController {
 	public boolean emailCheck3(@ModelAttribute SelfCheckDto selfCheckDto) {
 		return emailService.checkSerial(selfCheckDto);
 	}
+	
+	@PostMapping("/profile_delete")
+	public void profileDelete(@RequestParam int memNo) {
+		memDao.deleteProfile(memNo);
+	}
 
 }
