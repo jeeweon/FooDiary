@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- 헤더 -->
-<jsp:include page="/WEB-INF/views/profilepage/myprofileheader.jsp">
+<%-- <jsp:include page="/WEB-INF/views/profilepage/myprofileheader.jsp">
 	<jsp:param value="주문내역페이지" name="title"/>
-</jsp:include>
+</jsp:include> --%>
 
 
 
@@ -62,8 +62,24 @@ li{ list-style: none; }
   /* 마우스를 올리면 보이게 처리 */
   opacity: 1;
 }
-</style>
+</style> 
 
+<c:forEach var="reviewDto" items="${list}">
+	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
+</c:forEach> 
+
+<div class="gallery">
+            <ul>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
+                            <figcaption>🧡23 ❤34</figcaption>
+                        </figure>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
 <section class="section1">
             <div class="inner">
@@ -146,7 +162,7 @@ li{ list-style: none; }
         </section>
     
 
-		<div class="gallery">
+	 	<div class="gallery">
             <ul>
                 <li>
                     <a href="#">
@@ -157,8 +173,8 @@ li{ list-style: none; }
                     </a>
                 </li>
             </ul>
-        </div>
-   
+        </div> 
+    
     <script>
         $(function(){
         });

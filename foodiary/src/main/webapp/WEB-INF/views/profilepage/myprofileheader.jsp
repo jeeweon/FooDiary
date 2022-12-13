@@ -29,8 +29,8 @@
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
                         <li>게시물(123)</li>
-                        <li>팔로워(235)</li>
-                        <li>팔로우(433)</li>
+                        <li><a href="">팔로워(235)</a></li>
+                        <li><a href="">팔로우(433)</a></li>
                     </ul> <!-- boardT2 -->
                     <P>내용 :
                         (내용)
