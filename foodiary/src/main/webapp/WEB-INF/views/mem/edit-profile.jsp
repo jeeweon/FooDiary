@@ -30,7 +30,7 @@
    }
    .preview{
    		border-radius : 50%;
-   		border:1px solid transparent;
+   		border:1px black solid transparent;
    }
    .preview.preview-hover:hover{
     	opacity : 0.5;
@@ -45,7 +45,7 @@
 	<form action ="edit_profile" method="post" class="edit-form" enctype="multipart/form-data" autocomplete="off">
 			<c:choose>
 				<c:when test="${empty profile}">
-					<img name="basic" class="preview preview-hover" src="${pageContext.request.contextPath}/images/Foodiary-logo.png" width="100" height="100">
+					<img name="basic" class="preview preview-hover" src="${pageContext.request.contextPath}/images/basic-profile.png" width="100" height="100">
 				</c:when>
 				<c:otherwise>
 				<c:forEach var="profile" items="${profile}">
@@ -73,10 +73,8 @@
 		</div>
 		<div>
 			<label>자기소개</label>
-				<textarea class="intro" rows="8" cols="70" name="memIntro" placeholder="자기소개" style="resize:none;">${memDto.memIntro}</textarea>
-		</div>
-		<div>
-			<span class="text-limit">(0 </span> / 100)
+				<textarea class="intro" rows="5" cols="50" name="memIntro" placeholder="자기소개를 입력하세요." style="resize:none;">${memDto.memIntro}</textarea>
+				(<span class="text-limit"> </span> / 100)
 		</div>
 		<div>
 			<button>프로필 수정</button>
@@ -148,7 +146,7 @@ $(function(){
 			method:"post",
 			data: {memNo:"${sessionScope.loginNo}"},
 			success:function(resp){
-				$(".preview").attr("src", "${pageContext.request.contextPath}/images/Foodiary-logo.png");
+				$(".preview").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");
 			}
 		});
 		
@@ -216,16 +214,16 @@ $(function(){
 		}
 	});
 	
+	//자기소개 
+	$(".text-limit").text($(".intro").val().length);//자기소개 
 	$(".intro").on("input",function(){		
 		var text = $(this).val();
-		console.log(text)
 		$(this).next().text(text.length);//바로 뒤 태그 선택
 		if(text.length>100){
-			
+			$(this).val(text.substring(0,99));
+			$(this).next().text(text.length)--;
 		}
-		else{
-			
-		}
+		
 	});
 
 	
