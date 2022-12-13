@@ -449,7 +449,7 @@
 					
 					var content;
 					if(value.reviewContent != null) {
-						content = $("<span>").text(value.reviewContent);
+						content = $("<span>").html(value.reviewContent);
 						content.addClass("content"); //영역 넘치면 첫 줄에서 말줄임표로 자르기(.review-main)
 					}
 					
