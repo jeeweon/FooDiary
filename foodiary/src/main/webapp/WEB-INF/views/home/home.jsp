@@ -92,18 +92,142 @@
 	color: white;
 }
 
+.review-list {
+	width: 600px;
+}
+.no-review {
+	margin-top: 100px;
+	text-align: center;
+	color: gray;
+}
+
+.list-item {
+	margin-top: 40px;
+}
+
+.review-write-info {
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.info-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+.sub-info-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-itmes: center;
+	font-size: 14px;
+	color: #707070;
+	margin-top: 3px;
+}
+
 .writer-avatar {
 	width: 50px;
 	height: 50px;
 }
 
+.writer-nick {
+	font-weight: bold;
+}
+
+.write-time {
+	margin-left: 10px;
+}
+
+.place {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.address {
+	color: #707070;
+	margin-top: 3px;
+}
+
+.loca-div {
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.loca-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.place {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.address {
+	color: #707070;
+}
+
 .thumbnail {
-	width: 100px;
-	height: 100px;
+	width: 300px;
+	height: 300px;
+	cursor: pointer;
+	margin-top: 10px;
+	border-radius: 6px;
+}
+
+.review-action {
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #707070;
+    margin-top: 20px;
+}
+
+.score-ic {
+	color: #FFC107;
+	margin-right: 5px;
 }
 
 .like-ic {
 	cursor: pointer;
+	margin-right: 5px;
+}
+
+.like-ic > .fa-solid {
+	color: #E27C5E;
+}
+
+.reply-ic {
+	margin-right: 5px;
+}
+
+.bookmark-ic {
+	margin-left: 350px;
+	cursor: pointer;
+}
+
+.content p {
+	display: inline;
+}
+
+.review-main {
+	width: 600px;
+	white-space: nowrap;
+	overflow: hidden;
+	word-break: break-all;
+	text-overflow: ellipsis;  /* 말줄임 적용 */
 }
 </style>
 </head>
@@ -146,7 +270,7 @@
 	$(function() {
 		loadInterestArea();
 		loadReviewAll();
-
+		
 		$(".label-all").addClass("label-selected");
 
 		//뒤로가기로 돌아왔을 때, 필터 설정 초기화를 위해 새로고침
@@ -280,7 +404,13 @@
 					var writeTime = $("<span>").text(value.reviewWriteTime);
 					writeTime.addClass("write-time");
 					
-					var infoDiv = $("<div>").append(writerAvatar).append(writerNick).append(reviewCnt).append(writeTime);
+					var subInfoText = $("<div>").append(reviewCnt).append(writeTime);
+					subInfoText.addClass("sub-info-text");
+					var infoText = $("<div>").append(writerNick).append(subInfoText);
+					infoText.addClass("info-text");
+					
+					var infoDiv = $("<div>").append(writerAvatar).append(infoText)
+						.attr("data-mno", value.memNo);
 					infoDiv.addClass("review-write-info");
 					
 					var thumbnail = $("<img>").attr("src", "${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
@@ -295,20 +425,37 @@
 						imgMore = $("<div>").append(moreIc).append(moreCnt);
 						imgMore.addClass("img-more");
 					}
+				
+					var locationIc;
+					if(value.reviewPlace != null || value.reviewAddress != null) {
+						locationIc = $("<span>").html("<i class='fa-solid fa-location-dot fa-2x'></i>")
+					}
+					
+					var place;
+					if(value.reviewPlace != null) {
+						place = $("<span>").text(value.reviewPlace);
+						place.addClass("place");
+					}
 					
 					var address;
-					if(value.reviewPlace != null) {
-						address = $("<span>").text(value.reviewPlace);
+					if(value.reviewAddress != null) {
+						address = $("<span>").text(value.reviewAddress);
 						address.addClass("address");
 					}
 					
+					var locaInfoDiv = $("<div>").append(place).append(address);
+					var locationDiv = $("<div>").append(locationIc).append(locaInfoDiv);
+					locaInfoDiv.addClass("loca-info");
+					locationDiv.addClass("loca-div");
+					
 					var content;
 					if(value.reviewContent != null) {
-						content = $("<span>").text(value.reivewContent);
-						content.addClass("content"); //text-overflow: ellipsis 옵션 설정 필요						
+						content = $("<span>").html(value.reviewContent);
+						content.addClass("content"); //영역 넘치면 첫 줄에서 말줄임표로 자르기(.review-main)
 					}
 					
-					var mainDiv = $("<div>").append(thumbnail).append(imgMore).append(address).append(content);
+					var mainDiv = $("<div>").append(thumbnail).append(imgMore).append(locationDiv).append(content)
+						.attr("data-rno", value.reviewNo);
 					mainDiv.addClass("review-main");
 					
 					var scoreIc = $("<span>").html("<i class='fa-solid fa-star'></i>");
@@ -323,8 +470,13 @@
 					
 					var scoreDiv = $("<div>").append(scoreIc).append(score); //별점 아이콘, 별점 묶기
 					
-					var likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>")
-						.attr("data-rno", value.reviewNo);; //내가 좋아요 눌렀는지 확인 필요
+					var likeIc;					
+					if(value.likeCheck) {
+						likeIc = $("<span>").html("<i class='fa-solid fa-heart'></i>");
+					} else {						
+						likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>");
+					}
+					likeIc.attr("data-rno", value.reviewNo);
 					var likeCnt = $("<span>").text("도움됐어요"+ " " +value.likeCnt);
 					likeIc.addClass("like-ic")
 					likeCnt.addClass("like-cnt");
@@ -339,20 +491,31 @@
 					var replyDiv = $("<div>").append(replyIc).append(replyCnt)
 						.attr("data-rno", value.reviewNo); //댓글 아이콘, 댓글 수 묶기
 					
-					var bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>")
-						.attr("data-rno", value.reviewNo); //내가 북마크 눌렀는지 확인 필요
+					var bookmarkIc;
+					if(value.bookmarkCheck) {
+						bookmarkIc = $("<span>").html("<i class='fa-solid fa-bookmark'></i>");
+					} else {
+						bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>")						
+					}
+					bookmarkIc.attr("data-rno", value.reviewNo);
 					bookmarkIc.addClass("bookmark-ic");
 					
 					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv).append(bookmarkIc);
 					actionDiv.addClass("review-action");
-					$(".review-list").append(infoDiv).append(mainDiv).append(actionDiv);
+					
+					var itemDiv = $("<div>").append(infoDiv).append(mainDiv).append(actionDiv);
+					itemDiv.addClass("list-item");
+					$(".review-list").append(itemDiv);
 				});
+				
 			} else {
-				$(".review-list").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
+				var noReviewDiv = $("<div>").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
+				noReviewDiv.addClass("no-review");
+				$(".review-list").append(noReviewDiv);
 			}
 		};
 		
-		//좋아요 버튼 클릭 이벤트 -> 아이콘 활성화 여부 적용 필요
+		//좋아요 버튼 클릭 이벤트
 		$(document).on("click", ".like-ic", function() {
 			var clickedHeart = $(this);
 			$.ajax({
@@ -362,30 +525,44 @@
 	        	   reviewNo:$(this).data("rno")
 	           	},
                 success : function(resp) {
+                	if(clickedHeart.find("i").hasClass("fa-solid")) {
+                		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
+                	} else {
+                		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
+                	}
                 	clickedHeart.next().text("도움됐어요"+ " " +resp);    
                 }
 			});
 		});
 		
-		//북마크 버튼 클릭 이벤트 -> 수정 필요(현재 동작 안함) 
+		//북마크 버튼 클릭 이벤트
 		$(document).on("click", ".bookmark-ic", function() {
+			var clickedBm = $(this);
 			var reviewNo = $(this).data("rno");
 			$.ajax({
-				url : "${pageContext.request.contextPath}/rest/review/like",
+				url : "${pageContext.request.contextPath}/rest/review/bookmark",
                 method : "post",
 			    data : {
-	        	   reviewNo:reviewNo
+	        	   reviewNo:$(this).data("rno")
 	           	},
                 success : function(resp) {
                 	if(resp) {
-                		$(this).html("<i class='fa-solid fa-bookmark'></i>")
-                			.attr("data-rno", reviewNo);
+                		clickedBm.find("i").addClass("fa-solid").removeClass("fa-regular");
                 	} else {
-                		$(this).html("<i class='fa-regular fa-bookmark'></i>")
-                			.attr("data-rno", reviewNo);
+                		clickedBm.find("i").addClass("fa-regular").removeClass("fa-solid");
                 	}   
                 }
 			});
+		});
+		
+		//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
+		$(document).on("click", ".review-main", function(){
+			window.location = "${pageContext.request.contextPath}/review/detail?reviewNo="+$(this).data("rno");
+		});
+		
+		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
+		$(document).on("click", ".review-write-info", function(){
+			//회원번호 붙여서 프로필로 이동
 		});
 	});
 </script>
