@@ -88,7 +88,7 @@
 <script src="${pageContext.request.contextPath}/js/summernote-ko-KR.min.js"></script>
 <!-- 지도 키워드검색 -->
 <link href="${pageContext.request.contextPath}/css/kakao-keyword.css" rel="stylesheet" type="text/css" >
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4cf30cac0d3ce8aa9755ab5c3966513d&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appkey}&libraries=services"></script>
 <script src="${pageContext.request.contextPath}/js/kakao-keyword.js"></script>
 
 <script type="text/javascript">

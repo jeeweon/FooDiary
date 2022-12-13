@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.appfoodiary.foodiary.configuration.MapProperties;
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
@@ -40,6 +41,8 @@ public class ReviewController {
 	private ReviewDao reviewDao;
 	@Autowired
 	private AttachmentService attachmentService;
+	@Autowired
+	private MapProperties mapProperties;
 	
 	@GetMapping("/list")
 	public String list(@ModelAttribute ReviewDto dto,
@@ -50,7 +53,9 @@ public class ReviewController {
 	}
 
 	@GetMapping("/write")
-	public String write() {
+	public String write(Model model) {
+		//appkey 가져와서 model에 저장
+		model.addAttribute("appkey", mapProperties.getAppkey());
 		return "review/write";
 	}
 	@PostMapping("/write")
