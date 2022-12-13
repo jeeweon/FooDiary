@@ -91,7 +91,7 @@ public class MemController {
 		//세션에서 loginNo, loginNick 데이터 삭제
 		session.removeAttribute(SessionConstant.NO);
 		session.removeAttribute(SessionConstant.NICK);
-		return "redirect:/home";
+		return "redirect:/home";//추후 탐색하기로 수정
 	}
 	
 	//비밀번호 재설정
@@ -206,25 +206,47 @@ public class MemController {
 	}
 	
 	@PostMapping("/edit_profile")
-	public String editProfile(HttpSession session,
-								@ModelAttribute MemDto inputDto,
-								@RequestParam int attachNo ) {
+	public String editProfile(HttpSession session, @ModelAttribute MemDto inputDto, @RequestParam MultipartFile profile) throws IllegalStateException, IOException {
 		int memNo = (int) session.getAttribute(SessionConstant.NO);
 		inputDto.setMemNo(memNo);
-		ProfileAttachDto profileAttachDto = new ProfileAttachDto(attachNo, memNo);
-
-		if(memDao.editProfile(inputDto)) {
+		
+		if(!profile.isEmpty()) {
+			int attachNo = attachmentService.attachUp(profile);
+			ProfileAttachDto profileAttachDto = new ProfileAttachDto(attachNo, memNo);
 			List<AttachDto> attachments = memDao.findProfile(memNo);
 			attachmentService.attachmentsDelete(attachments);
 			memDao.deleteProfile(memNo);
 			memDao.profileImage(profileAttachDto);
-			return "redirect:/home";//마이 프로필 이동으로 수정하기
+		}
+		
+		if(memDao.editProfile(inputDto)) {
+			return "redirect:/home";
 		}
 		else {
 			return "redirect:edit_profile?error";
 		}
-		
 	}
+	
+//	@PostMapping("/edit_profile")
+//	public String editProfile(HttpSession session,
+//								@ModelAttribute MemDto inputDto,
+//								@RequestParam int attachNo ) {
+//		int memNo = (int) session.getAttribute(SessionConstant.NO);
+//		inputDto.setMemNo(memNo);
+//		ProfileAttachDto profileAttachDto = new ProfileAttachDto(attachNo, memNo);
+//
+//		if(memDao.editProfile(inputDto)) {
+//			List<AttachDto> attachments = memDao.findProfile(memNo);
+//			attachmentService.attachmentsDelete(attachments);
+//			memDao.deleteProfile(memNo);
+//			memDao.profileImage(profileAttachDto);
+//			return "redirect:/home";//마이 프로필 이동으로 수정하기
+//		}
+//		else {
+//			return "redirect:edit_profile?error";
+//		}
+//		
+//	}
 	
 
 }

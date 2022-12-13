@@ -28,6 +28,13 @@
    .input.NNNNN ~ .success-message{
    		display : none;
    }
+   .preview{
+   		border-radius : 50%;
+   		border:1px solid transparent;
+   }
+   .preview.preview-hover:hover{
+    	opacity : 0.5;
+   }
 </style>
 
 </head>
@@ -35,21 +42,24 @@
 	<div>
 		<h1>프로필 수정</h1>
 	</div>
-	
-	<form action ="edit_profile" method="post" class="edit-form" enctype="multipart/form-data">
+	<form action ="edit_profile" method="post" class="edit-form" enctype="multipart/form-data" autocomplete="off">
 			<c:choose>
 				<c:when test="${empty profile}">
-					<img class="preview" src="${pageContext.request.contextPath}/images/Foodiary-logo.png" width="100" height="100">
+					<img name="basic" class="preview preview-hover" src="${pageContext.request.contextPath}/images/Foodiary-logo.png" width="100" height="100">
 				</c:when>
 				<c:otherwise>
 				<c:forEach var="profile" items="${profile}">
-						<img class="preview" src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}" width="100" height="100">
+						<img name="origin" class="preview preview-hover" src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}" width="100" height="100">
 				</c:forEach>
 				</c:otherwise>		
 			</c:choose>
+			<button class="profile-delete" type="button"><i class="fa-solid fa-x"></i></button>
 		<div>
-			<input type="text" name="attachNo" hidden="true">
-			<input type="file" name="profile" class="profile-input" accept=".jpg, .png, .gif">
+		<div class="file">
+		
+		</div>
+<!-- 			<input type="text" name="attachNo" hidden="true"> -->
+			<input type="file" name="profile" class="profile-input" accept=".jpg, .png, .gif" hidden="true" >
 		</div>
 		<div>
 			<label>
@@ -63,7 +73,10 @@
 		</div>
 		<div>
 			<label>자기소개</label>
-				<textarea rows="8" cols="70" name="memIntro" placeholder="자기소개" style="resize:none;">${memDto.memIntro}</textarea>
+				<textarea class="intro" rows="8" cols="70" name="memIntro" placeholder="자기소개" style="resize:none;">${memDto.memIntro}</textarea>
+		</div>
+		<div>
+			<span class="text-limit">(0 </span> / 100)
 		</div>
 		<div>
 			<button>프로필 수정</button>
@@ -81,40 +94,72 @@
 <script type="text/javascript">
 
 $(function(){
+	//사진 클릭시 파일 선택창 클릭
+	$(".preview").click(function(){
+		$("input[name=profile]").click();
+		
+	});
+	
 	$(".profile-input").change(function(){
+
+// 		console.log(this.files);
 		if(this.files.length>0){
+			$(".preview").attr("src", window.URL.createObjectURL(this.files[0]));
 			
 	// 서버에 비동기로 파일을 업로드하는 코드를 사용해야 함(ajax를 이용해서 multipart 전송 구현)
     // - 반드시 contentType, processData를 false로 설정해야 한다
     // - FormData 객체를 만들어 전송할 내용을 담아서 data에 설정한다
-			var fd = new FormData();
-			fd.append("attach",this.files[0]);
+// 			var fd = new FormData();
+// 			fd.append("attach",this.files[0]);
 
-			$.ajax({
-				url: "${pageContext.request.contextPath}/attach/upload",
-				method : "post",
-				data : fd,
-				processData : false,
-				contentType : false,
-				success:function(resp){
-					 $(".preview").attr("src", resp).attr("width","200").attr("height","200");
-					var check = resp.lastIndexOf("/")//경로에서 /위치 찾기
-					var attachNo = resp.substr(check+1);
-					$("[name=attachNo]").val(attachNo);
-				}
-			});
+// 			$.ajax({
+// 				url: "${pageContext.request.contextPath}/attach/upload",
+// 				method : "post",
+// 				data : fd,
+// 				processData : false,
+// 				contentType : false,
+// 				success:function(resp){
+// 					$(".preview").attr("src", resp).attr("width","200").attr("height","200");
+					 
+// 					var div= $("<div>");
+// 					var input = $("<input>").addClass("file-no");
+					 
+// 					$(".file").html(div);	
+// 					div.append(input);
+						 
+// 					var check = resp.lastIndexOf("/")//경로에서 /위치 찾기
+// 					var attachNo = resp.substr(check+1);
+// 					$(".file-no").val(attachNo);
+// 				}
+// 			});
+// 			$(".preview").attr("src", window.URL.createObjectURL(this.files[0]));
 		}
 		else{
-			$(".preview").attr("src","${pageContext.request.contextPath}/images/Foodiary-logo.png");
+			
+// 			$(".preview").attr("src", window.URL.createObjectURL(this.files[0]));
+// 			$(".file-no").remove();
 		}
+	});
+	
+	//프로필 삭제 버튼(삭제 후엔 기본 이미지로)
+	$(".profile-delete").click(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/rest/mem/profile_delete",
+			method:"post",
+			data: {memNo:"${sessionScope.loginNo}"},
+			success:function(resp){
+				$(".preview").attr("src", "${pageContext.request.contextPath}/images/Foodiary-logo.png");
+			}
+		});
+		
 	});
 	
 	//input 상태객체
 	var validChecker = {
-			memNickValid : false, memNickRegex : /^[가-힣0-9]{2,10}$/
+			memNickValid : false, memNickRegex : /^[가-힣0-9]{2,10}$/,
+			memNickTest : false
 	};
 	
-	//비밀번호창 블러 이벤트-> 정규표현식 검사
 	$("input[name=memNick]").blur(function(){
 		var name = $(this).attr("name");
 		var value = $(this).val();
@@ -126,14 +171,16 @@ $(function(){
         else {
             validChecker[name+"Valid"] = false;
             $(this).removeClass("success fail").addClass("fail");
-        }
-		
+        }		
 	});
 	
 	$("input[name=memNick]").blur(function(){
+		
 		var memNick = $(this).val();
 		$(this).removeClass("fail NNNNN NNNNY");
 		$(this).removeClass("success fail")
+		
+// 		console.log("정규표현식 성공"+validChecker.memNickValid);
 		
 		if(validChecker.memNickValid){
 			var that = this;//this 보관
@@ -147,13 +194,17 @@ $(function(){
 				success:function(resp){
 					if(resp=="NNNNN"){
 						$(that).addClass("NNNNN");
-						validChecker.memNickValid = false;	
+						validChecker.memNickTest = false;	
 						$(this).removeClass("success fail").addClass("success");
+// 						console.log("N");
+// 						console.log(validChecker.memNickValid);
 					}
 					else if(resp="NNNNY"){
 						$(that).addClass("NNNNY");
-						validChecker.memNickValid = true;
+						validChecker.memNickTest = true;
 						$(this).removeClass("success fail").addClass("fail");
+// 						console.log("Y");
+// 						console.log(validChecker.memNickValid);
 					}
 				},
 				error:function(){}
@@ -161,16 +212,32 @@ $(function(){
 		}
 		else{
 			$(this).addClass("fail");
-			validChecker.memNickValid = false;	
+			validChecker.memNickTest = false;	
 		}
 	});
 	
+	$(".intro").on("input",function(){		
+		var text = $(this).val();
+		console.log(text)
+		$(this).next().text(text.length);//바로 뒤 태그 선택
+		if(text.length>100){
+			
+		}
+		else{
+			
+		}
+	});
+
+	
+	
 	$(".edit-form").submit(function(e){
+		
 		e.preventDefault();
 
 		$(this).find("input, textarea, select").blur();
 
-		if(validChecker.memNickValid){
+// 			console.log(validChecker.memNickTest);
+		if(validChecker.memNickValid&&validChecker.memNickTest){
 			this.submit();			
 		}
 	});
