@@ -409,7 +409,8 @@
 					var infoText = $("<div>").append(writerNick).append(subInfoText);
 					infoText.addClass("info-text");
 					
-					var infoDiv = $("<div>").append(writerAvatar).append(infoText);
+					var infoDiv = $("<div>").append(writerAvatar).append(infoText)
+						.attr("data-mno", value.memNo);
 					infoDiv.addClass("review-write-info");
 					
 					var thumbnail = $("<img>").attr("src", "${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
@@ -557,6 +558,11 @@
 		//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
 		$(document).on("click", ".review-main", function(){
 			window.location = "${pageContext.request.contextPath}/review/detail?reviewNo="+$(this).data("rno");
+		});
+		
+		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
+		$(document).on("click". ".review-write-info", function(){
+			//회원번호 붙여서 프로필로 이동
 		});
 	});
 </script>
