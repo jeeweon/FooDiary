@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.appfoodiary.foodiary.entity.BookmarkDto;
+import com.appfoodiary.foodiary.entity.LikeDto;
 import com.appfoodiary.foodiary.entity.MyprofileDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
 
@@ -25,5 +27,13 @@ public class MyprofileDaoImpl implements MyprofileDao{
 	@Override
 	public List<ReviewDto> reviewList(int memNo) {
 		return sqlSession.selectList("myprofile.review",memNo);
+	}
+	@Override
+	public List<BookmarkDto> bookmarkList(int memNo) {
+		return sqlSession.selectList("myprofile.bookmark", memNo);
+	}
+	@Override
+	public List<LikeDto> likeList(int memNo) {
+		return sqlSession.selectList("myprofile.like",memNo);
 	}
 }

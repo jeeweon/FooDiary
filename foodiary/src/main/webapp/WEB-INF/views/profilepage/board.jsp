@@ -68,6 +68,18 @@ li{ list-style: none; }
 	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
 </c:forEach> 
 
+<div class="gallery">
+            <ul>
+                <li>
+                    <a href="#">
+                        <figure>
+                            <img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
+                            <figcaption>🧡23 ❤34</figcaption>
+                        </figure>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
 <section class="section1">
             <div class="inner">
@@ -150,7 +162,7 @@ li{ list-style: none; }
         </section>
     
 
-		<div class="gallery">
+	 	<div class="gallery">
             <ul>
                 <li>
                     <a href="#">
@@ -161,7 +173,7 @@ li{ list-style: none; }
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> 
     
     <script>
         $(function(){
