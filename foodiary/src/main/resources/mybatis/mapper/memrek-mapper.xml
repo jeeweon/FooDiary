@@ -30,7 +30,5 @@ select TMP.*, rownum rn from(
 R left outer join mem M
 on R.mem_no=M.mem_no
 order by DBMS_RANDOM.RANDOM
-
-
 	</select>
 </mapper>
