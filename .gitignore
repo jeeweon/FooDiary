@@ -341,7 +341,7 @@
 **/*.log
 
 # Properties
-# **/*.properties
+**/*.properties
 
 # Eclipse Gradle plugin generated files
 # Eclipse Core

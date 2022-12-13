@@ -12,25 +12,25 @@
 		where 
 			review_no=#{reviewNo} and mem_no=#{memNo}
 	</select>
-	<select id="list" parameterType="int" resultType="BookmarkDto">
+	<select id="list" parameterType="int" resultType="ReviewDto">
 		select 
-			review_no 
+		    R.* 
 		from 
-			bookmark 
-		where 	 
-			mem_no=#{memNo}
-		order by 
-			bookmark_time
+    		review R
+		right outer join
+			(select review_no from bookmark where mem_no=#{memNo}) M
+		on R.review_no=M.review_no
 	</select>
 	<insert id="insert" parameterType="int">
-		insert into bookmark(reivew_no,mem_no) 
-		values(#{reviewNo},#{memNo});
+		insert into
+			bookmark(review_no,mem_no)
+		values(#{reviewNo},#{memNo})
 	</insert>
 	<delete id="delete" parameterType="int">
 		delete 
 		from 
 			bookmark 
 		where 
-			review_no=#{reviewNo} and mem_no=#{memNo};
+			review_no=#{reviewNo} and mem_no=#{memNo}
 	</delete>
 </mapper>

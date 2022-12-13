@@ -44,4 +44,24 @@
 	<delete id="delete-interest" parameterType="InterestAreaDto">
 		delete interest_areas where mem_no = #{memNo} and area_no = #{areaNo}
 	</delete>
+	
+	<!-- 
+	인근지역 조회
+	- 관심지역, 중복데이터를 제외하고 조회 
+	-->
+	<select id="list-nearby" parameterType="list" resultType="NearbyAreaVO">
+		select area_no, area_city, area_district 
+		from (
+			select distinct nearby_no from nearby_areas 
+			where area_no in
+			<foreach collection="list" separator="," item="area" index="index" open="(" close=")">
+				#{area.areaNo}
+			</foreach>
+			and nearby_no not in 
+			<foreach collection="list" separator="," item="area" index="index" open="(" close=")">
+				#{area.areaNo}
+			</foreach>
+			) A
+			inner join areas B on A.nearby_no = B.area_no
+	</select>
 </mapper>
