@@ -6,7 +6,6 @@
 <head>
     <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 
 <style>
@@ -54,6 +53,7 @@
 	</div>
 
 <form action="join" class="join-form" method="post" autocomplete="off">
+	
 	<div>
 		<label>
 			이메일
@@ -63,7 +63,7 @@
         <div class="success-message">사용 가능한 이메일입니다. 인증번호를 전송해주세요.</div>
         <div class="fail-message">올바르지 않은 이메일 형식입니다.</div>
         <div class="NNNNN-message">이미 사용중인 이메일입니다.</div>
-		<div><button class="send-btn" type="button" hidden="true">인증번호 보내기</button></div>
+		<div><button class="send-btn" type="button" disabled>인증번호 보내기</button></div>
 		<div class="wait-message">인증번호 전송중</div>
 	</div>
 	
@@ -71,6 +71,7 @@
 	        <div id="success-message">인증번호가 확인되었습니다.</div>
 	     	<div id="fail-message">인증번호가 확인되지 않았습니다.</div>
         </div>
+        <div class="email-check-btn"></div>
 
 	
 	<div>
@@ -129,6 +130,7 @@ $(function(){
 			memEmailValid : false,
 	};
 	
+	//input 상태객체
 	var validChecker = {
 			memEmailValid : false, memEmailRegex : /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 			memPwValid : false, memPwRegex : /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,16}$/,
@@ -145,6 +147,7 @@ $(function(){
 			}
 	};
 	
+	//name이 있는 창들 블러 이벤트-> 정규표현식 검사
 	$("[name]").blur(function(){
 		var name = $(this).attr("name");
 		var value = $(this).val();
@@ -160,47 +163,47 @@ $(function(){
 		
 	});
 	
-	//이메일 중복 검사
+	//이메일 input창 검사(정규표현식 검사->이메일 중복 검사)
 	$("input[name=memEmail]").blur(function(){
 		var memEmail = $(this).val();
 		$(this).removeClass("success fail NNNNN NNNNY");
 		
-		if(validChecker.memEmailValid){
+		if(validChecker.memEmailValid){//정규표현식 검사 성공 -> 이메일 중복 검사
 			var that = this;//this 보관
 			
-			$.ajax({
+			$.ajax({//이메일 중복 검사
 				url:"${pageContext.request.contextPath}/rest/mem/email",
 				method:"post",
 				data:{
 					memEmail:memEmail
 				},
 				success:function(resp){
-					if(resp=="NNNNN"){
+					if(resp=="NNNNN"){//이메일 중복이면 인증번호 보내기 버튼 잠금상태
 						$(that).addClass("NNNNN");
 						validChecker.memEmailValid = false;	
 						$(this).removeClass("success fail").addClass("NNNNN");
-						$(".send-btn").prop("hidden",true);
+						$(".send-btn").prop("disabled",true);
 					}
 					else if(resp="NNNNY"){
 						$(that).addClass("NNNNY");
 						validChecker.memEmailValid = true;
 						$(this).removeClass("success fail").addClass("success");
-						$(".send-btn").prop("hidden",false);
+						$(".send-btn").prop("disabled",false);
 					}
 				},
 				error:function(){}
 			});
 		}
-		else{
+		else{//정규표현식 검사에서 실패시 인증번호 보내기 버튼 잠금상태
 			$(this).addClass("fail");
 			validChecker.memEmailValid = false;
-			$(".send-btn").prop("hidden",true);
+			$(".send-btn").prop("disabled",true);
 		}
 		
 		
 	});
 	
-	//이메일 발송
+	//인증번호 보내기 버튼 클릭 시 -> 이메일 발송
 	$(".send-btn").click(function(){
 		var email = $("[name=memEmail]").val();
 		if(email.length==0) return;
@@ -208,10 +211,10 @@ $(function(){
 		var btn =$(this);
 		btn.prop("disabled",true);
 		
-		var waitMessage=$(".wait-message");
+		var waitMessage=$(".wait-message"); //인증번호 전송중 메세지
 		waitMessage.css("display","block");
 		
-		$.ajax({
+		$.ajax({//이메일 전송
 			url : "${pageContext.request.contextPath}/rest/mem/email_check1",
 			method: "post",
 			data : {who:email},
@@ -219,48 +222,58 @@ $(function(){
 				btn.prop("disabled",false);
 			
 			waitMessage.css("display","none");	
+			
+			//이메일 전송 시 인증번호 창 생김
 			var div = $("<div>");
+			var div2= $("<div>");
 			var input = $("<input>").addClass("serial input").attr("placeholder","인증번호");
 			var successMessage = $("#success-message");
 			var failMessage = $("#fail-message");
 			var button = $("<button>").attr("type","button").text("인증번호 확인");
 			
-			input.blur(function(){
-				if(judge.memEmailValid !=true) 
-					return $(".serial").addClass("fail").after(failMessage);
-			});	
+			//인증번호 input,button 생성
+			$(".email-check").html(div);	
+			div.append(input);
+			$(".email-check-btn").html(div2);
+			div2.append(button);
 			
-			button.click(function(){
-				var serial = input.val(); //변수 input의 value 값 
-				if(serial.length !=6) 
-				return  $(".serial").addClass("fail").after(failMessage);
-				
-				$.ajax({
-					url : "${pageContext.request.contextPath}/rest/mem/email_check2",
-					method : "post",
-					data : {
-						who : email, //바깥에 있는 email
-						serial : serial //지금 불러온 serial
-					},
-					success:function(resp){
-						judge.memEmailValid = resp;
-						
-						if(resp) {
-							$(".serial").removeClass("success fail").addClass("input success");
-							$(".serial").after(successMessage);
-							button.prop("hidden",true);
-							btn.prop("hidden",true);
+			//alert 처리하면서 블러이벤트 지움 혹시 모르니 일단 주석처리..
+// 			input.blur(function(){
+// 				if(judge.memEmailValid !=true) 
+// 					return $(".serial").addClass("fail").after(failMessage);
+// 			});	
+			
+				//인증번호 확인 클릭시
+				button.click(function(){
+					var serial = input.val(); //변수 input의 value 값 
+					if(serial.length !=6) 
+					return  $(".serial").addClass("fail").after(failMessage);//6자리 아니면 리턴
+					
+					$.ajax({//인증번호 검사
+						url : "${pageContext.request.contextPath}/rest/mem/email_check2",
+						method : "post",
+						data : {
+							who : email, //바깥에 있는 email
+							serial : serial //지금 불러온 serial
+						},
+						success:function(resp){
+							judge.memEmailValid = resp; //검사 성공 시 이메일인증 상태 true
+							
+							if(resp) {//성공 시 이메일 인증버튼, 인증번호 보내기 버튼 잠금처리 
+								$(".serial").removeClass("success fail").addClass("input success");
+								$(".serial").after(successMessage);
+								button.prop("disabled",true);
+								btn.prop("disabled",true);
+							}
+					        else {
+					            $(".serial").removeClass("success fail").addClass("input fail");
+					            $(".serial").after(failMessage);
+					        }
 						}
-				        else {
-				            $(".serial").removeClass("success fail").addClass("input fail");
-				            $(".serial").after(failMessage);
-				        }
-					}
+					});
 				});
-			});
 			
-			$(".email-check").html(div);		
-			div.append(input).append(button);
+
 			}
 		});
 	});
