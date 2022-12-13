@@ -25,49 +25,50 @@
 
 
 
-<!-- 첨부파일 -->
-<div>
-	<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-	<input type="file" name="attachments" multiple>
-</div>
-
-<!-- 별점 -->    
 <form action="write" method="post" enctype="multipart/form-data">
+
+	<!-- 첨부파일 -->
+	<div>
+		<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
+		<input type="file" name="attachments" multiple>
+	</div>
+	
+	<!-- 별점 -->    
 	별점 : <div class="star-score-edit" data-max="5"></div>
-	
-<!-- summernote + 리뷰장소 -->	
-<div class="total">
-	<!-- summernote -->
-	<div class="left">
-		<textarea name="reviewContent"></textarea>
-	</div>
-	
-	<!-- 리뷰장소 -->
-	<div class="right">
-    <div>
-    	<label>리뷰 장소</label><br>
-        <input type="text" id="reviewAddress" placeholder=" 주소 : 지도에서 주소를 선택하세요" readonly>
-        <input type="text" id="reviewPlace" placeholder=" 장소명 : 추가 입력 가능">
-    </div>
-	<div class="map_wrap">
-    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-	    <div id="menu_wrap" class="bg_white">
-	        <div class="option">
-	            <div>
-	                <form onsubmit="searchPlaces(); return false;">
-	                    <input type="text" value="당산역 맛집" id="keyword" size="15"> 
-	                    <button type="submit">검색</button> 
-	                </form>
-	            </div>
-	        </div>
-	        <hr>
-	        <ul id="placesList"></ul>
-	        <div id="pagination"></div>
+		
+	<!-- summernote + 리뷰장소 -->	
+	<div class="total">
+		<!-- summernote -->
+		<div class="left">
+			<textarea name="reviewContent"></textarea>
+		</div>
+		
+		<!-- 리뷰장소 -->
+		<div class="right">
+	    <div>
+	    	<label>리뷰 장소</label><br>
+	        <input type="text" name="reviewAddress" placeholder=" 주소 : 지도에서 주소를 선택하세요" readonly>
+	        <input type="text" name="reviewPlace" placeholder=" 장소명 : 추가 입력 가능">
 	    </div>
+		<div class="map_wrap">
+	    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+		    <div id="menu_wrap" class="bg_white">
+		        <div class="option">
+		            <div>
+		                <!-- <form onsubmit="searchPlaces(); return false;">  -->
+		                    <input type="text" value="당산역 맛집" id="keyword" size="15"> 
+		                    <button type="button" class="keywordMap">검색</button> 
+		                <!--  </form> -->
+		            </div>
+		        </div>
+		        <hr>
+		        <ul id="placesList"></ul>
+		        <div id="pagination"></div>
+		    </div>
+		</div>
+		</div>
 	</div>
-	</div>
-</div>
-	
+		
 	<div>
 		<a href="list">목록으로</a>
 		<button type="submit">등록하기</button>
@@ -114,6 +115,7 @@
 			fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 		});
+		
 		//별점 옵션 수정
 		$(".star-score-edit").score({
             editable:true,//수정 가능하도록 설정

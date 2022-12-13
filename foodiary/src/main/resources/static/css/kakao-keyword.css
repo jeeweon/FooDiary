@@ -39,5 +39,5 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
-#reviewPlace {width: 350px;}
-#reviewAddress {width: 350px;}
+[name=reviewAddress] {width: 350px;}
+[name=reviewPlace] {width: 350px;}
