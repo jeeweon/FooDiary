@@ -92,6 +92,16 @@
 	color: white;
 }
 
+.no-review {
+	margin-top: 100px;
+	text-align: center;
+	color: gray;
+}
+
+.list-item {
+	margin-top: 40px;
+}
+
 .writer-avatar {
 	width: 50px;
 	height: 50px;
@@ -104,6 +114,29 @@
 
 .like-ic {
 	cursor: pointer;
+}
+
+.bookmark-ic {
+	cursor: pointer;
+}
+
+.review-write-info {
+	width: 300px;
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.review-action {
+	display: flex;
+	flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookmark-ic {
+	margin-left: 300px;
 }
 </style>
 </head>
@@ -323,8 +356,13 @@
 					
 					var scoreDiv = $("<div>").append(scoreIc).append(score); //별점 아이콘, 별점 묶기
 					
-					var likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>")
-						.attr("data-rno", value.reviewNo);; //내가 좋아요 눌렀는지 확인 필요
+					var likeIc;					
+					if(value.likeCheck) {
+						likeIc = $("<span>").html("<i class='fa-solid fa-heart'></i>");
+					} else {						
+						likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>");
+					}
+					likeIc.attr("data-rno", value.reviewNo);
 					var likeCnt = $("<span>").text("도움됐어요"+ " " +value.likeCnt);
 					likeIc.addClass("like-ic")
 					likeCnt.addClass("like-cnt");
@@ -339,20 +377,30 @@
 					var replyDiv = $("<div>").append(replyIc).append(replyCnt)
 						.attr("data-rno", value.reviewNo); //댓글 아이콘, 댓글 수 묶기
 					
-					var bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>")
-						.attr("data-rno", value.reviewNo); //내가 북마크 눌렀는지 확인 필요
+					var bookmarkIc;
+					if(value.bookmarkCheck) {
+						bookmarkIc = $("<span>").html("<i class='fa-solid fa-bookmark'></i>");
+					} else {
+						bookmarkIc = $("<span>").html("<i class='fa-regular fa-bookmark'></i>")						
+					}
+					bookmarkIc.attr("data-rno", value.reviewNo);
 					bookmarkIc.addClass("bookmark-ic");
 					
 					var actionDiv = $("<div>").append(scoreDiv).append(likeDiv).append(replyDiv).append(bookmarkIc);
 					actionDiv.addClass("review-action");
-					$(".review-list").append(infoDiv).append(mainDiv).append(actionDiv);
+					
+					var itemDiv = $("<div>").append(infoDiv).append(mainDiv).append(actionDiv);
+					itemDiv.addClass("list-item");
+					$(".review-list").append(itemDiv);
 				});
 			} else {
-				$(".review-list").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
+				var noReviewDiv = $("<div>").append("<span class='no-review'>최근 올라온 리뷰가 없습니다.</span>");
+				noReviewDiv.addClass("no-review");
+				$(".review-list").append(noReviewDiv);
 			}
 		};
 		
-		//좋아요 버튼 클릭 이벤트 -> 아이콘 활성화 여부 적용 필요
+		//좋아요 버튼 클릭 이벤트
 		$(document).on("click", ".like-ic", function() {
 			var clickedHeart = $(this);
 			$.ajax({
@@ -362,31 +410,38 @@
 	        	   reviewNo:$(this).data("rno")
 	           	},
                 success : function(resp) {
+                	if(clickedHeart.find("i").hasClass("fa-solid")) {
+                		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
+                	} else {
+                		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
+                	}
                 	clickedHeart.next().text("도움됐어요"+ " " +resp);    
                 }
 			});
 		});
 		
-		//북마크 버튼 클릭 이벤트 -> 수정 필요(현재 동작 안함) 
+		//북마크 버튼 클릭 이벤트
 		$(document).on("click", ".bookmark-ic", function() {
+			var clickedBm = $(this);
 			var reviewNo = $(this).data("rno");
 			$.ajax({
-				url : "${pageContext.request.contextPath}/rest/review/like",
+				url : "${pageContext.request.contextPath}/rest/review/bookmark",
                 method : "post",
 			    data : {
-	        	   reviewNo:reviewNo
+	        	   reviewNo:$(this).data("rno")
 	           	},
                 success : function(resp) {
                 	if(resp) {
-                		$(this).html("<i class='fa-solid fa-bookmark'></i>")
-                			.attr("data-rno", reviewNo);
+                		clickedBm.find("i").addClass("fa-solid").removeClass("fa-regular");
                 	} else {
-                		$(this).html("<i class='fa-regular fa-bookmark'></i>")
-                			.attr("data-rno", reviewNo);
+                		clickedBm.find("i").addClass("fa-regular").removeClass("fa-solid");
                 	}   
                 }
 			});
 		});
+		
+		//이미지 클릭 시, 리뷰 상세로 이동
+		
 	});
 </script>
 </body>
