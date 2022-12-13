@@ -10,6 +10,11 @@
 
     <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
     <script type="text/javascript"></script>   
+    <script>
+    	$(function(){
+    		console.log(${list});
+    	});
+    </script>
 </head>
 
 <body>
@@ -22,18 +27,18 @@
                 <!--boardM-->
                 <div class="boardT">
                     <ul class="boardT1">
-                        <li>이름(이름)</li>
+                        <li>이름 : ${list.memNick}</li>
                         <button><a href="">프로필 편집</a></button>
                         <a href="" id="Ta1"><img src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정"></a>
                         <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
-                        <li>게시물(123)</li>
+                        <li>게시물(000)</li>
                         <li>팔로워(235)</li>
                         <li>팔로우(433)</li>
                     </ul> <!-- boardT2 -->
-                    <P>내용 :
-                        (내용)
+                    <P>내용 :${list.memIntro}
+                        
                     </P>
                 </div> <!--boardT-->
                 <div class="boardA">

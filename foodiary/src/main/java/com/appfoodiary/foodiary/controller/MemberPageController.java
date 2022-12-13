@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.repository.MemDao;
+import com.appfoodiary.foodiary.repository.MyprofileDao;
+import com.appfoodiary.foodiary.repository.ReviewDao;
 
 
 @Controller
@@ -17,6 +20,10 @@ public class MemberPageController {
 	
 	@Autowired
 	private MemDao memDao;
+	@Autowired
+	private MyprofileDao myprofileDao;
+	@Autowired
+	private ReviewDao reviewDao;
 	
 	@GetMapping("/myprofile")
 	public String myprfile(
@@ -28,7 +35,13 @@ public class MemberPageController {
 		return "profilepage/myprofile";
 	}
 	@GetMapping("/board")
-	public String board() {
+	public String board(
+			Model model,
+			HttpSession session
+			) {
+		//한회원에 대해하여 리뷰 정보를 가지고 온다.
+		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
+		model.addAttribute("list",myprofileDao.reviewList(memNo));
 		return "profilepage/board";
 	}
 	@GetMapping("/like")
@@ -38,5 +51,15 @@ public class MemberPageController {
 	@GetMapping("/bookmark")
 	public String bookmark() {
 		return "profilepage/bookmark";
+	}
+	
+	@GetMapping("/myprofileheader")
+	public String myprofileheader(
+			Model model,
+			HttpSession session) {
+		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
+		model.addAttribute("list",memDao.selectOne(memNo));
+		//model.addAttribute("reviewcnt",myprofileDao.reviewCnt(memNo));
+		return "profilepage/myprofileheader";
 	}
 }
