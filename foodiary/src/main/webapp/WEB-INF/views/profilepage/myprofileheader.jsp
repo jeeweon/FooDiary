@@ -60,6 +60,7 @@
             </div><!--inner-->
         </div><!--boaardE-->
 	</div>
+	<hr>
 	
     <script>
         $(function(){
