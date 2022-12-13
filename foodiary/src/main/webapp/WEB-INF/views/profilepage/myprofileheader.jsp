@@ -34,15 +34,15 @@
                         <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
-<<<<<<< HEAD
+
                         <li>게시물(123)</li>
                         <li><a href="">팔로워(235)</a></li>
                         <li><a href="">팔로우(433)</a></li>
-=======
+
                         <li>게시물(000)</li>
                         <li>팔로워(235)</li>
                         <li>팔로우(433)</li>
->>>>>>> refs/remotes/origin/jeeweon
+
                     </ul> <!-- boardT2 -->
                     <P>내용 :${list.memIntro}
                         
