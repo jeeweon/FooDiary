@@ -1,6 +1,7 @@
 package com.appfoodiary.foodiary.repository;
 
 import com.appfoodiary.foodiary.entity.FollowDto;
+import com.appfoodiary.foodiary.vo.FollowVO;
 
 public interface FollowDao {
 

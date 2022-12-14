@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.FollowDto;
+import com.appfoodiary.foodiary.vo.FollowVO;
 
 @Repository
 public class FollowDaoImpl implements FollowDao{

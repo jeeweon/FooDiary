@@ -61,5 +61,49 @@
 		where 
 			L.mem_no=#{memNo}
 	</select>
+	<!-- 리뷰당사진갯수 -->
+	<select id="photocnt" parameterType="int" resultType="int">
+		select
+	 		count(*)
+	 	 from 
+	 	 	review_attach 
+	 	 where 
+	 	 	review_no={reviewNo}
+	</select>
+	<select id="memprofile" parameterType="int" resultType="ProfileMemVO">
+		select
+        	distinct
+        	M.mem_no,
+        	M.mem_nick,
+        	M.mem_intro,
+        	coalesce(RC.cnt, 0) review_cnt,
+        	coalesce(FP.cnt2, 0) follow_cnt,
+        	coalesce(FT.cnt3, 0) follower_cnt
+        
+    	from (
+    		 select * from mem where mem_no=#{memNo})M 
+    left outer join review R on M.mem_no=R.mem_no
+    left outer join(
+    		select 
+    			mem_no,count(mem_no) cnt
+    		 from 
+    		 	review
+    		 group by mem_no
+    )RC on M.mem_no=RC.mem_no
+    left outer join(
+        select
+            passive_mem_no ,count(passive_mem_no)cnt2
+        from 
+            follow 
+        group by passive_mem_no)
+        FP on M.mem_no=FP.passive_mem_no
+    left outer join(
+        select 
+            active_mem_no, count(active_mem_no) cnt3
+        from 
+            follow 
+        group by active_mem_no
+    ) FT on M.mem_no=FT.active_mem_no
+	</select>
 
 </mapper>
