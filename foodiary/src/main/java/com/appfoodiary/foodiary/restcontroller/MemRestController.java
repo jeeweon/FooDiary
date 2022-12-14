@@ -4,14 +4,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.entity.SelfCheckDto;
 import com.appfoodiary.foodiary.repository.MemDao;
@@ -26,6 +29,9 @@ public class MemRestController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	@RequestMapping("/email")
 	public String email(@RequestParam String memEmail) {
@@ -63,5 +69,12 @@ public class MemRestController {
 	public void profileDelete(@RequestParam int memNo) {
 		memDao.deleteProfile(memNo);
 	}
-
+	
+	@PostMapping("/leave_pw")
+	public boolean leavePw(HttpSession session, 
+							@RequestParam String memPw) {
+			int memNo = (int) session.getAttribute(SessionConstant.NO);
+			MemDto loginDto = memDao.selectOne(memNo);
+			return encoder.matches(memPw,loginDto.getMemPw());
+	}
 }
