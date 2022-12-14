@@ -465,19 +465,30 @@
 				alert("로그인이 필요한 기능입니다."); //모달로 변경 -> 취소, 로그인하러가기				
 			} else {//회원
 				var clickedHeart = $(this);
+				var no = $(this).data("rno");
 				$.ajax({
-					url : "${pageContext.request.contextPath}/rest/review/like",
+					url : "${pageContext.request.contextPath}/rest/review/like2",
 	                method : "post",
 				    data : {
-		        	   reviewNo:$(this).data("rno")
+		        	   reviewNo:no
 		           	},
 	                success : function(resp) {
-	                	if(clickedHeart.find("i").hasClass("fa-solid")) {
+	                	if(resp == 0) {
 	                		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
 	                	} else {
 	                		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
 	                	}
-	                	clickedHeart.next().text("도움됐어요"+ " " +resp);    
+	                	
+	                	$.ajax({
+	                		url : "${pageContext.request.contextPath}/rest/review/count",
+	    	                method : "post",
+	    				    data : {
+	    		        	   reviewNo:no
+	    		           	},
+	    	                success : function(resp) {
+			                	clickedHeart.next().text("도움됐어요"+ " " +resp);    	    	                	
+	    	                }
+	                	});
 	                }
 				});
 			}
