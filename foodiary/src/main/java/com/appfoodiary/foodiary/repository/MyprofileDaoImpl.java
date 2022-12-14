@@ -10,6 +10,7 @@ import com.appfoodiary.foodiary.entity.MyprofileDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
 import com.appfoodiary.foodiary.vo.ProfileBookmarkVO;
 import com.appfoodiary.foodiary.vo.ProfileLikeVO;
+import com.appfoodiary.foodiary.vo.ProfileMemVO;
 
 @Repository
 public class MyprofileDaoImpl implements MyprofileDao{
@@ -22,7 +23,7 @@ public class MyprofileDaoImpl implements MyprofileDao{
 	}
 	@Override
 	public int reviewCnt(int memNo) {
-		return sqlSession.selectOne("myprofile.reviewcnt",memNo);
+		return sqlSession.selectOne("myprofile.reviewCnt",memNo);
 	}
 	@Override
 	public List<ReviewDto> reviewList(int memNo) {
@@ -35,5 +36,13 @@ public class MyprofileDaoImpl implements MyprofileDao{
 	@Override
 	public List<ProfileLikeVO> likeList(int memNo) {
 		return sqlSession.selectList("myprofile.like",memNo);
+	}
+	@Override
+	public int photocnt(int reviewNo) {
+		return sqlSession.selectOne("myprofile.photocnt",reviewNo);
+	}
+	@Override
+	public ProfileMemVO profileMemVO(int memNo) {
+		return sqlSession.selectOne("myprofile.memprofile",memNo);
 	}
 }

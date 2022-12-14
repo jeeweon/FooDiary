@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
+import com.appfoodiary.foodiary.entity.FollowDto;
+import com.appfoodiary.foodiary.repository.FollowDao;
 import com.appfoodiary.foodiary.repository.MemDao;
 import com.appfoodiary.foodiary.repository.MyprofileDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
+import com.appfoodiary.foodiary.vo.FollowVO;
 
 
 @Controller
@@ -24,6 +27,8 @@ public class MemberPageController {
 	private MyprofileDao myprofileDao;
 	@Autowired
 	private ReviewDao reviewDao;
+	@Autowired
+	private FollowDao followDao;
 	
 	@GetMapping("/myprofile")
 	public String myprfile(
@@ -68,8 +73,26 @@ public class MemberPageController {
 			Model model,
 			HttpSession session) {
 		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
+		FollowVO vo=FollowVO.builder()
+				.follow(followDao.follower(memNo))
+				.follower(followDao.following(memNo))
+				.review(myprofileDao.reviewCnt(memNo))
+				.build();
+		model.addAttribute("followcnt",vo);
 		model.addAttribute("list",memDao.selectOne(memNo));
-		//model.addAttribute("reviewcnt",myprofileDao.reviewCnt(memNo));
 		return "profilepage/myprofileheader";
+	}
+	
+	@GetMapping("/follow")
+	public String follow() {
+		return "profilepage/follow";
+	}
+	@GetMapping("/follower")
+	public String follower() {
+		return "profilepage/follower";
+	}
+	@GetMapping("/yourprofile")
+	public String yourprofile() {
+		return "/profilepage/yourprofile";
 	}
 }

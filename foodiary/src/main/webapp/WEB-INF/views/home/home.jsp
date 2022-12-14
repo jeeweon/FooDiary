@@ -299,6 +299,7 @@
 				success : function(resp) {
 					interestList = resp;
 					showInterestArea();
+				
 				}
 			});
 		};
