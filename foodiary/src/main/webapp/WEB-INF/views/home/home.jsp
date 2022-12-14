@@ -294,6 +294,7 @@
 </div>
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/commons.js"></script>
 <script>
 	$(function() {
 		loadInterestArea();
