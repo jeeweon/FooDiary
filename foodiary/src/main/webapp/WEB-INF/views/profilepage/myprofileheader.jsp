@@ -23,24 +23,29 @@
             <div class="inner">
                 <div class="boardM">
                     <%-- <img src="${pageContext.request.contextPath}/images/프로필임시.png"> --%>
-                    <img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${list.memNo}" width="300" height="200">
-                </div>
-                <!--boardM-->
+                    <img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${list.memNo}">
+                </div><!--boardM-->
                 <div class="boardT">
                     <ul class="boardT1">
                         <li>이름 : ${list.memNick}</li>
                         <button><a href="">프로필 편집</a></button>
                         <a href="" id="Ta1"><img src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정"></a>
-                        <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                        <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
+
                         <li>게시물${followcnt.review}</li>
                         <li>팔로워${followcnt.follow}</li>
                         <li>팔로우${followcnt.follower}</li>
 
+
+                        <li>게시물(123)</li>
+                        <li><a href="">팔로워(235)</a></li>
+                        <li><a href="">팔로우(433)</a></li>
+
                     </ul> <!-- boardT2 -->
-                    <P>내용 :${list.memIntro}
-                        
+                    <P>
+                    	내용 :${list.memIntro}           
                     </P>
                 </div> <!--boardT-->
                 <div class="boardA">
@@ -53,8 +58,8 @@
                     </ul>
                 </div> <!-- boardA -->
             </div><!--inner-->
-        </div><!--boaardE-->
-	</div>
+        </div><!--boaardF-->
+	</div><!-- wrapper -->
 	<hr>
 	
     <script>

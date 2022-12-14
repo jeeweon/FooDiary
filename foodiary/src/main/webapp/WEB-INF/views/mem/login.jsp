@@ -9,13 +9,21 @@
 
 <script src="http://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript"></script>
+
+<style>
+	#loginX{
+		font-size: 17px;
+		color: 9C254D;
+		padding-bottom: 20px;
+	}
+</style>
 </head>
 <body>
 		<div class="wrapper">
 		        <div class="Mlogin">
 		            <div class="inner">
 		                <div class="Lhead">
-		                    <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
+		                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
 		                </div> <!--Lhead-->
 		                <div class="Lbody">
 		                <form action="login" method="post" autocomplete="off">
@@ -26,7 +34,7 @@
 	                            	<button type="submit">로그인</button>
 	                            	<div>
 										<c:if test="${param.error !=null}">
-											<h2>입력한 정보가 올바르지 않습니다</h2>
+											<h2 id="loginX">입력한 정보가 올바르지 않습니다.</h2>
 										</c:if>	
 									</div> <!-- 정보 확인 -->
 	                            </legend> <!-- legend -->

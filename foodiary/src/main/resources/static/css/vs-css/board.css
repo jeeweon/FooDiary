@@ -31,13 +31,12 @@ li {
 .boardM{
     position: relative;
     top: 100px;
-    border: 1px solid black;
 }
 
 .boardM img {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     left: 180px;
     border: 1px solid black;
     border-radius: 50%;
@@ -54,19 +53,18 @@ li {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid pink;
     margin-bottom: 50px;
 }
 
 .boardT1 li {
-    font-size: 30px;
+    font-size: 27px;
     width: 100%;
 }
 
 .boardT1 button {
     width: 200px;
     height: 30px;
-    border: 1px solid pink;
+    background: white;
     border-radius: 10px 10px;
 }
 .boardT1 #Ta1{
