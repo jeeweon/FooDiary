@@ -550,19 +550,30 @@
 		//좋아요 버튼 클릭 이벤트
 		$(document).on("click", ".like-ic", function() {
 			var clickedHeart = $(this);
+			var no = $(this).data("rno");
 			$.ajax({
-				url : "${pageContext.request.contextPath}/rest/review/like",
+				url : "${pageContext.request.contextPath}/rest/review/like2",
                 method : "post",
 			    data : {
-	        	   reviewNo:$(this).data("rno")
+	        	   reviewNo:no
 	           	},
                 success : function(resp) {
-                	if(clickedHeart.find("i").hasClass("fa-solid")) {
+                	if(resp == 0) {
                 		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
                 	} else {
                 		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
                 	}
-                	clickedHeart.next().text("도움됐어요"+ " " +resp);    
+                	
+                	$.ajax({
+                		url : "${pageContext.request.contextPath}/rest/review/count",
+    	                method : "post",
+    				    data : {
+    		        	   reviewNo:no
+    		           	},
+    	                success : function(resp) {
+		                	clickedHeart.next().text("도움됐어요"+ " " +resp);    	    	                	
+    	                }
+                	});
                 }
 			});
 		});
