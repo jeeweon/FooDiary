@@ -34,8 +34,6 @@ public class SearchRestController {
 	@GetMapping(value = {"/review/{keyword}", "/review"})
 	public List<ReviewSearchVO> memSearchList(@PathVariable (required=false) String keyword,
 			ReviewSearchVO vo, HttpSession session) {
-		log.debug("들어옴");
-		log.debug("keyword : " + keyword);
 		int memNo = (Integer)session.getAttribute("loginNo");
 		vo.setMemNo(memNo);
 		vo.setKeyword(keyword);
