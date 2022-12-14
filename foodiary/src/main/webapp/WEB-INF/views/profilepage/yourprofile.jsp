@@ -12,7 +12,7 @@
     <script type="text/javascript"></script>   
     <script>
     	$(function(){
-    		console.log(${list});
+    		
     	});
     </script>
 </head>
@@ -34,12 +34,12 @@
                         <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
-                        <li>게시물${followcnt.review}</li>
-                        <li>팔로워${followcnt.follow}</li>
-                        <li>팔로우${followcnt.follower}</li>
+                        <li>게시물</li>
+                        <li>팔로워</li>
+                        <li>팔로우</li>
 
                     </ul> <!-- boardT2 -->
-                    <P>내용 :${list.memIntro}
+                    <P>내용 :
                         
                     </P>
                 </div> <!--boardT-->

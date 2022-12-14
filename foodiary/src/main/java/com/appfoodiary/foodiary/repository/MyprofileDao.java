@@ -6,6 +6,7 @@ import com.appfoodiary.foodiary.entity.MyprofileDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
 import com.appfoodiary.foodiary.vo.ProfileBookmarkVO;
 import com.appfoodiary.foodiary.vo.ProfileLikeVO;
+import com.appfoodiary.foodiary.vo.ProfileMemVO;
 
 public interface MyprofileDao {
 
@@ -19,4 +20,8 @@ public interface MyprofileDao {
 	List<ProfileBookmarkVO> bookmarkList(int memNo);
 	//좋아요
 	List<ProfileLikeVO> likeList(int memNo);
+	//사진갯수 
+	int photocnt(int reviewNo);
+	//전체회원 구문 
+	ProfileMemVO profileMemVO(int memNo);
 }
