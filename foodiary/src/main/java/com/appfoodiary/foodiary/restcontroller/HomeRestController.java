@@ -19,12 +19,12 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @Slf4j
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/rest/home")
 public class HomeRestController {
 	@Autowired
 	private ReviewDao reviewDao;
 	
-	@GetMapping(value = {"/home/review/{interestArea}", "/home/review"})
+	@GetMapping(value = {"/review/{interestArea}", "/review"})
 	public List<ReviewSearchVO> allOrAreaReviewList(@PathVariable (required=false) String interestArea,
 			ReviewSearchVO vo, HttpSession session) {
 		int memNo = (Integer)session.getAttribute("loginNo");
@@ -32,7 +32,7 @@ public class HomeRestController {
 		return reviewDao.homeSearchList(vo);
 	}
 	
-	@GetMapping("/home/review/follow")
+	@GetMapping("/review/follow")
 	public List<ReviewSearchVO> followReviewList(HttpSession session) {
 		int memNo = (Integer)session.getAttribute("loginNo");
 		return reviewDao.homeFollowList(memNo);
