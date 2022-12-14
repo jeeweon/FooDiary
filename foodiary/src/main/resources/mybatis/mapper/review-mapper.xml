@@ -87,7 +87,6 @@
 			where mem_no = #{memNo}
 		) BM on R.review_no = BM.review_no
 		<where>
-			R.mem_no not in(#{memNo})
 			<if test="interestArea != null">
 				and	instr(review_address, #{interestArea}) > 0 
 			</if>
