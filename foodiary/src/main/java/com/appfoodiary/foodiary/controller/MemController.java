@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -157,13 +158,15 @@ public class MemController {
 	
 	@PostMapping("/check_pw")
 	public String checkPw(HttpSession session,
-						@RequestParam String beforePw) {
+						@RequestParam String beforePw,
+						RedirectAttributes attr) {
 		int memNo = (int) session.getAttribute(SessionConstant.NO);
 		MemDto loginDto = memDao.selectOne(memNo);
 		boolean judge = encoder.matches(beforePw, loginDto.getMemPw());
 		
 		if(judge) {
-			return "mem/edit-pw";
+//			attr.addAttribute("memNo",memNo);
+			return "redirect:edit_pw";
 		}
 		else {
 			return "redirect:check_pw?error"; 
@@ -172,7 +175,7 @@ public class MemController {
 
 	@GetMapping("/edit_pw")
 	public String editPw() {
-		return "";
+		return "mem/edit-pw";
 	}
 	@PostMapping("/edit_pw")
 	public String editPw(HttpSession session,
@@ -192,6 +195,24 @@ public class MemController {
 			return "redirect:edit_pw?error";
 		}
 	}
+	
+//	@PostMapping("/edit_pw")
+//	public String editPw(@RequestParam int memNo,
+//							@RequestParam String memPw) {
+//		
+//		MemDto loginDto = memDao.selectOne(memNo);
+//		
+//		loginDto.setMemPw(memPw);
+//		boolean result = memDao.resetPw(loginDto);
+//		
+//		
+//		if(result) {			
+//			return "redirect:login"; //마이 프로필 이동으로 수정하기
+//		}
+//		else {
+//			return "redirect:edit_pw?error";
+//		}
+//	}
 	
 	@GetMapping("/edit_profile")
 	public String editProfile(HttpSession session,
@@ -247,6 +268,24 @@ public class MemController {
 //		}
 //		
 //	}
+	
+	@GetMapping("/leave")
+	public String memLeave() {
+		return "mem/leave";
+	}
+	
+	@PostMapping("/leave")
+	public String memLeave(HttpSession session) {
+		int memNo = (int) session.getAttribute(SessionConstant.NO);
+		MemDto loginDto = memDao.selectOne(memNo);
+			memDao.deleteMem(memNo);
+			return "redirect:goodbye";
+	}
+	
+	@GetMapping("/goodbye")
+	public String goodbye() {
+		return "mem/goodbye";
+	}
 	
 
 }
