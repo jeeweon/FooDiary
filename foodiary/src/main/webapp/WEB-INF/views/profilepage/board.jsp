@@ -63,13 +63,8 @@ li{ list-style: none; }
   opacity: 1;
 }
 </style> 
-<<<<<<< HEAD
-=======
 
-<c:forEach var="reviewDto" items="${list}">
-	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
-</c:forEach> 
->>>>>>> refs/remotes/origin/jeeweon
+
 
 <c:forEach var="reviewDto" items="${list}">
 	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
