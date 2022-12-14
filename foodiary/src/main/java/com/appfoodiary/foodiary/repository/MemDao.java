@@ -41,4 +41,10 @@ public interface MemDao {
 	//프로필 삭제
 	boolean deleteProfile(int memNo);
 	
+	//회원 탈퇴
+	boolean deleteMem(int memNo);
+	
+	//글 쓰기 포인트
+	boolean writePoint(MemDto memDto);
+	
 }

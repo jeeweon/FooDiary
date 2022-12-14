@@ -18,7 +18,7 @@ select TMP.*, rownum rn from(
                 from 
                     mem 
                 where 
-                    10>=(select count(*) from review)
+                    100>=(select count(*) from review)
     minus
          select active_mem_no, sysdate as  mem_join_date 
          from

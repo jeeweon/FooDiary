@@ -115,5 +115,14 @@ public class MemDaoImpl implements MemDao {
 		return sqlSession.delete("mem.deleteProfile",memNo)>0;
 	}
 	
+	@Override
+	public boolean deleteMem(int memNo) {
+		return sqlSession.delete("mem.deleteMem",memNo)>0;
+	}
+	
+	@Override
+	public boolean writePoint(MemDto memDto) {
+		return sqlSession.update("mem.point",memDto)>0;
+	}
 
 }
