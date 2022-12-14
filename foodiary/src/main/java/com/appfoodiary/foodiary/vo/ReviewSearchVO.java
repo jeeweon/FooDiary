@@ -25,4 +25,5 @@ public class ReviewSearchVO {
 	private int imgCnt;
 	private boolean likeCheck; //특정회원이 리뷰에 좋아요했는지 여부
 	private boolean bookmarkCheck; //특정회원이 리뷰를 북마크했는지 여부
+	private String keyword; //검색어
 }
