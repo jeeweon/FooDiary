@@ -28,19 +28,32 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 // 키워드로 장소를 검색합니다
 searchPlaces();	
 //form -> 버튼클릭으로 실행조건 변경해서 추가
+
+var ReadKeyword = $("#keyword").prop("readonly");
+if(ReadKeyword) {	//속성이 readonly가 아닐경우
+	$(".keywordMap").attr("disabled", true);
+}
 $(".keywordMap").click(function(){
 	//console.log("클릭");
-	searchPlaces();
-	return false;
+	
+	var keyword = document.getElementById('keyword').value;
+	if (!keyword.replace(/^\s+|\s+$/g, '')) {
+        alert('키워드를 입력해주세요!');
+        return false;
+    }
+	else {		
+		searchPlaces();
+		return false;
+	}
 });
+
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
     var keyword = document.getElementById('keyword').value;
-    
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
+    //    alert('키워드를 입력해주세요!');
         return false;
     }
 
@@ -127,16 +140,22 @@ function displayPlaces(places) {
                 //클릭한 항목으로 중심위치 변경
                 map.panTo(moveMap);
                 //input에 복사할 주소, 장소를 넣는다
-                $("input[name=reviewAddress]").val(addressCopy);
-                $("input[name=reviewPlace]").val(playCopy);
+               	var ReadKeyword = $("#keyword").prop("readonly");
+                if(!ReadKeyword) {	//속성이 readonly가 아닐경우
+	                $("input[name=reviewAddress]").val(addressCopy);
+	                $("input[name=reviewPlace]").val(playCopy);
+				}
             });
             //검색결과 항목 클릭 이벤트
             itemEl.onclick =  function () {
                 //클릭한 항목으로 중심위치 변경
                 map.panTo(moveMap);
                 //input에 복사할 주소, 장소를 넣는다
-                $("input[name=reviewAddress]").val(addressCopy);
-                $("input[name=reviewPlace]").val(playCopy);
+                var ReadKeyword = $("#keyword").prop("readonly");
+                if(!ReadKeyword) {	//속성이 readonly가 아닐경우
+	                $("input[name=reviewAddress]").val(addressCopy);
+	                $("input[name=reviewPlace]").val(playCopy);
+				}
             };
         })(marker, places[i].place_name);
 

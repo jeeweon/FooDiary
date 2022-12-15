@@ -83,13 +83,13 @@ public class MemberPageController {
 		return "profilepage/myprofileheader";
 	}
 	
-	@GetMapping("/follow")
+	@GetMapping("/my-profile-header")
 	public String follow() {
-		return "profilepage/follow";
+		return "profilepage/my-profile-header";
 	}
-	@GetMapping("/follower")
+	@GetMapping("/board")
 	public String follower() {
-		return "profilepage/follower";
+		return "profilepage/board";
 	}
 	@GetMapping("/yourprofile")
 	public String yourprofile() {

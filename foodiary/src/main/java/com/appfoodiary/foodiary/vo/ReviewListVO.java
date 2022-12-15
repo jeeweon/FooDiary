@@ -6,12 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class ProfileMemVO {
+public class ReviewListVO {
 private int memNo;
-private String memNick;
-private String memIntro;
-private int reviewCnt;
-private int followCnt;
-private int followerCnt;
-private int attachNo;
+private int reviewNo;
+private int likeCnt;
+private int imgCnt;
+private int replyCnt;
 }

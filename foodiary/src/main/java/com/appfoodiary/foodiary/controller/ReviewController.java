@@ -85,7 +85,7 @@ public class ReviewController {
 		reviewDao.write(dto);
 		
 		//리뷰 작성시 포인트 업데이트
-//		levelPointService.ReviewPoint(memNo);
+		levelPointService.ReviewPoint(memNo);
 		
 		//파일 첨부
 		for(MultipartFile file : attachments) {
@@ -108,6 +108,8 @@ public class ReviewController {
 		
 		//첨부파일 조회, 첨부
 		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
+		//appkey 가져와서 model에 저장
+		model.addAttribute("appkey", mapProperties.getAppkey());
 		return "review/detail";
 	}
 	
@@ -115,6 +117,11 @@ public class ReviewController {
 	public String edit(Model model, @RequestParam int reviewNo) {
 		ReviewDto reviewDto = reviewDao.find(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
+		
+		//첨부파일 조회, 첨부
+		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
+		//appkey 가져와서 model에 저장
+		model.addAttribute("appkey", mapProperties.getAppkey());
 		return "review/edit";
 	}
 	@PostMapping("/edit")

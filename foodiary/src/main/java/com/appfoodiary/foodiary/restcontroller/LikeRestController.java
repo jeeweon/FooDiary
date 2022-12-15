@@ -111,12 +111,13 @@ public class LikeRestController {
 	// follow 비동기 통신 
 	@PostMapping("/follow")
 	public boolean follow(
-			@RequestParam int activeMemNo,
-			@RequestParam int passiveMemNo
+			@RequestParam int passiveMemNo,
+			HttpSession session
 			) {
 		//(1)들어온 데이터값을 있는지 없는지 확인
 		//(2)없다면 추가 있다면 삭제
 		//(3)true false 출력 
+		int activeMemNo=(int)session.getAttribute(SessionConstant.NO);
 		FollowDto dto =FollowDto.builder()
 								.activeMemNo(activeMemNo)
 								.passiveMemNo(passiveMemNo)
