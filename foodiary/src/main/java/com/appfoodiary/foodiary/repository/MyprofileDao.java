@@ -27,4 +27,8 @@ public interface MyprofileDao {
 	ProfileMemVO profileMemVO(int memNo);
 	//리뷰리스트 
 	List<ReviewListVO> reivewListVO(int memNo);
+	//북마크리스트
+	List<ReviewListVO> bookmarkListVO(int memNo);
+	//좋아요리스트 
+	List<ReviewListVO> likeListVO(int memNo);
 }

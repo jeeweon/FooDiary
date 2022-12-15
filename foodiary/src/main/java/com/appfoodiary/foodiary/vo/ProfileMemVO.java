@@ -13,4 +13,5 @@ private String memIntro;
 private int reviewCnt;
 private int followCnt;
 private int followerCnt;
+private int attachNo;
 }

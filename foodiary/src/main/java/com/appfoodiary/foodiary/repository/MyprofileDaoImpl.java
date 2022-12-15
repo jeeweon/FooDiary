@@ -50,4 +50,12 @@ public class MyprofileDaoImpl implements MyprofileDao{
 	public List<ReviewListVO> reivewListVO(int memNo) {
 		return sqlSession.selectList("myprofile.reviewlist",memNo);
 	}
+	@Override
+	public List<ReviewListVO> bookmarkListVO(int memNo) {
+		return sqlSession.selectList("myprofile.bookmarklist",memNo);
+	}
+	@Override
+	public List<ReviewListVO> likeListVO(int memNo) {
+		return sqlSession.selectList("myprofile.likelist",memNo);
+	}
 		}
