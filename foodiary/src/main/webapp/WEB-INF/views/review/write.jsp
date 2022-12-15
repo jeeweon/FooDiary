@@ -29,7 +29,7 @@
 
 
 
-<form action="write" method="post" enctype="multipart/form-data">
+<form class="form-submit" action="write" method="post" enctype="multipart/form-data">
 
 	<!-- 첨부파일 -->
 	<div>
@@ -144,6 +144,16 @@
 		//주소 : x버튼 초기화
 		$(".btn-xmark").click(function(){
 			$("input[name=reviewAddress]").val("");
+		});
+		
+		//사진 없으면, 전송불가
+		$(".form-submit").submit(function(e) {
+			var result = true;
+			if ($("input[name=attachments]").val() == "") {
+				alert("사진을 선택해주세요");
+				return result = false;
+			}
+			return result;
 		});
 	});
 </script>
