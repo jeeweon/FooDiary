@@ -220,7 +220,11 @@
 				dataType : "json",
 				success : function(resp) {
 					interestList = resp;
-					interestArea = resp[0].areaCity;
+					if(interestList.length == 0) {
+						interestArea = "서울";
+					} else {
+						interestArea = resp[0].areaCity;						
+					}
 					loadMemSameInterestList(interestArea);
 				}
 			});
