@@ -32,8 +32,8 @@ if($("#map").val() != null) {
 }
 
 var ReadKeyword = $("#keyword").prop("readonly");
-if(ReadKeyword) {	//속성이 readonly가 아닐경우
-	$(".keywordMap").attr("disabled", true);
+if(ReadKeyword) {	//속성이 readonly일 경우
+	$(".keywordMap").prop("disabled", true);
 }
 $(".keywordMap").click(function(){
 	//console.log("클릭");
