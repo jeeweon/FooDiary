@@ -49,6 +49,6 @@ public interface MemDao {
 	List<LevelPointDto> getPoint();
 	
 	//포인트 업데이트
-	boolean updateReviewPoint(MemDto memDto);
+	boolean updatePoint(MemDto memDto);
 	
 }

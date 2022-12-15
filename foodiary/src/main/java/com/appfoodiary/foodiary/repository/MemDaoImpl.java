@@ -131,7 +131,7 @@ public class MemDaoImpl implements MemDao {
 	}
 	
 	@Override
-	public boolean updateReviewPoint(MemDto memDto) {
+	public boolean updatePoint(MemDto memDto) {
 		return sqlSession.update("mem.point",memDto)>0;
 	}
 

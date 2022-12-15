@@ -25,7 +25,7 @@ public class LevelPointServiceImpl implements LevelPointService{
 		int reviewPoint = levelPoint.reviewPoint();
 		int updatePoint = originPoint + reviewPoint;
 		memDto.setMemPoint(updatePoint);
-		memDao.updateReviewPoint(memDto);
+		memDao.updatePoint(memDto);
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class LevelPointServiceImpl implements LevelPointService{
 		int likePoint = levelPoint.likePoint();
 		int updatePoint = originPoint + likePoint;
 		memDto.setMemPoint(updatePoint);
-		memDao.updateReviewPoint(memDto);
+		memDao.updatePoint(memDto);
 		
 	}
 }
