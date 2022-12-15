@@ -67,7 +67,7 @@ li {
 }
 .header3 .home-title{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 30px;
     color: #18253D;
     font-size: 20px;
@@ -262,7 +262,7 @@ li {
 	border-radius: 4px;
 	color: white;
 	bottom:0;
-	right:0;
+	left:340px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
