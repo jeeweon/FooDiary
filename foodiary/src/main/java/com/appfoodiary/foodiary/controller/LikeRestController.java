@@ -1,4 +1,4 @@
-package com.appfoodiary.foodiary.restcontroller;
+package com.appfoodiary.foodiary.controller;
 
 import javax.servlet.http.HttpSession;
 

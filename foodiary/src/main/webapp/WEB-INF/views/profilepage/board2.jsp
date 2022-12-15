@@ -1,11 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    pageEncoding="UTF-8"%>>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<jsp:include page="/WEB-INF/views/profilepage/follow.jsp">
+	<jsp:param value="주문내역페이지" name="title"/>
+</jsp:include> 
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
+<script>
+	$(function(){
+		reviewList();
+		
+		let reviewList1 = [];
+		//내가 작성한 모든 리뷰 
+		function reviewList() {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/rest/profile/reviewlist",
+			method : "get",
+			dataType : "json",
+			success : function(resp) {
+				reviewList1 = resp;
+				console.log(reviewList1);
+			}
+		});
+	};
+});
+</script>
 
 <style>
 * {
@@ -93,8 +111,6 @@ li {
   opacity: 1;
 }
 </style> 
-
-<p>내가 올린 게시물</p>
 <%-- <c:forEach var="bookmarkdto" items="${list}">
 	<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${bookmarkdto.reviewNo}">
 		<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${bookmarkDto.reviewNo}" width="300" height="200">
@@ -129,36 +145,5 @@ li {
                 </div>      
             </div>
         </section> 
-    
 
-<!--                     <ul>
-                        <li>
-                            <div class="feedimg1">
-                                <a href="#">
-                                    <image src="image/피자1.jpg" style="width: 300px; height: 300px;"></image>
-                                </a>
-                            </div>
-                        </li>
-                    </ul> -->
 
-	<%-- <div class="gallery">
-		<c:forEach var="reviewDto" items="${list}">
-            	<ul>
-                	<li>
-                    	<a href="${pageContext.request.contextPath}/review/detail?reviewNo=${reviewDto.reviewNo}">
-                        	<figure>
-                            	<img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/${reviewDto.reviewNo}" width="300" height="200">
-                            		<c:choose>
-                            			<c:when test="${reviewDto.likeCnt>0}">
-                            				<figcaption>🧡${reviewDto.likeCnt}</figcaption>
-                            			</c:when>
-                            		<c:otherwise>
-                            			<figcaption>♡</figcaption>
-                            		</c:otherwise>                    
-                            	</c:choose>
-                        	</figure>
-                    	</a>
-                	</li>
-            	</ul>
-            </c:forEach>
-        </div>  --%>

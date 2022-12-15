@@ -1,5 +1,7 @@
 package com.appfoodiary.foodiary.restcontroller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appfoodiary.foodiary.repository.MyprofileDao;
 import com.appfoodiary.foodiary.vo.ProfileMemVO;
+import com.appfoodiary.foodiary.vo.ReviewListVO;
 
 @CrossOrigin
 @RestController
@@ -25,5 +28,12 @@ public class ProfileRestController {
 	{
 		int memNo = (Integer)session.getAttribute("loginNo");
 		return myprofileDao.profileMemVO(memNo);
+	}
+	@GetMapping("profile/reviewlist")
+	public List<ReviewListVO> reviewList(
+			HttpSession session
+			){
+		int memNo=(Integer)session.getAttribute("loginNo");
+		return myprofileDao.reivewListVO(memNo);
 	}
 }
