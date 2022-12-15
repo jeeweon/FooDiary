@@ -1,10 +1,14 @@
 package com.appfoodiary.foodiary.repository;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.LikeDto;
+import com.appfoodiary.foodiary.entity.LikePointHistoryDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
 
 @Repository
@@ -42,5 +46,17 @@ public class LikeDaoImpl implements LikeDao{
 	public int count2(int reviewNo) {
 		return sqlSession.selectOne("like.count2",reviewNo);
 	}
+	
+	@Override
+	public void addHisotry(Map<String, Integer> param) {
+		sqlSession.insert("like.addtHistory",param);
+	}
+	
+	@Override
+	public LikePointHistoryDto likePointHistory(Map<String, Integer> param) {
+		return sqlSession.selectOne("like.history",param);
+	}
+	
+
 	
 }
