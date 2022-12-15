@@ -178,12 +178,40 @@
 	color: #707070;
 }
 
+.img-div {
+	position: relative;
+	width: 300px;
+}
+
 .thumbnail {
 	width: 300px;
 	height: 300px;
 	cursor: pointer;
 	margin-top: 10px;
 	border-radius: 6px;
+}
+
+.img-more {
+	position: absolute;
+	width: 60px;
+	height:60px;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 4px;
+	color: white;
+	bottom:0;
+	right:0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+}
+
+.img-more-none {
+	display: none;
+}
+
+.more-ic {
+	margin-right: 5px;
 }
 
 .review-action {
@@ -266,6 +294,7 @@
 </div>
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="${pageContext.request.contextPath}/js/commons.js"></script>
 <script>
 	$(function() {
 		loadInterestArea();
@@ -417,16 +446,20 @@
 					var thumbnail = $("<img>").attr("src", "${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 					thumbnail.addClass("thumbnail");
 					
-					var moreIc;
-					var moreCnt;
-					var imgMore;
+					var moreIc = $("<span>").html("<i class='fa-solid fa-plus'></i>");
+					moreIc.addClass("more-ic");
+					var moreCnt = $("<span>").text(value.imgCnt-1);
+					moreCnt.addClass("more-cnt");
+					var imgMore = $("<div>").append(moreIc).append(moreCnt);
 					if(value.imgCnt > 1) {
-						moreIc = $("<span>").html("<i class='fa-solid fa-plus'></i>");
-						moreCnt = $("<span>").text(value.imgCnt-1);
-						imgMore = $("<div>").append(moreIc).append(moreCnt);
 						imgMore.addClass("img-more");
+					} else {
+						imgMore.addClass("img-more-none")
 					}
-				
+					var imgDiv = $("<div>").append(thumbnail).append(imgMore);
+					imgDiv.addClass("img-div");
+					
+					
 					var locationIc;
 					if(value.reviewPlace != null || value.reviewAddress != null) {
 						locationIc = $("<span>").html("<i class='fa-solid fa-location-dot fa-2x'></i>")
@@ -455,7 +488,7 @@
 						content.addClass("content"); //영역 넘치면 첫 줄에서 말줄임표로 자르기(.review-main)
 					}
 					
-					var mainDiv = $("<div>").append(thumbnail).append(imgMore).append(locationDiv).append(content)
+					var mainDiv = $("<div>").append(imgDiv).append(locationDiv).append(content)
 						.attr("data-rno", value.reviewNo);
 					mainDiv.addClass("review-main");
 					
@@ -519,19 +552,30 @@
 		//좋아요 버튼 클릭 이벤트
 		$(document).on("click", ".like-ic", function() {
 			var clickedHeart = $(this);
+			var no = $(this).data("rno");
 			$.ajax({
-				url : "${pageContext.request.contextPath}/rest/review/like",
+				url : "${pageContext.request.contextPath}/rest/review/like2",
                 method : "post",
 			    data : {
-	        	   reviewNo:$(this).data("rno")
+	        	   reviewNo:no
 	           	},
                 success : function(resp) {
-                	if(clickedHeart.find("i").hasClass("fa-solid")) {
+                	if(resp == 0) {
                 		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
                 	} else {
                 		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
                 	}
-                	clickedHeart.next().text("도움됐어요"+ " " +resp);    
+                	
+                	$.ajax({
+                		url : "${pageContext.request.contextPath}/rest/review/count",
+    	                method : "post",
+    				    data : {
+    		        	   reviewNo:no
+    		           	},
+    	                success : function(resp) {
+		                	clickedHeart.next().text("도움됐어요"+ " " +resp);    	    	                	
+    	                }
+                	});
                 }
 			});
 		});
