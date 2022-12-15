@@ -11,6 +11,7 @@ import com.appfoodiary.foodiary.entity.ReviewDto;
 import com.appfoodiary.foodiary.vo.ProfileBookmarkVO;
 import com.appfoodiary.foodiary.vo.ProfileLikeVO;
 import com.appfoodiary.foodiary.vo.ProfileMemVO;
+import com.appfoodiary.foodiary.vo.ReviewListVO;
 
 @Repository
 public class MyprofileDaoImpl implements MyprofileDao{
@@ -45,4 +46,8 @@ public class MyprofileDaoImpl implements MyprofileDao{
 	public ProfileMemVO profileMemVO(int memNo) {
 		return sqlSession.selectOne("myprofile.memprofile",memNo);
 	}
-}
+	@Override
+	public List<ReviewListVO> reivewListVO(int memNo) {
+		return sqlSession.selectList("myprofile.reviewlist",memNo);
+	}
+		}
