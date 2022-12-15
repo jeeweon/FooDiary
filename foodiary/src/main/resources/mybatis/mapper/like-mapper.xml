@@ -59,4 +59,16 @@
 		 where 
 		 	review_no=#{reviewNo}
 	</select>
+	
+	<select id="history" resultType="LikePointHistoryDto" parameterType="map">
+		select * from like_point_history where mem_no=#{memNo} and review_no=#{reviewNo}
+	</select>
+	
+	<insert id="addtHistory" parameterType="map">
+		insert into like_point_history 
+			(mem_no, review_no) 
+		values (#{memNo}, #{reviewNo}) 
+	</insert>
+	
+	
 </mapper>

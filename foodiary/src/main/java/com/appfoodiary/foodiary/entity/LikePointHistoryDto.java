@@ -5,9 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @Builder @NoArgsConstructor @AllArgsConstructor
-public class LevelPointDto {
-	
-	private int reviewPoint, likePoint;
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
+public class LikePointHistoryDto {
 
+	private int memNo, reviewNo;
 }
