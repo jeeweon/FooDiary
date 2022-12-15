@@ -3,6 +3,7 @@ package com.appfoodiary.foodiary.repository;
 import java.util.List;
 
 import com.appfoodiary.foodiary.entity.AttachDto;
+import com.appfoodiary.foodiary.entity.LevelPointDto;
 import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.entity.ProfileAttachDto;
 
@@ -44,7 +45,10 @@ public interface MemDao {
 	//회원 탈퇴
 	boolean deleteMem(int memNo);
 	
-	//글 쓰기 포인트
-	boolean writePoint(MemDto memDto);
+	//레벨포인트 get을 위한 조회
+	List<LevelPointDto> getPoint();
+	
+	//포인트 업데이트
+	boolean updatePoint(MemDto memDto);
 	
 }

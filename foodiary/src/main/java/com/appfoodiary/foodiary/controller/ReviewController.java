@@ -26,6 +26,7 @@ import com.appfoodiary.foodiary.entity.ReviewDto;
 import com.appfoodiary.foodiary.repository.LikeDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.service.AttachmentService;
+import com.appfoodiary.foodiary.service.LevelPointService;
 
 //@CrossOrigin(origins = "http://127.0.0.1:5500/")
 @Controller
@@ -47,6 +48,8 @@ public class ReviewController {
 	private LikeDao likeDao;
 	@Autowired
 	private MapProperties mapProperties;
+	@Autowired
+	private LevelPointService levelPointService;
 	
 	@GetMapping("/list")
 	public String list(@ModelAttribute ReviewDto dto,
@@ -80,6 +83,9 @@ public class ReviewController {
 
 		//write
 		reviewDao.write(dto);
+		
+		//리뷰 작성시 포인트 업데이트
+//		levelPointService.ReviewPoint(memNo);
 		
 		//파일 첨부
 		for(MultipartFile file : attachments) {
