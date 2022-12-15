@@ -11,7 +11,7 @@
 		<h1>비밀번호 찾기</h1>
 	</div>
 	
-	<form action="email_check" method="post">
+	<form action="email_check" method="post" autocomplete="off">
 		
 		<div>
 			<input name="memEmail" placeholder="이메일">

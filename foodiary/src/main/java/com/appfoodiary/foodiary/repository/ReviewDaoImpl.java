@@ -78,4 +78,16 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<ReviewSearchVO> homeFollowList(int memNo) {
 		return sqlSession.selectList("review.home-follow", memNo);
 	}
+	
+	//맛집 탐색 > 리뷰/검색 결과 조회(비회원)
+	@Override
+	public List<ReviewSearchVO> guestSearchList(String keyword) {
+		return sqlSession.selectList("review.search-guest", keyword);
+	}
+	
+	//맛집 탐색 > 리뷰/검색 결과 조회(회원)
+	@Override
+	public List<ReviewSearchVO> memSearchList(ReviewSearchVO vo) {
+		return sqlSession.selectList("review.search-mem", vo);
+	}
 }
