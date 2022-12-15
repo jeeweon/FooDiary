@@ -5,6 +5,7 @@ import java.util.List;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.entity.ProfileAttachDto;
+import com.appfoodiary.foodiary.vo.MemSearchVO;
 
 public interface MemDao {
 	
@@ -47,4 +48,15 @@ public interface MemDao {
 	//글 쓰기 포인트
 	boolean writePoint(MemDto memDto);
 	
+	//맛쟁이 탐색 > 검색 결과 조회
+	List<MemSearchVO> memSearchList(MemSearchVO vo);
+	
+	//맛쟁이 탐색 > 활동 점수 top10 조회
+	List<MemSearchVO> memPointTopList();
+	
+	//맛쟁이 탐색 > 관심지역 같은 유저 조회(비회원)
+	List<MemSearchVO> guestSameInterestList();
+	
+	//맛쟁이 탐색 > 관심지역 같은 유저 조회(회원)
+	List<MemSearchVO> memSameInterestList(MemSearchVO vo);
 }

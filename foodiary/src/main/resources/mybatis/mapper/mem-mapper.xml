@@ -76,5 +76,96 @@
 		delete from profile_attach where mem_no =#{memNo}
 	</delete>
 	
+	<!--
+		회원 검색(맛쟁이 검색 메뉴)
+		- 활동점수(mem), 관심지역(interest_area), 프로필 이미지(profile_attach) 조인
+	-->
+	<!-- 특정 회원 조회(닉네임 유사 검색) -->
+	<select id="nick-search" parameterType="MemSearchVO" resultType="MemSearchVO">
+		select 
+			M.*, 
+			P.attach_no,
+			coalesce(B.cnt, 0) mem_review_cnt
+			<if test="memNo != 0">
+				, decode(F.follow_no, null, 'false', 'true') follow_check
+			</if> 
+			from mem M
+		left outer join profile_attach P on M.mem_no = P.mem_no
+		left outer join( <!-- 작성한 리뷰 개수 조회 -->
+			select mem_no, count(mem_no) cnt
+			from review
+			group by mem_no
+		)B on M.mem_no = B.mem_no
+		<if test="memNo != 0"> <!-- 회원이면 팔로우 여부 조회 -->
+			left outer join (
+				select * 
+				from follow
+				where active_mem_no = #{memNo}) F
+			on M.mem_no = F.passive_mem_no
+		</if>
+		where instr(mem_nick, #{keyword}) > 0
+		<if test="memNo != 0"> <!-- 회원이면 검색결과에서 자기자신 제외 -->
+			and M.mem_no not in(#{memNo})
+		</if>
+	</select>
 	
+	<!-- 활동점수 높은 순 top10 회원 조회 -->
+	<select id="point-top" resultType="MemSearchVO">
+		select * from(
+			select TMP.*, rownum rn from(
+				select M.*, P.attach_no from mem M 
+				left outer join profile_attach P on M.mem_no = P.mem_no
+				order by m.mem_point desc, m.mem_login_date desc
+			)TMP
+		) 
+		<![CDATA[
+			where rn <= 5
+		]]>	
+	</select>
+	
+	<!-- 특정 지역을 관심지역으로 설정한 회원 조회(비회원) -->
+	<select id="guest-same-interest" resultType="MemSearchVO">
+		select * from (
+			select TMP.*, rownum rn from (
+				select distinct 
+					M.*, 
+					P.attach_no 
+				from interest_areas I 
+				inner join areas A on I.area_no = A.area_no 
+				left outer join mem M on M.mem_no = I.mem_no
+				left outer join profile_attach P on M.mem_no = P.mem_no
+				where A.area_city = '서울' 
+				order by mem_login_date desc
+			)TMP
+		)
+		<![CDATA[
+			where rn <= 5
+		]]>	
+	</select>
+	
+	<!-- 특정 지역을 관심지역으로 설정한 회원 조회(회원) -->
+	<select id="mem-same-interest" parameterType="MemSearchVO" resultType="MemSearchVO">
+		select * from (
+			select TMP.*, rownum rn from (
+				select distinct 
+					M.*, 
+					P.attach_no, 
+					decode(F.follow_no, null, 'false', 'true') follow_check 
+				from interest_areas I 
+				inner join areas A on I.area_no = A.area_no 
+				left outer join mem M on M.mem_no = I.mem_no
+				left outer join profile_attach P on M.mem_no = P.mem_no
+				left outer join (
+					select * 
+					from follow
+					where active_mem_no = #{memNo}) F
+				on M.mem_no = F.passive_mem_no
+				where A.area_city = #{keyword} and M.mem_no not in(#{memNo})
+				order by mem_login_date desc
+			)TMP
+		)
+		<![CDATA[
+			where rn <= 5
+		]]>	
+	</select>
 </mapper>
