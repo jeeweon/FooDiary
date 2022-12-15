@@ -22,6 +22,14 @@
 					$(".follower-cnt").text("팔로우 : "+profileList.followerCnt);
 					$(".mem-no").text(profileList.memNo);
 					$(".mem-info").text(profileList.memIntro);
+					
+					//사진이 있는지 없는지 확인
+					if(profileList.attachNo != null){
+						$("[name=origin]").attr("src","${pageContext.request.contextPath}/attach/download/"+profileList.attachNo);
+					}else{
+						$("[name=origin]").attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
+					}
+			
 				}
 			});
 		};
@@ -34,7 +42,7 @@
                 <div class="boardM">
                     <%-- <img src="${pageContext.request.contextPath}/images/프로필임시.png"> --%>
                     <%-- <img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/"> --%>
-                     <img src="​">  
+                <img name="origin" class="preview preview-hover"> 
                     
                 </div><!--boardM-->
                 <div class="boardT">
@@ -59,7 +67,7 @@
                 <div class="boardA">
                     <ul>
                         <li>
-                            <a href="board2">게시물</a>
+                            <a href="board">게시물</a>
                             <a href="bookmark">북마크</a>
                             <a href="like">좋아요</a>
                         </li>
