@@ -110,6 +110,7 @@
 	flex-direction: row;
     align-items: center;
     margin: 10px 0;
+    cursor: pointer;
 }
 
 .info-text {
@@ -133,6 +134,8 @@
 .writer-avatar {
 	width: 50px;
 	height: 50px;
+	border-radius : 50%;
+  	border:1px black solid transparent;
 }
 
 .writer-nick {
@@ -368,7 +371,6 @@
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
-					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -396,7 +398,6 @@
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
-					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -411,7 +412,6 @@
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
-					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -421,8 +421,12 @@
 		function renderList(){
 			if(reviewList.length != 0) {
 				$.each(reviewList, function(index, value) {
-					//프로필 이미지 다운로드 기능 구현 후, 주소 변경 예정(프사 있으면 다운로드, 없으면 기본 이미지)
-					var writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
+					var writerAvatar;
+					if(value.attachNo == 0) {
+						writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");						
+					} else {
+						writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/attach/download/"+value.attachNo);
+					}
 					writerAvatar.addClass("writer-avatar");
 					
 					var writerNick = $("<span>").text(value.memNick);
@@ -607,7 +611,7 @@
 		
 		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
 		$(document).on("click", ".review-write-info", function(){
-			//회원번호 붙여서 프로필로 이동
+			window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
 		});
 	});
 </script>
