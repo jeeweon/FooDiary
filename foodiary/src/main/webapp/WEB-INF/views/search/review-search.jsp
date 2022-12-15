@@ -447,6 +447,7 @@ li {
 	flex-direction: row;
     align-items: center;
     margin: 10px 0;
+    cursor: pointer;
 }
 
 .info-text {
@@ -470,6 +471,8 @@ li {
 .writer-avatar {
 	width: 50px;
 	height: 50px;
+	border-radius : 50%;
+  	border:1px black solid transparent;
 }
 
 .writer-nick {
@@ -903,25 +906,24 @@ resetNum = 0;
 }
 
 	$(function() {
-		 var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
-		 console.log("memNo : " + memNo);
-         if(memNo == "null"){
-        	 loadReviewForGuest();
-         } else {
-        	 loadReviewForMem();
-         }
+		//세션에서 회원 번호 가져오기
+		var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
+        if(memNo == "null"){
+        	loadReviewForGuest();
+        } else {
+        	loadReviewForMem();
+        }
 
 		let reviewList = [];
 		//이번주 인기 리뷰 목록 조회(비회원)
 		function loadReviewForGuest() {
 			$(".review-list").empty();
 			$.ajax({
-				url : "${pageContext.request.contextPath}/rest/search/guest/review",
+				url : "${pageContext.request.contextPath}/rest/search/review/guest",
 				method : "get",
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
-					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -936,7 +938,6 @@ resetNum = 0;
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
-					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -951,14 +952,13 @@ resetNum = 0;
 			$(".review-list").empty();
 			if(memNo == "null") { //비회원				
 				$.ajax({
-					url : "${pageContext.request.contextPath}/rest/search/guest/review/"+ keyword,
+					url : "${pageContext.request.contextPath}/rest/search/review/guest/"+ keyword,
 					method : "get",
 					dataType : "json",
 					contentType:"application/json",
 				    data:JSON.stringify(keyword),
 					success : function(resp) {
 						reviewList = resp;
-						console.log(reviewList);
 						renderList();
 					}
 				});
@@ -971,7 +971,6 @@ resetNum = 0;
 				    data:JSON.stringify(keyword),
 					success : function(resp) {
 						reviewList = resp;
-						console.log(reviewList);
 						renderList();
 					}
 				});
@@ -982,8 +981,12 @@ resetNum = 0;
 		function renderList(){
 			if(reviewList.length != 0) {
 				$.each(reviewList, function(index, value) {
-					//프로필 이미지 다운로드 기능 구현 후, 주소 변경 예정(프사 있으면 다운로드, 없으면 기본 이미지)
-					var writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
+					var writerAvatar;
+					if(value.attachNo == 0) {
+						writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");						
+					} else {
+						writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/attach/download/"+value.attachNo);
+					}
 					writerAvatar.addClass("writer-avatar");
 					
 					var writerNick = $("<span>").text(value.memNick);
@@ -1176,7 +1179,7 @@ resetNum = 0;
 		
 		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
 		$(document).on("click", ".review-write-info", function(){
-			//회원번호 붙여서 프로필로 이동
+			window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
 		});
 	});
 </script>

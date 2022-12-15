@@ -31,7 +31,7 @@ public class AreaRestController {
 	@Autowired
 	private AreaDao areaDao;
 	
-	@GetMapping("/area")
+	@GetMapping("")
 	public List<AreaDto> list(){
 		return areaDao.selectList();
 	}

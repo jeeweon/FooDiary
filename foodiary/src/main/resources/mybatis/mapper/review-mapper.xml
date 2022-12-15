@@ -60,12 +60,14 @@
 		select 
 			R.*,
 			M.mem_nick,
+			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt,
 			decode(L.review_no, null, 'false', 'true') like_check,
 			decode(BM.review_no, null, 'false', 'true') bookmark_check
 		from review R
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on R.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
@@ -99,6 +101,7 @@
 		select 
 			R.*, 
 			M.mem_nick,
+			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt, 
 			decode(L.review_no, null, 'false', 'true') like_check,
@@ -106,6 +109,7 @@
 		from review R
 		left outer join follow F on R.mem_no = F.passive_mem_no 
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on R.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
@@ -134,10 +138,12 @@
 		select 
 			R.*,
 			M.mem_nick,
+			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt
 		from review R
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on R.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
@@ -168,12 +174,14 @@
 		select 
 			R.*,
 			M.mem_nick,
+			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt,
 			decode(L.review_no, null, 'false', 'true') like_check,
 			decode(BM.review_no, null, 'false', 'true') bookmark_check
 		from review R
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on R.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
