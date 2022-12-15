@@ -26,6 +26,7 @@ import com.appfoodiary.foodiary.entity.ReviewDto;
 import com.appfoodiary.foodiary.repository.LikeDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.service.AttachmentService;
+import com.appfoodiary.foodiary.service.LevelPointService;
 
 //@CrossOrigin(origins = "http://127.0.0.1:5500/")
 @Controller
@@ -47,6 +48,8 @@ public class ReviewController {
 	private LikeDao likeDao;
 	@Autowired
 	private MapProperties mapProperties;
+	@Autowired
+	private LevelPointService levelPointService;
 	
 	@GetMapping("/list")
 	public String list(@ModelAttribute ReviewDto dto,
@@ -81,6 +84,9 @@ public class ReviewController {
 		//write
 		reviewDao.write(dto);
 		
+		//리뷰 작성시 포인트 업데이트
+		levelPointService.ReviewPoint(memNo);
+		
 		//파일 첨부
 		for(MultipartFile file : attachments) {
 			int attachNo = attachmentService.attachmentsUp(attachments, file);	//attach 추가
@@ -102,6 +108,8 @@ public class ReviewController {
 		
 		//첨부파일 조회, 첨부
 		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
+		//appkey 가져와서 model에 저장
+		model.addAttribute("appkey", mapProperties.getAppkey());
 		return "review/detail";
 	}
 	
@@ -109,6 +117,11 @@ public class ReviewController {
 	public String edit(Model model, @RequestParam int reviewNo) {
 		ReviewDto reviewDto = reviewDao.find(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
+		
+		//첨부파일 조회, 첨부
+		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
+		//appkey 가져와서 model에 저장
+		model.addAttribute("appkey", mapProperties.getAppkey());
 		return "review/edit";
 	}
 	@PostMapping("/edit")

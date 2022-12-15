@@ -3,264 +3,15 @@
 <head>
 <title>홈</title>
 
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/home.css"> <!--css 불러오는 링크--> 
+ 
+ <style>
+ 	.receipt{
+ 		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
+ 	}
+ </style>
 
-<style>
-.container {
-	width: 600px;
-	margin: 0 auto;
-}
-
-.set-area-banner.hide {
-	display: none;
-}
-
-.set-area-banner {
-	width: 100%;
-	border: 1px solid #18253D;
-	border-radius: 6px;
-	color: #18253D;
-	position: relative;
-	margin-top: 30px;
-	cursor: pointer;
-}
-
-.banner-title {
-	display: block;
-}
-
-.exp1 {
-	font-size: 14px;
-	margin: 10px;
-}
-
-.exp2 {
-	font-size: 16px;
-	font-weight: bold;
-	margin: 10px;
-}
-
-.ic-go {
-	position: absolute;
-	padding: 0.5em;
-	top: 10%;
-	right: 0;
-}
-
-.home-title {
-	margin-top: 30px;
-	color: #18253D;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.title-nickname {
-	color: #E27C5E;
-}
-
-.filter-btn {
-	position: relative;
-	top: 20px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: center;
-}
-
-.label {
-	border: none;
-	width: auto;
-	height: 30px;
-	font-weight: bold;
-	border-radius: 4px;
-	font-size: 16px;
-	padding: 0.5em 1em;
-	margin: 10px;
-	margin-left: 0;
-	background-color: #FBE9DD;
-	color: #E27C5E;
-	text-align: center;
-	display: inline-block;
-	line-height: 30px;
-	vertical-align: middle;
-	cursor: pointer;
-}
-
-.label-selected {
-	background-color: #E27C5E;
-	color: white;
-}
-
-.review-list {
-	width: 600px;
-}
-.no-review {
-	margin-top: 100px;
-	text-align: center;
-	color: gray;
-}
-
-.list-item {
-	margin-top: 40px;
-}
-
-.review-write-info {
-	display: flex;
-	flex-direction: row;
-    align-items: center;
-    margin: 10px 0;
-    cursor: pointer;
-}
-
-.info-text {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-    align-items: flex-start;
-    margin-left: 10px;
-}
-
-.sub-info-text {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-itmes: center;
-	font-size: 14px;
-	color: #707070;
-	margin-top: 3px;
-}
-
-.writer-avatar {
-	width: 50px;
-	height: 50px;
-	border-radius : 50%;
-  	border:1px black solid transparent;
-}
-
-.writer-nick {
-	font-weight: bold;
-}
-
-.write-time {
-	margin-left: 10px;
-}
-
-.place {
-	font-weight: bold;
-	font-size: 18px;
-}
-
-.address {
-	color: #707070;
-	margin-top: 3px;
-}
-
-.loca-div {
-	display: flex;
-	flex-direction: row;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.loca-info {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-    align-items: flex-start;
-    margin-left: 10px;
-    padding: 5px;
-}
-
-.place {
-	font-weight: bold;
-	font-size: 18px;
-}
-
-.address {
-	color: #707070;
-}
-
-.img-div {
-	position: relative;
-	width: 300px;
-}
-
-.thumbnail {
-	width: 300px;
-	height: 300px;
-	cursor: pointer;
-	margin-top: 10px;
-	border-radius: 6px;
-}
-
-.img-more {
-	position: absolute;
-	width: 60px;
-	height:60px;
-	background-color: rgba(0,0,0,0.5);
-	border-radius: 4px;
-	color: white;
-	bottom:0;
-	right:0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 20px;
-}
-
-.img-more-none {
-	display: none;
-}
-
-.more-ic {
-	margin-right: 5px;
-}
-
-.review-action {
-	display: flex;
-	flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    color: #707070;
-    margin-top: 20px;
-}
-
-.score-ic {
-	color: #FFC107;
-	margin-right: 5px;
-}
-
-.like-ic {
-	cursor: pointer;
-	margin-right: 5px;
-}
-
-.like-ic > .fa-solid {
-	color: #E27C5E;
-}
-
-.reply-ic {
-	margin-right: 5px;
-}
-
-.bookmark-ic {
-	margin-left: 350px;
-	cursor: pointer;
-}
-
-.content p {
-	display: inline;
-}
-
-.review-main {
-	width: 600px;
-	white-space: nowrap;
-	overflow: hidden;
-	word-break: break-all;
-	text-overflow: ellipsis;  /* 말줄임 적용 */
-}
-</style>
 </head>
 <body>
 <!-- 임시 로그인 메뉴 -->
@@ -274,31 +25,193 @@
 	</c:otherwise>
 </c:choose>
 
-<div class="container">
-	<div class="home-title">
-		<span class="title-nickname">${loginNick}</span><span>님을 위한 리뷰 피드</span>
-	</div>
+ <div class="wrapper">
+    <div class="inner">
+        <header class="header">
+            <div class="header1">
+                <h1><a href="/home" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+                <div class="sidemenu">
+                <ul id="sideP">
+                    <li>
+                        <img src="${pageContext.request.contextPath}/images/프로필임시.png">
+                        닉네임 최대 열다섯 글자
+                    </li>
+                </ul>
+                <ul>
+                    <li><a href="#">홈</a></li>
+                    <li><a href="#">맛집 탐색</a></li>
+                    <li><a href="#">맛쟁이 탐색</a></li>
+                    <li><a href="#">알림</a></li>
+                    <li><a href="#">북마크</a></li>
+                </ul>
+                </div> <!--sidemenu-->
+                <a href="#" class="review">리뷰하기</a>
+                <div class="btnW">
+                    <a href="mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
+                    <span><a href="#" class="morebtn">더보기버튼</a></span>
+                </div>
+            </div> <!--header1-->              
+            <div class="header3">
+                <div class="home-title">
+                    <ul class="title-nickname">
+                        <li>
+                            ${loginNick} 님을 위한 리뷰 피드
+                        </li>
+                    </ul> <!--title-nickname-->
+                </div> <!--home-title-->
+            
+                <!-- 관심지역 설정 유도 배너 -->
+                <div class="set-area-banner hide">
+                </div>
+            
+                <!-- 리뷰 필터 버튼 -->
+                <div class="filter-btn">
+                    <ul>
+                        <li class="label label-all">전체</li>
+                        <li class="label label-follow">팔로우</li>
+                    </ul>
+                    <!-- 관심지역이 있으면 지역 버튼 노출 -->
+                </div> <!--filter-btn-->         
+            </div> <!--header3-->
+        </header> <!--header-->
+     	<div class="sideW">
+     		<div class="feed">
+       		<!-- 리뷰 목록 -->
+          	<div class="review-list"></div>                         
+     		</div> <!-- feed -->
+     	</div> <!-- sideW -->      		
+        <div class="sidebar">
+            <div class="random">
+            <div class="container">
+                <div class="receipt">
+                  <div class="title_text">
+                    <h1>Today~</h1>
+                    <h3>뭐 먹지?</h3>
+                  </div>
+                  <div class="menu_print">
+                    <h2></h2>
+                  </div>
+                  <div class="menu_slot">
+                    <div class="slot_container">
+                      <ul class="slide_box">
+                        <li>카레</li>
+                        <li>우동</li>
+                        <li>햄버거</li>
+                        <li>냉면</li>
+                        <li>삼겹살</li>
+                        <li>쌈밥</li>
+                        <li>감자탕</li>
+                        <li>칼국수</li>
+                        <li>짜장면</li>
+                        <li>국밥</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="btn_area">
+                    <button onclick="lunchIs()">멈 춰 !</button>
+                    <button onclick="reset()">한번 더</button>
+                  </div>
+                </div>          
+            </div>
+                 <div class="follow">
+                    <h3>먹는거 좋아하는 사람</h3>
+                     <ul>
+                         <li><a href="">먹보1</a></li>
+                         <li><a href="">먹보2</a></li>
+                         <li><a href="">먹보3</a></li>
+                     </ul>
+                     <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p>
+                 </div> <!--follow-->
+             </div> <!--random-->
+         </div> <!--sidebar-->
+    </div><!--//inner-->
+</div> <!--wrapper--> 
 
-	<!-- 관심지역 설정 유도 배너 -->
-	<div class="set-area-banner hide">
-	</div>
 
-	<!-- 리뷰 필터 버튼 -->
-	<div class="filter-btn">
-        <span class="label label-all">전체</span>
-        <span class="label label-follow">팔로우</span>
-        <!-- 관심지역이 있으면 지역 버튼 노출 -->
-    </div>
-    
-    <!-- 리뷰 목록 -->
-    <div class="review-list">
-    </div>
-    
-</div>
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
 <script>
+
+//런치리스트 배열생성
+let lunchList = ["카레", "우동", "햄버거", "냉면", "삼겹살","쌈밥","감자탕","칼국수","짜장면","국밥"]
+
+//배열복사
+let firstLunchList = [];
+
+lunchList.forEach(function(item) {
+  firstLunchList.push(item);
+});
+
+
+//제어할 요소선택 후 변수에 담기
+let displaySlot = document.querySelector(".menu_slot"); //menu slot
+let elem = document.querySelector(".menu_print > h2"); //menu print
+let costTxt = document.querySelector("em"); //cost
+
+
+//reset check
+let resetNum = 1;
+
+//LunchIs 함수선언
+function lunchIs() {
+  //setTimeout 선언
+  setTimeout(timeFunc, 900);
+
+  function timeFunc() {
+    //shuffle 메소드 선언
+    function shuffle(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    //슬롯애니메이션 감추기
+    displaySlot.style.display = "none";
+
+    //shuffle 메소드를 사용하여 석은 배열에서 index[0]을 가져오기
+    console.log(shuffle(lunchList));
+    let lunckPick = shuffle(lunchList)[0];
+
+    //메뉴 노출
+    console.log(lunckPick);
+    elem.innerHTML = lunckPick;
+
+
+    //reset 되었을 경우에 숨겨진 메뉴를 다시 노출시킴
+    if (resetNum == 0) {
+      elem.style.display = "block";
+    }
+  }
+}
+
+//reset 함수선언
+function reset() {
+  //메뉴 숨기기
+  elem.style.display = "none";
+
+  //슬롯애니메이션 노출
+  displaySlot.style.display = "block";
+
+  //resetNum으로 reset여부를 구분하기 위해 0 할당
+  resetNum = 0;
+}
+
+    // 드롭다운 시작
+    function btndrop(){
+        let click = document.getElementById("dropsub");
+        if(click.style.display == "none"){
+            click.style.display = "block";
+        }
+        else{
+            click.style.display = "none";
+        }
+    }
+    // 끝
+
+
 	$(function() {
 		loadInterestArea();
 		loadReviewAll();

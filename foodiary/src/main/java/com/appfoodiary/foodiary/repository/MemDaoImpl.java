@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.appfoodiary.foodiary.component.LevelPoint;
 import com.appfoodiary.foodiary.entity.AttachDto;
+import com.appfoodiary.foodiary.entity.LevelPointDto;
 import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.entity.ProfileAttachDto;
 import com.appfoodiary.foodiary.vo.MemSearchVO;
@@ -20,6 +22,9 @@ public class MemDaoImpl implements MemDao {
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@Autowired
+//	private LevelPoint levelPoint;
 	
 	@Override
 	public int sequence() {
@@ -122,7 +127,12 @@ public class MemDaoImpl implements MemDao {
 	}
 	
 	@Override
-	public boolean writePoint(MemDto memDto) {
+	public List<LevelPointDto> getPoint() {
+		return sqlSession.selectList("mem.findPoint");
+	}
+	
+	@Override
+	public boolean updatePoint(MemDto memDto) {
 		return sqlSession.update("mem.point",memDto)>0;
 	}
 	

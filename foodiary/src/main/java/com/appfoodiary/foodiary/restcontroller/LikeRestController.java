@@ -1,5 +1,8 @@
 package com.appfoodiary.foodiary.restcontroller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +16,13 @@ import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.BookmarkDto;
 import com.appfoodiary.foodiary.entity.FollowDto;
 import com.appfoodiary.foodiary.entity.LikeDto;
+import com.appfoodiary.foodiary.entity.LikePointHistoryDto;
+import com.appfoodiary.foodiary.entity.ReviewDto;
 import com.appfoodiary.foodiary.repository.BookmarkDao;
 import com.appfoodiary.foodiary.repository.FollowDao;
 import com.appfoodiary.foodiary.repository.LikeDao;
+import com.appfoodiary.foodiary.repository.ReviewDao;
+import com.appfoodiary.foodiary.service.LevelPointService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +37,10 @@ public class LikeRestController {
 	private BookmarkDao bookmarkDao;
 	@Autowired
 	private FollowDao followDao;
+	@Autowired
+	private LevelPointService levelPointService;
+	@Autowired
+	private ReviewDao reviewDao;
 	
 	
 	//좋아요 비동기 통신처리 백인드 
@@ -100,12 +111,13 @@ public class LikeRestController {
 	// follow 비동기 통신 
 	@PostMapping("/follow")
 	public boolean follow(
-			@RequestParam int activeMemNo,
-			@RequestParam int passiveMemNo
+			@RequestParam int passiveMemNo,
+			HttpSession session
 			) {
 		//(1)들어온 데이터값을 있는지 없는지 확인
 		//(2)없다면 추가 있다면 삭제
 		//(3)true false 출력 
+		int activeMemNo=(int)session.getAttribute(SessionConstant.NO);
 		FollowDto dto =FollowDto.builder()
 								.activeMemNo(activeMemNo)
 								.passiveMemNo(passiveMemNo)
@@ -145,6 +157,25 @@ public class LikeRestController {
 			likeDao.insert(dto);
 			//추가
 			likeDao.plus(reviewNo);
+			
+			//좋아요 점수 내역 추가(내역에 없으면 내역 추가 후 점수 추가)
+			Map<String,Integer> param = new HashMap<>();
+			param.put("memNo", memNo);
+			param.put("reviewNo", reviewNo);
+			
+			//점수 내역 조회
+			LikePointHistoryDto likePointHistoryDto = likeDao.likePointHistory(param);
+			ReviewDto writeDto = reviewDao.find(reviewNo);
+			int writerNo = writeDto.getMemNo();
+			
+			//내역이 없으면 추가, 점수 추가
+			if(likePointHistoryDto==null) {
+				param.put("memNo", memNo);
+				param.put("reviewNo", reviewNo);
+				likeDao.addHisotry(param);
+				levelPointService.LikePoint(writerNo);
+			}
+			
 			return 1;
 		}
 	}
