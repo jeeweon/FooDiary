@@ -7,9 +7,382 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
 <style>
-.container {
-	width: 600px;
-	margin: 0 auto;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+li {
+    list-style: none;
+}
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+.sideW {
+    display: flex;
+    gap: 50px;
+    flex: 1;
+    justify-content: space-between;
+}
+.wrapper > div.inner{
+    display: flex; 
+    gap: 50px;
+    justify-content: space-between;
+}
+.header{
+    flex-shrink: 0;
+    width: 300px;
+    height: 800px;
+}
+.header1{
+    position: fixed;
+    top: 50px;
+    width: 300px;
+    height: 800px;
+    box-sizing: border-box;
+}
+.header1 h1 {
+    margin-bottom: 30px;
+}
+.logo{
+    position: relative;
+}
+.logo img {
+    width: 160px;
+}
+.header2 > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header2{
+    position: relative;
+    left: 380px;
+    top: 160px;
+    background-color:#ffffff; 
+}
+.formdiv{
+	position: fixed;
+	z-index: 999;
+	
+}
+.sidemenu {
+    padding-left: 15px;
+    box-sizing: border-box;
+    margin-bottom: 150px;
+}
+
+.sidemenu #sideP{
+    position: relative;
+    bottom: 40px;
+}
+#sideP img{
+    position: relative;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+#sideP li{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.sidemenu ul > li > a {
+    font-size: 20px;
+    color: #000;
+    font-weight: bold;
+}
+.sidemenu ul > li + li{
+    margin-top: 15px;
+}
+.review {
+    display: block;
+    margin-left: 15px;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    background: #e27c5e;
+    border-radius: 30px;
+}
+.logout {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 50px;
+    left: 15px;
+}
+#logoutimg{
+    width: 30px;
+    position: relative;
+}
+
+.sidebar{
+    width: 300px;
+}
+.sidebar .random{
+    position: fixed;
+    top: 50px;
+    width: 300px;
+    height: 800px;
+    box-sizing: border-box;
+}
+/* 슬롯머신 */
+
+.slot_container {
+    width: 100px;
+    height: 50px;
+    overflow: hidden;
+  }
+  
+  .menu_slot {
+    position: absolute;
+    top: 50%;
+  }
+  
+  @keyframes slide {
+    0% {
+      margin-top: 0;
+    }
+    10% {
+      margin-top: -50px;
+    }
+    20% {
+      margin-top: -100px;
+    }
+    30% {
+      margin-top: -150px;
+    }
+    40% {
+      margin-top: -200px;
+    }
+    50% {
+      margin-top: -250px;
+    }
+    60% {
+      margin-top: -300px;
+    }
+    70% {
+      margin-top: -350px;
+    }
+    80% {
+      margin-top: -400px;
+    }
+    90% {
+      margin-top: -450px;
+    }
+    100% {
+      margin-top: -500px;
+    }
+  }
+  
+  .slide_box {
+    width: 100px;
+    height: 50px * 5;
+    animation: slide 1.5s infinite;
+    color: black;
+  }
+  
+  .slide_box li {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .container {
+    margin: auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 350px;
+  }
+  
+  .receipt {
+    width: 100%;
+    height: 80%;
+    background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    position: relative;
+  }
+  
+  .receipt .title_text {
+    border-bottom: 1px dashed black;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .receipt .title_text h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  
+  .receipt .title_text h3 {
+      margin-top: 10px;
+      margin-bottom: 15px;
+  }
+  
+  em {
+    display: inline-block;
+    width: 78px;
+    height: 21px;
+    text-align: left;
+    position: absolute;
+    right: 5px;
+  }
+  
+  .menu_print {
+    position: absolute;
+    top: 55%;
+    font-size: 20px;
+    color: black;
+    transition: 0.5s;
+  }
+  
+  .btn_area {
+    position: absolute;
+    bottom: 50px;
+  }
+  
+  body:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .btn_area button {
+    background: gray;
+    color: ivory;
+    border: none;
+    position: relative;
+    height: 30px;
+    font-size: 1.0em;
+    padding: 0 1em;
+    cursor: pointer;
+    transition: 800ms ease all;
+    outline: none;
+  }
+  .btn_area button:hover {
+    background: #fff;
+    color: black;
+  }
+  .btn_area button:before,
+  .btn_area button:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: black;
+    transition: 400ms ease all;
+  }
+  .btn_area button:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+  }
+  .btn_area button:hover:before,
+  .btn_area button:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
+  }
+
+/* 슬롯머신 끝 */
+
+.follow h3 {
+    font-size: 18px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.follow ul li{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+#follow1{
+    position: relative;
+    border-top: 1px dotted black;
+    font-size: 17px;
+    text-align: center;
+    white-space: normal;
+    top: 80px;  
+}
+.feed{
+    flex: 1;
+    position: relative;
+    top: 400px;
+}
+.feedtitle{
+    padding: 30px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 750px;
+    margin-bottom: 40px;
+}
+.rowbar{
+    position: fixed;
+    right: 250px;
+    bottom: 50px;
+    font-size: 23px;
+    width: 1400px; height: 80px;
+    background-color: #ffe9b1;
+    color: #000;
+    line-height: 80px;
+    text-align: center;
+}
+.rowbar legend{
+    font-weight: lighter;
+}
+#btn-row{
+    border: 1px solid #e27c5e;
+    background-color: white;
+    border-radius: 10px 10px;
+    font-size: 17px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-left: 50px;
+    width: 110px;
+}
+#btn-row a{
+    color: #e27c5e;
+}
+#btn-row2{
+    border: 1px solid #e1e1e1;
+    background-color: #e27c5e;
+    border-radius: 10px 10px;
+    font-size: 17px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-left: 50px;
+    width: 110px;
+}
+#btn-row2 a{
+    color: white;
 }
 
 .search-form {
@@ -35,7 +408,7 @@
 .search-input {
     padding: 0.5em;
     padding-right: 30px;
-    width: 100%;
+    width: 500px;
     height: inherit;
     border: none;
     border-radius: 4px;
@@ -221,6 +594,132 @@
 	word-break: break-all;
 	text-overflow: ellipsis;  /* 말줄임 적용 */
 }
+
+@media screen and (max-width: 1420px) {
+    .inner {
+        width: 100%; 
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+}
+@media screen and (max-width: 1240px) {
+    .wrapper > div.inner {
+        display: block;
+    }
+    .header {
+        width: 100%;
+        height: 105px;
+        margin-bottom: 15px;
+    }
+    .feed {
+        width: 100%;
+    }
+    .review {
+        display: none;
+    }
+    .header1 {
+        position: unset;
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    .header1 h1 {
+        margin-bottom: 0;
+    }
+    .header3{
+        position: unset;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    .sidebar .random {
+        position: relative;
+    }
+    .logout {
+        position: unset;
+    }
+    .sidemenu {
+        margin-bottom: 0;
+        padding-left: 0;
+    }
+    .sidemenu > ul > li {
+        display: inline-block;
+    }
+    .sidemenu ul > li + li {
+        margin-top: 0;
+        margin-left: 15px;
+    }
+    .sidebar {
+        width: 200px;
+    }
+    .sidebar .random {
+        width: auto;
+    }
+    .sideW {
+        gap: 20px;
+    }
+    .rowbar{
+        position: relative;
+    }
+}
+@media screen and (max-width: 768px) {
+    .inner {
+        padding: 0 10px;
+    }
+    .sidebar {
+        display: none;
+    }
+    .sidemenu {
+        display: none;
+    }
+    .btnW {
+        display: flex;
+        align-items: center;
+    }
+    .morebtn{
+        position: relative;
+        display: block;
+        width: 30px;
+        height: 20px;
+        margin-left: 30px;
+    }
+    .morebtn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 2px;
+        background: #000;
+    }
+    .morebtn::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #000;
+    }
+    .morebtn span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #000;
+        text-indent: -9999px;
+        font-size: 0;
+        
+    }
+}
 </style>
 </head>
 <body>
@@ -235,7 +734,91 @@
 	</c:otherwise>
 </c:choose>
 
-<div class="container">
+ <div class="wrapper">
+        <div class="inner">
+            <header class="header">
+                <div class="header1">
+                    <h1><a href="/search/review" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+                    <div class="sidemenu">
+                    <ul>
+                        <li><a href="#">맛집 탐색</a></li>
+                        <li><a href="#">맛쟁이 탐색</a></li>
+                    </ul>
+                    </div> <!--sidemenu-->
+                </div> <!--header1-->
+                <div class="header2">
+                    <div class="formdiv">                      
+                        <form action="" class="search-form">
+                            <fieldset>
+                                <legend class="search-bar">                         
+                                    <input type="text" name="keyword" class="search-input" placeholder="지역, 장소, 메뉴 검색" autocomplete="off">
+            						<button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>                             
+                                </legend>
+                            </fieldset>
+                        </form>
+                    </div> <!--//formdiv-->
+                </div> <!--header2-->
+            </header> <!--header-->
+            <div class="sideW">
+                <div class="feed">
+                    <!-- 리뷰 목록 -->
+    				<div class="review-list"></div>
+                </div> <!--feed-->
+                </div> <!--sideW-->
+                <div class="sidebar">
+                    <div class="random">
+                    <div class="container">
+                        <div class="receipt">
+                          <div class="title_text">
+                            <h1>Today~</h1>
+                            <h3>뭐 먹지?</h3>
+                          </div> <!--title_text-->
+                          <div class="menu_print">
+                            <h2></h2>
+                          </div> <!--menu_print-->
+                          <div class="menu_slot">
+                            <div class="slot_container">
+                              <ul class="slide_box">
+                                <li>카레</li>
+                                <li>우동</li>
+                                <li>햄버거</li>
+                                <li>냉면</li>
+                                <li>삼겹살</li>
+                                <li>쌈밥</li>
+                                <li>감자탕</li>
+                                <li>칼국수</li>
+                                <li>짜장면</li>
+                                <li>국밥</li>
+                              </ul> <!--slide_box-->
+                            </div> <!--slot_container-->
+                          </div> <!--menu_slot-->
+                          <div class="btn_area">
+                            <button onclick="lunchIs()">멈 춰 !</button>
+                            <button onclick="reset()">한번 더</button>
+                          </div> <!--btn_area-->
+                        </div> <!--receipt-->          
+                    </div> <!--container-->
+                         <div class="follow">
+                             <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p>
+                         </div> <!--follow-->
+                     </div> <!--random-->
+                 </div> <!--sidebar-->
+            <div class="rowbar">
+                <form action="">
+                    <fieldset>
+                        <legend>
+                            "로그인하여 내 주변 맛집 리뷰를 확인하고 회원님이 좋아할 만한 계정을 찾아보세요."
+                            <button id="btn-row"><a href="/mem/login">로그인</a></button>
+                            <button id="btn-row2"><a href="/mem/join">회원가입</a></button>
+                        </legend>
+                    </fieldset>
+                </form>  
+            </div> <!--rowbar-->
+        </div><!--//inner-->
+    </div> <!--wrapper-->
+
+
+<!-- <div class="container">
 	<form class="search-form">
         <div class="search-bar">
             <input type="text" name="keyword" class="search-input" placeholder="지역, 장소, 메뉴 검색" autocomplete="off">
@@ -243,15 +826,82 @@
         </div>  
     </form>
 
-    <!-- 리뷰 목록 -->
+    리뷰 목록
     <div class="review-list">
     </div>
     
-</div>
+</div> -->
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
 <script>
+
+//런치리스트 배열생성
+let lunchList = ["카레", "우동", "햄버거", "냉면", "삼겹살","쌈밥","감자탕","칼국수","짜장면","국밥"]
+
+//배열복사
+let firstLunchList = [];
+
+lunchList.forEach(function(item) {
+firstLunchList.push(item);
+});
+
+
+//제어할 요소선택 후 변수에 담기
+let displaySlot = document.querySelector(".menu_slot"); //menu slot
+let elem = document.querySelector(".menu_print > h2"); //menu print
+let costTxt = document.querySelector("em"); //cost
+
+
+//reset check
+let resetNum = 1;
+
+//LunchIs 함수선언
+function lunchIs() {
+//setTimeout 선언
+setTimeout(timeFunc, 900);
+
+function timeFunc() {
+//shuffle 메소드 선언
+function shuffle(a) {
+for (let i = a.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[a[i], a[j]] = [a[j], a[i]];
+}
+return a;
+}
+
+//슬롯애니메이션 감추기
+displaySlot.style.display = "none";
+
+//shuffle 메소드를 사용하여 석은 배열에서 index[0]을 가져오기
+console.log(shuffle(lunchList));
+let lunckPick = shuffle(lunchList)[0];
+
+//메뉴 노출
+console.log(lunckPick);
+elem.innerHTML = lunckPick;
+
+
+//reset 되었을 경우에 숨겨진 메뉴를 다시 노출시킴
+if (resetNum == 0) {
+elem.style.display = "block";
+}
+}
+}
+
+//reset 함수선언
+function reset() {
+//메뉴 숨기기
+elem.style.display = "none";
+
+//슬롯애니메이션 노출
+displaySlot.style.display = "block";
+
+//resetNum으로 reset여부를 구분하기 위해 0 할당
+resetNum = 0;
+}
+
 	$(function() {
 		 var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
 		 console.log("memNo : " + memNo);

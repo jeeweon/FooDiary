@@ -34,7 +34,7 @@
                 <ul id="sideP">
                     <li>
                         <img src="${pageContext.request.contextPath}/images/프로필임시.png">
-                        닉네임 최대 열다섯 글자
+                        ${loginNick}
                     </li>
                 </ul>
                 <ul>
@@ -198,18 +198,6 @@ function reset() {
   //resetNum으로 reset여부를 구분하기 위해 0 할당
   resetNum = 0;
 }
-
-    // 드롭다운 시작
-    function btndrop(){
-        let click = document.getElementById("dropsub");
-        if(click.style.display == "none"){
-            click.style.display = "block";
-        }
-        else{
-            click.style.display = "none";
-        }
-    }
-    // 끝
 
 
 	$(function() {
