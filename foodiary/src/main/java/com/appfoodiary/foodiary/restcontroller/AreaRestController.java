@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @Slf4j
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/rest/area")
 public class AreaRestController {
 	@Autowired
 	private AreaDao areaDao;
@@ -37,7 +37,7 @@ public class AreaRestController {
 	}
 	
 	
-	@PostMapping("/area/interest")
+	@PostMapping("/interest")
 	public void insert(@RequestBody InterestAreaDto dto, 
 			HttpSession session) {
 		int memNo = (Integer)session.getAttribute("loginNo");
@@ -56,13 +56,13 @@ public class AreaRestController {
 		}
 	}
 	
-	@GetMapping("/area/interest")
+	@GetMapping("/interest")
 	public List<InterestAreaVO> myAreas(HttpSession session) {
 		int memNo = (Integer)session.getAttribute("loginNo");
 		return areaDao.myAreas(memNo);
 	}
 	
-	@DeleteMapping("/area/interest/{areaNo}")
+	@DeleteMapping("/interest/{areaNo}")
 	public void delete(@PathVariable int areaNo,
 			HttpSession session) {
 		int memNo = (Integer)session.getAttribute("loginNo");
@@ -72,7 +72,7 @@ public class AreaRestController {
 				.build());
 	}
 	
-	@PostMapping("/area/nearby")
+	@PostMapping("/nearby")
 	public List<NearbyAreaVO> nearbyAreas(@RequestBody(required=false) List<InterestAreaVO> areas) {
 		return areaDao.nearbyAreas(areas);
 	}

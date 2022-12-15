@@ -26,4 +26,9 @@ public interface ReviewDao {
 	
 	//홈 > 리뷰(팔로우) 조회
 	List<ReviewSearchVO> homeFollowList(int memNo);
+	
+	//맛집 탐색 > 리뷰/검색 결과 조회(비회원)
+	List<ReviewSearchVO> guestSearchList(String keyword);
+	//맛집 탐색 > 리뷰/검색 결과 조회(회원)
+	List<ReviewSearchVO> memSearchList(ReviewSearchVO vo);
 }
