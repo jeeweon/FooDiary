@@ -62,6 +62,10 @@
 			mem_point=#{memPoint} 
 		where mem_no =#{memNo}
 	</update>
+	
+	<select id="findPoint" resultType="levelPointDto">
+		select * from level_point
+	</select>
 
 	<!-- 파일첨부 -->
 	<insert id="profileAttach" parameterType="ProfileAttachDto">
