@@ -199,4 +199,8 @@ CREATE TABLE  interest_areas  (
          mem_no  references mem(mem_no) on delete cascade
 );
 
+create table like_point_history(
+review_no references review(review_no) on delete cascade,
+mem_no references mem(mem_no) on delete cascade);
+
 commit;
