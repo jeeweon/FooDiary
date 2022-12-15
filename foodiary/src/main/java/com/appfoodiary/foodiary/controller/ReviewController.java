@@ -71,8 +71,8 @@ public class ReviewController {
 			@ModelAttribute ReviewDto dto, 
 			@RequestParam List<MultipartFile> attachments, RedirectAttributes attr) 
 															throws IllegalStateException, IOException {
-		session.removeAttribute(SessionConstant.NO);	//★로그인기능 연결시 삭제예정
-		session.setAttribute(SessionConstant.NO, 1);	//★로그인기능 연결시 삭제예정
+		//session.removeAttribute(SessionConstant.NO);	//★로그인기능 연결시 삭제예정
+		//session.setAttribute(SessionConstant.NO, 1);	//★로그인기능 연결시 삭제예정
 		
 		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
 		dto.setMemNo(memNo);	//세션값을 dto.memNo에 저장
@@ -89,12 +89,10 @@ public class ReviewController {
 			
 		//파일 첨부
 		for(MultipartFile file : attachments) {
-			if(!file.isEmpty()) {	//첨부파일이 없어도 리스트에 1개 객체 존재하므로, if문으로 체크
-				int attachNo = attachmentService.attachmentsUp(attachments, file);	//attach 추가
-				
-				ReviewAttachDto reviewAttachDto = new ReviewAttachDto(attachNo, reviewNo);	
-				reviewDao.addReviewAttach(reviewAttachDto);	//reviewAttach DB 저장
-			}
+			int attachNo = attachmentService.attachmentsUp(attachments, file);	//attach 추가
+			
+			ReviewAttachDto reviewAttachDto = new ReviewAttachDto(attachNo, reviewNo);	
+			reviewDao.addReviewAttach(reviewAttachDto);	//reviewAttach DB 저장
 		}
 		
 		attr.addAttribute("reviewNo", reviewNo);
