@@ -68,6 +68,8 @@ public class ReviewController {
 			@ModelAttribute ReviewDto dto, 
 			@RequestParam List<MultipartFile> attachments, RedirectAttributes attr) 
 															throws IllegalStateException, IOException {
+//		session.removeAttribute(SessionConstant.NO);	//★로그인기능 연결시 삭제예정
+//		session.setAttribute(SessionConstant.NO, 1);	//★로그인기능 연결시 삭제예정	
 		
 		int memNo = (Integer)session.getAttribute(SessionConstant.NO);
 		dto.setMemNo(memNo);	//세션값을 dto.memNo에 저장
