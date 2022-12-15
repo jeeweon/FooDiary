@@ -108,6 +108,8 @@ public class ReviewController {
 		
 		//첨부파일 조회, 첨부
 		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
+		//appkey 가져와서 model에 저장
+		model.addAttribute("appkey", mapProperties.getAppkey());
 		return "review/detail";
 	}
 	
@@ -115,6 +117,11 @@ public class ReviewController {
 	public String edit(Model model, @RequestParam int reviewNo) {
 		ReviewDto reviewDto = reviewDao.find(reviewNo);
 		model.addAttribute("reviewDto", reviewDto);
+		
+		//첨부파일 조회, 첨부
+		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
+		//appkey 가져와서 model에 저장
+		model.addAttribute("appkey", mapProperties.getAppkey());
 		return "review/edit";
 	}
 	@PostMapping("/edit")

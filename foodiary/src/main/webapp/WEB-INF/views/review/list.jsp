@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!-- 현재 시간 구하기 -->
+<jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
+<c:set var="today">
+	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
+</c:set>
+
 <!-- 스타일 -->
 <style>
 *{ padding: 0; margin: 0; }
@@ -74,80 +81,8 @@ position:absolute; top:50%; left:50%;
 }
 </style>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script>
-	$(function(){
-			//시작시
-			/* $.ajax({
-				url:
-			}); */
-		
-		    //좋아요
-			$(".like2-btn").click(function(e){
-				e.preventDefault();
-				var that=$(this);
-				
-				$.ajax({
-					url:"${pageContext.request.contextPath}/rest/review/like2",
-					method:"post",
-					data:{
-						reviewNo:$(this).data("review-no")
-					},
-					success:function(resp){
-						console.log(resp);
-						if(resp>0){
-							$(that).text("♥");
-						}else{
-							$(that).text("♡");
-						}
-						
-						  $.ajax({
-								url:"${pageContext.request.contextPath}/rest/review/count",
-								method:"post",
-								data:{
-									reviewNo:$(that).data("review-no")		
-								},
-								success:function(resp2){
-									console.log(resp2);					
-									$(that).next().text(resp2);
-									$(".hover-btn").text("♥"+resp2);
-									
-								}
-							});  
-					}
-				});
-			});
-	        //북마크
-	        $(".bookmark-btn").click(function(e){
-	     		e.preventDefault();
-	     		var that=$(this);
-	     		
-	     		$.ajax({
-					url:"${pageContext.request.contextPath}/rest/review/bookmark",
-					method:"post",
-					data:{
-			        	   reviewNo:$(this).data("review-no"),
-			           },
-					success:function(resp){
-						if(resp){
-							
-							$(that).text("북마크해제");
 
-						}else{
-							
-							$(that).text("북마크");
-						}
-					}
-	     		});
-	        });
-	});
-</script>
-<!-- 현재 시간 구하기 -->
-<jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
-<c:set var="today">
-	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>
-</c:set>
+
 
 	<h1>리뷰</h1>
 
@@ -232,3 +167,74 @@ position:absolute; top:50%; left:50%;
 			</div><br>
 		</c:forEach>
 	</div>
+	
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+	$(function(){
+			//시작시
+			/* $.ajax({
+				url:
+			}); */
+		
+		    //좋아요
+			$(".like2-btn").click(function(e){
+				e.preventDefault();
+				var that=$(this);
+				
+				$.ajax({
+					url:"${pageContext.request.contextPath}/rest/review/like2",
+					method:"post",
+					data:{
+						reviewNo:$(this).data("review-no")
+					},
+					success:function(resp){
+						console.log(resp);
+						if(resp>0){
+							$(that).text("♥");
+						}else{
+							$(that).text("♡");
+						}
+						
+						  $.ajax({
+								url:"${pageContext.request.contextPath}/rest/review/count",
+								method:"post",
+								data:{
+									reviewNo:$(that).data("review-no")		
+								},
+								success:function(resp2){
+									console.log(resp2);					
+									$(that).next().text(resp2);
+									$(".hover-btn").text("♥"+resp2);
+									
+								}
+							});  
+					}
+				});
+			});
+	        //북마크
+	        $(".bookmark-btn").click(function(e){
+	     		e.preventDefault();
+	     		var that=$(this);
+	     		
+	     		$.ajax({
+					url:"${pageContext.request.contextPath}/rest/review/bookmark",
+					method:"post",
+					data:{
+			        	   reviewNo:$(this).data("review-no"),
+			           },
+					success:function(resp){
+						if(resp){
+							
+							$(that).text("북마크해제");
+
+						}else{
+							
+							$(that).text("북마크");
+						}
+					}
+	     		});
+	        });
+	});
+</script>
