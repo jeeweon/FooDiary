@@ -58,4 +58,8 @@ public class MyprofileDaoImpl implements MyprofileDao{
 	public List<ReviewListVO> likeListVO(int memNo) {
 		return sqlSession.selectList("myprofile.likelist",memNo);
 	}
+	@Override
+	public List<com.appfoodiary.foodiary.vo.MemRekVO> MemRekVO(int memNo) {
+		return sqlSession.selectList("myprofile.memreklist",memNo);
+	}
 		}
