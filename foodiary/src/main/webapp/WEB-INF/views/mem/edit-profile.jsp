@@ -172,6 +172,8 @@ $(function(){
         }		
 	});
 	
+
+	
 	$("input[name=memNick]").blur(function(){
 		
 		var memNick = $(this).val();
@@ -180,38 +182,49 @@ $(function(){
 		
 // 		console.log("정규표현식 성공"+validChecker.memNickValid);
 		
-		if(validChecker.memNickValid){
-			var that = this;//this 보관
-			
-			$.ajax({
-				url:"${pageContext.request.contextPath}/rest/mem/nick",
-				method:"post",
-				data:{
-					memNick:memNick
-				},
-				success:function(resp){
-					if(resp=="NNNNN"){
-						$(that).addClass("NNNNN");
-						validChecker.memNickTest = false;	
-						$(this).removeClass("success fail").addClass("success");
-// 						console.log("N");
-// 						console.log(validChecker.memNickValid);
-					}
-					else if(resp="NNNNY"){
-						$(that).addClass("NNNNY");
-						validChecker.memNickTest = true;
-						$(this).removeClass("success fail").addClass("fail");
-// 						console.log("Y");
-// 						console.log(validChecker.memNickValid);
-					}
-				},
-				error:function(){}
-			});
+		var nowNick = "${memDto.memNick}"
+		
+		//지금 닉네임과 다를 때 정규표현식, 중복검사
+		if(memNick!=nowNick){
+			if(validChecker.memNickValid){
+				var that = this;//this 보관
+				
+				$.ajax({
+					url:"${pageContext.request.contextPath}/rest/mem/nick",
+					method:"post",
+					data:{
+						memNick:memNick
+					},
+					success:function(resp){
+						if(resp=="NNNNN"){
+							$(that).addClass("NNNNN");
+							validChecker.memNickTest = false;	
+							$(this).removeClass("success fail").addClass("success");
+	// 						console.log("N");
+	// 						console.log(validChecker.memNickValid);
+						}
+						else if(resp="NNNNY"){
+							$(that).addClass("NNNNY");
+							validChecker.memNickTest = true;
+							$(this).removeClass("success fail").addClass("fail");
+	// 						console.log("Y");
+	// 						console.log(validChecker.memNickValid);
+						}
+					},
+					error:function(){}
+				});
+			}
+			else{
+				$(this).addClass("fail");
+				validChecker.memNickTest = false;	
+			}
 		}
 		else{
-			$(this).addClass("fail");
-			validChecker.memNickTest = false;	
+			validChecker.memNickValid = true;
+			validChecker.memNickTest = true;
+// 			console.log(validChecker.memNickValid);
 		}
+		
 	});
 	
 	//자기소개 
