@@ -18,9 +18,8 @@
                     <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
                 </div> <!--Mhead-->
                 <duv class="Mbody">
-                    <p>회원가입이 완료되었습니다</p>
-                    <p>로그인 후 더 다양한 맛집을 탐색해보세요!!</p>
-                    <a href="login"><button>로그인 화면으로 이동</button></a>
+                    <p>문의메일 전송이 완료되었습니다</p>
+                    <a href="${pageContext.request.contextPath}/home"><button>홈으로 이동</button></a>
                 </duv> <!--Mbody-->
             </div> <!--inner-->
         </div> <!--Mplus-->

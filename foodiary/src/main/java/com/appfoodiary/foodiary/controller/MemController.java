@@ -1,8 +1,10 @@
 package com.appfoodiary.foodiary.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import com.appfoodiary.foodiary.entity.ProfileAttachDto;
 import com.appfoodiary.foodiary.repository.AttachDao;
 import com.appfoodiary.foodiary.repository.MemDao;
 import com.appfoodiary.foodiary.service.AttachmentService;
+import com.appfoodiary.foodiary.service.EmailService;
 
 @Controller
 @RequestMapping("/mem")
@@ -38,6 +41,9 @@ public class MemController {
 	
 	@Autowired
 	private AttachmentService attachmentService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -92,7 +98,7 @@ public class MemController {
 		//세션에서 loginNo, loginNick 데이터 삭제
 		session.removeAttribute(SessionConstant.NO);
 		session.removeAttribute(SessionConstant.NICK);
-		return "redirect:/home";//추후 탐색하기로 수정
+		return "redirect:/search/review";
 	}
 	
 	//비밀번호 재설정
@@ -288,6 +294,19 @@ public class MemController {
 	@GetMapping("/goodbye")
 	public String goodbye() {
 		return "mem/goodbye";
+	}
+	
+	@GetMapping("/inquiry")
+	public String inquiry() {
+		return "mem/inquiry";
+	}
+	
+	@PostMapping("/inquiry")
+	public String inquiry(HttpSession session, @RequestParam String text) throws FileNotFoundException, MessagingException, IOException {
+		int memNo = (int) session.getAttribute(SessionConstant.NO);
+		MemDto memDto = memDao.selectOne(memNo);
+		emailService.inquiryMail(memDto.getMemEmail(), text);
+		return "mem/inquiry-finish";
 	}
 	
 
