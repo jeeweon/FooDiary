@@ -85,8 +85,8 @@ public class ReviewController {
 		reviewDao.write(dto);
 		
 		//리뷰 작성시 포인트 업데이트
-		levelPointService.ReviewPoint(memNo);
-			
+		levelPointService.reviewPoint(memNo);
+		
 		//파일 첨부
 		for(MultipartFile file : attachments) {
 			int attachNo = attachmentService.attachmentsUp(attachments, file);	//attach 추가
