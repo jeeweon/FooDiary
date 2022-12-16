@@ -7,6 +7,7 @@
  	$(function(){
  		console.log(${memNo});
  		memList();
+ 		
  		//회원조회
  		let profileList = [];
  		function memList() {
@@ -25,14 +26,13 @@
 					$(".follower-cnt").text("팔로우 : "+profileList.followerCnt);
 					$(".mem-no").text(profileList.memNo);
 					$(".mem-info").text(profileList.memIntro);
-					
+					var imgClass=$("[name=orgin]");
 					//사진이 있는지 없는지 확인
-					if(profileList.attachNo > 0){
-						$("[name=origin]").attr("src","${pageContext.request.contextPath}/attach/download/"+profileList.attachNo);
+					if(profileList.attachNo != 0){
+						$(imgClass).attr("src","${pageContext.request.contextPath}/attach/download/"+profileList.attachNo);
 					}else{
-						$("[name=origin]").attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
+						$(imgClass).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
-			
 				}
 			});
 		};
