@@ -17,7 +17,7 @@ public class LevelPointServiceImpl implements LevelPointService{
 	private LevelPoint levelPoint;
 	
 	@Override
-	public void ReviewPoint(int memNo) {
+	public void reviewPoint(int memNo) {
 		
 		MemDto memDto = memDao.selectOne(memNo);
 		int originPoint = memDto.getMemPoint();
@@ -29,7 +29,7 @@ public class LevelPointServiceImpl implements LevelPointService{
 	}
 	
 	@Override
-	public void LikePoint(int memNo) {
+	public void likePoint(int memNo) {
 		MemDto memDto = memDao.selectOne(memNo);
 		int originPoint = memDto.getMemPoint();
 		
@@ -37,6 +37,28 @@ public class LevelPointServiceImpl implements LevelPointService{
 		int updatePoint = originPoint + likePoint;
 		memDto.setMemPoint(updatePoint);
 		memDao.updatePoint(memDto);
+	}
+	
+	@Override
+	public void levelUp(int memNo) {
+		MemDto memDto = memDao.selectOne(memNo);
+		int memPoint = memDto.getMemPoint();
 		
+		if(memPoint>=1000) {
+			memDto.setMemLevel("6");
+		}
+		else if(memPoint>=300) {
+			memDto.setMemLevel("5");
+		}
+		else if(memPoint>=100) {
+			memDto.setMemLevel("4");
+		}
+		else if(memPoint>=50) {
+			memDto.setMemLevel("3");
+		}
+		else {
+			memDto.setMemLevel("2");
+		}
+		memDao.levelUp(memDto);
 	}
 }

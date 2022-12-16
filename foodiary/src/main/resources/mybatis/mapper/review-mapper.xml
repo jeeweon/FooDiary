@@ -60,12 +60,14 @@
 		select 
 			R.*,
 			M.mem_nick,
+			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt,
 			decode(L.review_no, null, 'false', 'true') like_check,
 			decode(BM.review_no, null, 'false', 'true') bookmark_check
 		from review R
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on R.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
@@ -99,6 +101,7 @@
 		select 
 			R.*, 
 			M.mem_nick,
+			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt, 
 			decode(L.review_no, null, 'false', 'true') like_check,
@@ -106,6 +109,7 @@
 		from review R
 		left outer join follow F on R.mem_no = F.passive_mem_no 
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on R.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
@@ -134,10 +138,12 @@
 		select 
 			R.*,
 			M.mem_nick,
+			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt
 		from review R
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on R.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
@@ -168,12 +174,14 @@
 		select 
 			R.*,
 			M.mem_nick,
+			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt,
 			decode(L.review_no, null, 'false', 'true') like_check,
 			decode(BM.review_no, null, 'false', 'true') bookmark_check
 		from review R
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on R.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
@@ -208,4 +216,51 @@
 	 	</choose>
 		order by R.like_cnt desc, R.review_no desc
 	</select>
+	
+	<!-- 리뷰신고 테이블 : 신고+1 (insert) -->
+	<insert id="insertReviewReport" parameterType="map">
+		insert into review_report(review_report_no, review_no, mem_no)
+		values(review_report_seq.nextval, #{reviewNo}, #{memNo})
+	</insert>
+	<!-- 리뷰 테이블 : 신고수+1 (update) -->
+	<update id="plusReviewReportCnt" parameterType="int">
+		update review
+		set review_report_cnt = review_report_cnt +1
+		where review_no = #{reviewNo}
+	</update>
+	<!-- 리뷰 테이블 : 신고수만 조회 -->
+	<select id="selectReviewReportCnt" parameterType="int" resultType="int">
+		select review_report_cnt from review 
+		where review_no = #{reviewNo}
+	</select>
+	<!-- 리뷰블라인드 테이블 : 신고+1 (insert) -->
+	<insert id="insertReviewBlind" parameterType="int">
+		insert into review_blind(review_blind_no, review_no, blind_report_cnt)
+		values(review_blind_seq.nextval, #{reviewNo}, 1)
+	</insert>
+	<!-- 리뷰블라인드 테이블 : 신고수+1 (update)
+			- 리뷰테이블 신고수 2~4	: 블라인드 상태 0(대기)인 데이터의 신고수 +1
+			- 리뷰테이블 신고수 5	: 블라인드 상태 1(블라인드)로 변경, 신고수 +1
+			- 리뷰테이블 신고수 6~	: 블라인드 상태 1(블라인드)인 데이터의 신고수 +1	-->
+	<update id="plusReviewBlind" parameterType="map">
+		update review_blind
+		<!-- <bind name="reviewReportCnt" value="reviewReportCnt"/> -->
+			<choose>
+				<when test="reviewReportCnt >= 2 and reviewReportCnt lte 4">
+					set blind_report_cnt = blind_report_cnt +1
+					where review_isblind = '0' 
+				</when>
+				<when test="reviewReportCnt == 5">
+					set blind_report_cnt = blind_report_cnt +1,
+						review_isblind = '1'
+					where review_isblind = '0' 
+				</when>
+				<when test="reviewReportCnt >= 6">
+					set blind_report_cnt = blind_report_cnt +1
+					where review_isblind = '1' 
+				</when>
+			</choose>
+		and review_no = #{reviewNo}
+	</update>
+	
 </mapper>

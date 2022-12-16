@@ -1,6 +1,7 @@
 package com.appfoodiary.foodiary.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
@@ -31,4 +32,16 @@ public interface ReviewDao {
 	List<ReviewSearchVO> guestSearchList(String keyword);
 	//맛집 탐색 > 리뷰/검색 결과 조회(회원)
 	List<ReviewSearchVO> memSearchList(ReviewSearchVO vo);
+	
+	//리뷰신고 테이블 : 신고+1 (insert)
+	void insertReviewReport(Map<String, Object> report);
+	//리뷰 테이블 : 신고수+1 (update)
+	boolean plusReviewReportCnt(int reviewNo);
+	//리뷰 테이블의 리뷰신고수 조회
+	int selectReviewReportCnt(int reviewNo);
+	//리뷰블라인드 테이블 : 신고+1 (insert)
+	void insertReviewBlind(int reviewNo);
+	//리뷰블라인드 테이블 : 신고수+1 (update)
+	boolean plusReviewBlind(Map<String, Object> blind);
+	
 }

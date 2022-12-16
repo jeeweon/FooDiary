@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/search")
 public class SearchController {
 	@GetMapping("/review")
-	public String guestSearchReview() {
+	public String searchReview() {
 		return "search/review-search";
+	}
+	
+	@GetMapping("/mem")
+	public String searchMem() {
+		return "search/mem-search";
 	}
 }
