@@ -1,6 +1,7 @@
 package com.appfoodiary.foodiary.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,4 +91,33 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<ReviewSearchVO> memSearchList(ReviewSearchVO vo) {
 		return sqlSession.selectList("review.search-mem", vo);
 	}
+
+	//리뷰신고 테이블 : 신고+1 (insert)
+	@Override
+	public void insertReviewReport(Map<String, Object> report) {
+		sqlSession.insert("review.insertReviewReport", report);
+	}
+	//리뷰 테이블 : 신고수+1 (update)
+	@Override
+	public boolean plusReviewReportCnt(int reviewNo) {
+		int count = sqlSession.update("review.plusReviewReportCnt", reviewNo);
+		return count >0;
+	}
+	//리뷰 테이블의 리뷰신고수 조회
+	@Override
+	public int selectReviewReportCnt(int reviewNo) {
+		return sqlSession.selectOne("review.selectReviewReportCnt", reviewNo);
+	}
+	//리뷰블라인드 테이블 : 신고+1 (insert)
+	@Override
+	public void insertReviewBlind(int reviewNo) {
+		sqlSession.insert("review.insertReviewBlind", reviewNo);
+	}
+	//리뷰블라인드 테이블 : 신고수+1 (update)
+	@Override
+	public boolean plusReviewBlind(Map<String, Object> blind) {
+		int count = sqlSession.update("review.plusReviewBlind", blind);
+		return count >0;
+	}
+
 }

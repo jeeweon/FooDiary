@@ -7,31 +7,33 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 1 // 지도의 확대 레벨
     };  
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 지도를 표시하는 div 크기를 변경하는 함수 추가
-mapContainer.style.width = '350px';
-mapContainer.style.height = '330px';
-
-map.relayout(); //지도 불러오기
-// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
-// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
-
-// 장소 검색 객체를 생성합니다
-var ps = new kakao.maps.services.Places();  
-
-// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
-// 키워드로 장소를 검색합니다
-searchPlaces();	
-//form -> 버튼클릭으로 실행조건 변경해서 추가
+// 지도를 생성합니다  
+if($("#map").val() != null) {
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 지도를 표시하는 div 크기를 변경하는 함수 추가
+	mapContainer.style.width = '350px';
+	mapContainer.style.height = '330px';
+	
+	map.relayout(); //지도 불러오기
+	// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+	// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+	// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+	
+	// 장소 검색 객체를 생성합니다
+	var ps = new kakao.maps.services.Places();  
+	
+	// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+	
+	// 키워드로 장소를 검색합니다
+	searchPlaces();	
+	//form -> 버튼클릭으로 실행조건 변경해서 추가
+}
 
 var ReadKeyword = $("#keyword").prop("readonly");
-if(ReadKeyword) {	//속성이 readonly가 아닐경우
-	$(".keywordMap").attr("disabled", true);
+if(ReadKeyword) {	//속성이 readonly일 경우
+	$(".keywordMap").prop("disabled", true);
 }
 $(".keywordMap").click(function(){
 	//console.log("클릭");

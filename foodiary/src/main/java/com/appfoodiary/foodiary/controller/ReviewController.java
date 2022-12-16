@@ -80,7 +80,7 @@ public class ReviewController {
 		//reviewNo
 		int reviewNo = reviewDao.newReviewNo();
 		dto.setReviewNo(reviewNo);
-
+		
 		//write
 		reviewDao.write(dto);
 		

@@ -1,4 +1,4 @@
-package com.appfoodiary.foodiary.controller;
+package com.appfoodiary.foodiary.restcontroller;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ import com.appfoodiary.foodiary.service.AttachmentService;
 @CrossOrigin(origins = "http://127.0.0.1:5500/")
 @RestController	//화면반환x (@Controller+@ReponseBody)
 @RequestMapping("/attach")
-public class AttachController {
+public class AttachRestController {
 
 	@Autowired
 	private AttachmentService attachmentService;
