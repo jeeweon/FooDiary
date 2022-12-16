@@ -154,6 +154,38 @@
 	) RA on R.review_no=RA.review_no
 	left outer join 
 	(select review_no,count(review_no) rcn from reply group by review_no) RP on R.review_no=RP.review_no
-	
+	</select>
+	<select id="memreklist" parameterType="int" resultType="MemRekVO">
+select
+    mem_no,
+    coalesce(attach_no, 0) attach_no,
+    mem_nick
+from (
+    select TMP.*, rownum rn from (
+        select * from 
+    (
+    select 
+        M.mem_no mem_no,
+        PA.attach_no attach_no,
+        MM.mem_nick mem_nick,
+        MM.mem_login_date mem_login_date,
+        RC.rcc review_cnt
+    from( 
+        ((select mem_no from mem 
+        minus
+        select passive_mem_no from follow where active_mem_no=#{memNo})
+        minus
+        select mem_no from mem where mem_no=#{memNo}
+        )) M
+        left outer join profile_attach PA on  M.mem_no=PA.mem_no
+        left outer join mem MM on M.mem_no=MM.mem_no
+        left outer join (select mem_no,count(mem_no)rcc from review group by mem_no
+        ) RC on m.mem_no=RC.mem_no)
+where review_cnt>=1
+order by mem_login_date desc
+    )TMP
+) where rn between 1 and 3
+order by DBMS_RANDOM.RANDOM
+			
 	</select>
 </mapper>

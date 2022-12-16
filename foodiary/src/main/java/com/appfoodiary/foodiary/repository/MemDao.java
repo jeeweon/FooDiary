@@ -52,6 +52,9 @@ public interface MemDao {
 	//포인트 업데이트
 	boolean updatePoint(MemDto memDto);
 	
+	//레벨 업
+	boolean levelUp(MemDto memDto);
+	
 	//맛쟁이 탐색 > 검색 결과 조회
 	List<MemSearchVO> memSearchList(MemSearchVO vo);
 	

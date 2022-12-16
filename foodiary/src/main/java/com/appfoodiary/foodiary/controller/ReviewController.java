@@ -80,12 +80,12 @@ public class ReviewController {
 		//reviewNo
 		int reviewNo = reviewDao.newReviewNo();
 		dto.setReviewNo(reviewNo);
-
+		
 		//write
 		reviewDao.write(dto);
 		
 		//리뷰 작성시 포인트 업데이트
-		levelPointService.ReviewPoint(memNo);
+		levelPointService.reviewPoint(memNo);
 		
 		//파일 첨부
 		for(MultipartFile file : attachments) {

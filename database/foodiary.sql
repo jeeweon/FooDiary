@@ -134,6 +134,7 @@ CREATE TABLE  review_blind  (
          report_start_time date default sysdate,
          blind_clear_time date
 );
+alter table review_blind modify report_start_time not null;
 
 create sequence reply_blind_seq;
 CREATE TABLE  reply_blind  (
