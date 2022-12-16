@@ -55,7 +55,7 @@
                 <div class="home-title">
                     <ul class="title-nickname">
                         <li>
-                            ${loginNick} 님을 위한 리뷰 피드
+                            ${loginNick}님을 위한 리뷰 피드
                         </li>
                     </ul> <!--title-nickname-->
                 </div> <!--home-title-->
