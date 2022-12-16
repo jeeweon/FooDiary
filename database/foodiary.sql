@@ -82,10 +82,9 @@ create table  mem_noti  (
          receiver_mem_no references mem(mem_no) on delete cascade,
          noti_content varchar2(300) not null,
          noti_type         varchar2(10) not null,
-         noti_target         number not null,
          noti_url         varchar2(2000) not null,
          noti_create_date         date default sysdate not null,
-         noti_isread  char(1) default 0 not null check(noti_isread in(0,1))
+         noti_read_date  date
 );
 
 create sequence reply_seq;

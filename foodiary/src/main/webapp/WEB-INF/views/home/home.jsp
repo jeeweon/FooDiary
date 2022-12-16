@@ -37,12 +37,12 @@
                         ${loginNick}
                     </li>
                 </ul>
-                <ul>
-                    <li><a href="#">홈</a></li>
-                    <li><a href="#">맛집 탐색</a></li>
-                    <li><a href="#">맛쟁이 탐색</a></li>
-                    <li><a href="#">알림</a></li>
-                    <li><a href="#">북마크</a></li>
+                <ul id="mainicon">
+                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="#">홈</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="#">맛집 탐색</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="#">맛쟁이 탐색</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="#">알림</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="#">북마크</a></li>
                 </ul>
                 </div> <!--sidemenu-->
                 <a href="#" class="review">리뷰하기</a>
@@ -53,10 +53,9 @@
             </div> <!--header1-->              
             <div class="header3">
                 <div class="home-title">
-                    <ul class="title-nickname">
-                        <li>
-                            ${loginNick} 님을 위한 리뷰 피드
-                        </li>
+
+                    <ul class="title-nickname">                 
+                        <li id="nickname1">${loginNick}</li>님을 위한 리뷰 피드                                             
                     </ul> <!--title-nickname-->
                 </div> <!--home-title-->
             

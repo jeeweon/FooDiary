@@ -248,7 +248,7 @@
 					var titleDiv = $("<div>").append(titleArea).append(title2);
 					titleDiv.addClass("title-div");
 					
-					var subtitle = $("<span>").text("활동 점수와 최근 로그인 시간이 반영돼요.");
+					var subtitle = $("<span>").text("나와 관심지역이 같은 사용자를 추천받을 수 있어요.");
 					subtitle.addClass("subtitle");
 
 					$(".mem-list").append(titleDiv).append(subtitle);
