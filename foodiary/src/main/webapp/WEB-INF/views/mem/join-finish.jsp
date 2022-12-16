@@ -20,7 +20,7 @@
                 <duv class="Mbody">
                     <p>회원가입이 완료되었습니다</p>
                     <p>로그인 후 더 다양한 맛집을 탐색해보세요!!</p>
-                    <button><a href="login">로그인 화면으로 이동</a></button>
+                    <a href="login"><button>로그인 화면으로 이동</button></a>
                 </duv> <!--Mbody-->
             </div> <!--inner-->
         </div> <!--Mplus-->
