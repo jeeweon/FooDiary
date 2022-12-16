@@ -55,13 +55,7 @@
                 <div class="home-title">
 
                     <ul class="title-nickname">                 
-                        <li id="nickname1">${loginNick}</li>님을 위한 리뷰 피드                                  
-
-                    <ul class="title-nickname">
-                        <li>
-                            ${loginNick}님을 위한 리뷰 피드
-                        </li>
-
+                        <li id="nickname1">${loginNick}</li>님을 위한 리뷰 피드                                             
                     </ul> <!--title-nickname-->
                 </div> <!--home-title-->
             
