@@ -173,7 +173,7 @@ public class LikeRestController {
 				param.put("memNo", memNo);
 				param.put("reviewNo", reviewNo);
 				likeDao.addHisotry(param);
-				levelPointService.LikePoint(writerNo);
+				levelPointService.likePoint(writerNo);
 			}
 			
 			return 1;
