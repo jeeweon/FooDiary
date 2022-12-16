@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-<jsp:include page="/WEB-INF/views/profilepage/my-profile-header.jsp">
+<!DOCTYPE html>
+<jsp:include page="/WEB-INF/views/profilepage/yourprofile.jsp">
 	<jsp:param value="주문내역페이지" name="title"/>
 </jsp:include> 
 <style>
@@ -105,7 +104,7 @@ li {
 		//내가 작성한 모든 리뷰 
 		function reviewList() {
 		$.ajax({
-			url : "${pageContext.request.contextPath}/rest/profile/likelist",
+			url : "${pageContext.request.contextPath}/rest/profile/yourreviewlist?memNo="+${memNo},
 			method : "get",
 			dataType : "json",
 			success : function(resp) {

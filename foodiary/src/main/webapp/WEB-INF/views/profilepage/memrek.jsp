@@ -38,7 +38,7 @@
 			var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name);
 			a.click(function(){
 				console.log("a클릭");
-				window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo"+$(this).data("mno");
+				window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
 			});
 			var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
 			

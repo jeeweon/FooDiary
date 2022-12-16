@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appfoodiary.foodiary.repository.MyprofileDao;
@@ -57,5 +58,20 @@ public class ProfileRestController {
 			HttpSession session){
 		int memNo=(Integer)session.getAttribute("loginNo");
 		return myprofileDao.MemRekVO(memNo);
+	}
+	
+	@GetMapping("/profile/yourprofile")
+	public ProfileMemVO yourprofile(
+			@RequestParam int memNo,
+			HttpSession session) 
+	{
+		return myprofileDao.profileMemVO(memNo);
+	}
+	@GetMapping("profile/yourreviewlist")
+	public List<ReviewListVO> yourreviewList(
+			@RequestParam int memNo,
+			HttpSession session
+			){
+		return myprofileDao.reivewListVO(memNo);
 	}
 }
