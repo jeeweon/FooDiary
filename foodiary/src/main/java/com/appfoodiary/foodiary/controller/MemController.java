@@ -241,6 +241,9 @@ public class MemController {
 		}
 		
 		if(memDao.editProfile(inputDto)) {
+			//닉네임 수정 후 세션에서 지우고 재설정
+			session.removeAttribute(SessionConstant.NICK);
+			session.setAttribute(SessionConstant.NICK, inputDto.getMemNick());
 			return "redirect:/home";
 		}
 		else {
