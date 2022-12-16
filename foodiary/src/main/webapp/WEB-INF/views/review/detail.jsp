@@ -64,8 +64,10 @@
 	2. 작성자 본인일 때 : 수정/삭제
 -->	
 	<!-- 신고 -->
-	※※※ 테스트 끝나면!! 신고 본인 아닌 회원만 할수있게 해라!
-	<input class="btn-report" type="button" value="신고">
+	<c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
+	<c:if test="${member}">
+		<input class="btn-report" type="button" value="신고">
+	</c:if>
 
 	<!-- 수정, 삭제 -->
 	<c:set var="owner" value="${loginNo == reviewDto.memNo}"></c:set>		
