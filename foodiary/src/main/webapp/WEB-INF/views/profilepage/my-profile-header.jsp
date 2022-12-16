@@ -42,22 +42,19 @@
                 <div class="boardM">
                     <%-- <img src="${pageContext.request.contextPath}/images/프로필임시.png"> --%>
                     <%-- <img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/"> --%>
-                <img name="origin" class="preview preview-hover"> 
-                    
+                <img name="origin" class="preview preview-hover">                
                 </div><!--boardM-->
                 <div class="boardT">
                     <ul class="boardT1">
                         <li class="mem-name"> </li>
-                        <button><a href="">프로필 편집</a></button>
+                        <button><a href="#">프로필 편집</a></button>
                         <a href="" id="Ta1"><img src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정"></a>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
-                    <ul class="boardT2">
-						
+                    <ul class="boardT2">				
                         <li class="board-cnt"></li>
-                        <li class="follow-cnt"></li>
-                        <li class="follower-cnt"></li>
-
+                        <a href="#"><li class="follow-cnt"></li></a>
+                        <a href="#"><li class="follower-cnt"></li></a>
                     </ul> <!-- boardT2 -->
                     <P>	
                     	<span>자기소개</span>
@@ -76,7 +73,7 @@
             </div><!--inner-->
         </div><!--boaardF-->
 	</div><!-- wrapper -->
-	<hr>
+	
 	
     <script>
         $(function(){
