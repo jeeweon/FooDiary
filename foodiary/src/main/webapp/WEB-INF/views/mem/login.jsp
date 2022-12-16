@@ -23,7 +23,7 @@
 		        <div class="Mlogin">
 		            <div class="inner">
 		                <div class="Lhead">
-		                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
+		                    <a href="/search/review"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
 		                </div> <!--Lhead-->
 		                <div class="Lbody">
 		                <form action="login" method="post" autocomplete="off">

@@ -11,7 +11,7 @@
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
  </style>
- 
+
 </head>
 <body>
 <!-- 임시 로그인 메뉴 -->
@@ -34,7 +34,7 @@
                 <ul id="sideP">
                     <li>
                         <img src="${pageContext.request.contextPath}/images/프로필임시.png">
-                        닉네임 최대 열다섯 글자
+                        ${loginNick}
                     </li>
                 </ul>
                 <ul>
@@ -199,18 +199,6 @@ function reset() {
   resetNum = 0;
 }
 
-    // 드롭다운 시작
-    function btndrop(){
-        let click = document.getElementById("dropsub");
-        if(click.style.display == "none"){
-            click.style.display = "block";
-        }
-        else{
-            click.style.display = "none";
-        }
-    }
-    // 끝
-
 
 	$(function() {
 		loadInterestArea();
@@ -284,7 +272,6 @@ function reset() {
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
-					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -312,7 +299,6 @@ function reset() {
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
-					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -327,7 +313,6 @@ function reset() {
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
-					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -337,8 +322,12 @@ function reset() {
 		function renderList(){
 			if(reviewList.length != 0) {
 				$.each(reviewList, function(index, value) {
-					//프로필 이미지 다운로드 기능 구현 후, 주소 변경 예정(프사 있으면 다운로드, 없으면 기본 이미지)
-					var writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/avatar.png");
+					var writerAvatar;
+					if(value.attachNo == 0) {
+						writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");						
+					} else {
+						writerAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/attach/download/"+value.attachNo);
+					}
 					writerAvatar.addClass("writer-avatar");
 					
 					var writerNick = $("<span>").text(value.memNick);
@@ -523,7 +512,7 @@ function reset() {
 		
 		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
 		$(document).on("click", ".review-write-info", function(){
-			//회원번호 붙여서 프로필로 이동
+			window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
 		});
 	});
 </script>

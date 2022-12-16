@@ -26,4 +26,5 @@ public class ReviewSearchVO {
 	private boolean likeCheck; //특정회원이 리뷰에 좋아요했는지 여부
 	private boolean bookmarkCheck; //특정회원이 리뷰를 북마크했는지 여부
 	private String keyword; //검색어
+	private int attachNo; //프로필 이미지 첨부파일번호
 }

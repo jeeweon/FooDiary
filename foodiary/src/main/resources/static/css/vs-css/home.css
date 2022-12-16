@@ -59,11 +59,12 @@ li {
 .header3{
     position: fixed;
     z-index: 999;
-    right: 700px;
+    right: 37%;
     top: 50px;
     width: 600px;
     height: 200px;
     box-sizing: border-box;   
+    background-color: #ffffff;
 }
 .header3 .home-title{
     display: flex;
