@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.appfoodiary.foodiary.entity.MyprofileDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
+import com.appfoodiary.foodiary.vo.MemRekVO;
 import com.appfoodiary.foodiary.vo.ProfileBookmarkVO;
 import com.appfoodiary.foodiary.vo.ProfileLikeVO;
 import com.appfoodiary.foodiary.vo.ProfileMemVO;
@@ -31,4 +32,6 @@ public interface MyprofileDao {
 	List<ReviewListVO> bookmarkListVO(int memNo);
 	//좋아요리스트 
 	List<ReviewListVO> likeListVO(int memNo);
+	//회원 추천 
+	List<MemRekVO> MemRekVO(int memNo);
 }

@@ -33,7 +33,11 @@
 	<h1>리뷰 상세</h1>
 </div>
 
-<!-- 글번호 : ${reviewDto.reviewNo} <br> -->
+<!-- 글번호 -->
+<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
+
+<div>
+
 작성자 회원번호 : ${reviewDto.memNo} <br>
 <!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
 				- (사진,닉네임)클릭시 프로필로 이동 
@@ -58,8 +62,14 @@
 	1. 작성자 본인이 아닐 때 : 신고버튼
 		- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
 	2. 작성자 본인일 때 : 수정/삭제
--->		
-<div>
+-->	
+	<!-- 신고 -->
+	<c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
+	<c:if test="${member}">
+		<input class="btn-report" type="button" value="신고">
+	</c:if>
+
+	<!-- 수정, 삭제 -->
 	<c:set var="owner" value="${loginNo == reviewDto.memNo}"></c:set>		
 	<c:if test="${owner}">
 		<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
@@ -168,6 +178,8 @@
 <link href="${pageContext.request.contextPath}/css/kakao-keyword.css" rel="stylesheet" type="text/css" >
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${appkey}&libraries=services"></script>
 <script src="${pageContext.request.contextPath}/js/kakao-keyword.js"></script>
+<!-- axios cdn -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -179,5 +191,29 @@
                 textColor:"black",//숫자 색상(기본 : 금색)
 		    }
         });
+		
+		//신고버튼
+		$(".btn-report").click(function(){
+			//확인 팝업(경고)
+			var result = confirm("정말 신고하시겠습니까?\n허위 신고시 서비스 이용제한조치를 받으실 수 있습니다.");
+			var that=$(this);
+			
+			//신고 카운트+1
+			if(result) {
+				axios.get("${pageContext.request.contextPath}/rest/review/report", {
+				    params : {
+				    	//reviewNo: $("input[name=reviewNo]").val()
+						reviewNo: ${reviewDto.reviewNo}
+			    	}
+				})
+				.then(function(response){
+					//console.log(response);
+					if(response.data) {	//response가 true일 경우
+						alert("신고가 접수되었습니다.");
+						$(that).prop("disabled", true);
+					}
+				});
+			}
+		});
 	});
 </script>

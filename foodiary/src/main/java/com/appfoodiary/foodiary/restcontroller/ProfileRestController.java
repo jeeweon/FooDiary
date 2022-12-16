@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appfoodiary.foodiary.repository.MyprofileDao;
-import com.appfoodiary.foodiary.vo.ProfileBookmarkVO;
+import com.appfoodiary.foodiary.vo.MemRekVO;
 import com.appfoodiary.foodiary.vo.ProfileMemVO;
 import com.appfoodiary.foodiary.vo.ReviewListVO;
 
@@ -51,5 +51,11 @@ public class ProfileRestController {
 			){
 		int memNo=(Integer)session.getAttribute("loginNo");
 		return myprofileDao.likeListVO(memNo);
+	}
+	@GetMapping("profile/memrek")
+	public List<MemRekVO> memRekList(
+			HttpSession session){
+		int memNo=(Integer)session.getAttribute("loginNo");
+		return myprofileDao.MemRekVO(memNo);
 	}
 }

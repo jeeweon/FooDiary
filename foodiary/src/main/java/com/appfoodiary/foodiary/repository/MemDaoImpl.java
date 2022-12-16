@@ -136,6 +136,11 @@ public class MemDaoImpl implements MemDao {
 		return sqlSession.update("mem.point",memDto)>0;
 	}
 	
+	@Override
+	public boolean levelUp(MemDto memDto) {
+		return sqlSession.update("mem.levelUp",memDto)>0;
+	}
+	
 	//맛쟁이 탐색 > 검색 결과 조회
 	@Override
 	public List<MemSearchVO> memSearchList(MemSearchVO vo) {
