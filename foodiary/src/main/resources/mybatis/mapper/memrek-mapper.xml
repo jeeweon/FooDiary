@@ -31,7 +31,4 @@ R left outer join mem M
 on R.mem_no=M.mem_no
 order by DBMS_RANDOM.RANDOM
 	</select>
-	<select id="memreklist" parameterType="int" resultType="">
-	</select>
-	
 </mapper>
