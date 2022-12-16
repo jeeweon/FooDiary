@@ -22,7 +22,10 @@
 			success : function(resp) {
 				memRekList = resp;
 				console.log(memRekList);
-				threeMem();
+				console.log("세션"+${sessionScope.loginNo});
+				
+				// 회원번호 가 있으면 팔로우한 사람제거 하고 출력
+					threeMem();
 			}
 		});
 	};

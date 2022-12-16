@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.appfoodiary.foodiary.entity.FollowCertDto;
+import com.appfoodiary.foodiary.repository.FollowDao;
 import com.appfoodiary.foodiary.repository.MyprofileDao;
+import com.appfoodiary.foodiary.vo.FollowCertVO;
 import com.appfoodiary.foodiary.vo.MemRekVO;
 import com.appfoodiary.foodiary.vo.ProfileMemVO;
 import com.appfoodiary.foodiary.vo.ReviewListVO;
@@ -23,6 +26,8 @@ public class ProfileRestController {
 
 	@Autowired
 	private MyprofileDao myprofileDao; 
+	@Autowired
+	private FollowDao followDao;
 	
 	@GetMapping("/profile/mem")
 	public ProfileMemVO profilemem(
@@ -74,4 +79,25 @@ public class ProfileRestController {
 			){
 		return myprofileDao.reivewListVO(memNo);
 	}
+	
+	//팔로우 followCert
+	@GetMapping("profile/followcert")
+	public boolean followCert(
+			HttpSession session,
+			@RequestParam int memNo
+			) {
+		int activeMemNo=(Integer)session.getAttribute("loginNo");
+		
+			FollowCertDto dto=FollowCertDto.builder()
+				.activeMemNo(activeMemNo)
+				.passiveMemNo(memNo)
+				.build();
+			if(followDao.followCert(dto) != null) {
+				return true;
+			}else {
+				return false;
+			}
+			 
+	}
+	
 }

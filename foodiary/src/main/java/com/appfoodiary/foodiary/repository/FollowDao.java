@@ -1,7 +1,8 @@
 package com.appfoodiary.foodiary.repository;
 
+import com.appfoodiary.foodiary.entity.FollowCertDto;
 import com.appfoodiary.foodiary.entity.FollowDto;
-import com.appfoodiary.foodiary.vo.FollowVO;
+import com.appfoodiary.foodiary.vo.FollowCertVO;
 
 public interface FollowDao {
 
@@ -17,4 +18,6 @@ public interface FollowDao {
 	int following(int memNo);
 	//게시물수
 	int reviewCount(int memNo);
+	//팔로우 확인
+	FollowCertVO followCert(FollowCertDto dto);
 }

@@ -7,6 +7,8 @@
  	$(function(){
  		console.log(${memNo});
  		memList();
+ 		followCert();
+ 		
  		
  		//회원조회
  		let profileList = [];
@@ -17,9 +19,6 @@
 				dataType : "json",
 				success : function(resp) {
 					profileList = resp;
-					console.log(profileList);
-					console.log(profileList.memNick);
-					console.log(profileList.attachNo != null);
 					$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
@@ -29,13 +28,31 @@
 					var imgClass=$("[name=orgin]");
 					//사진이 있는지 없는지 확인
 					if(profileList.attachNo != 0){
-						$(imgClass).attr("src","${pageContext.request.contextPath}/attach/download/"+profileList.attachNo);
+						$("[name=origin]").attr("src","${pageContext.request.contextPath}/attach/download/"+profileList.attachNo);
 					}else{
-						$(imgClass).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
+						$("[name=origin]").attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 				}
 			});
 		};
+		
+		//팔로우 했는지 안했는지 확인 
+		
+		 function followCert(){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rest/profile/followcert?memNo="+${memNo},
+				method : "get",
+				dataType : "json",
+				success : function(resp) {
+					if(resp){
+						$(".follow-cert").text("팔로잉");
+					}else{
+						$(".follow-cert").text("팔로우");
+					}
+				}
+			});
+		} 
+		
  	});
 </script>
 <body>
@@ -45,24 +62,25 @@
                 <div class="boardM">
                     <%-- <img src="${pageContext.request.contextPath}/images/프로필임시.png"> --%>
                     <%-- <img src="${pageContext.request.contextPath}/attach/downloadReviewAttach/"> --%>
-                	<img name="origin" class="preview preview-hover"> 
+                	 <img name="origin" class="preview preview-hover">  
                     
                 </div><!--boardM-->
                 <div class="boardT">
                     <ul class="boardT1">
                         <li class="mem-name"> </li>
+                        <button class="follow-cert"></button>
                         <button><a href="">프로필 편집</a></button>
                         <a href="" id="Ta1"><img src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정"></a>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
-						
                         <li class="board-cnt"></li>
                         <li class="follow-cnt"></li>
                         <li class="follower-cnt"></li>
 
                     </ul> <!-- boardT2 -->
                     <P>	
+                    	<span class="aaa">adfsa</span>
                     	<span>자기소개</span>
                     	<span class="mem-info"></span>           
                     </P>
