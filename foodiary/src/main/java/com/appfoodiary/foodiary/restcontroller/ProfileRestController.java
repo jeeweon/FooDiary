@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appfoodiary.foodiary.entity.FollowCertDto;
 import com.appfoodiary.foodiary.repository.FollowDao;
 import com.appfoodiary.foodiary.repository.MyprofileDao;
-import com.appfoodiary.foodiary.vo.FollowCertVO;
+import com.appfoodiary.foodiary.vo.FollowMemVO;
 import com.appfoodiary.foodiary.vo.MemRekVO;
 import com.appfoodiary.foodiary.vo.ProfileMemVO;
 import com.appfoodiary.foodiary.vo.ReviewListVO;
@@ -99,5 +100,41 @@ public class ProfileRestController {
 			}
 			 
 	}
+	//팔로우수 
+	@PostMapping("profile/followcnt")
+	public int followcnt(
+			@RequestParam int passiveMemNo) {
+		return followDao.follower(passiveMemNo);
+	}
 	
+	//myprofile 팔로우 멤버
+	@GetMapping("/profile/followmem")
+	public List<FollowMemVO> followmem(
+			HttpSession session){
+		
+		int memNo=(Integer)session.getAttribute("loginNo");
+		return followDao.followMem(memNo);
+	}
+	//myprofile 팔로워 멤버
+	@GetMapping("/profile/followermem")
+	public List<FollowMemVO> followermem(
+			HttpSession session){
+		
+		int memNo=(Integer)session.getAttribute("loginNo");
+		return followDao.followerMem(memNo);
+	}
+	//yourprofile 팔로우 멤버
+	@GetMapping("/profile/yourfollowmem")
+	public List<FollowMemVO> yourfollowmem(
+			HttpSession session,
+			@RequestParam int memNo){
+		return followDao.followMem(memNo);
+	}
+	//yourprofile 팔로워 멤버
+	@GetMapping("/profile/yourfollowermem")
+	public List<FollowMemVO> yourfollowermem(
+			HttpSession session,
+			@RequestParam int memNo){
+		return followDao.followerMem(memNo);
+	}
 }

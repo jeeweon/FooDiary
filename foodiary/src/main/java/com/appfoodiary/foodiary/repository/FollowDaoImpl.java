@@ -1,6 +1,8 @@
 package com.appfoodiary.foodiary.repository;
 
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.appfoodiary.foodiary.entity.FollowCertDto;
 import com.appfoodiary.foodiary.entity.FollowDto;
 import com.appfoodiary.foodiary.vo.FollowCertVO;
+import com.appfoodiary.foodiary.vo.FollowMemVO;
 
 @Repository
 public class FollowDaoImpl implements FollowDao{
@@ -45,6 +48,14 @@ public class FollowDaoImpl implements FollowDao{
 	@Override
 	public FollowCertVO followCert(FollowCertDto dto) {
 		return sqlSession.selectOne("myprofile.followcert" ,dto);
+	}
+	@Override
+	public List<FollowMemVO> followMem(int memNo) {
+		return sqlSession.selectList("follow.followmem",memNo);
+	}
+	@Override
+	public List<FollowMemVO> followerMem(int memNo) {
+		return sqlSession.selectList("follow.followermem",memNo);
 	}
 
 }
