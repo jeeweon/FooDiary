@@ -229,29 +229,4 @@
 -->
 <!-- 바벨 CDN(using JSX) -->    
 <script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel">
-	//함수 형태로 컴포넌트를 구현(functional component) -> this 사용X
-	const MainComponent = ()=> {
-	//state 생성
-            const [name, setName] = React.useState("마리오");
-            const [korean, setKorean] = React.useState(50);
-            const [english, setEnglish] = React.useState(60);
-            const [math, setMath] = React.useState(65);
-            const [total, setTotal] = React.useState(korean+english+math);
-            const [average, setAverage] = React.useState(total / 3);
-
-		return (
-                <>
-                    <h1>name : {name}</h1>
-                    <h1>korean : {korean}점</h1>
-                    <h1>english : {english}점</h1>
-                    <h1>math : {math}점</h1>
-                    <h1>total : {total}점</h1>
-                    <h1>average : {average}점</h1>
-                </>
-            );
-        };
-
-	const app = ReactDOM.createRoot(document.querySelector("#reply"));
-	app.render(<MainComponent/>);
-</script>
+<script type="text/babel" src="${pageContext.request.contextPath}/js/reply.js"></script>
