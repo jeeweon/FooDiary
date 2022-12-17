@@ -15,9 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 
 @CrossOrigin(origins = "http://127.0.0.1:5500/")
+@Tag(name = "review controller", description = "리뷰")
 @RestController
 @RequestMapping("/rest/review")
 public class ReviewRestController {
@@ -27,6 +31,7 @@ public class ReviewRestController {
 
 	//리뷰 신고 카운트+1
 	@PostMapping("/report/{reviewNo}")
+	@Operation(summary = "리뷰 신고처리", description = "reviewNo를 이용하여 신고처리를 합니다.")
 	public boolean report(@PathVariable int reviewNo,
 			HttpSession session) {
 		//신고접수 과정
