@@ -155,6 +155,7 @@
 	left outer join 
 	(select review_no,count(review_no) rcn from reply group by review_no) RP on R.review_no=RP.review_no
 	</select>
+	<!-- 회원추천 --> 
 	<select id="memreklist" parameterType="int" resultType="MemRekVO">
 select
     mem_no,
@@ -188,4 +189,17 @@ order by mem_login_date desc
 order by DBMS_RANDOM.RANDOM
 			
 	</select>
+	
+	
+	<!-- 팔로우 확인 -->
+	<select id="followcert" parameterType="FollowCertDto" resultType="followCertVO">
+	 select 
+    	decode(follow_no, null, 'false', 'true') follow_check
+    from 
+    	follow 
+    where 
+    	active_mem_no=#{activeMemNo} and passive_mem_no=#{passiveMemNo}
+	</select>
+	
+	
 </mapper>

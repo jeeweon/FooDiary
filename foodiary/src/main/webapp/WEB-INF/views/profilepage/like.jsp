@@ -82,4 +82,3 @@
 		<div class="feed"></div>
 </section>
 
-<i class='fa-solid fa-star'>test</i>
