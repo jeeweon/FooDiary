@@ -7,13 +7,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.repository.ReviewDao;
+
+
 
 @CrossOrigin(origins = "http://127.0.0.1:5500/")
 @RestController
@@ -24,8 +26,8 @@ public class ReviewRestController {
 	private ReviewDao reviewDao;
 
 	//리뷰 신고 카운트+1
-	@GetMapping("/report")
-	public boolean report(@RequestParam int reviewNo,
+	@PostMapping("/report/{reviewNo}")
+	public boolean report(@PathVariable int reviewNo,
 			HttpSession session) {
 		//신고접수 과정
 		//1. 리뷰신고 테이블 : 신고 +1(insert)

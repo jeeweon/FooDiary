@@ -153,16 +153,18 @@
 			<!-- 본문 내용 -->
 			<div class="float-left">
 				(내용)${reviewDto.reviewContent}
-			</div>
 			
-			<!-- 댓글 위치 
-				1. 댓글목록 : 최신순, 한번에 10개씩, 더보기클릭
-					- 작성시간 출력
-					- 회원 : 댓글 신고
-					- 내 댓글 : 삭제 가능 (회원탈퇴시 자동삭제)
-				2. 하단 위치 고정 : 좋아요, 북마크, 댓글작성란
-					- 댓글 작성 : 내용없을 때 등록버튼 비활성화
-			-->
+				<!-- 댓글 위치 
+					1. 댓글목록 : 최신순, 한번에 10개씩, 더보기클릭
+						- 작성시간 출력
+						- 회원 : 댓글 신고
+						- 내 댓글 : 삭제 가능 (회원탈퇴시 자동삭제)
+					2. 하단 위치 고정 : 좋아요, 북마크, 댓글작성란
+						- 댓글 작성 : 내용없을 때 등록버튼 비활성화
+				-->
+				<!-- 댓글 : 제어 영역 설정 -->
+	    		<div id="reply"></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -200,12 +202,9 @@
 			
 			//신고 카운트+1
 			if(result) {
-				axios.get("${pageContext.request.contextPath}/rest/review/report", {
-				    params : {
-				    	//reviewNo: $("input[name=reviewNo]").val()
-						reviewNo: ${reviewDto.reviewNo}
-			    	}
-				})
+				//reviewNo = $("input[name=reviewNo]").val()
+				var reviewNo = ${reviewDto.reviewNo}
+				axios.post("${pageContext.request.contextPath}/rest/review/report/"+reviewNo)
 				.then(function(response){
 					//console.log(response);
 					if(response.data) {	//response가 true일 경우
@@ -216,4 +215,43 @@
 			}
 		});
 	});
+</script>
+
+
+<!-- react 라이브러리 -->
+<!-- 개발용 CDN -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<!-- 배포용 CDN -->
+<!--
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+-->
+<!-- 바벨 CDN(using JSX) -->    
+<script src=" https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+	//함수 형태로 컴포넌트를 구현(functional component) -> this 사용X
+	const MainComponent = ()=> {
+	//state 생성
+            const [name, setName] = React.useState("마리오");
+            const [korean, setKorean] = React.useState(50);
+            const [english, setEnglish] = React.useState(60);
+            const [math, setMath] = React.useState(65);
+            const [total, setTotal] = React.useState(korean+english+math);
+            const [average, setAverage] = React.useState(total / 3);
+
+		return (
+                <>
+                    <h1>name : {name}</h1>
+                    <h1>korean : {korean}점</h1>
+                    <h1>english : {english}점</h1>
+                    <h1>math : {math}점</h1>
+                    <h1>total : {total}점</h1>
+                    <h1>average : {average}점</h1>
+                </>
+            );
+        };
+
+	const app = ReactDOM.createRoot(document.querySelector("#reply"));
+	app.render(<MainComponent/>);
 </script>
