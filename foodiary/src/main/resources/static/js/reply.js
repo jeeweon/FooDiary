@@ -14,7 +14,7 @@ const ListView = (props)=>{
         return (
             <>
                 <div>
-                    <h2>No result</h2>
+                    <h2>"댓글을 남겨주세요"</h2>
                 </div>
             </>
         )
@@ -53,19 +53,15 @@ const MainComponent = ()=> {
 
         setLoading(true);
 
-        axios({
-            url:"http://localhost:8888/rest/reply/list",
-            method:"get",
-            //resultType:"json",
-        })
+        axios.get("http://localhost:8888/rest/reply/list/"+168)
         .then(respObject=>{
-            //console.log(respObject);
+            console.log(respObject);
             
             //const resp = respObject.data;
             //setPkmList(resp.data);
             setReplyList(respObject.data);
 
-            //setLoading(false);    ◆ setLoading 각각 처리 (1)
+            //setLoading(false);    //◆ setLoading 각각 처리 (1)
         })
         //.catch(e=>{
         //    window.alert("에러 발생");

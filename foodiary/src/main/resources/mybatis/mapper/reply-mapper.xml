@@ -8,8 +8,10 @@
 		select reply_seq.nextval from dual
 	</select>
 	
-	<select id="list" resultType="ReplyDto">
-		select * from reply order by reply_write_time asc
+	<select id="list" parameterType="int" resultType="ReplyDto">
+		select * from reply 
+		where review_no = #{reviewNo}
+		order by reply_write_time asc
 	</select>
 	
 	<insert id="insert" parameterType="ReplyDto">

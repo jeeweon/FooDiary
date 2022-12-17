@@ -22,8 +22,8 @@ public class ReplyDaoImpl implements ReplyDao {
 	}
 	//댓글목록출력
 	@Override
-	public List<ReplyDto> list() {
-		return sqlSession.selectList("reply.list");
+	public List<ReplyDto> list(int reviewNo) {
+		return sqlSession.selectList("reply.list", reviewNo);
 	}
 	//댓글 작성
 	@Override
