@@ -7,9 +7,9 @@
  	$(function(){
  		console.log(${memNo});
  		memList();
- 		followCert();
- 		
- 		
+ 		followCert();	
+ 		followMem();
+ 		followerMem();
  		//회원조회
  		let profileList = [];
  		function memList() {
@@ -19,6 +19,7 @@
 				dataType : "json",
 				success : function(resp) {
 					profileList = resp;
+					console.log(profileList);
 					$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
@@ -52,6 +53,59 @@
 				}
 			});
 		} 
+		
+		// 팔로우버튼 클릭시 
+		$(".follow-cert").click(function(){
+			console.log("버튼 클릭");
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/review/follow",
+				method:"post",
+				data:{
+					passiveMemNo : ${memNo}	
+				},
+				success:function(resp){
+					if(resp){
+						$(".follow-cert").text("팔로잉");
+					}else{
+						$(".follow-cert").text("팔로우");
+					}
+					$.ajax({
+						url:"${pageContext.request.contextPath}/rest/profile/followcnt",
+						method:"post",
+						data:{
+							passiveMemNo : ${memNo}
+						},
+						success:function(resp){
+								console.log("follow :"+resp);
+								$(".follow-cnt").text("팔로워 : "+resp);
+						}
+					});
+				}
+			});
+		});
+		
+		//팔로우멤버 조회
+		function followMem(){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/profile/yourfollowmem?memNo="+${memNo},
+				method :"get",
+				dataType:"json",
+				success:function(resp){
+					console.log(resp);
+				}
+			}); 
+		};
+		//팔로워멤버 조회
+		function followerMem(){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/profile/yourfollowermem?memNo="+${memNo},
+				method :"get",
+				dataType:"json",
+				success:function(resp){
+					console.log(resp);
+				}
+			}); 
+		};
 		
  	});
 </script>
@@ -89,8 +143,6 @@
                     <ul>
                         <li>
                             <a href="yourreviewlist?memNo=${memNo}">게시물</a>
-                            <a href="bookmark">북마크</a>
-                            <a href="like">좋아요</a>
                         </li>
                     </ul>
                 </div> <!-- boardA -->
