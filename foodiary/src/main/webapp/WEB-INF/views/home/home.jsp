@@ -157,7 +157,7 @@
                 </div>          
             </div>
                  <div class="follow">
-                    <h3>맛쟁이 추천</h3>
+                    <h3>오늘의 맛쟁이 추천</h3>
                      <ul>
                          <li><a href="">먹보1</a></li>
                          <li><a href="">먹보2</a></li>
