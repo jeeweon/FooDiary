@@ -38,12 +38,13 @@
 			var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 			var br=$("<br>");
 			var name=$("<span>").text(value.memNick);
+			var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
 			var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name);
+			var li=$("<li>").append(a).append(button);
 			a.click(function(){
 				console.log("a클릭");
-				window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
 			});
-			var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
 			
 			button.click(function(){
 				console.log("팔로우 클릭");
@@ -71,13 +72,16 @@
 			}else{
 				memImg.attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 			} 
-			$(".main").append(a).append(button).append(br);	
+			
+			$(".follow").append(li);	
 		});
 	};
 });
 </script>
-<div class="main">
-</div>
-
+ 				 <div class="follow">
+                    <h3>먹는거 좋아하는 사람</h3>
+                     <ul class="follow-ul">
+                     </ul>
+                 </div>
 
 

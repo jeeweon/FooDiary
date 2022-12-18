@@ -74,7 +74,7 @@
           background:rgba(0, 0, 0, 0.5);
           z-index:-1;
         }  
-        .follow-img {
+        .follow-img{
         	width:50px;
         	height:50px;
         }
@@ -185,6 +185,9 @@
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
+					var b=$("<a>").attr("href","www.naver.com");
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span).append(b);
+					
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
@@ -193,9 +196,13 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					$(".modal_content").css("display","block");
-					$(".modal_content").append(img).append(span).append(br);
+					$(".modal_content").append(a).append(br);
 				});
-			} 
+			}else{
+				console.log("팔로우 목록이 없습니다");
+				var span=$("<span>").text("선택된 팔로우가 없습니다.")
+				$(".modal_content").append(span);
+			}
 		};
 		
 		//팔로워멤버 조회
@@ -206,7 +213,7 @@
 				method :"get",
 				dataType:"json",
 				success:function(resp){
-					console.log("팔로잉 멤버adfdsf"+resp);
+					console.log("팔로잉 멤버"+resp);
 					followerMemList=resp;
 					renderfollowerList();
 				}
@@ -223,6 +230,9 @@
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
+					var b=$("<a>").attr("href","www.naver.com");
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span).append(b);
+					
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
@@ -231,8 +241,12 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					
-					$(".modal_content2").append(img).append(span).append(br);
+					$(".modal_content2").append(a).append(br);
 				});
+			}else{
+				console.log("팔로워 목록이 없습니다");
+				var span2=$("<span>").text("선택된 팔로우가 없습니다.");
+				$(".modal_content2").append(span2);
 			} 
 		};
 		
@@ -257,14 +271,15 @@
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
+                    <a href="${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo=${memNo}">
                         <li class="board-cnt"></li>
+                    </a>
                         <li class="follow-cnt"></li>
                         <li class="follower-cnt"></li>
 
                     </ul> <!-- boardT2 -->
                     <P>	
-                    	<span class="aaa">adfsa</span>
-                    	<span>자기소개</span>
+                    	<span>자기소개</span><br><br>
                     	<span class="mem-info"></span>           
                     </P>
                 </div> <!--boardT-->

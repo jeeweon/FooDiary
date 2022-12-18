@@ -10,11 +10,11 @@
 <section class="section1">	
 		<div class="feed"></div>	
 </section>
-
+<span><i class="fa-solid fa-heart"></i></span>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
 <script>
-		
+	
 
 	$(function(){
 		reviewList();

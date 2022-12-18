@@ -137,6 +137,8 @@
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
+					//a+img+span
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span);
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
@@ -145,8 +147,11 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					$(".modal_content").css("display","block");
-					$(".modal_content").append(img).append(span).append(br);
+					$(".modal_content").append(a).append(br);
 				});
+			}else{
+				var span=$("span").text("선택된 팔로우가 없습니다.");
+				$(".modal_content").append(span);
 			} 
 		};
 		
@@ -175,6 +180,7 @@
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span);
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
@@ -183,9 +189,12 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					
-					$(".modal_content2").append(img).append(span).append(br);
+					$(".modal_content2").append(a).append(br);
 				});
-			} 
+			}else{
+				var span=$("span").text("선택된 팔로워가 없습니다.");
+				$(".modal2_content").append(span);
+			}  
 		};
 		
 		
@@ -208,7 +217,9 @@
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">				
-                        <li class="board-cnt"></li>
+                        <a href="${pageContext.request.contextPath}/profilepage/board">
+    	                    <li class="board-cnt"></li>
+	                    </a>
                         <a href="#"><li class="follow-cnt"></li></a>
                         <a href="#"><li class="follower-cnt"></li></a>
                     </ul> <!-- boardT2 -->
