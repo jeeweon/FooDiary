@@ -305,7 +305,7 @@
 		//검색 버튼 클릭 시, 검색어가 닉네임에 포함된 유저 조회
 		$(document).on("click", ".search-btn", function() {
             const keyword = $("[name=keyword]").val();
-            
+            console.log(keyword);
 			$(".mem-list").empty();
 			if(!keyword){
 				if(memNo == "null"){
