@@ -149,8 +149,8 @@ public class MemDaoImpl implements MemDao {
 	
 	//맛쟁이 탐색 > 활동 점수 top10 조회
 	@Override
-	public List<MemSearchVO> memPointTopList() {
-		return sqlSession.selectList("mem.point-top");
+	public List<MemSearchVO> memPointTopList(MemSearchVO vo) {
+		return sqlSession.selectList("mem.point-top", vo);
 	}
 	
 	//맛쟁이 탐색 > 관심지역 같은 유저 조회(비회원)
