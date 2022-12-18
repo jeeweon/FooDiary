@@ -120,17 +120,31 @@
 		</if>
 	</select>
 	
-	<!-- 활동점수 높은 순 top10 회원 조회 -->
-	<select id="point-top" resultType="MemSearchVO">
+	<!-- 활동점수 높은 순 top5 회원 조회 -->
+	<select id="point-top" parameterType="MemSearchVO" resultType="MemSearchVO">
 		select * from(
 			select TMP.*, rownum rn from(
-				select M.*, P.attach_no, coalesce(B.cnt, 0) mem_review_cnt from mem M 
+				select 
+					M.*, 
+					P.attach_no, 
+					coalesce(B.cnt, 0) mem_review_cnt 
+					<if test="memNo != 0">
+						, decode(F.follow_no, null, 'false', 'true') follow_check
+					</if>
+				from mem M 
 				left outer join profile_attach P on M.mem_no = P.mem_no
 				left outer join( <!-- 작성한 리뷰 개수 조회 -->
 					select mem_no, count(mem_no) cnt
 					from review
 					group by mem_no
 				)B on M.mem_no = B.mem_no
+				<if test="memNo != 0"> <!-- 회원이면 팔로우 여부 조회 -->
+					left outer join (
+						select * 
+						from follow
+						where active_mem_no = #{memNo}) F
+					on M.mem_no = F.passive_mem_no
+				</if>
 				order by m.mem_point desc, m.mem_login_date desc
 			)TMP
 		) 
