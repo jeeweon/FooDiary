@@ -54,4 +54,26 @@
 	where 
 		mem_no=#{memNo}
 	</select>
+	<!-- 내가 팔로우한 (팔로우) -->
+	<select id="followmem" parameterType="int" resultType="FollowMemVO">
+	select
+	    M.mem_no mem_no,
+    	M.mem_nick mem_nick,
+    	PA.attach_no attach_no
+	from(
+		select passive_mem_no from follow where active_mem_no=#{memNo}) F
+	left outer join mem M on F.passive_mem_no=M.mem_no
+	left outer join profile_attach PA on F.passive_mem_no=PA.mem_no
+	</select>
+	<!-- 나를 팔로우한 (팔로워) -->
+	<select id="followermem" parameterType="int" resultType="FollowMemVO">
+	select
+    	M.mem_no mem_no,
+    	M.mem_nick mem_nick,
+    	PA.attach_no attach_no
+	from(
+		select active_mem_no from follow where passive_mem_no=#{memNo}) F
+	left outer join mem M on F.active_mem_no=M.mem_no
+	left outer join profile_attach PA on F.active_mem_no=PA.mem_no
+	</select>
 </mapper>

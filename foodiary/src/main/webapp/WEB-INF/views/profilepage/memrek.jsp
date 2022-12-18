@@ -22,7 +22,10 @@
 			success : function(resp) {
 				memRekList = resp;
 				console.log(memRekList);
-				threeMem();
+				console.log("세션"+${sessionScope.loginNo});
+				
+				// 회원번호 가 있으면 팔로우한 사람제거 하고 출력
+					threeMem();
 			}
 		});
 	};
@@ -38,7 +41,7 @@
 			var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name);
 			a.click(function(){
 				console.log("a클릭");
-				window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo"+$(this).data("mno");
+				window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
 			});
 			var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
 			

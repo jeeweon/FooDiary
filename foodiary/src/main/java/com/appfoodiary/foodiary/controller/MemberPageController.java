@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.FollowDto;
@@ -92,7 +93,18 @@ public class MemberPageController {
 		return "profilepage/board";
 	}
 	@GetMapping("/yourprofile")
-	public String yourprofile() {
+	public String yourprofile(
+			@RequestParam int memNo,
+			Model model 
+			) {
+		model.addAttribute("memNo",memNo);
 		return "/profilepage/yourprofile";
+	}
+	@GetMapping("/yourreviewlist")
+	public String yourreviewlist(
+			@RequestParam int memNo,
+			Model model) {
+		model.addAttribute("memNo",memNo);
+		return "/profilepage/yourreviewlist";
 	}
 }
