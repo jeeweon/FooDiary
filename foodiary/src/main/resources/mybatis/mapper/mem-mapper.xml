@@ -159,11 +159,17 @@
 			select TMP.*, rownum rn from (
 				select distinct 
 					M.*, 
-					P.attach_no 
+					P.attach_no, 
+					coalesce(B.cnt, 0) mem_review_cnt
 				from interest_areas I 
 				inner join areas A on I.area_no = A.area_no 
 				left outer join mem M on M.mem_no = I.mem_no
 				left outer join profile_attach P on M.mem_no = P.mem_no
+				left outer join( <!-- 작성한 리뷰 개수 조회 -->
+					select mem_no, count(mem_no) cnt
+					from review
+					group by mem_no
+				)B on M.mem_no = B.mem_no
 				where A.area_city = '서울' 
 				order by mem_login_date desc
 			)TMP
@@ -179,12 +185,18 @@
 			select TMP.*, rownum rn from (
 				select distinct 
 					M.*, 
-					P.attach_no, 
+					P.attach_no,
+					coalesce(B.cnt, 0) mem_review_cnt,
 					decode(F.follow_no, null, 'false', 'true') follow_check 
 				from interest_areas I 
 				inner join areas A on I.area_no = A.area_no 
 				left outer join mem M on M.mem_no = I.mem_no
 				left outer join profile_attach P on M.mem_no = P.mem_no
+				left outer join( <!-- 작성한 리뷰 개수 조회 -->
+					select mem_no, count(mem_no) cnt
+					from review
+					group by mem_no
+				)B on M.mem_no = B.mem_no
 				left outer join (
 					select * 
 					from follow

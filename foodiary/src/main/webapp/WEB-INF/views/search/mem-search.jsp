@@ -325,7 +325,6 @@
 		function renderList(){
 			if(memList.length != 0) {
 				$.each(memList, function(index, value) {
-					console.log(memList);
 					var memAvatar;
 					if(value.attachNo == 0) {
 						memAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");						
