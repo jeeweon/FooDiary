@@ -9,17 +9,6 @@
 
 </head>
 <body>
-<!-- 임시 로그인 메뉴 -->
-<c:set var="login" value="${loginNo != null}"></c:set>
-<c:choose>
-	<c:when test="${login}">
-		<a href="/mem/logout">로그아웃</a>
-	</c:when>
-	<c:otherwise>
-		<a href="/mem/login">로그인</a>	
-	</c:otherwise>
-</c:choose>
-
  <div class="wrapper">
         <div class="inner">
             <header class="header">
@@ -103,20 +92,6 @@
         </div><!--//inner-->
     </div> <!--wrapper-->
 
-
-<!-- <div class="container">
-	<form class="search-form">
-        <div class="search-bar">
-            <input type="text" name="keyword" class="search-input" placeholder="지역, 장소, 메뉴 검색" autocomplete="off">
-            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
-        </div>  
-    </form>
-
-    리뷰 목록
-    <div class="review-list">
-    </div>
-    
-</div> -->
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
