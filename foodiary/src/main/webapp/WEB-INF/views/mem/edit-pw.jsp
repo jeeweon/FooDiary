@@ -24,8 +24,10 @@
 	<div>
 		<h1>비밀번호 변경</h1>
 	</div>
-	
 	<form action="edit_pw" method="post" class="pw-form">
+		<div>
+			<input name="memNo" value="${memNo}" hidden="true">
+		</div>
 		<div>
 			<label>
 				비밀번호
