@@ -154,6 +154,17 @@
 	color: #E27C5E;
 }
 
+
+.level-img {
+	width:24px;
+	margin:0;
+	margin-left: 5px;
+}
+ 	
+.nick-lev {
+	display: flex;
+	align-items:center;
+}
 </style>
 </head>
 <body>
@@ -336,10 +347,29 @@
 					var memNick = $("<span>").text(value.memNick);
 					memNick.addClass("mem-nick");
 					
+					var memLevel;
+					if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (value.memLevel == "5  ") {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (value.memLevel == "4  ") {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (value.memLevel == "3  ") {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (value.memLevel == "2  ") {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					memLevel.addClass("level-img");
+					
 					var reviewCnt = $("<span>").text("리뷰 " + value.memReviewCnt);
 					reviewCnt.addClass("review-cnt");
 					
-					var infoText = $("<div>").append(memNick).append(reviewCnt);
+					var nickLev = $("<div>").append(memNick).append(memLevel);
+					nickLev.addClass("nick-lev");
+					
+					var infoText = $("<div>").append(nickLev).append(reviewCnt);
 					infoText.addClass("info-text");
 					
 					var memFollow; 

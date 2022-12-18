@@ -28,6 +28,9 @@ public class HomeController {
 		//프로필 조회
 		model.addAttribute("profile",memDao.findProfile(memNo));
 		
+		//레벨, 포인트만 조회
+		model.addAttribute("level", memDao.memLevelAndPoint(memNo));
+		
 		//레벨 업데이트
 		levelPointService.levelUp(memNo);
 		return "home/home";

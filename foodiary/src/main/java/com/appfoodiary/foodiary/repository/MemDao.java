@@ -6,6 +6,7 @@ import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.LevelPointDto;
 import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.entity.ProfileAttachDto;
+import com.appfoodiary.foodiary.vo.MemLevelVO;
 import com.appfoodiary.foodiary.vo.MemSearchVO;
 
 public interface MemDao {
@@ -66,4 +67,7 @@ public interface MemDao {
 	
 	//맛쟁이 탐색 > 관심지역 같은 유저 조회(회원)
 	List<MemSearchVO> memSameInterestList(MemSearchVO vo);
+	
+	//회원 레벨과 포인트만 조회
+	MemLevelVO memLevelAndPoint(int memNo);
 }
