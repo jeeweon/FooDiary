@@ -124,8 +124,13 @@
 	<select id="point-top" resultType="MemSearchVO">
 		select * from(
 			select TMP.*, rownum rn from(
-				select M.*, P.attach_no from mem M 
+				select M.*, P.attach_no, coalesce(B.cnt, 0) mem_review_cnt from mem M 
 				left outer join profile_attach P on M.mem_no = P.mem_no
+				left outer join( <!-- 작성한 리뷰 개수 조회 -->
+					select mem_no, count(mem_no) cnt
+					from review
+					group by mem_no
+				)B on M.mem_no = B.mem_no
 				order by m.mem_point desc, m.mem_login_date desc
 			)TMP
 		) 
