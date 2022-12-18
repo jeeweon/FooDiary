@@ -97,6 +97,17 @@ create table reply(
         reply_write_time date default sysdate not null,
         reply_report_cnt number default 0 not null check(reply_report_cnt>=0) 
 );
+create view reply_mem_attach_view as
+select
+    R.*, 
+    M.mem_nick, M.mem_level, 
+    P.attach_no
+from
+    reply R 
+inner join mem M 
+    on R.mem_no = M.mem_no
+left outer join profile_attach P
+     on M.mem_no = P.mem_no;
 
 CREATE TABLE likes ( --like가 예약어라 likes로 대체
         review_no references review(review_no) on delete cascade,
