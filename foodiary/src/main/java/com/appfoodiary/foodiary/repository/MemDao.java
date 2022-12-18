@@ -59,7 +59,7 @@ public interface MemDao {
 	List<MemSearchVO> memSearchList(MemSearchVO vo);
 	
 	//맛쟁이 탐색 > 활동 점수 top10 조회
-	List<MemSearchVO> memPointTopList();
+	List<MemSearchVO> memPointTopList(MemSearchVO vo);
 	
 	//맛쟁이 탐색 > 관심지역 같은 유저 조회(비회원)
 	List<MemSearchVO> guestSameInterestList();
