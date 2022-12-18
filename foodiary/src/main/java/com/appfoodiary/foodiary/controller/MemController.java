@@ -132,21 +132,25 @@ public class MemController {
 	@PostMapping("/email_send")
 	public String emailSend(@RequestParam String memEmail,
 							RedirectAttributes attr) {
-		attr.addAttribute("memEmail",memEmail);
+		MemDto memDto = memDao.findByEmail(memEmail);
+		attr.addFlashAttribute("memDto",memDto);
 		return "redirect:reset_pw";
 	}
 	
 	//3. 비밀번호 재설정
 	@GetMapping("/reset_pw")
-	public String resetPw(@RequestParam String memEmail,Model model) {
-		MemDto memDto = memDao.findByEmail(memEmail);
-		model.addAttribute("memDto",memDto);
-		return "mem/reset-pw";
+	public String resetPw(@ModelAttribute MemDto memDto) {
+		
+		if(memDto!=null) {
+			return "mem/reset-pw";			
+		}
+		else {
+			return "redirect:reset_pw?error"; //error 페이지로 가게 할 수는 없나?
+		}
 	}
 	
 	@PostMapping("/reset_pw")
-	public String resetPw(@ModelAttribute MemDto memDto) {
-		
+	public String resetPw(@ModelAttribute MemDto memDto,Model model) {
 		boolean result = memDao.resetPw(memDto);
 		
 		if(result) {			
@@ -156,6 +160,19 @@ public class MemController {
 			return "redirect:reset_pw?error";
 		}
 	}
+	
+//	@PostMapping("/reset_pw")
+//	public String resetPw(@ModelAttribute MemDto memDto) {
+//		MemDto memDto = memDao.findByEmail(memEmail);
+//		boolean result = memDao.resetPw(memDto);
+//		
+//		if(result) {			
+//			return "redirect:login";
+//		}
+//		else {
+//			return "redirect:reset_pw?error";
+//		}
+//	}
 	
 	@GetMapping("/check_pw")
 	public String checkPw() {
@@ -171,7 +188,7 @@ public class MemController {
 		boolean judge = encoder.matches(beforePw, loginDto.getMemPw());
 		
 		if(judge) {
-//			attr.addAttribute("memNo",memNo);
+			attr.addFlashAttribute("memNo", memNo);
 			return "redirect:edit_pw";
 		}
 		else {
@@ -185,9 +202,8 @@ public class MemController {
 	}
 	@PostMapping("/edit_pw")
 	public String editPw(HttpSession session,
-							@RequestParam String memPw) {
+						@RequestParam int memNo, String memPw) {
 		
-		int memNo = (int) session.getAttribute(SessionConstant.NO);
 		MemDto loginDto = memDao.selectOne(memNo);
 		
 		loginDto.setMemPw(memPw);

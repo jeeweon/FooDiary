@@ -56,8 +56,11 @@ public class LevelPointServiceImpl implements LevelPointService{
 		else if(memPoint>=50) {
 			memDto.setMemLevel("3");
 		}
-		else {
+		else if(memPoint>=25){
 			memDto.setMemLevel("2");
+		}
+		else {
+			memDto.setMemLevel("1");
 		}
 		memDao.levelUp(memDto);
 	}
