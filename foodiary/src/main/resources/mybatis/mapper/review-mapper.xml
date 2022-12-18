@@ -60,6 +60,7 @@
 		select 
 			R.*,
 			M.mem_nick,
+			M.mem_level,
 			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt,
@@ -101,6 +102,7 @@
 		select 
 			R.*, 
 			M.mem_nick,
+			M.mem_level,
 			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt, 
@@ -138,6 +140,7 @@
 		select 
 			R.*,
 			M.mem_nick,
+			M.mem_level,
 			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt
@@ -174,6 +177,7 @@
 		select 
 			R.*,
 			M.mem_nick,
+			M.mem_level,
 			P.attach_no,
 			coalesce(B.cnt, 0) mem_review_cnt, 
 			coalesce(C.cnt2, 0) img_cnt,

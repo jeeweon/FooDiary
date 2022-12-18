@@ -12,6 +12,7 @@ import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.LevelPointDto;
 import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.entity.ProfileAttachDto;
+import com.appfoodiary.foodiary.vo.MemLevelVO;
 import com.appfoodiary.foodiary.vo.MemSearchVO;
 
 @Repository
@@ -149,8 +150,8 @@ public class MemDaoImpl implements MemDao {
 	
 	//맛쟁이 탐색 > 활동 점수 top10 조회
 	@Override
-	public List<MemSearchVO> memPointTopList() {
-		return sqlSession.selectList("mem.point-top");
+	public List<MemSearchVO> memPointTopList(MemSearchVO vo) {
+		return sqlSession.selectList("mem.point-top", vo);
 	}
 	
 	//맛쟁이 탐색 > 관심지역 같은 유저 조회(비회원)
@@ -163,5 +164,11 @@ public class MemDaoImpl implements MemDao {
 	@Override
 	public List<MemSearchVO> memSameInterestList(MemSearchVO vo) {
 		return sqlSession.selectList("mem.mem-same-interest", vo);
+	}
+	
+	//회원 레벨과 포인트만 조회
+	@Override
+	public MemLevelVO memLevelAndPoint(int memNo) {
+		return sqlSession.selectOne("mem.level-and-point", memNo);
 	}
 }

@@ -7,6 +7,11 @@
     <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
+    <!--lightpick 사용을 위한 CDN 추가-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/css/lightpick.css">
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
 
 <style>
    .success-message,
@@ -110,7 +115,7 @@
 			생일
 			<i class="fa-solid fa-asterisk"></i>
 		</label>		
-		<input type="date" class="input" name="memBirth" id="memBirth" placeholder="생일">
+		<input type="text" class="input single-date-picker" name="memBirth" id="memBirth" placeholder="생년월일">
 		<div class="birth">생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요.</div>
         <div class="fail-message">생년월일을 선택해주세요.</div>
 	</div>
@@ -342,6 +347,18 @@ $(function(){
 		
 	});
 	
+	var moment = new Date;//오늘 날짜
+	var limit = moment.getFullYear()-14;
+	
+	console.log(limit);
+	var picker = new Lightpick({
+		field : document.querySelector(".single-date-picker"),
+		format : "YYYY-MM-DD",
+		maxDate : limit,
+		numberOfMonths:2,
+		
+	})
+	
 	$("input[name=memBirth]").blur(function(){
 		var memBirth = $(this).val();
 		$(this).removeClass("success fail");
@@ -353,6 +370,7 @@ $(function(){
 			$(this).addClass("fail");
 		}
 	});
+	
 	
 	
 	$(".join-form").submit(function(e){

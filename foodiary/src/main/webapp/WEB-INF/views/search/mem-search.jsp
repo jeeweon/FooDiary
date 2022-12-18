@@ -139,12 +139,32 @@
 
 .mem-follow-ic {
 	color: #E27C5E;
+	cursor: pointer;
 }
 
 .fa-user-minus {
 	color: #AAAAAA;
 }
 
+.mem-me { /* 맛쟁이 top5에 내가 있으면 클릭 x(팔로우 불가) */
+	padding: 5px 10px;
+	border: 2px solid #E27C5E;
+	border-radius: 20px;
+	font-weight: bold;
+	color: #E27C5E;
+}
+
+
+.level-img {
+	width:24px;
+	margin:0;
+	margin-left: 5px;
+}
+ 	
+.nick-lev {
+	display: flex;
+	align-items:center;
+}
 </style>
 </head>
 <body>
@@ -327,20 +347,43 @@
 					var memNick = $("<span>").text(value.memNick);
 					memNick.addClass("mem-nick");
 					
+					var memLevel;
+					if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (value.memLevel == "5  ") {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (value.memLevel == "4  ") {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (value.memLevel == "3  ") {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (value.memLevel == "2  ") {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					memLevel.addClass("level-img");
+					
 					var reviewCnt = $("<span>").text("리뷰 " + value.memReviewCnt);
 					reviewCnt.addClass("review-cnt");
 					
-					var infoText = $("<div>").append(memNick).append(reviewCnt);
+					var nickLev = $("<div>").append(memNick).append(memLevel);
+					nickLev.addClass("nick-lev");
+					
+					var infoText = $("<div>").append(nickLev).append(reviewCnt);
 					infoText.addClass("info-text");
 					
-					var memFollow;
+					var memFollow; 
 					if(value.followCheck) {
 						memFollow = $("<span>").html("<i class='fa-solid fa-user-minus fa-2x'></i>");
-					} else {					
+						memFollow.addClass("mem-follow-ic");
+					} else if(value.memNo == memNo) { //맛쟁이 top5에 내가 있으면 클릭 x(팔로우 불가)					
+						memFollow = $("<span>").text("ME");
+						memFollow.addClass("mem-me");
+					} else {
 						memFollow = $("<span>").html("<i class='fa-solid fa-user-plus fa-2x'></i>");
+						memFollow.addClass("mem-follow-ic");
 					}
 					memFollow.attr("data-mno", value.memNo);
-					memFollow.addClass("mem-follow-ic");
 					
 					var infoDiv = $("<div>").append(memAvatar).append(infoText)
 						.attr("data-mno", value.memNo);
@@ -359,26 +402,26 @@
 		};
 		
 		//팔로우 버튼 클릭 이벤트 -> rest API 나오면 수정 예정
-		$(document).on("click", ".follow-ic", function() {
+		$(document).on("click", ".mem-follow-ic", function() {
 			if(memNo == "null") {//비회원
 				alert("로그인이 필요한 기능입니다."); //모달로 변경 -> 취소, 로그인하러가기				
 			} else {//회원
 				var clickedBtn = $(this);
 				var no = $(this).data("mno");
-				/* $.ajax({
-					url : "${pageContext.request.contextPath}/rest/",
+				$.ajax({
+					url : "${pageContext.request.contextPath}/rest/review/follow",
 	                method : "post",
 				    data : {
-		        	   reviewNo:no
+				    	passiveMemNo:no
 		           	},
 	                success : function(resp) {
-	                	if(resp == 0) {
-	                		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
+	                	if(resp) {
+	                		clickedBtn.find("i").removeClass("fa-user-plus").addClass("fa-user-minus");
 	                	} else {
-	                		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
+	                		clickedBtn.find("i").removeClass("fa-user-minus").addClass("fa-user-plus");
 	                	}
 	                }
-				}); */
+				});
 			}
 		});
 		

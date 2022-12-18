@@ -6,4 +6,6 @@ public interface SessionConstant {
 	
 	String NICK = "loginNick";
 	//"loginNick" 대신 SessionConstant.NICK
+	
+	String ID = "loginId"; //adminId
 }

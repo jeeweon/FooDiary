@@ -56,10 +56,13 @@ public class SearchRestController {
 		return memDao.memSearchList(vo);
 	}
 	
-	//활동점수 높은 순 top10 회원 조회
+	//활동점수 높은 순 top5 회원 조회
 	@GetMapping("/mem/point-top")
-	public List<MemSearchVO> memPointTopList() {
-		return memDao.memPointTopList();
+	public List<MemSearchVO> memPointTopList(MemSearchVO vo, HttpSession session) {
+		if((Integer)session.getAttribute("loginNo") != null) {
+			vo.setMemNo((Integer)session.getAttribute("loginNo"));
+		}
+		return memDao.memPointTopList(vo);
 	}
 	
 	//맛쟁이 탐색 > 관심지역 같은 유저 조회(비회원)
@@ -72,8 +75,6 @@ public class SearchRestController {
 	@GetMapping("/mem/same-interest/{keyword}")
 	public List<MemSearchVO> memSameInterestList(@PathVariable String keyword,
 			MemSearchVO vo, HttpSession session) {
-		log.debug("들어옴");
-		log.debug("keyword: "+ keyword);
 		int memNo = (Integer)session.getAttribute("loginNo");
 		vo.setMemNo(memNo);
 		vo.setKeyword(keyword);

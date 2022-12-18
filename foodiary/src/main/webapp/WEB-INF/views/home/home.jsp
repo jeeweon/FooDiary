@@ -10,6 +10,21 @@
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
+ 	
+ 	.level-img {
+ 		width:24px;
+ 		margin:0;
+ 		margin-left: 5px;
+ 	}
+ 	
+ 	.nick-lev {
+ 		display: flex;
+ 		align-items:center;
+ 	}
+ 	
+ 	.thumbnail {
+ 		object-fit:cover;
+ 	}
  </style>
 
 </head>
@@ -33,14 +48,43 @@
                 <div class="sidemenu">
                 <ul id="sideP">
                     <li>
-                        <img src="${pageContext.request.contextPath}/images/프로필임시.png">
+                    	<c:choose>
+							<c:when test="${empty profile}">
+								<img src="${pageContext.request.contextPath}/images/basic-profile.png">
+							</c:when>
+							<c:otherwise>
+							<c:forEach var="profile" items="${profile}">
+									<img src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}">
+							</c:forEach>
+							</c:otherwise>		
+						</c:choose>
                         ${loginNick}
+                        <c:choose>
+                        	<c:when test="${level.memLevel == '6  '}">
+                        		<img class="level-img" src="${pageContext.request.contextPath}/images/6.피잣집.png">
+							</c:when>
+                        	<c:when test="${level.memLevel == '5  '}">
+                        		<img class="level-img" src="${pageContext.request.contextPath}/images/5.피자콜라.png">
+							</c:when>
+                        	<c:when test="${level.memLevel == '4  '}">
+                        		<img class="level-img" src="${pageContext.request.contextPath}/images/4.조각피자.png">
+							</c:when>
+                        	<c:when test="${level.memLevel == '3  '}">
+                        		<img class="level-img" src="${pageContext.request.contextPath}/images/3.반죽.png">
+							</c:when>
+                        	<c:when test="${level.memLevel == '2  '}">
+                        		<img class="level-img" src="${pageContext.request.contextPath}/images/2.밀가루.png">
+							</c:when>
+                        	<c:otherwise>
+                        		<img class="level-img" src="${pageContext.request.contextPath}/images/1.밀.png">
+                        	</c:otherwise>
+                        </c:choose>
                     </li>
                 </ul>
                 <ul id="mainicon">
-                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="#">홈</a></li>
-                    <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="#">맛집 탐색</a></li>
-                    <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="#">맛쟁이 탐색</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="/home">홈</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="/search/review">맛집 탐색</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="/search/mem">맛쟁이 탐색</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="#">알림</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="#">북마크</a></li>
                 </ul>
@@ -113,7 +157,7 @@
                 </div>          
             </div>
                  <div class="follow">
-                    <h3>먹는거 좋아하는 사람</h3>
+                    <h3>맛쟁이 추천</h3>
                      <ul>
                          <li><a href="">먹보1</a></li>
                          <li><a href="">먹보2</a></li>
@@ -332,15 +376,33 @@ function reset() {
 					var writerNick = $("<span>").text(value.memNick);
 					writerNick.addClass("writer-nick");
 					
+					var writerLevel;
+					if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (value.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (value.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (value.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (value.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img");
+					
 					var reviewCnt = $("<span>").text("리뷰 " + value.memReviewCnt);
 					reviewCnt.addClass("review-cnt");
 					
 					var writeTime = $("<span>").text(value.reviewWriteTime);
 					writeTime.addClass("write-time");
 					
+					var nickLev = $("<div>").append(writerNick).append(writerLevel);
+					nickLev.addClass("nick-lev");
 					var subInfoText = $("<div>").append(reviewCnt).append(writeTime);
 					subInfoText.addClass("sub-info-text");
-					var infoText = $("<div>").append(writerNick).append(subInfoText);
+					var infoText = $("<div>").append(nickLev).append(subInfoText);
 					infoText.addClass("info-text");
 					
 					var infoDiv = $("<div>").append(writerAvatar).append(infoText)

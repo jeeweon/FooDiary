@@ -6,20 +6,28 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/review-search.css"> <!--css 불러오는 링크--> 
+<style>
+.receipt{
+	background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
+}
 
+.level-img {
+	width:24px;
+	margin:0;
+	margin-left: 5px;
+}
+ 	
+.nick-lev {
+	display: flex;
+	align-items:center;
+}
+
+.thumbnail {
+	object-fit:cover;
+}
+</style>
 </head>
 <body>
-<!-- 임시 로그인 메뉴 -->
-<c:set var="login" value="${loginNo != null}"></c:set>
-<c:choose>
-	<c:when test="${login}">
-		<a href="/mem/logout">로그아웃</a>
-	</c:when>
-	<c:otherwise>
-		<a href="/mem/login">로그인</a>	
-	</c:otherwise>
-</c:choose>
-
  <div class="wrapper">
         <div class="inner">
             <header class="header">
@@ -103,20 +111,6 @@
         </div><!--//inner-->
     </div> <!--wrapper-->
 
-
-<!-- <div class="container">
-	<form class="search-form">
-        <div class="search-bar">
-            <input type="text" name="keyword" class="search-input" placeholder="지역, 장소, 메뉴 검색" autocomplete="off">
-            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
-        </div>  
-    </form>
-
-    리뷰 목록
-    <div class="review-list">
-    </div>
-    
-</div> -->
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
@@ -275,15 +269,33 @@ resetNum = 0;
 					var writerNick = $("<span>").text(value.memNick);
 					writerNick.addClass("writer-nick");
 					
+					var writerLevel;
+					if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (value.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (value.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (value.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (value.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img");
+					
 					var reviewCnt = $("<span>").text("리뷰 " + value.memReviewCnt);
 					reviewCnt.addClass("review-cnt");
 					
 					var writeTime = $("<span>").text(value.reviewWriteTime);
 					writeTime.addClass("write-time");
 					
+					var nickLev = $("<div>").append(writerNick).append(writerLevel);
+					nickLev.addClass("nick-lev");
 					var subInfoText = $("<div>").append(reviewCnt).append(writeTime);
 					subInfoText.addClass("sub-info-text");
-					var infoText = $("<div>").append(writerNick).append(subInfoText);
+					var infoText = $("<div>").append(nickLev).append(subInfoText);
 					infoText.addClass("info-text");
 					
 					var infoDiv = $("<div>").append(writerAvatar).append(infoText)
