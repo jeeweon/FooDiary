@@ -1,7 +1,5 @@
 package com.appfoodiary.foodiary.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
-import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.repository.MemDao;
 import com.appfoodiary.foodiary.service.LevelPointService;
 
@@ -20,7 +17,7 @@ import com.appfoodiary.foodiary.service.LevelPointService;
 public class HomeController {
 	
 	@Autowired
-	LevelPointService levelPointService;
+	private LevelPointService levelPointService;
 	
 	@Autowired
 	private MemDao memDao;
