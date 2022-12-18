@@ -146,6 +146,14 @@
 	color: #AAAAAA;
 }
 
+.mem-me { /* 맛쟁이 top5에 내가 있으면 클릭 x(팔로우 불가) */
+	padding: 5px 10px;
+	border: 2px solid #E27C5E;
+	border-radius: 20px;
+	font-weight: bold;
+	color: #E27C5E;
+}
+
 </style>
 </head>
 <body>
@@ -335,14 +343,18 @@
 					var infoText = $("<div>").append(memNick).append(reviewCnt);
 					infoText.addClass("info-text");
 					
-					var memFollow;
+					var memFollow; 
 					if(value.followCheck) {
 						memFollow = $("<span>").html("<i class='fa-solid fa-user-minus fa-2x'></i>");
-					} else {					
+						memFollow.addClass("mem-follow-ic");
+					} else if(value.memNo == memNo) { //맛쟁이 top5에 내가 있으면 클릭 x(팔로우 불가)					
+						memFollow = $("<span>").text("ME");
+						memFollow.addClass("mem-me");
+					} else {
 						memFollow = $("<span>").html("<i class='fa-solid fa-user-plus fa-2x'></i>");
+						memFollow.addClass("mem-follow-ic");
 					}
 					memFollow.attr("data-mno", value.memNo);
-					memFollow.addClass("mem-follow-ic");
 					
 					var infoDiv = $("<div>").append(memAvatar).append(infoText)
 						.attr("data-mno", value.memNo);
