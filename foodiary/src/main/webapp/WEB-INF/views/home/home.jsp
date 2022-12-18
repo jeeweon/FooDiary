@@ -33,7 +33,16 @@
                 <div class="sidemenu">
                 <ul id="sideP">
                     <li>
-                        <img src="${pageContext.request.contextPath}/images/프로필임시.png">
+                    	<c:choose>
+							<c:when test="${empty profile}">
+								<img src="${pageContext.request.contextPath}/images/basic-profile.png">
+							</c:when>
+							<c:otherwise>
+							<c:forEach var="profile" items="${profile}">
+									<img src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}">
+							</c:forEach>
+							</c:otherwise>		
+						</c:choose>
                         ${loginNick}
                     </li>
                 </ul>
@@ -114,7 +123,7 @@
                 </div>          
             </div>
                  <div class="follow">
-                    <h3>먹는거 좋아하는 사람</h3>
+                    <h3>맛쟁이 추천</h3>
                      <ul>
                          <li><a href="">먹보1</a></li>
                          <li><a href="">먹보2</a></li>
