@@ -280,10 +280,8 @@ resetNum = 0;
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
 					} else if (value.memLevel == "2  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
-					} else if (value.memLevel == "1  ") {
-						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
 					} else {
-						writerLevel = $("<span>").text(" 블랙리스트");
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
 					}
 					writerLevel.addClass("level-img");
 					

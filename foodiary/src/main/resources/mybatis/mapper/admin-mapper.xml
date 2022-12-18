@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	<select id="find-admin" parameterType="String" resultType="AdminDto">
+		select * from admin
+		where admin_id = #{adminId}
+	</select>
+	
+	<update id="login-date" parameterType="String">
+		update admin 
+			set admin_login_date = sysdate 
+		where admin_id = #{adminId}
+	</update>
+</mapper>
