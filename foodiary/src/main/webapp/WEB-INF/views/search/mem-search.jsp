@@ -139,6 +139,7 @@
 
 .mem-follow-ic {
 	color: #E27C5E;
+	cursor: pointer;
 }
 
 .fa-user-minus {
@@ -316,6 +317,7 @@
 		function renderList(){
 			if(memList.length != 0) {
 				$.each(memList, function(index, value) {
+					console.log(memList);
 					var memAvatar;
 					if(value.attachNo == 0) {
 						memAvatar = $("<img>").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");						
@@ -359,26 +361,26 @@
 		};
 		
 		//팔로우 버튼 클릭 이벤트 -> rest API 나오면 수정 예정
-		$(document).on("click", ".follow-ic", function() {
+		$(document).on("click", ".mem-follow-ic", function() {
 			if(memNo == "null") {//비회원
 				alert("로그인이 필요한 기능입니다."); //모달로 변경 -> 취소, 로그인하러가기				
 			} else {//회원
 				var clickedBtn = $(this);
 				var no = $(this).data("mno");
-				/* $.ajax({
-					url : "${pageContext.request.contextPath}/rest/",
+				$.ajax({
+					url : "${pageContext.request.contextPath}/rest/review/follow",
 	                method : "post",
 				    data : {
-		        	   reviewNo:no
+				    	passiveMemNo:no
 		           	},
 	                success : function(resp) {
-	                	if(resp == 0) {
-	                		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
+	                	if(resp) {
+	                		clickedBtn.find("i").removeClass("fa-user-plus").addClass("fa-user-minus");
 	                	} else {
-	                		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
+	                		clickedBtn.find("i").removeClass("fa-user-minus").addClass("fa-user-plus");
 	                	}
 	                }
-				}); */
+				});
 			}
 		});
 		
