@@ -56,12 +56,12 @@ public class SearchRestController {
 		return memDao.memSearchList(vo);
 	}
 	
-	//활동점수 높은 순 top10 회원 조회
+	//활동점수 높은 순 top5 회원 조회
 	@GetMapping("/mem/point-top")
 	public List<MemSearchVO> memPointTopList(MemSearchVO vo, HttpSession session) {
-		log.debug("들어옴");
-		int memNo = (Integer)session.getAttribute("loginNo");
-		vo.setMemNo(memNo);
+		if((Integer)session.getAttribute("loginNo") != null) {
+			vo.setMemNo((Integer)session.getAttribute("loginNo"));
+		}
 		return memDao.memPointTopList(vo);
 	}
 	
