@@ -12,6 +12,7 @@ public class ReviewSearchVO {
 	private int reviewNo;
 	private int memNo;
 	private String memNick;
+	private String memLevel;
 	private String reviewContent;
 	private Date reviewWriteTime;
 	private float starScore;
