@@ -10,7 +10,6 @@
 <section class="section1">	
 		<div class="feed"></div>	
 </section>
-<span><i class="fa-solid fa-heart"></i></span>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
 <script>
@@ -45,9 +44,22 @@
 				$(reviewImg).hover(function(){
 					$(this).addClass("feedimg");
 					console.log("호버 완료");
-				})
+				});
+				
+				var span2=$("<span>").text("   "+value.likeCnt+" ");
+				var iheart=$("<i>").append(span2);
+				iheart.addClass("fa-solid fa-heart");
+				
+				var span3=$("<span>").text("   "+value.replyCnt+" ");
+				var imessage=$("<i>").append(span3);
+				imessage.addClass("fa-solid fa-message");
+				
+				var span4=$("<span>").text(" ");
+				
 				var figure=$("<figure>").html(reviewImg);
-				var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+				//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+				var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
+				
 				var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
 				feeda.addClass("review-main");
 				reviewImg.addClass("img-size");

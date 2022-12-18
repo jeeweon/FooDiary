@@ -192,8 +192,9 @@
 					$(".modal_content2").append(a).append(br);
 				});
 			}else{
-				var span=$("span").text("선택된 팔로워가 없습니다.");
-				$(".modal2_content").append(span);
+				//var span=$("span").text("선택된 팔로워가 없습니다.");
+				//$(".modal_content2").append(span);
+				//$(".follower-btn").append(span);
 			}  
 		};
 		
@@ -224,7 +225,7 @@
                         <a href="#"><li class="follower-cnt"></li></a>
                     </ul> <!-- boardT2 -->
                     <P>	
-                    	<span>자기소개</span>
+                    	<span>자기소개</span><br><br>
                     	<span class="mem-info"></span>           
                     </P>
                 </div> <!--boardT-->
