@@ -280,7 +280,8 @@
 				replyContent: replyContent
 			})
 			.then(function(resp){
-				console.log(resp);
+				//console.log(resp);
+				$(".input-reply").val("");
 				loadReplyList();
 			});
 		});
