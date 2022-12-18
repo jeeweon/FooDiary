@@ -210,4 +210,9 @@
 			where rn <= 5
 		]]>	
 	</select>
+	
+	<!-- 특정 회원의 레벨, 포인트만 조회 -->
+	<select id="level-and-point" parameterType="int" resultType="MemLevelVO">
+		select mem_level, mem_point from mem where mem_no = #{memNo}
+	</select>
 </mapper>
