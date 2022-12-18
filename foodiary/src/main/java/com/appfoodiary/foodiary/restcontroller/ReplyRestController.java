@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appfoodiary.foodiary.entity.ReplyDto;
 import com.appfoodiary.foodiary.repository.ReplyDao;
+import com.appfoodiary.foodiary.vo.ReplyListVO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,7 +26,7 @@ public class ReplyRestController {
 	
 	@GetMapping("/list/{reviewNo}")
 	@Operation(summary = "댓글목록 조회", description = "reviewNo에 해당하는 댓글목록을 조회합니다.")
-	public List<ReplyDto> list(@PathVariable int reviewNo) {
+	public List<ReplyListVO> list(@PathVariable int reviewNo) {
 		return replyDao.list(reviewNo);
 	}
 

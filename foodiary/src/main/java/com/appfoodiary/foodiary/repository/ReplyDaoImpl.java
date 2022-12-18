@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.ReplyDto;
+import com.appfoodiary.foodiary.vo.ReplyListVO;
 
 @Repository
 public class ReplyDaoImpl implements ReplyDao {
@@ -22,7 +23,7 @@ public class ReplyDaoImpl implements ReplyDao {
 	}
 	//댓글목록출력
 	@Override
-	public List<ReplyDto> list(int reviewNo) {
+	public List<ReplyListVO> list(int reviewNo) {
 		return sqlSession.selectList("reply.list", reviewNo);
 	}
 	//댓글 작성
