@@ -33,7 +33,16 @@
                 <div class="sidemenu">
                 <ul id="sideP">
                     <li>
-                        <img src="${pageContext.request.contextPath}/images/프로필임시.png">
+                    	<c:choose>
+							<c:when test="${empty profile}">
+								<img src="${pageContext.request.contextPath}/images/basic-profile.png">
+							</c:when>
+							<c:otherwise>
+							<c:forEach var="profile" items="${profile}">
+									<img src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}">
+							</c:forEach>
+							</c:otherwise>		
+						</c:choose>
                         ${loginNick}
                     </li>
                 </ul>
@@ -113,7 +122,7 @@
                 </div>          
             </div>
                  <div class="follow">
-                    <h3>먹는거 좋아하는 사람</h3>
+                    <h3>맛쟁이 추천</h3>
                      <ul>
                          <li><a href="">먹보1</a></li>
                          <li><a href="">먹보2</a></li>
@@ -271,6 +280,7 @@ function reset() {
 				dataType : "json",
 				success : function(resp) {
 					reviewList = resp;
+					console.log(reviewList);
 					renderList();
 				}
 			});
@@ -332,15 +342,31 @@ function reset() {
 					var writerNick = $("<span>").text(value.memNick);
 					writerNick.addClass("writer-nick");
 					
+					var writerLevel;
+					if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<span>").text(" 레벨6"); //레벨에 맞는 이미지로 변경 필요
+					} else if (value.memLevel == "5  ") {
+						writerLevel = $("<span>").text(" 레벨5");
+					} else if (value.memLevel == "4  ") {
+						writerLevel = $("<span>").text(" 레벨4");
+					} else if (value.memLevel == "3  ") {
+						writerLevel = $("<span>").text(" 레벨3");
+					} else if (value.memLevel == "2  ") {
+						writerLevel = $("<span>").text(" 레벨2");
+					} else if (value.memLevel == "1  ") {
+						writerLevel = $("<span>").text(" 레벨1");
+					}
+					
 					var reviewCnt = $("<span>").text("리뷰 " + value.memReviewCnt);
 					reviewCnt.addClass("review-cnt");
 					
 					var writeTime = $("<span>").text(value.reviewWriteTime);
 					writeTime.addClass("write-time");
 					
+					var nickLev = $("<div>").append(writerNick).append(writerLevel);
 					var subInfoText = $("<div>").append(reviewCnt).append(writeTime);
 					subInfoText.addClass("sub-info-text");
-					var infoText = $("<div>").append(writerNick).append(subInfoText);
+					var infoText = $("<div>").append(nickLev).append(subInfoText);
 					infoText.addClass("info-text");
 					
 					var infoDiv = $("<div>").append(writerAvatar).append(infoText)
