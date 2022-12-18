@@ -11,7 +11,7 @@
 	<select id="list" parameterType="int" resultType="ReplyListVO">
 		select * from reply_mem_attach_view 
 		where review_no = #{reviewNo}
-		order by reply_write_time asc
+		order by reply_write_time desc
 	</select>
 	
 	<insert id="insert" parameterType="ReplyDto">

@@ -209,10 +209,8 @@
 	    		<hr>
 				
 				<!-- 댓글 작성 -->
-				<form class="form-reply" action="">	    		
-					<input type="text" class="input-reply" name="replyContent" placeholder="내용을 입력해주세요.">
-					<button type="submit">등록</button>
-				</form>
+				<input type="text" class="input-reply" name="replyContent" placeholder="내용을 입력해주세요.">
+				<button class="btn-replyWrite" type="button">등록</button>
 			</div>
 		</div>
 	</div>
@@ -267,8 +265,25 @@
 			}
 		});
 	
+		
 		//댓글목록 출력
 		loadReplyList();
+		
+		//댓글 입력
+		$(".btn-replyWrite").click(function(){
+			var memNo = loginNo;
+    		var replyContent = $(".input-reply").val();
+    		
+			axios.post("${pageContext.request.contextPath}/rest/reply/insert", {
+				reviewNo: reviewNo,	
+				memNo: memNo,
+				replyContent: replyContent
+			})
+			.then(function(resp){
+				console.log(resp);
+				loadReplyList();
+			});
+		});
 		
 		//댓글 : 목록조회
 		function loadReplyList(){
