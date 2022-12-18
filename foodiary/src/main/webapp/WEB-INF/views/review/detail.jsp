@@ -279,7 +279,7 @@
 	        	$(".reply-list").empty();	//목록 초기화
 	        	$.each(replyListVO, function(index, value){
 	        		var replyNo = value.replyNo;
-	        		var memNo = value.memNo;
+	        		var replyMemNo = value.memNo;
 	        		var replyReportCnt = value.replyReportCnt;
 	        		
 	        		//replyListHead
@@ -308,8 +308,14 @@
 	        		replyContent.addClass("replyContent");
 	        		
 	        		//reply-list
-	        		var replyListHead = $("<div>").append(profile).append(memNick).append(memLevel).append(replyWriteTime)
-	        										.append(" ").append(replyReport).append(replyDelete);
+	        		var replyListHead = $("<div>").append(profile).append(memNick).append(memLevel).append(replyWriteTime);
+	        		if(loginNo==replyMemNo) {
+	        			replyListHead = $("<div>").append(profile).append(memNick).append(memLevel).append(replyWriteTime)
+													.append(" ").append(replyDelete);
+	        		}else if(!loginNo.empty){
+		        		replyListHead = $("<div>").append(profile).append(memNick).append(memLevel).append(replyWriteTime)
+		        									.append(" ").append(replyReport);
+	        		}
 	        		replyListHead.addClass("replyListHead");
 	        		
 	        		var replyListBody = $("<div>").append(replyContent);
