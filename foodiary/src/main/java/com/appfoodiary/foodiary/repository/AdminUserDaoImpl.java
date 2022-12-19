@@ -7,17 +7,17 @@ import org.springframework.stereotype.Repository;
 import com.appfoodiary.foodiary.entity.AdminDto;
 
 @Repository
-public class AdminDaoImpl implements AdminDao{
+public class AdminUserDaoImpl implements AdminUserDao{
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Override
 	public AdminDto findDto(String adminId) {
-		return sqlSession.selectOne("admin.find-admin", adminId);
+		return sqlSession.selectOne("admin-user.find-admin", adminId);
 	}
 	
 	@Override
 	public void updateLoginDate(String adminId) {
-		sqlSession.update("admin.login-date", adminId);
+		sqlSession.update("admin-user.login-date", adminId);
 	}
 }

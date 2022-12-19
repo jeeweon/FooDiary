@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.AdminDto;
-import com.appfoodiary.foodiary.repository.AdminDao;
+import com.appfoodiary.foodiary.repository.AdminUserDao;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminHomeController {
 	@Autowired
-	private AdminDao adminDao;
+	private AdminUserDao adminDao;
 	
 	@GetMapping("/home")
 	public String home() {
