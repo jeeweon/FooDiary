@@ -25,6 +25,10 @@
  	.thumbnail {
  		object-fit:cover;
  	}
+ 	.orign{
+		width:50px;
+		hight:50px;
+	}
  </style>
 
 </head>
@@ -158,12 +162,9 @@
             </div>
                  <div class="follow">
                     <h3>맛쟁이 추천</h3>
-                     <ul>
-                         <li><a href="">먹보1</a></li>
-                         <li><a href="">먹보2</a></li>
-                         <li><a href="">먹보3</a></li>
+                     <ul class="follow-ul">
                      </ul>
-                     <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p>
+                     <!-- <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p> -->
                  </div> <!--follow-->
              </div> <!--random-->
          </div> <!--sidebar-->
@@ -573,8 +574,97 @@ function reset() {
 		
 		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
 		$(document).on("click", ".review-write-info", function(){
-			window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
+			window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
 		});
+		
+		//맛쟁이 리스트 추천 
+		
+		memRek();
+		let memRekList = [];
+		function memRek() {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/rest/profile/memrek",
+			method : "get",
+			dataType : "json",
+			success : function(resp) {
+				memRekList = resp;
+				console.log(memRekList);
+				console.log("세션"+${sessionScope.loginNo});
+				
+				// 회원번호 가 있으면 팔로우한 사람제거 하고 출력
+					threeMem();
+			}
+		});
+	};
+	function threeMem(){
+		$.each(memRekList, function(index, value) {
+			
+			
+			
+			var writerLevel;
+			if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+			} else if (value.memLevel == "5  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+			} else if (value.memLevel == "4  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+			} else if (value.memLevel == "3  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+			} else if (value.memLevel == "2  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+			} else {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+			}
+			writerLevel.addClass("level-img");
+			
+// 			console.log(value);
+// 			console.log(value.memNo);
+			console.log(value.attachNo);
+			var memImg=$("<img>").attr("src","");
+			var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+			var br=$("<br>");
+			var name=$("<span>").text(value.memNick);
+			var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
+			var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name).append(writerLevel);
+			var li=$("<li>").append(a).append(button);
+			a.click(function(){
+				console.log("a클릭");
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
+			});
+			
+			
+			
+			
+			button.click(function(){
+				console.log("팔로우 클릭");
+				var that=$(this);
+				$.ajax({
+					url:"${pageContext.request.contextPath}/rest/review/follow",
+					method:"post",
+					data :{
+						 passiveMemNo : $(this).data("rno")	
+					},
+					success :function(resp){
+						console.log(resp);
+						if(resp){
+							$(that).text("팔로잉");
+						}else{
+							$(that).text("팔로우");
+						}
+					}
+				});
+			});
+			memImg.addClass("orign");
+			//사진이 있는지 없는지 확인
+		   if(value.attachNo > 0){
+			   	memImg.attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
+			}else{
+				memImg.attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
+			} 
+			
+			$(".follow-ul").append(li);	
+		});
+	};
 	});
 </script>
 </body>

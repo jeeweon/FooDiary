@@ -94,8 +94,9 @@
 				method : "get",
 				dataType : "json",
 				success : function(resp) {
+					console.log("회원"+resp);
 					profileList = resp;
-					console.log(profileList);
+					$(".profile-level-image").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
 					$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
@@ -137,6 +138,8 @@
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
+					//a+img+span
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span);
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
@@ -145,8 +148,11 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					$(".modal_content").css("display","block");
-					$(".modal_content").append(img).append(span).append(br);
+					$(".modal_content").append(a).append(br);
 				});
+			}else{
+				var span=$("span").text("선택된 팔로우가 없습니다.");
+				$(".modal_content").append(span);
 			} 
 		};
 		
@@ -175,6 +181,7 @@
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span);
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
@@ -183,9 +190,13 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					
-					$(".modal_content2").append(img).append(span).append(br);
+					$(".modal_content2").append(a).append(br);
 				});
-			} 
+			}else{
+				//var span=$("span").text("선택된 팔로워가 없습니다.");
+				//$(".modal_content2").append(span);
+				//$(".follower-btn").append(span);
+			}  
 		};
 		
 		
@@ -202,18 +213,22 @@
                 </div><!--boardM-->
                 <div class="boardT">
                     <ul class="boardT1">
-                        <li class="mem-name"> </li>
+                        <li class="mem-name">
+                        <img src="" class="profile-level-image" alt="설정">
+                         </li>
                         <button><a href="#">프로필 편집</a></button>
                         <a href="" id="Ta1"><img src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정"></a>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">				
-                        <li class="board-cnt"></li>
+                        <a href="${pageContext.request.contextPath}/profilepage/board">
+    	                    <li class="board-cnt"></li>
+	                    </a>
                         <a href="#"><li class="follow-cnt"></li></a>
                         <a href="#"><li class="follower-cnt"></li></a>
                     </ul> <!-- boardT2 -->
                     <P>	
-                    	<span>자기소개</span>
+                    	<span>자기소개</span><br><br>
                     	<span class="mem-info"></span>           
                     </P>
                 </div> <!--boardT-->
@@ -267,4 +282,21 @@
   });
 </script>
 </html>
+
+
+					<%-- var writerLevel;
+					if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (value.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (value.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (value.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (value.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img"); --%>
 

@@ -10,4 +10,5 @@ public class MemRekVO {
 	private int memNo;
 	private int attachNo;
 	private String memNick;
+	private int memLevel;
 }
