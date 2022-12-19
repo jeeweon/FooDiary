@@ -216,7 +216,7 @@
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span).append(b);
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b);
 					
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
@@ -261,7 +261,7 @@
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span).append(b);
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b);
 					
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
@@ -323,9 +323,6 @@
             </div><!--inner-->
         </div><!--boaardF-->
 	</div><!-- wrapper -->
-
-	
-
 	<hr>
 	</body>
 	<!-- 팔러우  모달 --> 
@@ -345,7 +342,6 @@
     </div>
     <div class="modal_layer"></div>
 </div>
-
 	
     <script>
   
