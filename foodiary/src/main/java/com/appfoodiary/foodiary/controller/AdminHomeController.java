@@ -54,4 +54,9 @@ public class AdminHomeController {
 		session.removeAttribute(SessionConstant.ID);
 		return "redirect:login";
 	}
+	
+	@GetMapping("/review-blind")
+	public String reviewBlind() {
+		return "admin/review-blind";
+	}
 }
