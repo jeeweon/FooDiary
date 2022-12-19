@@ -38,4 +38,51 @@
 		delete reply where reply_no = #{replyNo}
 	</delete>
 	
+	
+	<!-- 댓글신고 테이블 : 신고+1 (insert) -->
+	<insert id="insertReplyReport" parameterType="map">
+		insert into reply_report(reply_report_no, reply_no, mem_no)
+		values(reply_report_seq.nextval, #{replyNo}, #{memNo})
+	</insert>
+	<!-- 댓글 테이블 : 신고수+1 (update) -->
+	<update id="plusReplyReportCnt" parameterType="int">
+		update reply
+		set reply_report_cnt = reply_report_cnt +1
+		where reply_no = #{replyNo}
+	</update>
+	<!-- 댓글 테이블 : 신고수만 조회 -->
+	<select id="selectReplyReportCnt" parameterType="int" resultType="int">
+		select reply_report_cnt from reply 
+		where reply_no = #{replyNo}
+	</select>
+	<!-- 댓글블라인드 테이블 : 신고+1 (insert) -->
+	<insert id="insertReplyBlind" parameterType="int">
+		insert into reply_blind(reply_blind_no, reply_no, blind_report_cnt)
+		values(reply_blind_seq.nextval, #{replyNo}, 1)
+	</insert>
+	<!-- 댓글블라인드 테이블 : 신고수+1 (update)
+			- 댓글테이블 신고수 2~4	: 블라인드 상태 0(대기)인 데이터의 신고수 +1
+			- 댓글테이블 신고수 5	: 블라인드 상태 1(블라인드)로 변경, 신고수 +1
+			- 댓글테이블 신고수 6~	: 블라인드 상태 1(블라인드)인 데이터의 신고수 +1	-->
+	<update id="plusReplyBlind" parameterType="map">
+		update reply_blind
+		<!-- <bind name="replyReportCnt" value="replyReportCnt"/> -->
+			<choose>
+				<when test="replyReportCnt >= 2 and replyReportCnt lte 4">
+					set blind_report_cnt = blind_report_cnt +1
+					where reply_isblind = '0' 
+				</when>
+				<when test="replyReportCnt == 5">
+					set blind_report_cnt = blind_report_cnt +1,
+						reply_isblind = '1'
+					where reply_isblind = '0' 
+				</when>
+				<when test="replyReportCnt >= 6">
+					set blind_report_cnt = blind_report_cnt +1
+					where reply_isblind = '1' 
+				</when>
+			</choose>
+		and reply_no = #{replyNo}
+	</update>
+	
 </mapper>

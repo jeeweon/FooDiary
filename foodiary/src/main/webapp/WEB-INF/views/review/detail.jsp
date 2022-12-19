@@ -287,7 +287,15 @@
 				loadReplyList();
 			});
 		});
-		
+		//댓글 삭제
+		$(document).on("click", ".btn-reply-delete", function(){ //생성된버튼은 해당방법 사용
+    		var replyNo = $(this).siblings(".replyNo").val();
+
+		axios.delete("${pageContext.request.contextPath}/rest/reply/"+replyNo)
+			.then(function(resp){
+				loadReplyList();
+			});
+		});
 		//댓글 : 목록조회
 		function loadReplyList(){
 			axios.get("${pageContext.request.contextPath}/rest/reply/"+reviewNo)
@@ -346,13 +354,20 @@
 			}); //axios끝
 		} //목록조회끝
 		
-		//댓글 삭제
-		$(document).on("click", ".btn-reply-delete", function(){ //생성된버튼은 해당방법 사용
-    		var replyNo = $(".btn-reply-delete").siblings(".replyNo").val();
-    		
-			axios.delete("${pageContext.request.contextPath}/rest/reply/"+replyNo)
+		//댓글 신고
+		$(document).on("click", ".btn-reply-report", function(){ //생성된버튼은 해당방법 사용
+			//확인 팝업(경고)
+			var result = confirm("정말 신고하시겠습니까?\n허위 신고시 서비스 이용제한조치를 받으실 수 있습니다.");
+			var that=$(this);
+			
+			var replyNo = $(this).siblings(".replyNo").val();
+			
+			axios.post("${pageContext.request.contextPath}/rest/reply/report/"+replyNo)
 			.then(function(resp){
-				loadReplyList();
+				if(resp.data) {	//response가 true일 경우
+					alert("신고가 접수되었습니다.");
+					$(that).prop("disabled", true);
+				}
 			});
 		});
 		
