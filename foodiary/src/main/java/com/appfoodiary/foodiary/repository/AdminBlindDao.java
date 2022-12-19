@@ -11,8 +11,8 @@ import com.appfoodiary.foodiary.vo.ReviewReportVO;
 public interface AdminBlindDao {
 	List<ReviewBlindVO> reviewBlindList(String keyword);
 	List<ReviewReportVO> reviewReportHistory(Map<String, Object> history);
-	void reviewCntReset(int reviewNo);
-	void reviewBlindClear(int reviewNo);
+	boolean reviewCntReset(int reviewNo);
+	boolean reviewBlindClear(int reviewNo);
 	BlindReviewContentsVO selectOne(int reviewNo);
 	Date reviewReportStart(int reviewNo);
 }

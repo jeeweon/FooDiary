@@ -28,13 +28,13 @@ public class AdminBlindDaoImpl implements AdminBlindDao {
 	}
 
 	@Override
-	public void reviewCntReset(int reviewNo) {
-		sqlSession.update("admin-blind.report-cnt-reset", reviewNo);
+	public boolean reviewCntReset(int reviewNo) {
+		return sqlSession.update("admin-blind.report-cnt-reset", reviewNo) > 0;
 	}
 
 	@Override
-	public void reviewBlindClear(int reviewNo) {
-		sqlSession.update("admin-blind.blind-clear", reviewNo);
+	public boolean reviewBlindClear(int reviewNo) {
+		return sqlSession.update("admin-blind.blind-clear", reviewNo) > 0;
 	}
 	
 	@Override
