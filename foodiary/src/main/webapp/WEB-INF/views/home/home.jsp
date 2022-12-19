@@ -10,8 +10,7 @@
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
-<<<<<<< HEAD
-=======
+
  	
  	.level-img {
  		width:24px;
@@ -36,7 +35,7 @@
 		width:50px;
 		hight:50px;
 	}
->>>>>>> refs/remotes/origin/main
+
  </style>
 
 </head>
@@ -611,7 +610,43 @@ function reset() {
 					
 					// 회원번호가 있으면 팔로우한 사람 제거하고 출력
 					threeMem();
+			}
+		});
+	};
+	function threeMem(){
+		$.each(memRekList, function(index, value) {
+			
+			var writerLevel;
+			if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+			} else if (value.memLevel == "5  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+			} else if (value.memLevel == "4  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+			} else if (value.memLevel == "3  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+			} else if (value.memLevel == "2  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+			} else {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+			}
+			writerLevel.addClass("level-img");
+			
+// 			console.log(value);
+// 			console.log(value.memNo);
+			console.log(value.attachNo);
+			var memImg=$("<img>").attr("src","");
+			var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+			var br=$("<br>");
+			var name=$("<span>").text(value.memNick);
+			var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
+			var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name).append(writerLevel);
+			var li=$("<li>").append(a).append(button);
+			a.click(function(){
+				console.log("a클릭");
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
 				}
+
 			});
 		};
 		
