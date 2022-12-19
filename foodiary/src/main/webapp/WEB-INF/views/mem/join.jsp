@@ -251,6 +251,7 @@ $(function(){
 			//이메일 전송 시 인증번호 창 생김
 			var div = $("<div>");
 			var div2= $("<div>");
+			var div3= $("<div>");
 			var span= $("<span>");
 			var input = $("<input>").addClass("serial input").attr("placeholder","인증번호");
 			var successMessage = $("#success-message");
@@ -261,7 +262,8 @@ $(function(){
 			$(".email-check").html(div);	
 			div.append(input);
 			$(".email-check-btn").html(div2);
-			div2.append(button).append(span);
+			div2.append(button);
+			div3.append(span);
 			span.text("인증번호 유효시간 : 05:00").addClass("timer");
 			
 			//인증번호 5분 타이머
