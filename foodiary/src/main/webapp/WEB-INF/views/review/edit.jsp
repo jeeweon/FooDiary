@@ -124,8 +124,6 @@
 			toolbar:[	//툴바 메뉴
 				["style",["style"]],
 				["font",["bold","underline","clear"]],
-				["fontname",["fontname"]],
-			    ['fontsize', ['fontsize']],		//fontsize 추가
 				["color",["color"]],
 				["para",["ul","ol","paragraph"]],
 				["table",["table"]],
@@ -133,8 +131,6 @@
 				["insert",["link"]],
 				//["view",["fullscreen","codeview","help"]]]	//전체모드, code모드 삭제
 				["view",["help"]]],
-			fontNames: ['맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체','Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
-			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 		});
 		
 		//별점 옵션 수정

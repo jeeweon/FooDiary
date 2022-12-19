@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">
+
+	<select id="seq" resultType="int">
+		select reply_seq.nextval from dual
+	</select>
+	
+	<select id="list" parameterType="int" resultType="ReplyListVO">
+		select * from reply_mem_attach_view 
+		where review_no = #{reviewNo}
+		order by reply_write_time desc
+	</select>
+	
+	<insert id="insert" parameterType="ReplyDto">
+		insert into
+		reply(
+			reply_no, review_no, mem_no, reply_content)
+		values(
+			#{replyNo}, #{reviewNo}, #{memNo}, #{replyContent}
+		)
+	</insert>
+	
+	<select id="get" parameterType="int" resultType="ReplyDto">
+		select * from reply where reply_no = #{replyNo}
+	</select>
+	
+	<!-- 현재 : 수정불가
+	<update id="edit" parameterType="ReplyDto">
+		update reply
+			set reply_content = #{replyContent}
+			where reply_no = #{replyNo}
+	</update> -->
+
+	<delete id="delete" parameterType="int">
+		delete reply where reply_no = #{replyNo}
+	</delete>
+	
+</mapper>
