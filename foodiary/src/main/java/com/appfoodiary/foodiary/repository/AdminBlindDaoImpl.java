@@ -18,8 +18,8 @@ public class AdminBlindDaoImpl implements AdminBlindDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ReviewBlindVO> reviewBlindList() {
-		return sqlSession.selectList("admin-blind.list");
+	public List<ReviewBlindVO> reviewBlindList(String keyword) {
+		return sqlSession.selectList("admin-blind.list", keyword);
 	}
 
 	@Override

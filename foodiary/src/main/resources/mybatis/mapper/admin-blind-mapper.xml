@@ -5,12 +5,15 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin-blind">
 	<!-- 블라인드 리뷰 목록 -->
-	<select id="list" resultType="ReviewBlindVO">
+	<select id="list" parameterType="String" resultType="ReviewBlindVO">
 		select B.*, M.mem_nick 
 		from review_blind B 
 			inner join review R on B.review_no = R.review_no
 			left outer join mem M on R.mem_no = M.mem_no
 		where review_isblind = '1'
+		<if test="keyword != null">
+			and instr(mem_nick, #{keyword}) > 0
+		</if>
 		order by review_blind_no desc
 	</select>
 	

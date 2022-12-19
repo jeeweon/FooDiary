@@ -16,4 +16,5 @@ public class ReviewBlindVO {
 	private Date reportStartTime;	//신고시작일 (5번째=블라인드일)
 	private Date blindClearTime;	//블라인드 해제일
 	private String memNick;
+	private String keyword;
 }

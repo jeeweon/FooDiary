@@ -97,8 +97,8 @@ td > a:visted {
 		
 		<form class="search-form">
 	        <div class="search-bar">
-	            <input type="text" name="keyword" class="search-input" placeholder="닉네임 검색" autocomplete="off">
-	            <button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
+	            <input type="text" name="keyword" class="search-input" placeholder="닉네임 검색" autocomplete="off" value="${param.keyword}">
+	            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
 	        </div>  
 	    </form>
 		

@@ -15,6 +15,9 @@ import com.appfoodiary.foodiary.repository.AdminBlindDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.vo.BlindReviewContentsVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/admin/blind")
 public class AdminBlindController {
@@ -25,8 +28,10 @@ public class AdminBlindController {
 	private AdminBlindDao blindDao;
 	
 	@GetMapping("/review")
-	public String reviewBlind(Model model) {
-		model.addAttribute("list", blindDao.reviewBlindList());
+	public String reviewBlind(Model model, @RequestParam(required=false) String keyword) {
+		log.debug("들어옴");
+		log.debug("keyword::: " + keyword);
+		model.addAttribute("list", blindDao.reviewBlindList(keyword));
 		return "admin/review-blind";
 	}
 	
