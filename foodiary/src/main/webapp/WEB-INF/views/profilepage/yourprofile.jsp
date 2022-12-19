@@ -27,7 +27,7 @@
           margin:100px auto;
           padding:20px 10px;
           background:#fff;
-          border:2px solid #666;
+          border:10px solid #666;
         }
         
         #modal .modal_layer {
@@ -62,7 +62,7 @@
           margin:100px auto;
           padding:20px 10px;
           background:#fff;
-          border:2px solid #666;
+          border:10px solid #666;
         }
         
         #modal2 .modal_layer {
