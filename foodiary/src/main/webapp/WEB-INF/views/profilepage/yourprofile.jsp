@@ -78,6 +78,9 @@
         	width:50px;
         	height:50px;
         }
+          .level-img {
+ 		width:10px;
+ 		height:50px;
  </style>
 <script>
  	$(function(){
@@ -96,12 +99,39 @@
 				success : function(resp) {
 					profileList = resp;
 					console.log(profileList);
-					$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
+					console.log("회원 레벨"+profileList.memLevel);
+					//$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
 					$(".follower-cnt").text("팔로우 : "+profileList.followerCnt);
 					$(".mem-no").text(profileList.memNo);
 					$(".mem-info").text(profileList.memIntro);
+					
+					
+					
+					//회원레벨 이미지
+					var writerLevel;
+					if( profileList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (profileList.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (profileList.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (profileList.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (profileList.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img");
+					
+					
+					
+					var span=$("<span>").text("유저 닉네임 : "+profileList.memNick);
+					
+					$(".mem-name").append(span).append(writerLevel);
+					
 					var imgClass=$("[name=orgin]");
 					//사진이 있는지 없는지 확인
 					if(profileList.attachNo != 0){
@@ -264,10 +294,10 @@
                 </div><!--boardM-->
                 <div class="boardT">
                     <ul class="boardT1">
-                        <li class="mem-name"> </li>
+                        <li class="mem-name">
+                        
+                         </li>
                         <button class="follow-cert"></button>
-                        <button><a href="">프로필 편집</a></button>
-                        <a href="" id="Ta1"><img src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정"></a>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">

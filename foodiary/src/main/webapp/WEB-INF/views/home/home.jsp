@@ -599,8 +599,6 @@ function reset() {
 	function threeMem(){
 		$.each(memRekList, function(index, value) {
 			
-			
-			
 			var writerLevel;
 			if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
 				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
