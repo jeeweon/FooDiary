@@ -8,21 +8,25 @@
 <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
+.page {
+	text-align: center;
+	margin: 0 auto;
+	width: 600px;
+}
+
+.logo{
+	width: 150px;
+	margin-top: 30px;
+}
+
 .title {
 	text-align: center;
-	margin-top: 100px;
+	margin-top: 10px;
 }
 
 .subtitle {
 	text-align: center;
 	margin-top: 10px;
-}
-
-.page {
-	text-align: center;
-	margin: 0 auto;
-	margin-top: 50px;
-	width: 600px;
 }
 
 .menu-list{
@@ -45,7 +49,7 @@
     width: 140px;
     height: 50px;
     padding: 0.5em;
-    margin: auto;
+    margin: 20px auto;
 }
 
 .menu-item span {
@@ -64,9 +68,12 @@
 </style>
 </head>
 <body>
+<div class="page">
+<div class="logo-div">
+	<img class="logo" src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고">
+</div>
 <h2 class="title">안녕하세요, ${loginId}님</h2>
 <h3 class="subtitle">이동할 메뉴를 선택해주세요.</h3>
-<div class="page">
 	<div class="menu-list">
 		<div class="menu-item mem">
 			<span>회원 관리</span>		
