@@ -53,7 +53,7 @@ public class AdminMailController {
 			String memEmail = memEmails.getMemEmail();
 			MemDto memDto = memDao.findByEmail(memEmail);
 			String memNick = memDto.getMemNick();
-//			emailService.noticeMail(memEmail, memNick, subject, content);
+			emailService.noticeMail(memEmail, memNick, subject, content);
 		} 
 		return "admin/send-result";
 	}
