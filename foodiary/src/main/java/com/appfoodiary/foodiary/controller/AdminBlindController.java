@@ -29,20 +29,18 @@ public class AdminBlindController {
 	
 	@GetMapping("/review")
 	public String reviewBlind(Model model, @RequestParam(required=false) String keyword) {
-		log.debug("들어옴");
-		log.debug("keyword::: " + keyword);
 		model.addAttribute("list", blindDao.reviewBlindList(keyword));
-		return "admin/review-blind";
+		return "admin/blind-review";
 	}
 	
 	@GetMapping("/review/detail")
 	public String reviewBlindDetail(@RequestParam int reviewNo, Model model) {
 		//리뷰정보
 		BlindReviewContentsVO reviewVO = blindDao.selectOne(reviewNo);
-		model.addAttribute("reviewVO", reviewVO);
+		model.addAttribute("rvo", reviewVO);
 		
 		//첨부파일
-		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
+		model.addAttribute("attaches", reviewDao.findReviewAttachViewList(reviewNo));
 		
 		//신고내역
 		Date reviewReportStart = blindDao.reviewReportStart(reviewNo);
@@ -51,6 +49,6 @@ public class AdminBlindController {
 		history.put("reviewNo", reviewNo);
 		history.put("reportStartTime", reviewReportStart);
 		model.addAttribute("history", blindDao.reviewReportHistory(history));
-		return "admin/review-blind-detail";
+		return "admin/blind-review-detail";
 	}
 }
