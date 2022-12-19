@@ -13,6 +13,26 @@
  		margin:0;
  		margin-left: 5px;
  	}
+ 	#relative{
+ 		width:300px;
+ 		height:300px;
+ 		background-color:green;
+ 		position:relative;
+ 		top:100px;
+ 		left:100px;
+ 	}
+ 	#absolute2{
+ 		width:100px;
+ 		height:100px;
+ 		background-color:red;
+ 		position:absolute;
+ 		top:200px;
+ 		left:200px;
+ 	}
+ 	.relative { width: 400px; height: 400px; position: relative; background-color: yellow;}
+	.absolute { width: 100px; height: 100px; position: absolute; left: 300px; top: 300px; background-color:red;}
+ 	
+			
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
 <script>
@@ -105,10 +125,24 @@
 	};
 });
 </script>
+
+
  				 <div class="follow">
                     <h3>먹는거 좋아하는 사람</h3>
                      <ul class="follow-ul">
                      </ul>
                  </div>
+                 
+              <div class="relative">
+              	<img class="relative" src="${pageContext.request.contextPath}/images/6.피잣집.png">
+    			<p class="absolute">adsfas</p>
+			 </div>
+			 
+			 
+			 
+			 
+                 
+             
+
 
 
