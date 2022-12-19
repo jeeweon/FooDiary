@@ -4,6 +4,8 @@
    .NNNNY-message,
    .wait-message { 
            display: none;
+           position: relative;
+           left: 25px;
         }
    .input.success ~ .success-message{
    		display : block;
@@ -30,24 +32,12 @@
    .input.NNNNN ~ .success-message{
    		display : none;
    }
-   .join-form{
-   		display: flex;
-   		flex-direction: column;
-   		justify-content: center;
-   		align-items: center;
-   		
-   }
+   
+
    .text-title{
    	position: relative;
    	top: 20px;
-   	right: 190px;
-   	
-   }
-   #pw1{
-   	right: 160px;
-   }
-   #pw2{
-   	right: 180px;
+   	left: 40px;   	
    }
    .text-title i{
    	color: red;
@@ -57,7 +47,8 @@
    }
    .timer{
    	display: flex;
-   	justify-content: center;
+   	width: 500px;
+   	justify-content:center;
    	align-items: center;
    	font-weight: bold;
    	color: red;
@@ -102,6 +93,7 @@ li {
 }
 .Mhead{
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
 }
@@ -109,19 +101,19 @@ li {
     width: 400px;
     height: 250px;
     margin: 30px;
+    margin-right: 200px;
 }
 .Mhead h1{
     font-size: 35px;
     margin: 30px;
+    margin-right: 200px;
 }
-.Mbodysub{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    display: none;
+.Mbody-container{
+	width: 1600px;
 }
 .Mbody{
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
 }
