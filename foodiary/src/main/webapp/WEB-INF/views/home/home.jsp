@@ -10,21 +10,6 @@
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
- 	
- 	.level-img {
- 		width:24px;
- 		margin:0;
- 		margin-left: 5px;
- 	}
- 	
- 	.nick-lev {
- 		display: flex;
- 		align-items:center;
- 	}
- 	
- 	.thumbnail {
- 		object-fit:cover;
- 	}
  </style>
 
 </head>
@@ -50,11 +35,11 @@
                     <li>
                     	<c:choose>
 							<c:when test="${empty profile}">
-								<img src="${pageContext.request.contextPath}/images/basic-profile.png">
+								<img id="img1" src="${pageContext.request.contextPath}/images/basic-profile.png">
 							</c:when>
 							<c:otherwise>
 							<c:forEach var="profile" items="${profile}">
-									<img src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}">
+									<img id="img1" src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}">
 							</c:forEach>
 							</c:otherwise>		
 						</c:choose>
@@ -192,9 +177,24 @@ let displaySlot = document.querySelector(".menu_slot"); //menu slot
 let elem = document.querySelector(".menu_print > h2"); //menu print
 let costTxt = document.querySelector("em"); //cost
 
+displaySlot.style.display = "none";
+let lunckPick = shuffle(lunchList)[0];        
+elem.innerHTML = lunckPick;
+elem.style.display = "block";
+
+
 
 //reset check
 let resetNum = 1;
+
+//shuffle 메소드 선언
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 //LunchIs 함수선언
 function lunchIs() {
@@ -202,14 +202,7 @@ function lunchIs() {
   setTimeout(timeFunc, 900);
 
   function timeFunc() {
-    //shuffle 메소드 선언
-    function shuffle(a) {
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
-    }
+  
 
     //슬롯애니메이션 감추기
     displaySlot.style.display = "none";

@@ -149,7 +149,7 @@
             </div><!--inner-->
         </div><!--boaardF-->
 	</div><!-- wrapper -->
-	<hr>
+	
 	
     <script>
         $(function(){

@@ -132,16 +132,15 @@ let displaySlot = document.querySelector(".menu_slot"); //menu slot
 let elem = document.querySelector(".menu_print > h2"); //menu print
 let costTxt = document.querySelector("em"); //cost
 
+displaySlot.style.display = "none";
+let lunckPick = shuffle(lunchList)[0];        
+elem.innerHTML = lunckPick;
+elem.style.display = "block";
+
 
 //reset check
 let resetNum = 1;
 
-//LunchIs 함수선언
-function lunchIs() {
-//setTimeout 선언
-setTimeout(timeFunc, 900);
-
-function timeFunc() {
 //shuffle 메소드 선언
 function shuffle(a) {
 for (let i = a.length - 1; i > 0; i--) {
@@ -150,6 +149,14 @@ const j = Math.floor(Math.random() * (i + 1));
 }
 return a;
 }
+
+//LunchIs 함수선언
+function lunchIs() {
+//setTimeout 선언
+setTimeout(timeFunc, 900);
+
+function timeFunc() {
+
 
 //슬롯애니메이션 감추기
 displaySlot.style.display = "none";
