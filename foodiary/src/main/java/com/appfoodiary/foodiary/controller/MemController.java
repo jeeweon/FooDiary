@@ -313,7 +313,8 @@ public class MemController {
 	}
 	
 	@GetMapping("/inquiry")
-	public String inquiry() {
+	public String inquiry(HttpSession session) {
+		int memNo = (int) session.getAttribute(SessionConstant.NO);
 		return "mem/inquiry";
 	}
 	
