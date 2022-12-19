@@ -128,7 +128,18 @@ li {
 					console.log("호버 완료");
 				})
 				var figure=$("<figure>").html(reviewImg);
-				var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+				//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+				var span2=$("<span>").text("   "+value.likeCnt+" ");
+				var iheart=$("<i>").append(span2);
+				iheart.addClass("fa-solid fa-heart");
+				
+				var span3=$("<span>").text("   "+value.replyCnt+" ");
+				var imessage=$("<i>").append(span3);
+				
+				var span4=$("<span>").text(" ");
+				
+				imessage.addClass("fa-solid fa-message");
+				var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
 				var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
 				feeda.addClass("review-main");
 				reviewImg.addClass("img-size");
