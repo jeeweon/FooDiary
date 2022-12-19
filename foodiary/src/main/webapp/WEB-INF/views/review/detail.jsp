@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<title>리뷰 상세</title>
+
 <!-- 현재 시간 구하기 -->
 <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 <c:set var="today">
@@ -210,7 +212,7 @@
 				
 				<!-- 댓글 작성 -->
 				<input type="text" class="input-reply" name="replyContent" placeholder="내용을 입력해주세요.">
-				<button class="btn-replyWrite" type="button">등록</button>
+				<button class="btn-reply-Write" type="button">등록</button>
 			</div>
 		</div>
 	</div>
@@ -270,11 +272,11 @@
 		loadReplyList();
 		
 		//댓글 입력
-		$(".btn-replyWrite").click(function(){
+		$(".btn-reply-write").click(function(){
 			var memNo = loginNo;
     		var replyContent = $(".input-reply").val();
     		
-			axios.post("${pageContext.request.contextPath}/rest/reply/insert", {
+			axios.post("${pageContext.request.contextPath}/rest/reply", {
 				reviewNo: reviewNo,	
 				memNo: memNo,
 				replyContent: replyContent
@@ -288,7 +290,7 @@
 		
 		//댓글 : 목록조회
 		function loadReplyList(){
-			axios.get("${pageContext.request.contextPath}/rest/reply/list/"+reviewNo)
+			axios.get("${pageContext.request.contextPath}/rest/reply/"+reviewNo)
 			.then(function(resp){
 	        	var replyListVO = resp.data;
 
@@ -299,6 +301,8 @@
 	        		var replyReportCnt = value.replyReportCnt;
 	        		
 	        		//replyListHead
+	        		var replyNoInput = $("<input>").attr("type","hidden").val(replyNo).addClass("replyNo");
+	        		
 	        		var profile;
 	        		if(value.attachNo == 0) {
 	        			profile = $("<img>").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");						
@@ -324,12 +328,12 @@
 	        		replyContent.addClass("replyContent");
 	        		
 	        		//reply-list
-	        		var replyListHead = $("<div>").append(profile).append(memNick).append(memLevel).append(replyWriteTime);
+	        		var replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime);
 	        		if(loginNo==replyMemNo) {
-	        			replyListHead = $("<div>").append(profile).append(memNick).append(memLevel).append(replyWriteTime)
+	        			replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime)
 													.append(" ").append(replyDelete);
 	        		}else if(!loginNo.empty){
-		        		replyListHead = $("<div>").append(profile).append(memNick).append(memLevel).append(replyWriteTime)
+		        		replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime)
 		        									.append(" ").append(replyReport);
 	        		}
 	        		replyListHead.addClass("replyListHead");
@@ -338,8 +342,19 @@
 	        		replyListBody.addClass("replyListBody");
 	        		
 	        		$(".reply-list").append(replyListHead).append(replyListBody);
-	        	});
+	        	}); //$.each끝
+			}); //axios끝
+		} //목록조회끝
+		
+		//댓글 삭제
+		$(document).on("click", ".btn-reply-delete", function(){ //생성된버튼은 해당방법 사용
+    		var replyNo = $(".btn-reply-delete").siblings(".replyNo").val();
+    		
+			axios.delete("${pageContext.request.contextPath}/rest/reply/"+replyNo)
+			.then(function(resp){
+				loadReplyList();
 			});
-		}
+		});
+		
 	});
 </script>

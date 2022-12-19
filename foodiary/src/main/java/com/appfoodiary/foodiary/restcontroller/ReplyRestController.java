@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,14 +28,14 @@ public class ReplyRestController {
 	@Autowired
 	ReplyDao replyDao;
 	
-	@GetMapping("/list/{reviewNo}")
+	@GetMapping("/{reviewNo}")
 	@Operation(summary = "댓글목록 조회", description = "reviewNo 리뷰의 댓글목록을 조회합니다.")
 	public List<ReplyListVO> list(@PathVariable int reviewNo) {
 		return replyDao.list(reviewNo);
 	}
 	
-	@PostMapping("/insert")
-	@Operation(summary = "댓글 추가", description = "reviewNo 리뷰에 댓글을 추가합니다.")
+	@PostMapping
+	@Operation(summary = "댓글 추가", description = "댓글을 추가합니다.")
 	public boolean insert(@RequestBody ReplyDto dto) {
 		int replyNo = replyDao.newReplyNo();
 		dto.setReplyNo(replyNo);
@@ -42,6 +43,14 @@ public class ReplyRestController {
 		replyDao.write(dto);
 		return true;
 	}
+	
+	@DeleteMapping("/{replyNo}")
+	@Operation(summary = "댓글 삭제", description = "replyNo 댓글을 삭제합니다.")
+	public boolean delete(@PathVariable int replyNo) {
+		replyDao.delete(replyNo);
+		return true;
+	}
+	
 	
 
 }
