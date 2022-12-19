@@ -25,6 +25,10 @@
  	.thumbnail {
  		object-fit:cover;
  	}
+ 	
+ 	#sideP {
+ 		cursor: pointer;
+ 	}
  </style>
 
 </head>
@@ -574,6 +578,11 @@ function reset() {
 		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
 		$(document).on("click", ".review-write-info", function(){
 			window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
+		});
+		
+		//사이드바 프로필 영역 클릭 시, 마이 프로필로 이동
+		$(document).on("click", "#sideP", function(){
+			window.location = "${pageContext.request.contextPath}/profilepage/board";
 		});
 	});
 </script>
