@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자::홈</title>
-<link rel="stylesheet" type="text/css"
-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <style>
 .page {
 	text-align: center;
@@ -102,7 +100,7 @@
     	});
     	
     	$(".blind").click(function(){
-    		window.location = "${pageContext.request.contextPath}/admin/review-blind";
+    		window.location = "${pageContext.request.contextPath}/admin/blind/review";
     	});
     	
     	$(".logout").click(function(){
