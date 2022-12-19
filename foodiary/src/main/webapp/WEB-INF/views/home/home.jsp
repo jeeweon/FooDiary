@@ -10,33 +10,7 @@
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
- 	
- 	.level-img {
- 		width:24px;
- 		margin:0;
- 		margin-left: 5px;
- 	}
- 	
- 	.nick-lev {
- 		display: flex;
- 		align-items:center;
- 	}
- 	
- 	.thumbnail {
- 		object-fit:cover;
- 	}
- 	
- 	#sideP {
- 		cursor: pointer;
- 	}
 
- 	.origin{
-		width:50px;
-		hight:50px;
-	}
-	.follow-ul img{
-		border-radius: 50%;
-	}
  </style>
 
 </head>
@@ -611,9 +585,10 @@ function reset() {
 					
 					// 회원번호가 있으면 팔로우한 사람 제거하고 출력
 					threeMem();
-				}
-			});
-		};
+			}
+		});
+	};
+		
 		
 		function threeMem(){
 			$.each(memRekList, function(index, value) {
