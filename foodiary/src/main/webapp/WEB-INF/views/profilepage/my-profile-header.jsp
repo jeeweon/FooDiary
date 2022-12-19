@@ -81,6 +81,11 @@
  		width:10px;
  		height:50px;
  		}
+ 		
+ 		.level-img2 {
+ 		width:30px;
+ 		height:30px;
+ 		}
  		#modal3 {
           display: none;
           position: absolute;         
@@ -107,7 +112,7 @@
           border:10px solid #666;
         }
         
-        #modal3 .modal_layer3 {
+        #modal3 .modal_layer {
           position:fixed;
           top:0;
           left:0;
@@ -116,6 +121,9 @@
           background:rgba(0, 0, 0, 0.5);
           z-index:-1;
         }  
+        .menu-top{
+       	margin-top:50em;
+        }
       
 </style> 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -197,12 +205,28 @@
 			 if(followMemList.length != 0) {
 				$.each(followMemList, function(index, value) {
 					
+					//팔로워 레벨 이미지 
+					var writerLevel;
+					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (followMemList.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (followMemList.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (followMemList.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (followMemList.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img2");
 					
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					//a+img+span
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span);
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
 					img.addClass("follow-img");
 					var hr=$("<hr>");
 					//사진 번호가 있는지 없는지. 
@@ -239,13 +263,30 @@
 			console.log("팔로우 목록 출력");
 			 if(followerMemList.length != 0) {
 				$.each(followerMemList, function(index, value) {
-					console.log("팔로워 "+value.memNo);
+					
+					//팔로 레벨 이미지
+					var writerLevel;
+					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (followerMemList.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (followerMemList.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (followerMemList.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (followerMemList.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img2");
+					
 					
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var hr=$("<hr>");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span);
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
@@ -262,9 +303,10 @@
 		};
 		
 		
+		
  	});
 </script>
-<body>
+<body class="body">
 	<div class="wrapper">
         <div class="boardF">
             <div class="inner">
@@ -336,27 +378,27 @@
 <!-- 설정창 -->
  <div id="modal3">
     <div class="modal_content3">
-      <h2>
+      <h2 class="menu-top">
       	<a href="${pageContext.request.contextPath}/mem/check_pw">
       	비밀번호 변경
       	</a>
       </h2>
       <hr>
-      <h2>
+      <h2 class="menu-top">
       	<a href="${pageContext.request.contextPath}/mem/leave">
       		탈퇴하기
       	</a>
       </h2>
       <hr>
-      <h2>
+      <h2 class="menu-top">
       	<a href="${pageContext.request.contextPath}/mem/inquiry">
      	 	문의
      	 </a>
       </h2>
       <hr>
-      <h2 class="menu-btn">취소</h2>
+      <h2 class="menu-btn menu-top">취소</h2>
     </div>
-    <div class="modal_layer3"></div>
+    <div class="modal_layer"></div>
 </div>
 
 
@@ -382,6 +424,11 @@
   $(".menu-btn").click(function(){
      $("#modal3").fadeOut(); 
 	  });
+    $(".modal_layer").click(function(){
+	  $("#modal").fadeOut(); 
+	  $("#modal2").fadeOut();
+	  $("#modal3").fadeOut();
+  });  
 </script>
 </html>
 

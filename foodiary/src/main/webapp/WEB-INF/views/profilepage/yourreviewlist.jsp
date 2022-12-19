@@ -93,6 +93,23 @@ li {
 	width :350px;
 	height :350px;
 }
+.relative { 
+ 	width: 350px;
+ 	height: 350px;
+ 	position: relative;
+ 	background-color: yellow;
+ 	}
+.absolute {
+	width: 50px; 
+ 	height: 50px;
+ 	position: absolute;
+ 	left: 300px;
+ 	top: 300px;
+ 	background-color:gray;
+ 	opacity: 0.5;
+ 	text-align: center;
+ 	font-size:35px;
+	 	}
 </style> 
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
