@@ -8,7 +8,9 @@ import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,5 +58,19 @@ public class AdminMailController {
 			emailService.noticeMail(memEmail, memNick, subject, content);
 		} 
 		return "admin/send-result";
+	}
+	
+	@GetMapping("/mail-list")
+	public String mailList(Model model) {
+		List<NoticeEmailDto> list = adminEmailDao.selectList();
+		model.addAttribute("list",list);
+		return "admin/mail-list";
+	}
+	
+	@GetMapping("/mail-detail")
+	public String detail(Model model, @RequestParam int emailNo) {
+		NoticeEmailDto noticeEmailDto = adminEmailDao.selectOne(emailNo);
+		model.addAttribute("emailDto",noticeEmailDto);
+		return "admin/mail-detail";
 	}
 }
