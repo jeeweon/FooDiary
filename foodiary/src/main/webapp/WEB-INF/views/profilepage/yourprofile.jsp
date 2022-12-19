@@ -81,6 +81,11 @@
           .level-img {
  		width:10px;
  		height:50px;
+ 		}
+ 		.level-img2 {
+ 		width:30px;
+ 		height:30px;
+ 		}
  </style>
 <script>
  	$(function(){
@@ -212,11 +217,29 @@
 				$.each(followMemList, function(index, value) {
 					
 					
+					//팔로우 레벨 이미지
+					var writerLevel;
+					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (followerMemList.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (followerMemList.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (followerMemList.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (followerMemList.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img2");
+					
+					
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b);
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
 					
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
@@ -255,13 +278,28 @@
 			console.log("팔로우 목록 출력");
 			 if(followerMemList.length != 0) {
 				$.each(followerMemList, function(index, value) {
-					console.log("팔로워 "+value.memNo);
+					//팔로워 레벨 이미지
+					var writerLevel;
+					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (followerMemList.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (followerMemList.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (followerMemList.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (followerMemList.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img2");
 					
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b);
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
 					
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
