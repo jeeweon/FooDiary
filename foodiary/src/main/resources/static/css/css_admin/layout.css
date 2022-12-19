@@ -35,6 +35,7 @@ aside a {
     text-decoration: none;
     /* color: #E27C5E; */
     color: #18253D;
+    box-sizing: border-box;
 }
 aside a:hover {
     font-weight: bold;

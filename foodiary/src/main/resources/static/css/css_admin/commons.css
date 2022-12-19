@@ -382,6 +382,43 @@ ul.pagination > li > a {
 #dashboard{
     position: absolute;
     top: 0;
-    left: 200px;
+    left: 220px;
     right: 0;
+}
+
+.float-container {}
+.float-container::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.float-left{
+    float: left;
+}
+.float-right{
+    float:right;
+}
+
+.flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+	align-items: center;
+}
+
+.flex > div {
+    flex-grow: 1;
+}
+.flex > div > a {
+	display: block;
+    width: 100%;
+	text-decoration: none;
+	color: black;
+	text-align: right;
+}
+
+flex > div > a:link, flex > div > a:visited {
+    color: black;
 }
