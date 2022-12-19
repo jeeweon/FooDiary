@@ -634,6 +634,18 @@ li {
  	.writer-avatar{
  		border-radius: 50%;
  	}
+ 		#sideP {
+ 		cursor: pointer;
+ 	}
+
+ 	.origin{
+		width:50px;
+		hight:50px;
+	}
+
+	.follow-ul img{
+		border-radius: 50%;
+	}
  
 
 @media screen and (max-width: 1420px) {
