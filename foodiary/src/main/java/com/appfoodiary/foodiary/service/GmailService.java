@@ -2,6 +2,7 @@ package com.appfoodiary.foodiary.service;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.mail.MessagingException;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import com.appfoodiary.foodiary.component.RandomGenerator;
 import com.appfoodiary.foodiary.entity.SelfCheckDto;
 import com.appfoodiary.foodiary.repository.SelfCheckDao;
+import com.appfoodiary.foodiary.vo.MemEmailVO;
 
 @Service
 public class GmailService implements EmailService{
@@ -111,6 +113,44 @@ public class GmailService implements EmailService{
 		helper.setText("[문의 계정 이메일 : " + memEmail+"]\r\n"+ text);
 		
 		//전송
+		javaMailSender.send(message);
+	}
+	
+	@Override
+	public void noticeMail(String memEmail,String memNick,String subject, String content) throws MessagingException, FileNotFoundException, IOException {
+		
+		//1.메세지 생성
+		MimeMessage message = javaMailSender.createMimeMessage();
+				
+		//2.헬퍼 생성
+		MimeMessageHelper helper = new MimeMessageHelper(message, false, "UTF-8");
+			
+		//3.정보 설정
+		helper.setTo(memEmail);
+		helper.setSubject("[FooDiary] "+subject);
+		
+		ClassPathResource resource = new ClassPathResource("email/notice.html");
+		StringBuffer buffer = new StringBuffer();
+		
+		try(Scanner sc = new Scanner(resource.getFile())){
+			while(sc.hasNextLine()) {//읽을 것이 있으면 추가
+				buffer.append(sc.nextLine());
+			}
+		}
+		// Jsoup 라이브러리르 이용해서 ID와 Address를 설정한 뒤 전송
+		String text = buffer.toString();
+		
+		//문자열을 HTML로 인식하도록 해서 전송
+		Document doc = Jsoup.parse(text);
+		
+		Element nick = doc.getElementById("memNick");
+		nick.text(memNick);
+		
+		Element element = doc.getElementById("content");
+		element.text(content);
+		
+		//true로 선택해야 html이 날라갈 수 있음
+		helper.setText(doc.toString(),true);
 		javaMailSender.send(message);
 	}
 }
