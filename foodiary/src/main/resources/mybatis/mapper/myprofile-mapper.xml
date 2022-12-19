@@ -160,7 +160,8 @@
 select
     mem_no,
     coalesce(attach_no, 0) attach_no,
-    mem_nick
+    mem_nick,
+    mem_level
 from (
     select TMP.*, rownum rn from (
         select * from 
@@ -170,7 +171,8 @@ from (
         PA.attach_no attach_no,
         MM.mem_nick mem_nick,
         MM.mem_login_date mem_login_date,
-        RC.rcc review_cnt
+        RC.rcc review_cnt,
+        MM.mem_level
     from( 
         ((select mem_no from mem 
         minus
