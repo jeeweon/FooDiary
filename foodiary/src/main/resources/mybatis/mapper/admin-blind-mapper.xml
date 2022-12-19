@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin-blind">
+	<select id="list" parameterType="String" resultType="ReviewBlindDto">
+		select * from review_blind 
+		where review_isblind = #{reviewIsblind}
+	</select>
+	
+	<!-- 블라인드 상세 (리뷰 원글: review-mapper(id=get)로 조회, 신고내역: 신고시작일 이후의 내역만 조회-->
+	<select id="report-history" parameterType="String" resultType="ReviewReportDto">
+		select * from review_report 
+		where review_no = #{review_no} 
+		and review_report_time >= to_timestamp('#{review_report_time}', 'YYYY-MM-DD HH:MI:SS.FF3')
+	</select>
+	
+	
+</mapper>
