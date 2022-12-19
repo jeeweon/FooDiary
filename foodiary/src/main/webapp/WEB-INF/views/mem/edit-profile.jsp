@@ -97,59 +97,33 @@ $(function(){
 		$("input[name=profile]").click();
 		
 	});
-	
+		
+	//프로필 인풋 창에 변화가 있을 때
 	$(".profile-input").change(function(){
-
-// 		console.log(this.files);
 		if(this.files.length>0){
-			$(".preview").attr("src", window.URL.createObjectURL(this.files[0]));
-			
-	// 서버에 비동기로 파일을 업로드하는 코드를 사용해야 함(ajax를 이용해서 multipart 전송 구현)
-    // - 반드시 contentType, processData를 false로 설정해야 한다
-    // - FormData 객체를 만들어 전송할 내용을 담아서 data에 설정한다
-// 			var fd = new FormData();
-// 			fd.append("attach",this.files[0]);
-
-// 			$.ajax({
-// 				url: "${pageContext.request.contextPath}/attach/upload",
-// 				method : "post",
-// 				data : fd,
-// 				processData : false,
-// 				contentType : false,
-// 				success:function(resp){
-// 					$(".preview").attr("src", resp).attr("width","200").attr("height","200");
-					 
-// 					var div= $("<div>");
-// 					var input = $("<input>").addClass("file-no");
-					 
-// 					$(".file").html(div);	
-// 					div.append(input);
-						 
-// 					var check = resp.lastIndexOf("/")//경로에서 /위치 찾기
-// 					var attachNo = resp.substr(check+1);
-// 					$(".file-no").val(attachNo);
-// 				}
-// 			});
-// 			$(".preview").attr("src", window.URL.createObjectURL(this.files[0]));
+			$(".preview").attr("src", window.URL.createObjectURL(this.files[0]));	
 		}
 		else{
-			
-// 			$(".preview").attr("src", window.URL.createObjectURL(this.files[0]));
-// 			$(".file-no").remove();
+			$(".preview").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");
 		}
 	});
 	
 	//프로필 삭제 버튼(삭제 후엔 기본 이미지로)
 	$(".profile-delete").click(function(){
-		$.ajax({
-			url:"${pageContext.request.contextPath}/rest/mem/profile_delete",
-			method:"post",
-			data: {memNo:"${sessionScope.loginNo}"},
-			success:function(resp){
-				$(".preview").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");
-			}
-		});
 		
+		//프로필 이미지를 선택했다가 삭제 버튼 누르면 val값 공란
+		$(".profile-input").val("");
+		$(".preview").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");
+		
+		//원래 프로필 이미지 삭제
+		$.ajax({
+				url:"${pageContext.request.contextPath}/rest/mem/profile_delete",
+				method:"post",
+				data: {memNo:"${sessionScope.loginNo}"},
+				success:function(resp){
+					$(".preview").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");
+				}
+			});				
 	});
 	
 	//input 상태객체
