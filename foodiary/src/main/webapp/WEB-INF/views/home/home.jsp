@@ -10,8 +10,6 @@
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
-<<<<<<< HEAD
-=======
  	
  	.level-img {
  		width:24px;
@@ -36,7 +34,9 @@
 		width:50px;
 		hight:50px;
 	}
->>>>>>> refs/remotes/origin/main
+	.follow-ul img{
+		border-radius: 50%;
+	}
  </style>
 
 </head>
