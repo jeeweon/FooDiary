@@ -94,8 +94,9 @@
 				method : "get",
 				dataType : "json",
 				success : function(resp) {
+					console.log("회원"+resp);
 					profileList = resp;
-					console.log(profileList);
+					$(".profile-level-image").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
 					$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
@@ -212,7 +213,9 @@
                 </div><!--boardM-->
                 <div class="boardT">
                     <ul class="boardT1">
-                        <li class="mem-name"> </li>
+                        <li class="mem-name">
+                        <img src="" class="profile-level-image" alt="설정">
+                         </li>
                         <button><a href="#">프로필 편집</a></button>
                         <a href="" id="Ta1"><img src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정"></a>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
@@ -279,4 +282,21 @@
   });
 </script>
 </html>
+
+
+					<%-- var writerLevel;
+					if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (value.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (value.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (value.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (value.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img"); --%>
 
