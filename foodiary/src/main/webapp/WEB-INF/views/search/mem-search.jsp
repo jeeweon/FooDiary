@@ -13,7 +13,7 @@
 }
 
 .search-form {
-        margin: 0;
+   	margin: 0;
 }
     
 .search-view{
