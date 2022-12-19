@@ -213,6 +213,7 @@ li {
   .receipt {
     width: 100%;
     height: 80%;
+    border-radius: 10%;
     background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
     display: flex;
     flex-direction: column;
@@ -289,7 +290,6 @@ li {
     right: 0;
     height: 2px;
     width: 0;
-    background: black;
     transition: 400ms ease all;
   }
   .btn_area button:after {

@@ -8,6 +8,11 @@
 		width:50px;
 		hight:50px;
 	}
+	.level-img {
+ 		width:24px;
+ 		margin:0;
+ 		margin-left: 5px;
+ 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
 <script>
@@ -31,6 +36,25 @@
 	};
 	function threeMem(){
 		$.each(memRekList, function(index, value) {
+			
+			
+			
+			var writerLevel;
+			if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+			} else if (value.memLevel == "5  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+			} else if (value.memLevel == "4  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+			} else if (value.memLevel == "3  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+			} else if (value.memLevel == "2  ") {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+			} else {
+				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+			}
+			writerLevel.addClass("level-img");
+			
 // 			console.log(value);
 // 			console.log(value.memNo);
 			console.log(value.attachNo);
@@ -38,12 +62,16 @@
 			var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 			var br=$("<br>");
 			var name=$("<span>").text(value.memNick);
-			var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name);
+			var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
+			var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name).append(writerLevel);
+			var li=$("<li>").append(a).append(button);
 			a.click(function(){
 				console.log("a클릭");
-				window.location = "${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+$(this).data("mno");
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
 			});
-			var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
+			
+			
+			
 			
 			button.click(function(){
 				console.log("팔로우 클릭");
@@ -71,13 +99,16 @@
 			}else{
 				memImg.attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 			} 
-			$(".main").append(a).append(button).append(br);	
+			
+			$(".follow-ul").append(li);	
 		});
 	};
 });
 </script>
-<div class="main">
-</div>
-
+ 				 <div class="follow">
+                    <h3>먹는거 좋아하는 사람</h3>
+                     <ul class="follow-ul">
+                     </ul>
+                 </div>
 
 
