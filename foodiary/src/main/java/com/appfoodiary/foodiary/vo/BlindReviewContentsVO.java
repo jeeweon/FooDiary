@@ -18,7 +18,9 @@ public class BlindReviewContentsVO {
 	private String reviewPlace;
 	private int reviewReportCnt;
 	private int likeCnt;
+	private int replyCnt;
 	private String memNick;
 	private String memLevel;
 	private String memReviewCnt;
+	private int pno; //프로필 이미지 첨부파일 번호
 }

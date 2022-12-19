@@ -18,7 +18,7 @@
 	</select>
 	
 	<!-- 
-		블라인드 상세[신고내역] 
+		블라인드 상세 
 		- 리뷰 원글: 블라인드 화면에 출력할 내용만 조회
 		- 신고내역: 신고시작일 이후의 내역만 조회
 	-->
@@ -27,9 +27,11 @@
 			R.*,
 			M.mem_nick,
 			M.mem_level,
+			P.attach_no as pno,
 			coalesce(B.cnt, 0) mem_review_cnt
 		from review R
 		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on M.mem_no = P.mem_no
 		left outer join(
 			select mem_no, count(mem_no) cnt
 			from review
