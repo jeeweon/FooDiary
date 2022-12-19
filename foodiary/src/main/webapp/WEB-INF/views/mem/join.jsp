@@ -58,7 +58,6 @@
 	</div>
 
 <form action="join" class="join-form" method="post" autocomplete="off">
-	
 	<div>
 		<label>
 			이메일
@@ -116,7 +115,7 @@
 			<i class="fa-solid fa-asterisk"></i>
 		</label>		
 		<input type="text" class="input single-date-picker" name="memBirth" id="memBirth" placeholder="생년월일">
-		<div class="birth">생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요.</div>
+		<div class="birth">만 14세 이상만 가입이 가능하며 생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요.</div>
         <div class="fail-message">생년월일을 선택해주세요.</div>
 	</div>
 	
@@ -208,6 +207,27 @@ $(function(){
 		
 	});
 	
+	//인증번호 5분 타이머 세팅
+	function startTimer(duration, display){
+		var timer = duration, minutes, seconds;
+		var interval = setInterval(function(){
+			minutes = parseInt(timer/60,10)
+			seconds = parseInt(timer%60,10);
+			
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
+			
+			display.textContent = "인증번호 유효시간 : " + minutes + ":" + seconds;
+			if(--timer<0){
+				timer = duration;
+			}
+			if(timer ==0){
+				clearInterval(interval);
+				display.textContent = "인증번호 입력 시간이 만료되었습니다.";
+			}
+		},1000);
+	}
+	
 	//인증번호 보내기 버튼 클릭 시 -> 이메일 발송
 	$(".send-btn").click(function(){
 		var email = $("[name=memEmail]").val();
@@ -231,6 +251,7 @@ $(function(){
 			//이메일 전송 시 인증번호 창 생김
 			var div = $("<div>");
 			var div2= $("<div>");
+			var span= $("<span>");
 			var input = $("<input>").addClass("serial input").attr("placeholder","인증번호");
 			var successMessage = $("#success-message");
 			var failMessage = $("#fail-message");
@@ -240,14 +261,15 @@ $(function(){
 			$(".email-check").html(div);	
 			div.append(input);
 			$(".email-check-btn").html(div2);
-			div2.append(button);
+			div2.append(button).append(span);
+			span.text("인증번호 유효시간 : 05:00").addClass("timer");
 			
-			//alert 처리하면서 블러이벤트 지움 혹시 모르니 일단 주석처리..
-// 			input.blur(function(){
-// 				if(judge.memEmailValid !=true) 
-// 					return $(".serial").addClass("fail").after(failMessage);
-// 			});	
-			
+			//인증번호 5분 타이머
+			var minutes = 5;
+			var fiveMinutes = (60*minutes) - 1,
+				display = document.querySelector('.timer');
+			startTimer(fiveMinutes,display);
+				
 				//인증번호 확인 클릭시
 				button.click(function(){
 					var serial = input.val(); //변수 input의 value 값 
@@ -347,17 +369,24 @@ $(function(){
 		
 	});
 	
-	var moment = new Date;//오늘 날짜
-	var limit = moment.getFullYear()-14;
+	var moment = new Date();//오늘 날짜
+	var year = moment.getFullYear()-14; //만 14세 이상만 가입가능
 	
-	console.log(limit);
+	function limit(){
+		var yyyy = year
+		var mm = moment.getMonth()+1;
+		var dd = moment.getDate();
+		return yyyy+'-'+mm+'-'+dd;
+	}
+
 	var picker = new Lightpick({
 		field : document.querySelector(".single-date-picker"),
 		format : "YYYY-MM-DD",
-		maxDate : limit,
+		maxDate : limit(),
 		numberOfMonths:2,
-		
-	})
+		startDate : limit()
+	});
+	
 	
 	$("input[name=memBirth]").blur(function(){
 		var memBirth = $(this).val();
