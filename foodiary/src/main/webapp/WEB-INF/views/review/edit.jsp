@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<title>리뷰 수정</title>
+
 <!-- 현재 시간 구하기 -->
 <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 <c:set var="today">
