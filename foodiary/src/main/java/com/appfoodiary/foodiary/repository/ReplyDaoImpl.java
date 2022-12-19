@@ -1,6 +1,7 @@
 package com.appfoodiary.foodiary.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,32 @@ public class ReplyDaoImpl implements ReplyDao {
 		return count >0;
 	}
 
+	
+	//댓글신고 테이블 : 신고+1 (insert)
+	@Override
+	public void insertReplyReport(Map<String, Object> report) {
+		sqlSession.insert("reply.insertReplyReport", report);
+	}
+	//댓글 테이블 : 신고수+1 (update)
+	@Override
+	public boolean plusReplyReportCnt(int replyNo) {
+		int count = sqlSession.update("reply.plusReplyReportCnt", replyNo);
+		return count >0;
+	}
+	//댓글 테이블의 댓글신고수 조회
+	@Override
+	public int selectReplyReportCnt(int replyNo) {
+		return sqlSession.selectOne("reply.selectReplyReportCnt", replyNo);
+	}
+	//댓글블라인드 테이블 : 신고+1 (insert)
+	@Override
+	public void insertReplyBlind(int replyNo) {
+		sqlSession.insert("reply.insertReplyBlind", replyNo);
+	}
+	//댓글블라인드 테이블 : 신고수+1 (update)
+	@Override
+	public boolean plusReplyBlind(Map<String, Object> blind) {
+		int count = sqlSession.update("reply.plusReplyBlind", blind);
+		return count >0;
+	}
 }

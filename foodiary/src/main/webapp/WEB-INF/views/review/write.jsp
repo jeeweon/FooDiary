@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<title>리뷰 작성</title>
+
 <style>
 /* summernote(좌측), 리뷰장소(우측) 구분용 style */
 	.float-container {}
