@@ -45,16 +45,6 @@ public class AttachRestController {
 		return attachmentService.attachmentsDownloadList(attachNo);
 	}
 	
-	// 프로필 이미지 업로드
-//	@PostMapping("/upload")
-//	public String upload(@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
-//		//파일 첨부
-//		int attachNo = attachmentService.attachUp(attach);
-//		return ServletUriComponentsBuilder.fromCurrentContextPath()
-//				.path("/attach/download/").path(String.valueOf(attachNo))
-//				.toUriString();
-//	}
-	
 	
 	
 }
