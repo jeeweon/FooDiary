@@ -92,7 +92,7 @@ td > a:visted {
 <div id="dashboard">
 	<div class="container">
 		<div class="title">
-			<h2>리뷰 블라인드 목록</h2>
+			<h2>블라인드 리뷰 목록</h2>
 		</div>
 		
 		<form class="search-form">
