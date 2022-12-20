@@ -18,18 +18,18 @@
 </head>
 <body>
  	<div class="wrapper">
-        <div class="Mplus">            
+        <div class="Mplus">
+            <div class="inner">
                 <div class="Mhead">
                     <a href="/search/review"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a> 
                     <h1>회원가입</h1>
-                </div> <!-- Mhead -->              
+                </div> <!-- Mhead -->
                 <div class="Mbody">
                 <fieldset>
 					<legend>
 						<form action="join" class="join-form" method="post" autocomplete="off">
-						<div>
                     	<div class="text-title">이메일 <i class="fa-solid fa-asterisk"></i></div>						
-						<input type="text" class="input" name="memEmail" placeholder="사용 가능한 이메일을 입력해주세요">
+						<input type="text" class="input" name="memEmail" placeholder="인증 가능한 이메일을 입력해주세요">
 				        <div class="success-message">사용 가능한 이메일입니다. 인증번호를 전송해주세요.</div>
 				        <div class="fail-message">올바르지 않은 이메일 형식입니다.</div>
 				        <div class="NNNNN-message">이미 사용중인 이메일입니다.</div>
@@ -41,42 +41,39 @@
 					     	<div id="fail-message">인증번호가 확인되지 않았습니다.</div>
 				        </div>
 				        <div class="email-check-btn"></div>
-						</div>
-						
-						<div>
-						<div class="text-title">비밀번호 <i class="fa-solid fa-asterisk"></i></div>						
+				
+					
+						<div class="text-title" id="pw2">비밀번호 <i class="fa-solid fa-asterisk"></i></div>						
 						<input type="password" class="input" name="memPw" placeholder="비밀번호">
 				        <div class="success-message">사용 가능한 비밀번호입니다.</div>
 				        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
-						</div>
 					
-						<div>
-						<div class="text-title">비밀번호 확인 <i class="fa-solid fa-asterisk"></i></div>						
+					
+						<div class="text-title" id="pw1">비밀번호 확인 <i class="fa-solid fa-asterisk"></i></div>						
 						<input type="password" class="input" id="pw-re" placeholder="비밀번호 확인">
 						<div class="success-message">비밀번호가 일치합니다.</div>
 				        <div class="fail-message">비밀번호가 일치하지 않습니다.</div>		
-						</div>
 					
-						<div>
+					
 						<div class="text-title">닉네임 <i class="fa-solid fa-asterisk"></i></div>						
 						<input type="text" class="input" name="memNick" placeholder="닉네임" >
 						<div class="success-message">사용 가능한 닉네임입니다.</div>
 				        <div class="fail-message">닉네임은 한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
 				        <div class="NNNNN-message">이미 사용중인 닉네임입니다.</div>		
-						</div>
-						
-						<div>
+					
+					
 						<div class="text-title">생일 <i class="fa-solid fa-asterisk"></i></div>		
 						<input type="text" class="input single-date-picker" name="memBirth" id="memBirth" placeholder="생년월일">
 						<div class="birth">만 14세 이상만 가입이 가능하며 생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요.</div>
 				        <div class="fail-message">생년월일을 선택해주세요.</div>
-						</div>
+					
 					
 						<div><button type="submit" id="form-button">가입하기</button></div>						                                     
                     	</form>
 					</legend>
 				</fieldset>	
-                </div> <!-- Mbody -->            
+                </div> <!-- Mbody -->
+            </div> <!-- inner -->
         </div> <!-- Mplus -->
     </div> <!-- wrapper -->
      
