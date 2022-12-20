@@ -89,7 +89,6 @@
  </style>
 <script>
  	$(function(){
- 		console.log(${memNo});
  		memList();
  		followCert();	
  		followMem();
@@ -104,7 +103,6 @@
 				success : function(resp) {
 					profileList = resp;
 					console.log(profileList);
-					console.log("회원 레벨"+profileList.memLevel);
 					//$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
@@ -167,7 +165,6 @@
 		
 		// 팔로우버튼 클릭시 
 		$(".follow-cert").click(function(){
-			console.log("버튼 클릭");
 			$.ajax({
 				url:"${pageContext.request.contextPath}/rest/review/follow",
 				method:"post",
@@ -187,7 +184,6 @@
 							passiveMemNo : ${memNo}
 						},
 						success:function(resp){
-								console.log("follow :"+resp);
 								$(".follow-cnt").text("팔로워 : "+resp);
 						}
 					});
@@ -203,16 +199,16 @@
 				method :"get",
 				dataType:"json",
 				success:function(resp){
-					console.log("팔로우 멤버dfsdfsdf"+resp);
 					followMemList=resp;
 					renderfollowList()
+					console.log("팔로우 멤버");
+					console.log(followMemList);
 				}
 			}); 
 		};
 		
 		//팔로우 목록 출력
 		function renderfollowList(){
-			console.log("팔로우 목록 출력");
 			 if(followMemList.length != 0) {
 				$.each(followMemList, function(index, value) {
 					
@@ -242,6 +238,13 @@
 					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
 					
 					img.addClass("follow-img");
+					//팔로우가 되어있는 상태인지 아닌지확인
+					var buttonFollow;
+					if(value.followCheck){
+						var buttonFollow=$("<button>").text("팔로잉");
+					}else{
+						var buttonFollow=$("<button>").text("팔로우");
+					}
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
@@ -249,10 +252,10 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					$(".modal_content").css("display","block");
-					$(".modal_content").append(a).append(br);
+					$(".modal_content").append(a).append(buttonFollow).append(br);
 				});
 			}else{
-				console.log("팔로우 목록이 없습니다");
+			
 				var span=$("<span>").text("선택된 팔로우가 없습니다.")
 				$(".modal_content").append(span);
 			}
@@ -266,16 +269,16 @@
 				method :"get",
 				dataType:"json",
 				success:function(resp){
-					console.log("팔로잉 멤버"+resp);
 					followerMemList=resp;
 					renderfollowerList();
+					console.log("팔로워 멤버");
+					console.log(followerMemList);
 				}
 			}); 
 		};
 		
 		//팔로워 목록 출력
 		function renderfollowerList(){
-			console.log("팔로우 목록 출력");
 			 if(followerMemList.length != 0) {
 				$.each(followerMemList, function(index, value) {
 					//팔로워 레벨 이미지
@@ -302,6 +305,13 @@
 					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
 					
 					img.addClass("follow-img");
+					//팔로우가 되어있는 상태인지 아닌지확인
+					var buttonFollow;
+					if(value.followCheck){
+						var buttonFollow=$("<button>").text("팔로잉");
+					}else{
+						var buttonFollow=$("<button>").text("팔로우");
+					}
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
@@ -309,10 +319,9 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					
-					$(".modal_content2").append(a).append(br);
+					$(".modal_content2").append(a).append(buttonFollow).append(br);
 				});
 			}else{
-				console.log("팔로워 목록이 없습니다");
 				var span2=$("<span>").text("선택된 팔로우가 없습니다.");
 				$(".modal_content2").append(span2);
 			} 
@@ -388,13 +397,20 @@
     });
    	$(".follow-btn").click(function(){
 	  $("#modal").fadeOut(); 
+	  location.reload();
    	});
    
    	$(".follow-cnt").click(function(){
    	 	  $("#modal2").fadeIn();
    	});
   	$(".follower-btn").click(function(){
-		  $("#modal2").fadeOut(); 
+		  $("#modal2").fadeOut();
+		  location.reload();
+  	});
+  	$(".modal_layer").click(function(){
+  		$("#modal").fadeOut();
+  	  	$("#modal2").fadeOut();
+  	  	location.reload();
   	});
 </script>
     

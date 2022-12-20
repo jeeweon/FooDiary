@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.FollowCertDto;
 import com.appfoodiary.foodiary.entity.FollowDto;
+import com.appfoodiary.foodiary.entity.FollowMemDto;
 import com.appfoodiary.foodiary.vo.FollowCertVO;
 import com.appfoodiary.foodiary.vo.FollowMemVO;
 
@@ -50,12 +51,12 @@ public class FollowDaoImpl implements FollowDao{
 		return sqlSession.selectOne("myprofile.followcert" ,dto);
 	}
 	@Override
-	public List<FollowMemVO> followMem(int memNo) {
-		return sqlSession.selectList("follow.followmem",memNo);
+	public List<FollowMemVO> followMem(FollowMemDto dto) {
+		return sqlSession.selectList("follow.followmem",dto);
 	}
 	@Override
-	public List<FollowMemVO> followerMem(int memNo) {
-		return sqlSession.selectList("follow.followermem",memNo);
+	public List<FollowMemVO> followerMem(FollowMemDto dto) {
+		return sqlSession.selectList("follow.followermem",dto);
 	}
 
 }
