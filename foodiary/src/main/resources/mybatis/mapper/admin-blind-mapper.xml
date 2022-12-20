@@ -71,4 +71,62 @@
 		where review_no = #{reviewNo} 
 			and review_isblind = '1'
 	</update>
+	
+	<!-- 블라인드 댓글 목록 -->
+	<select id="reply-list" parameterType="String" resultType="ReplyBlindVO">
+		select B.*, M.mem_nick from reply_blind B 
+		inner join reply R on B.reply_no = R.reply_no
+		left outer join mem M on R.mem_no = M.mem_no
+		where reply_isblind = '1'
+		<if test="keyword != null">
+			and instr(mem_nick, #{keyword}) > 0
+		</if>
+		order by reply_blind_no desc
+	</select>
+	
+	<!-- 
+		블라인드 상세 
+		- 댓글 원글: 블라인드 화면에 출력할 내용 조회
+		- 신고내역: 신고시작일 이후의 내역만 조회
+	-->
+	<select id="reply-contents" parameterType="int" resultType="BlindReplyContentsVO">
+		select 
+			R.*,
+			M.mem_nick,
+			M.mem_level,
+			P.attach_no as pno
+		from reply R
+		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on M.mem_no = P.mem_no
+		where R.reply_no = #{replyNo}
+	</select>
+	
+	<select id="reply-report-start" parameterType="int" resultType="java.sql.Date">
+		select report_start_time 
+		from reply_blind
+		where reply_no = #{replyNo}
+			and reply_isblind = '1'
+	</select>
+	
+	<select id="reply-report-history" parameterType="map" resultType="ReplyReportVO">
+		select R.*, M.mem_nick from reply_report R
+			left outer join mem M on R.mem_no = M.mem_no
+		where R. reply_no = #{replyNo} 
+		and R.reply_report_time >= #{reportStartTime}
+		order by reply_report_no asc
+	</select>
+	
+	<!-- 블라인드 해제 시, 댓글신고 수 = 0, 블라인드 상태 = 2(해제), 해제 시간 = sysdate -->
+	<update id="reply-report-cnt-reset" parameterType="int">
+		update reply 
+			set reply_report_cnt = 0 
+		where reply_no = #{replyNo}
+	</update>
+	
+	<update id="reply-blind-clear" parameterType="int">
+		update reply_blind
+			set reply_isblind = '2', blind_clear_time = sysdate
+		where reply_no = #{replyNo}
+			and reply_isblind = '1'
+	</update>
 </mapper>
