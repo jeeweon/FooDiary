@@ -43,7 +43,7 @@ li {
 .Lhead img{
     width: 400px;
     height: 250px;
-    margin: 30px;
+    margin: 20px;
 }
 
 .Lbody{
@@ -61,7 +61,7 @@ li {
     height: 50px;
     border: 1px solid grey;
     border-radius: 10px 10px;
-    margin: 30px;
+    margin: 20px;
     padding-left: 15px;
 }
 .Lbody button{
@@ -69,11 +69,12 @@ li {
     height: 50px;
     margin: 30px;
     align-items: center;
-    border: 1px solid gray;
+    border: none;
     border-radius: 10px 10px;
     background-color: #ffe9b1;
     font-size: 15px;
     font-weight: bold;
+    color : #E27C5E
 }
 
 .Lfoot{
