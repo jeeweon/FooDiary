@@ -83,15 +83,17 @@
 					- (사진,닉네임)클릭시 프로필로 이동 
 	-->
 	<div class="reviewWriter">
-		<c:choose>
-			<c:when test="${reviewWriter.attachNo == 0}">
-				<img class="profile" src="${pageContext.request.contextPath}/images/basic-profile.png">
-			</c:when>
-			<c:otherwise>
-				<img class="profile" src="${pageContext.request.contextPath}/attach/download/${reviewWriter.attachNo}">
-			</c:otherwise>
-		</c:choose>
-		<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
+		<span class="reviewMem">
+			<c:choose>
+				<c:when test="${reviewWriter.attachNo == 0}">
+					<img class="profile" src="${pageContext.request.contextPath}/images/basic-profile.png">
+				</c:when>
+				<c:otherwise>
+					<img class="profile" src="${pageContext.request.contextPath}/attach/download/${reviewWriter.attachNo}">
+				</c:otherwise>
+			</c:choose>
+			<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
+		</span>
 	</div>
 	
 	
@@ -274,7 +276,12 @@
 			}
 			memLevel.addClass("level-img");
 			
-			var follow=$("<button>").attr("data-rno",loginNo).text("팔로우");
+			var reviewMem = $(".reviewMem").append(memLevel);
+			$(".reviewMem").click(function(){
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+			});
+			
+			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우");
 			follow.click(function(){
 				var that=$(this);
 				$.ajax({
@@ -294,10 +301,7 @@
 				});
 			});
 			
-			$(".reviewWriter").append(memLevel).append(follow);
-			$(".reviewWriter").click(function(){
-				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
-			});
+			$(".reviewWriter").append(reviewMem).append(follow);
 		}
 		
 		//별점 옵션 수정
