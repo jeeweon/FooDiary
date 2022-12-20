@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+.review-list {
+	width: 500px;
+} 
+
+.review-main {
+	width: 500px;
+}
+
+.review-write-info {
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.info-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+}
+
+.sub-info-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 14px;
+	color: #707070;
+	margin-top: 3px;
+}
+
+.writer-avatar {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.writer-nick {
+	font-weight: bold;
+}
+
+.write-time {
+	margin-left: 10px;
+}
+
+.place {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.address {
+	color: #707070;
+	margin-top: 3px;
+}
+
+.loca-div {
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.loca-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.place {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.address {
+	color: #707070;
+}
+
+.img-div {
+	position: relative;
+	width: 300px;
+}
+
+.thumbnail {
+	width: 400px;
+	height: 400px;
+	cursor: pointer;
+	margin-top: 10px;
+	border-radius: 6px;
+}
+
+.img-more {
+	position: absolute;
+	width: 60px;
+	height:60px;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 4px;
+	color: white;
+	bottom:0;
+	left:340px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+}
+
+.img-more-none {
+	display: none;
+}
+
+.more-ic {
+	margin-right: 5px;
+}
+
+.review-action {
+	display: flex;
+	flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    color: #707070;
+    margin-top: 20px;
+}
+
+.score-ic {
+	color: #FFC107;
+	margin-right: 5px;
+}
+
+.like-ic {
+	margin-right: 5px;
+}
+
+.reply-ic {
+	margin-right: 5px;
+}
+
+.score, .like-cnt {
+	margin-right: 20px;
+}
+
+.content p {
+	display: inline;
+}
+
+.thumbnail {
+ 	object-fit:cover;
+ 	width: 300px;
+ 	height: 300px;
+ }

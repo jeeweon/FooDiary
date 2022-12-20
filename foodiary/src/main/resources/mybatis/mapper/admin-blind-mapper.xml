@@ -4,17 +4,71 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin-blind">
-	<select id="list" parameterType="String" resultType="ReviewBlindDto">
-		select * from review_blind 
-		where review_isblind = #{reviewIsblind}
+	<!-- 블라인드 리뷰 목록 -->
+	<select id="list" parameterType="String" resultType="ReviewBlindVO">
+		select B.*, M.mem_nick 
+		from review_blind B 
+			inner join review R on B.review_no = R.review_no
+			left outer join mem M on R.mem_no = M.mem_no
+		where review_isblind = '1'
+		<if test="keyword != null">
+			and instr(mem_nick, #{keyword}) > 0
+		</if>
+		order by review_blind_no desc
 	</select>
 	
-	<!-- 블라인드 상세 (리뷰 원글: review-mapper(id=get)로 조회, 신고내역: 신고시작일 이후의 내역만 조회-->
-	<select id="report-history" parameterType="String" resultType="ReviewReportDto">
-		select * from review_report 
-		where review_no = #{review_no} 
-		and review_report_time >= to_timestamp('#{review_report_time}', 'YYYY-MM-DD HH:MI:SS.FF3')
+	<!-- 
+		블라인드 상세 
+		- 리뷰 원글: 블라인드 화면에 출력할 내용만 조회
+		- 신고내역: 신고시작일 이후의 내역만 조회
+	-->
+	<select id="review-contents" parameterType="int" resultType="BlindReviewContentsVO">
+		select 
+			R.*,
+			M.mem_nick,
+			M.mem_level,
+			P.attach_no as pno,
+			coalesce(B.cnt, 0) mem_review_cnt
+		from review R
+		left outer join mem M on R.mem_no = M.mem_no
+		left outer join profile_attach P on M.mem_no = P.mem_no
+		left outer join(
+			select mem_no, count(mem_no) cnt
+			from review
+			group by mem_no
+		)B on R.mem_no = B.mem_no
+		where R.review_no = #{reviewNo}
 	</select>
 	
+	<select id="review-report-start" parameterType="int" resultType="java.sql.Date">
+		select report_start_time 
+		from review_blind
+		where review_no = #{reviewNo}
+			and review_isblind = '1'
+	</select>
 	
+	<select id="report-history" parameterType="map" resultType="ReviewReportVO">
+		select R.*, M.mem_nick 
+		from review_report R
+			left outer join mem M on R.mem_no = M.mem_no 
+		where review_no = #{reviewNo} 
+			and review_report_time >= #{reportStartTime}
+		order by review_report_no asc
+	</select>
+	
+	<!-- 블라인드 해제 시, 리뷰신고 수 = 0, 블라인드 상태 = 2(해제), 해제 시간 = sysdate -->
+	<update id="report-cnt-reset" parameterType="int">
+		update review 
+			set review_report_cnt = 0 
+		where review_no = #{reviewNo}
+	</update>
+	
+	<update id="blind-clear" parameterType="int">
+		update review_blind
+			set 
+				review_isblind = '2', 
+				blind_clear_time = sysdate
+		where review_no = #{reviewNo} 
+			and review_isblind = '1'
+	</update>
 </mapper>
