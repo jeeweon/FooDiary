@@ -1,0 +1,144 @@
+ * {
+  margin: 0;
+  padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper>div.inner {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+.PW{
+    position: relative;
+}
+.PWchange{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.PWchange img{
+    width: 350px;
+    height: 200px;
+    margin-top: 30px;
+}
+.PWchange h1{
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+.PWchange h3{
+    font-size: 20px;
+    margin: 30px;
+}
+.PWtext{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form #pwx{
+	color: red;
+}
+.PWtext input{
+    width: 450px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 10px 10px;
+    margin: 30px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+.PWtext button{
+    width: 455px;
+    height: 50px;
+    margin: 30px;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px 10px;
+    background-color: #ffe9b1;
+    font-size: 17px;
+    font-weight: bold;
+}
+@media screen and (max-width: 1420px) {
+.inner {
+    width: 100%; 
+    padding: 0 20px;
+    box-sizing: border-box;
+    }
+}
+@media screen and (max-width: 1240px) {
+    .wrapper > div.inner {
+        display: block;
+    }
+    .PW{
+    width: 100%;
+    height: 105px;
+    margin-bottom: 15px;
+    }
+    .PWchange{
+        position: unset;
+        padding: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    .PWchange a{
+        margin-bottom: 0;
+    }
+    .PWtext{
+        position: relative;
+        top: 150px;
+    }
+    .PWtext input button{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 768px) {
+    .inner {
+        padding: 0 20px;
+    }
+    .PWchange img{
+        width: 250px;
+    }
+    .PWchange h1{
+        font-size: 30px;
+    }
+    .PWchange h3{
+        font-size: 20px;
+    }
+    .PWtext input{
+        width: 100%;
+    }
+    .PWtext button{
+        width: 105%;
+    }
+}
