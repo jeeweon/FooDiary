@@ -142,8 +142,7 @@
     .my-area-list{
         margin: 0;
         padding: 0;
-        list-style: none;
-        width: 100%;
+        list-style: none;      
         border: none;
         font-size: 16px;
         position: absolute;

@@ -15,16 +15,8 @@
 
 </head>
 <body>
-<!-- 임시 로그인 메뉴 -->
+
 <c:set var="login" value="${loginNo != null}"></c:set>
-<c:choose>
-	<c:when test="${login}">
-		<a href="mem/logout">로그아웃</a>
-	</c:when>
-	<c:otherwise>
-		<a href="mem/login">로그인</a>	
-	</c:otherwise>
-</c:choose>
 
  <div class="wrapper">
     <div class="inner">
