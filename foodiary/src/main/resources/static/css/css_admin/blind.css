@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
-.review-list {
+.review-list, .reply-list {
 	width: 500px;
 } 
 
-.review-main {
+.review-main, .reply-main {
 	width: 500px;
 }
 
-.review-write-info {
+.review-write-info, .reply-write-info {
 	display: flex;
 	flex-direction: row;
     align-items: center;
@@ -153,3 +153,102 @@
  	width: 300px;
  	height: 300px;
  }
+
+.float-container {
+	width: 1000px;
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+
+.float-1 {
+	width: 500px;
+}
+
+.float-2 {
+	width: 400px;
+}
+
+.container {
+	width: 1000px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+  	justify-content : center;
+  	box-sizing: border-box;
+}
+
+.title {
+	text-align: center;
+	margin: 30px auto;
+}
+
+td > a {
+	color: #E27C5E;
+	font-weight: bold;
+}
+
+th > a {
+	color: black;
+	font-weight: bold;
+}
+
+td > a,
+th > a {
+	text-decoration: none;
+}
+
+th > a:visited {
+	color: black;
+	font-weight: bold;
+}
+
+td > a:visted {
+	color: #E27C5E;
+	font-weight: bold;
+}
+
+.subtitle {
+	margin: 0;
+}
+
+.history {
+	margin-top: 3px;
+}
+
+.review-list, .history-list {
+	margin-top: 30px;
+}
+
+.swiper {
+    height: 300px;
+    position:static;
+}
+
+.img-div {
+	position:relative;
+}
+
+.blind-clear, .blind-list {
+	width: 250x;
+	height: 40px;
+	padding: 0.5em;
+	font-size: 16px;
+	color: #E27C5E;
+	background-color: #ffffff;
+	border: 1.5px solid #E27C5E;
+	border-radius: 4px;
+}
+
+.blind-clear {
+	margin-right: 20px;
+}
+
+.blind-clear.clear {
+	background-color: #dddddd;
+	color: #aaaaaa;
+	border: 1.5px solid #dddddd;
+}
+
+.action-btn {
+	text-align: center;
+}
