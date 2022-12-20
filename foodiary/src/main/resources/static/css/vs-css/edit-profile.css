@@ -67,18 +67,17 @@ li {
     
 }
 .profileH img{
-    width: 250px;
-    height: 150px;
-    margin-bottom: 50px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-right: 1000px;
 }
 .profileH h1{
-
 	position: relative;
-	left: 600px;
-    font-size: 35px;
+/* 	left: 600px; */
+	left: 43%;
+/*     font-size: 35px; */
     margin-top: 80px;
-    
-
     margin-bottom: 20px;
 
 }
@@ -147,16 +146,25 @@ form #PT{
 .profileT input{
     width: 450px;
     height: 50px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     border-radius: 10px 10px;
-    margin: 30px;
-    font-size: 20px;
+    margin: 20px;
+    font-size: 15px;
+    padding-left: 15px;
+}
+.profileT input:focus{
+    width: 450px;
+    height: 50px;
+    outline: 1px solid lightgrey;
+    border-radius: 10px 10px;
+    margin: 20px;
+    font-size: 15px;
     padding-left: 15px;
 }
 .profileT #btn-profile{
     width: 455px;
     height: 50px;
-    margin: 30px;
+/*     margin: 10px; */
     align-items: center;
     border: none;
     border-radius: 10px 10px;
@@ -167,12 +175,23 @@ form #PT{
 }
 .profileT textarea{
     width: 455px;
-    height: 200px;
-    margin: 30px;
+    height: 150px;
+    margin: 20px;
     align-items: center;
-    border: 1px solid gray;
+    border: 1px solid lightgrey;
     border-radius: 10px 10px;
-    font-size: 17px;  
+    font-size: 15px;  
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.profileT textarea:focus{
+    width: 455px;
+    height: 150px;
+    margin: 20px;
+    align-items: center;
+    outline: 1px solid lightgrey;
+    border-radius: 10px 10px;
+    font-size: 15px;  
     padding-left: 10px;
     padding-top: 5px;
 }

@@ -92,19 +92,23 @@ li {
 }
 .Mhead{
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 .Mhead img{
-    width: 200px;
-    height: 150px;
-    padding-top: 40px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-left: 250px;
     
 }
 .Mhead h1{
-    font-size: 35px;
-    margin-bottom: 30px;
+	position: relative;
+	right: 45%;
+    font-size: 30px;
+    padding-top: 100px;    
+/*     margin-bottom: 30px; */
     
 }
 .Mbody-container{
@@ -116,11 +120,21 @@ li {
     flex-direction: column;
     align-items: center;
     margin-left: 200px;
+    padding-top: 30px;     
 }
 .Mbody input{
     width: 450px;
     height: 50px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
+    border-radius: 10px 10px;
+    margin: 30px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+.Mbody input:focus{
+    width: 450px;
+    height: 50px;
+    outline: 1px solid lightgrey;
     border-radius: 10px 10px;
     margin: 30px;
     font-size: 20px;
