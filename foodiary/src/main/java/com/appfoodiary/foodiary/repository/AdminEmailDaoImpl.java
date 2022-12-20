@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.appfoodiary.foodiary.entity.NoticeEmailDto;
+import com.appfoodiary.foodiary.vo.ListSearchVO;
 import com.appfoodiary.foodiary.vo.MemEmailVO;
 
 @Repository
@@ -31,12 +32,48 @@ public class AdminEmailDaoImpl implements AdminEmailDao{
 	}
 	
 	@Override
-	public List<NoticeEmailDto> selectList() {
-		return sqlSession.selectList("admin-email.list");
+	public List<NoticeEmailDto> selectList(ListSearchVO vo) {
+		if(vo.isSearch()) {
+			return search(vo);
+		}
+		else {
+			return list(vo);
+		}
+	}
+	
+	@Override
+	public List<NoticeEmailDto> list(ListSearchVO vo) {
+		return sqlSession.selectList("admin-email.list",vo);
+	}
+	
+	@Override
+	public List<NoticeEmailDto> search(ListSearchVO vo) {
+		return sqlSession.selectList("admin-email.search",vo);
 	}
 	
 	@Override
 	public List<MemEmailVO> emailList(){
 		return sqlSession.selectList("admin-email.emailList");
 	}
+	
+	@Override
+	public int count(ListSearchVO vo) {
+		if(vo.isSearch()) {//검색이라면
+			return searchCount(vo); //검색 카운트 구하는 메소드
+		}
+		else {
+			return listCount(vo);
+		}
+	}
+	
+	@Override
+	public int listCount(ListSearchVO vo) {
+		return sqlSession.selectOne("admin-email.listCount");
+	}
+	
+	@Override
+	public int searchCount(ListSearchVO vo) {
+		return sqlSession.selectOne("admin-email.searchCount",vo);
+	}
+
 }
