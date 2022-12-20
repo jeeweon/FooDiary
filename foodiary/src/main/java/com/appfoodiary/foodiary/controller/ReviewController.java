@@ -28,6 +28,7 @@ import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.service.AttachmentService;
 import com.appfoodiary.foodiary.service.LevelPointService;
 import com.appfoodiary.foodiary.vo.ReviewWriterVO;
+import com.appfoodiary.foodiary.vo.CheckRpLkBkVO;
 
 //@CrossOrigin(origins = "http://127.0.0.1:5500/")
 @Controller
@@ -107,15 +108,31 @@ public class ReviewController {
 		ReviewDto dto = reviewDao.find(reviewNo);
 		model.addAttribute("reviewDto", dto);
 		
-		//회원정보(+프로필)
+		//작성자 회원정보(+프로필)
 		int memNo = dto.getMemNo();
 		ReviewWriterVO reviewWriterVO =  reviewDao.selectReviewWriter(memNo);
 		model.addAttribute("reviewWriter", reviewWriterVO);
+		
+		//로그인회원의 좋아요,북마크 여부
+		CheckRpLkBkVO checkRpLkBkVO = new CheckRpLkBkVO();
+		if(session.getAttribute(SessionConstant.NO)!=null) {			
+			int loginNo = (Integer)session.getAttribute(SessionConstant.NO);
+			checkRpLkBkVO.setReviewNo(reviewNo);
+			checkRpLkBkVO.setMemNo(loginNo);
+			checkRpLkBkVO.setLikeCheck(reviewDao.loginIslike(checkRpLkBkVO));
+			checkRpLkBkVO.setBookmarkCheck(reviewDao.loginIsbook(checkRpLkBkVO));
+		}else {
+			checkRpLkBkVO.setLikeCheck(false);
+			checkRpLkBkVO.setBookmarkCheck(false);
+		}
+		checkRpLkBkVO.setReplyTotal(reviewDao.replyTotal(reviewNo));
+		model.addAttribute("checkRpLkBkVO", checkRpLkBkVO);
 		
 		//첨부파일 조회, 첨부
 		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));
 		//appkey 가져와서 model에 저장
 		model.addAttribute("appkey", mapProperties.getAppkey());
+		
 		return "review/detail";
 	}
 	
