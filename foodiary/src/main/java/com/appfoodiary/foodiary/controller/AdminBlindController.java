@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.appfoodiary.foodiary.repository.AdminBlindDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
+import com.appfoodiary.foodiary.vo.BlindReplyContentsVO;
 import com.appfoodiary.foodiary.vo.BlindReviewContentsVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -50,5 +51,27 @@ public class AdminBlindController {
 		history.put("reportStartTime", reviewReportStart);
 		model.addAttribute("history", blindDao.reviewReportHistory(history));
 		return "admin/blind-review-detail";
+	}
+	
+	@GetMapping("/reply")
+	public String replyBlind(Model model, @RequestParam(required=false) String keyword) {
+		model.addAttribute("list", blindDao.replyBlindList(keyword));
+		return "admin/blind-reply";
+	}
+	
+	@GetMapping("/reply/detail")
+	public String replyBlindDetail(@RequestParam int replyNo, Model model) {
+		//댓글정보
+		BlindReplyContentsVO replyVO = blindDao.pickOne(replyNo);
+		model.addAttribute("rvo", replyVO);
+		
+		//신고내역
+		Date replyReportStart = blindDao.replyReportStart(replyNo);
+		
+		Map<String, Object> history = new HashMap<>();
+		history.put("replyNo", replyNo);
+		history.put("reportStartTime", replyReportStart);
+		model.addAttribute("history", blindDao.replyReportHistory(history));
+		return "admin/blind-reply-detail";
 	}
 }
