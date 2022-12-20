@@ -309,7 +309,7 @@
 		    }
         });
 		
-		//신고버튼
+		//리뷰 신고버튼
 		$(".btn-report").click(function(){
 			//확인 팝업(경고)
 			var result = confirm("정말 신고하시겠습니까?\n허위 신고시 서비스 이용제한조치를 받으실 수 있습니다.");
@@ -416,7 +416,13 @@
         			replyDelete.attr("type", "button").addClass("btn-reply-delete");
         			
 	        		//replyListBody
-	        		var replyContent = $("<input>").attr("value", value.replyContent).prop("readonly", true);
+	        		var replyContent;
+	        		//블라인드여부 검사
+	        		if(value.replyReportCnt >=5) {
+	        			replyContent = $("<input>").attr("value", " [ 블라인드 처리된 댓글입니다 ] ").prop("readonly", true);
+	        		} else {
+	        			replyContent = $("<input>").attr("value", value.replyContent).prop("readonly", true);
+	        		}
 	        		replyContent.addClass("replyContent");
 	        		
 	        		//reply-list
@@ -446,13 +452,16 @@
 			
 			var replyNo = $(this).siblings(".replyNo").val();
 			
-			axios.post("${pageContext.request.contextPath}/rest/reply/report/"+replyNo)
-			.then(function(resp){
-				if(resp.data) {	//response가 true일 경우
-					alert("신고가 접수되었습니다.");
-					$(that).prop("disabled", true);
-				}
-			});
+			//신고 카운트 +1
+			if(result) {
+				axios.post("${pageContext.request.contextPath}/rest/reply/report/"+replyNo)
+				.then(function(resp){
+					if(resp.data) {	//response가 true일 경우
+						alert("신고가 접수되었습니다.");
+						$(that).prop("disabled", true);
+					}
+				});
+			}
 		});
 		
 	});
