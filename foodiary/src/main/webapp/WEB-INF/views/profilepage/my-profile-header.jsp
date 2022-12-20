@@ -143,8 +143,6 @@
 				dataType : "json",
 				success : function(resp) {
 					profileList = resp;
-					console.log("회원"+resp);
-					console.log("회원 레벨"+profileList.memLevel);
 					//$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
@@ -195,6 +193,7 @@
 				dataType:"json",
 				success:function(resp){
 					followMemList=resp;
+					console.log("팔로우 멤버");
 					console.log(followMemList);
 					renderfollowList();
 				}
@@ -202,11 +201,11 @@
 		};
 		//팔로우 목록 출력
 		function renderfollowList(){
-			console.log("팔로우 목록 출력");
+		
 			 if(followMemList.length != 0) {
 				$.each(followMemList, function(index, value) {
 					
-					//팔로워 레벨 이미지 
+					//팔로우 레벨 이미지 
 					var writerLevel;
 					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
@@ -230,6 +229,13 @@
 					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
 					img.addClass("follow-img");
 					var hr=$("<hr>");
+					//팔로우가 되어있는 상태인지 아닌지확인
+					var buttonFollow;
+					if(value.followCheck){
+						var buttonFollow=$("<button>").text("팔로잉");
+					}else{
+						var buttonFollow=$("<button>").text("팔로우");
+					}
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
@@ -237,7 +243,7 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					$(".modal_content").css("display","block");
-					$(".modal_content").append(a).append(hr).append(br);
+					$(".modal_content").append(a).append(buttonFollow).append(hr).append(br);
 				});
 			}else{
 				$(".follow-span").text("선택된 팔로우가 없습니다.");
@@ -253,6 +259,7 @@
 				dataType:"json",
 				success:function(resp){
 					followerMemList=resp;
+					console.log("팔로워 멤버 조회");
 					console.log(followerMemList);
 					renderfollowerList()
 				}
@@ -261,7 +268,6 @@
 	
 		//팔로워 목록 출력
 		function renderfollowerList(){
-			console.log("팔로우 목록 출력");
 			 if(followerMemList.length != 0) {
 				$.each(followerMemList, function(index, value) {
 					
@@ -281,6 +287,15 @@
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
 					}
 					writerLevel.addClass("level-img2");
+					//팔로우가 되어있는 상태인지 아닌지확인
+					var buttonFollow;
+					if(value.followCheck){
+						var buttonFollow=$("<button>").text("팔로잉");
+						buttonFollow.addClass("follow-cert");
+					}else{
+						var buttonFollow=$("<button>").text("팔로우");
+						buttonFollow.addClass("follow-cert");
+					}
 					
 					
 					var span=$("<span>").text(value.memNick + value.attachNo);
@@ -296,14 +311,12 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					
-					$(".modal_content2").append(a).append(hr).append(br);
+					$(".modal_content2").append(a).append(buttonFollow).append(hr).append(br);
 				});
 			}else{
 				$(".follower-span").text("선택된 팔로워가 없습니다.");
 			}  
 		};
-		
-		
 		
  	});
 </script>
@@ -409,26 +422,30 @@
     	$("#modal").fadeIn();
     });
    $(".follow-btn").click(function(){
-	  $("#modal").fadeOut(); 
+	  $("#modal").fadeOut();
+	  location.reload();
    });
    
    $(".follow-cnt").click(function(){
    	$("#modal2").fadeIn();
    });
   $(".follower-btn").click(function(){
-	  $("#modal2").fadeOut(); 
+	  $("#modal2").fadeOut();
+	  location.reload();
   });
   
   $(".menu").click(function(){
   	$("#modal3").fadeIn();
    });
   $(".menu-btn").click(function(){
-     $("#modal3").fadeOut(); 
+     $("#modal3").fadeOut();
+     location.reload();
 	  });
     $(".modal_layer").click(function(){
 	  $("#modal").fadeOut(); 
 	  $("#modal2").fadeOut();
 	  $("#modal3").fadeOut();
+	  location.reload();
   });  
 </script>
 </html>
