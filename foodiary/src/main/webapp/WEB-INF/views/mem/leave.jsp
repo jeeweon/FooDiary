@@ -13,7 +13,7 @@
    .input.success ~ .success-message{
    		display : block;
    }	
-/*    .input.fail ~ .fail-message { */
+    .input.fail ~ .fail-message { 
             display: block;
         }	
 </style>
