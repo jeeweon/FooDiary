@@ -4,6 +4,8 @@
 
 <title>리뷰 상세</title>
 
+<c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
+<c:set var="owner" value="${loginNo == reviewDto.memNo}"></c:set>	
 <!-- 현재 시간 구하기 -->
 <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 <c:set var="today">
@@ -113,13 +115,11 @@
 		2. 작성자 본인일 때 : 수정/삭제
 	-->	
 		<!-- 신고 -->
-		<c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
 		<c:if test="${member}">
 			<input class="btn-report" type="button" value="신고">
 		</c:if>
 	
 		<!-- 수정, 삭제 -->
-		<c:set var="owner" value="${loginNo == reviewDto.memNo}"></c:set>		
 		<c:if test="${owner}">
 			<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
 			<a href="delete?reviewNo=${reviewDto.reviewNo}">삭제</a>
@@ -224,10 +224,40 @@
 				</div>
 					
 	    		<hr>
-				
+				<!-- 댓글,좋아요,북마크 -->
+				<div>
+					<span>
+						<i class='fa-regular fa-comment'></i>${checkRpLkBkVO.replyTotal}
+					</span>
+					<c:choose>
+						<c:when test="${checkRpLkBkVO.likeCheck}">
+							<span>
+								<i class='fa-solid fa-heart like-ic'></i>
+								<span class="like-ic-count">${reviewDto.likeCnt}</span>
+							</span>
+						</c:when>
+						<c:otherwise>
+							<span>
+								<i class='fa-regular fa-heart like-ic'></i>
+								<span class="like-ic-count">${reviewDto.likeCnt}</span>
+							</span>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${checkRpLkBkVO.bookmarkCheck}">
+							<span><i class='fa-solid fa-bookmark bookmark-ic'></i></span>
+						</c:when>
+						<c:otherwise>
+							<span><i class='fa-regular fa-bookmark bookmark-ic'></i></span>
+						</c:otherwise>
+					</c:choose>
+				</div>
 				<!-- 댓글 작성 -->
-				<input type="text" class="input-reply" name="replyContent" placeholder="내용을 입력해주세요.">
-				<button class="btn-reply-Write" type="button">등록</button>
+				<div>
+					<textarea class="input-reply" name="replyContent" 
+								rows="3" style="resize:none;" placeholder="내용을 입력해주세요."></textarea>
+					<button class="btn-reply-Write" type="button">등록</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -246,6 +276,9 @@
 <script src="${pageContext.request.contextPath}/js/kakao-keyword.js"></script>
 <!-- axios cdn -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- font-awesome -->   
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+ 
 
 <script type="text/javascript">
 	$(function(){
@@ -256,9 +289,10 @@
 		let reviewWriterLevel = ${reviewWriter.memLevel} //리뷰작성자 레벨
 		let loginNo = ${loginNo}	//로그인한 회원번호
 		
-		reviewWriter();
+		reviewWriter(); //리뷰상단: 리뷰작성자 정보
+		loadReplyList(); //댓글목록 출력
 		
-		//리뷰상단 : 작성자 정보
+		//리뷰상단 : 리뷰 작성자 정보
 		function reviewWriter(){
 			var memLevel;
 			if(reviewWriterLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
@@ -331,26 +365,26 @@
 				});
 			}
 		});
-	
-		
-		//댓글목록 출력
-		loadReplyList();
 		
 		//댓글 입력
 		$(".btn-reply-write").click(function(){
 			var memNo = loginNo;
     		var replyContent = $(".input-reply").val();
-    		
-			axios.post("${pageContext.request.contextPath}/rest/reply", {
-				reviewNo: reviewNo,	
-				memNo: memNo,
-				replyContent: replyContent
-			})
-			.then(function(resp){
-				//console.log(resp);
-				$(".input-reply").val("");
-				loadReplyList();
-			});
+    		if(memNo==null) {
+    			alert("로그인하셔야 댓글을 등록 할 수 있습니다!");
+    		}
+    		else {
+    			axios.post("${pageContext.request.contextPath}/rest/reply", {
+    				reviewNo: reviewNo,	
+    				memNo: memNo,
+    				replyContent: replyContent
+    			})
+    			.then(function(resp){
+    				//console.log(resp);
+    				$(".input-reply").val("");
+    				loadReplyList();
+    			});
+    		}
 		});
 		//댓글 삭제
 		$(document).on("click", ".btn-reply-delete", function(){ //생성된버튼은 해당방법 사용
@@ -466,6 +500,58 @@
 					}
 				});
 			}
+		});
+		
+		//좋아요 버튼 클릭 이벤트
+		$(document).on("click", ".like-ic", function() {
+			if(loginNo==null) {
+				alert("로그인하셔야 좋아요를 선택 할 수 있습니다!");
+			}
+			else {
+				$.ajax({
+					url : "${pageContext.request.contextPath}/rest/review/like2",
+	                method : "post",
+				    data : {
+		        	   reviewNo:reviewNo
+		           	},
+	                success : function(resp) {
+	                	if(resp == 0) {
+	                		$(".like-ic").removeClass("fa-solid").addClass("fa-regular");
+	                	} else {
+	                		$(".like-ic").removeClass("fa-regular").addClass("fa-solid");
+	                	}
+	                	
+	                	$.ajax({
+	                		url : "${pageContext.request.contextPath}/rest/review/count",
+	    	                method : "post",
+	    				    data : {
+	    		        	   reviewNo:reviewNo
+	    		           	},
+	    	                success : function(resp) {
+	    	                	$(".like-ic-count").text(resp);    	    	                	
+	    	                }
+	                	});
+	                }
+				});
+			}
+		});
+		
+		//북마크 버튼 클릭 이벤트
+		$(document).on("click", ".bookmark-ic", function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rest/review/bookmark",
+                method : "post",
+			    data : {
+	        	   reviewNo:reviewNo
+	           	},
+                success : function(resp) {
+                	if(resp) {
+                		$(".bookmark-ic").addClass("fa-solid").removeClass("fa-regular");
+                	} else {
+                		$(".bookmark-ic").addClass("fa-regular").removeClass("fa-solid");
+                	}   
+                }
+			});
 		});
 		
 	});

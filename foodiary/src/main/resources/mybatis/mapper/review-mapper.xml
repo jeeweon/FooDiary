@@ -280,4 +280,19 @@
 		where M.mem_no = #{memNo}
 	</select>
 	
+	<!-- 로그인회원의 좋아요,북마크 여부 -->
+	<select id="loginIslike" parameterType="CheckRpLkBkVO" resultType="int">
+		select count(review_no) from likes
+		where review_no = #{reviewNo} and mem_no = #{memNo}
+	</select>
+	<select id="loginIsBook" parameterType="CheckRpLkBkVO" resultType="int">
+		select count(review_no) from bookmark
+		where review_no = #{reviewNo} and mem_no = #{memNo}
+	</select>
+	
+	<!-- 댓글 총갯수 -->
+	<select id="replyTotal" parameterType="int" resultType="int">
+		select count(reply_no) from reply
+		where review_no = #{reviewNo}
+	</select>
 </mapper>

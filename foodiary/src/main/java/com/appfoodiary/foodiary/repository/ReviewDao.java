@@ -6,6 +6,7 @@ import java.util.Map;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
+import com.appfoodiary.foodiary.vo.CheckRpLkBkVO;
 import com.appfoodiary.foodiary.vo.MemRekVO;
 import com.appfoodiary.foodiary.vo.ReviewSearchVO;
 import com.appfoodiary.foodiary.vo.ReviewWriterVO;
@@ -49,4 +50,9 @@ public interface ReviewDao {
 	//리뷰 상세
 	//작성자 회원정보(+프로필)
 	ReviewWriterVO selectReviewWriter(int memNo);
+	//로그인회원의 좋아요,북마크 여부
+	boolean loginIslike(CheckRpLkBkVO checkRpLkBkVO);
+	boolean loginIsbook(CheckRpLkBkVO checkRpLkBkVO);
+	//댓글 총갯수
+	int replyTotal(int reviewNo);
 }
