@@ -23,7 +23,6 @@ import com.appfoodiary.foodiary.vo.NearbyAreaVO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @Slf4j
 @RestController
 @RequestMapping("/rest/area")
