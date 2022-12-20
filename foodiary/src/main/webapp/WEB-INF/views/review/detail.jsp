@@ -4,6 +4,8 @@
 
 <title>리뷰 상세</title>
 
+<c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
+<c:set var="owner" value="${loginNo == reviewDto.memNo}"></c:set>	
 <!-- 현재 시간 구하기 -->
 <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 <c:set var="today">
@@ -14,6 +16,13 @@
 </c:set>
 
 <style>
+/* 리뷰 관련 style */
+	.level-img {
+ 		width:24px;
+ 		margin:0;
+ 		margin-left: 5px;
+ 	}
+ 	
 /* summernote(좌측), 리뷰장소(우측) 구분용 style */
 	.float-container {
 		width: 850px;
@@ -66,49 +75,55 @@
 
 
 
-<div>
-	<h1>리뷰 상세</h1>
-</div>
-
 <!-- 글번호 -->
 <input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
 
 <div>
 
-작성자 회원번호 : ${reviewDto.memNo} <br>
-<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
-				- (사진,닉네임)클릭시 프로필로 이동 
--->
-
-<!-- 작성일 -->
-<c:choose>
-	<c:when test="${today == current}">
-		작성일 : 
-		<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
-	</c:when>
-	<c:otherwise>
-		작성일 : 
-		<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
-	</c:otherwise>
-</c:choose>	
-
-<!-- 회원 기능 
-	1. 작성자 본인이 아닐 때 : 신고버튼
-		- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
-	2. 작성자 본인일 때 : 수정/삭제
--->	
-	<!-- 신고 -->
-	<c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
-	<c:if test="${member}">
-		<input class="btn-report" type="button" value="신고">
-	</c:if>
-
-	<!-- 수정, 삭제 -->
-	<c:set var="owner" value="${loginNo == reviewDto.memNo}"></c:set>		
-	<c:if test="${owner}">
-		<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
-		<a href="delete?reviewNo=${reviewDto.reviewNo}">삭제</a>
-	</c:if>
+	<%-- 작성자 회원번호 : ${reviewDto.memNo} <br> --%>
+	<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
+					- (사진,닉네임)클릭시 프로필로 이동 
+	-->
+	<div class="reviewWriter">
+		<span class="reviewMem">
+			<c:choose>
+				<c:when test="${reviewWriter.attachNo == 0}">
+					<img class="profile" src="${pageContext.request.contextPath}/images/basic-profile.png">
+				</c:when>
+				<c:otherwise>
+					<img class="profile" src="${pageContext.request.contextPath}/attach/download/${reviewWriter.attachNo}">
+				</c:otherwise>
+			</c:choose>
+			<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
+		</span>
+	</div>
+	
+	
+	<!-- 작성일 -->
+	<c:choose>
+		<c:when test="${today == current}">
+			<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
+		</c:when>
+		<c:otherwise>
+			<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
+		</c:otherwise>
+	</c:choose>	
+	
+	<!-- 회원 기능 
+		1. 작성자 본인이 아닐 때 : 신고버튼
+			- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
+		2. 작성자 본인일 때 : 수정/삭제
+	-->	
+		<!-- 신고 -->
+		<c:if test="${member}">
+			<input class="btn-report" type="button" value="신고">
+		</c:if>
+	
+		<!-- 수정, 삭제 -->
+		<c:if test="${owner}">
+			<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
+			<a href="delete?reviewNo=${reviewDto.reviewNo}">삭제</a>
+		</c:if>
 </div>
 	
 <div class="float-container"> <!-- 사진(좌측)/본문(우측) 배치 -->
@@ -209,10 +224,40 @@
 				</div>
 					
 	    		<hr>
-				
+				<!-- 댓글,좋아요,북마크 -->
+				<div>
+					<span>
+						<i class='fa-regular fa-comment'></i>${checkRpLkBkVO.replyTotal}
+					</span>
+					<c:choose>
+						<c:when test="${checkRpLkBkVO.likeCheck}">
+							<span>
+								<i class='fa-solid fa-heart like-ic'></i>
+								<span class="like-ic-count">${reviewDto.likeCnt}</span>
+							</span>
+						</c:when>
+						<c:otherwise>
+							<span>
+								<i class='fa-regular fa-heart like-ic'></i>
+								<span class="like-ic-count">${reviewDto.likeCnt}</span>
+							</span>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${checkRpLkBkVO.bookmarkCheck}">
+							<span><i class='fa-solid fa-bookmark bookmark-ic'></i></span>
+						</c:when>
+						<c:otherwise>
+							<span><i class='fa-regular fa-bookmark bookmark-ic'></i></span>
+						</c:otherwise>
+					</c:choose>
+				</div>
 				<!-- 댓글 작성 -->
-				<input type="text" class="input-reply" name="replyContent" placeholder="내용을 입력해주세요.">
-				<button class="btn-reply-Write" type="button">등록</button>
+				<div>
+					<textarea class="input-reply" name="replyContent" 
+								rows="3" style="resize:none;" placeholder="내용을 입력해주세요."></textarea>
+					<button class="btn-reply-Write" type="button">등록</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -231,13 +276,67 @@
 <script src="${pageContext.request.contextPath}/js/kakao-keyword.js"></script>
 <!-- axios cdn -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- font-awesome -->   
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+ 
 
 <script type="text/javascript">
 	$(function(){
 		//변수 저장
 		//reviewNo = $("input[name=reviewNo]").val()
 		let reviewNo = ${reviewDto.reviewNo}	//리뷰 글번호
+		let reviewWriterNo = ${reviewWriter.memNo}	//리뷰작성자 번호
+		let reviewWriterLevel = ${reviewWriter.memLevel} //리뷰작성자 레벨
 		let loginNo = ${loginNo}	//로그인한 회원번호
+		
+		reviewWriter(); //리뷰상단: 리뷰작성자 정보
+		loadReplyList(); //댓글목록 출력
+		
+		//리뷰상단 : 리뷰 작성자 정보
+		function reviewWriter(){
+			var memLevel;
+			if(reviewWriterLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+			} else if (reviewWriterLevel == "5  ") {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+			} else if (reviewWriterLevel == "4  ") {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+			} else if (reviewWriterLevel == "3  ") {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+			} else if (reviewWriterLevel == "2  ") {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+			} else {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+			}
+			memLevel.addClass("level-img");
+			
+			var reviewMem = $(".reviewMem").append(memLevel);
+			$(".reviewMem").click(function(){
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+			});
+			
+			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우");
+			follow.click(function(){
+				var that=$(this);
+				$.ajax({
+					url:"${pageContext.request.contextPath}/rest/review/follow",
+					method:"post",
+					data :{
+						 passiveMemNo : $(this).data("rno")	
+					},
+					success :function(resp){
+						console.log(resp);
+						if(resp){
+							$(that).text("팔로잉");
+						}else{
+							$(that).text("팔로우");
+						}
+					}
+				});
+			});
+			
+			$(".reviewWriter").append(reviewMem).append(follow);
+		}
 		
 		//별점 옵션 수정
 		$(".star-score").score({
@@ -248,7 +347,7 @@
 		    }
         });
 		
-		//신고버튼
+		//리뷰 신고버튼
 		$(".btn-report").click(function(){
 			//확인 팝업(경고)
 			var result = confirm("정말 신고하시겠습니까?\n허위 신고시 서비스 이용제한조치를 받으실 수 있습니다.");
@@ -266,26 +365,26 @@
 				});
 			}
 		});
-	
-		
-		//댓글목록 출력
-		loadReplyList();
 		
 		//댓글 입력
 		$(".btn-reply-write").click(function(){
 			var memNo = loginNo;
     		var replyContent = $(".input-reply").val();
-    		
-			axios.post("${pageContext.request.contextPath}/rest/reply", {
-				reviewNo: reviewNo,	
-				memNo: memNo,
-				replyContent: replyContent
-			})
-			.then(function(resp){
-				//console.log(resp);
-				$(".input-reply").val("");
-				loadReplyList();
-			});
+    		if(memNo==null) {
+    			alert("로그인하셔야 댓글을 등록 할 수 있습니다!");
+    		}
+    		else {
+    			axios.post("${pageContext.request.contextPath}/rest/reply", {
+    				reviewNo: reviewNo,	
+    				memNo: memNo,
+    				replyContent: replyContent
+    			})
+    			.then(function(resp){
+    				//console.log(resp);
+    				$(".input-reply").val("");
+    				loadReplyList();
+    			});
+    		}
 		});
 		//댓글 삭제
 		$(document).on("click", ".btn-reply-delete", function(){ //생성된버튼은 해당방법 사용
@@ -309,8 +408,10 @@
 	        		var replyReportCnt = value.replyReportCnt;
 	        		
 	        		//replyListHead
+	        		//1. replyListHead-replyNoInput
 	        		var replyNoInput = $("<input>").attr("type","hidden").val(replyNo).addClass("replyNo");
 	        		
+	        		//2. replyListHead-replyMem
 	        		var profile;
 	        		if(value.attachNo == 0) {
 	        			profile = $("<img>").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");						
@@ -321,27 +422,54 @@
 	        		
 	        		var memNick = $("<span>").text(value.memNick);
 	        		
-	        		var memLevel = $("<span>").text(" Lv."+value.memLevel);
-	        		
-        			var replyReport = $("<input>").val("신고");
+	        		var memLevel;
+	    			if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+	    			} else if (value.memLevel == "5  ") {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+	    			} else if (value.memLevel == "4  ") {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+	    			} else if (value.memLevel == "3  ") {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+	    			} else if (value.memLevel == "2  ") {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+	    			} else {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+	    			}
+	    			memLevel.addClass("level-img");
+	    			
+	    			var replyMem = $("<span>").append(profile).append(memNick).append(memLevel);
+	    			replyMem.addClass("replyMem")
+	    			$(".replyMem").click(function(){
+	    				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
+	    			});
+	    			
+	    			//3. replyListHead-replyWriteTime
+	        		var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
+
+	        		var replyReport = $("<input>").val("신고");
         			replyReport.attr("type", "button").addClass("btn-reply-report");
 
         			var replyDelete = $("<input>").val("삭제");
         			replyDelete.attr("type", "button").addClass("btn-reply-delete");
-	        		
-        			//replyListBody
-	        		var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
-	        		
-	        		var replyContent = $("<input>").attr("value", value.replyContent).prop("readonly", true);
+        			
+	        		//replyListBody
+	        		var replyContent;
+	        		//블라인드여부 검사
+	        		if(value.replyReportCnt >=5) {
+	        			replyContent = $("<input>").attr("value", " [ 블라인드 처리된 댓글입니다 ] ").prop("readonly", true);
+	        		} else {
+	        			replyContent = $("<input>").attr("value", value.replyContent).prop("readonly", true);
+	        		}
 	        		replyContent.addClass("replyContent");
 	        		
 	        		//reply-list
-	        		var replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime);
+	        		var replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime);
 	        		if(loginNo==replyMemNo) {
-	        			replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime)
+	        			replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime)
 													.append(" ").append(replyDelete);
-	        		}else if(!loginNo.empty){
-		        		replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime)
+	        		}else if(loginNo!=replyMemNo){
+		        		replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime)
 		        									.append(" ").append(replyReport);
 	        		}
 	        		replyListHead.addClass("replyListHead");
@@ -362,12 +490,67 @@
 			
 			var replyNo = $(this).siblings(".replyNo").val();
 			
-			axios.post("${pageContext.request.contextPath}/rest/reply/report/"+replyNo)
-			.then(function(resp){
-				if(resp.data) {	//response가 true일 경우
-					alert("신고가 접수되었습니다.");
-					$(that).prop("disabled", true);
-				}
+			//신고 카운트 +1
+			if(result) {
+				axios.post("${pageContext.request.contextPath}/rest/reply/report/"+replyNo)
+				.then(function(resp){
+					if(resp.data) {	//response가 true일 경우
+						alert("신고가 접수되었습니다.");
+						$(that).prop("disabled", true);
+					}
+				});
+			}
+		});
+		
+		//좋아요 버튼 클릭 이벤트
+		$(document).on("click", ".like-ic", function() {
+			if(loginNo==null) {
+				alert("로그인하셔야 좋아요를 선택 할 수 있습니다!");
+			}
+			else {
+				$.ajax({
+					url : "${pageContext.request.contextPath}/rest/review/like2",
+	                method : "post",
+				    data : {
+		        	   reviewNo:reviewNo
+		           	},
+	                success : function(resp) {
+	                	if(resp == 0) {
+	                		$(".like-ic").removeClass("fa-solid").addClass("fa-regular");
+	                	} else {
+	                		$(".like-ic").removeClass("fa-regular").addClass("fa-solid");
+	                	}
+	                	
+	                	$.ajax({
+	                		url : "${pageContext.request.contextPath}/rest/review/count",
+	    	                method : "post",
+	    				    data : {
+	    		        	   reviewNo:reviewNo
+	    		           	},
+	    	                success : function(resp) {
+	    	                	$(".like-ic-count").text(resp);    	    	                	
+	    	                }
+	                	});
+	                }
+				});
+			}
+		});
+		
+		//북마크 버튼 클릭 이벤트
+		$(document).on("click", ".bookmark-ic", function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rest/review/bookmark",
+                method : "post",
+			    data : {
+	        	   reviewNo:reviewNo
+	           	},
+                success : function(resp) {
+                	if(resp) {
+                		$(".bookmark-ic").addClass("fa-solid").removeClass("fa-regular");
+                	} else {
+                		$(".bookmark-ic").addClass("fa-regular").removeClass("fa-solid");
+                	}   
+                }
 			});
 		});
 		

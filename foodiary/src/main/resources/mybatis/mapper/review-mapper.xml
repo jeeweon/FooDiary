@@ -284,4 +284,32 @@
 		and review_no = #{reviewNo}
 	</update>
 	
+	
+	<!-- 특정 회원의 레벨,닉네임,레벨, 프로필번호 -->
+	<select id="mem-frofile" parameterType="int" resultType="ReviewWriterVO">
+		select
+		    M.mem_no, M.mem_nick, M.mem_level, 
+		    P.attach_no
+		from
+		    mem M 
+		left outer join profile_attach P
+		     on M.mem_no = P.mem_no
+		where M.mem_no = #{memNo}
+	</select>
+	
+	<!-- 로그인회원의 좋아요,북마크 여부 -->
+	<select id="loginIslike" parameterType="CheckRpLkBkVO" resultType="int">
+		select count(review_no) from likes
+		where review_no = #{reviewNo} and mem_no = #{memNo}
+	</select>
+	<select id="loginIsBook" parameterType="CheckRpLkBkVO" resultType="int">
+		select count(review_no) from bookmark
+		where review_no = #{reviewNo} and mem_no = #{memNo}
+	</select>
+	
+	<!-- 댓글 총갯수 -->
+	<select id="replyTotal" parameterType="int" resultType="int">
+		select count(reply_no) from reply
+		where review_no = #{reviewNo}
+	</select>
 </mapper>
