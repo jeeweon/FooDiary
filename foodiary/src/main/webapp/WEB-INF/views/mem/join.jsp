@@ -181,6 +181,7 @@ $(function(){
 			}
 		},1000);
 	}
+
 	
 	//인증번호 보내기 버튼 클릭 시 -> 이메일 발송
 	$(".send-btn").click(function(){
@@ -216,8 +217,7 @@ $(function(){
 			$(".email-check").html(div);	
 			div.append(input);
 			$(".email-check-btn").html(div2);
-			div2.append(button);
-			div3.append(span);
+			div2.append(button).append(span);
 			span.text("인증번호 유효시간 : 05:00").addClass("timer");
 			
 			//인증번호 5분 타이머

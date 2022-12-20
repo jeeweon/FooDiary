@@ -10,7 +10,6 @@
 .receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
-
 </style>
 </head>
 <body>

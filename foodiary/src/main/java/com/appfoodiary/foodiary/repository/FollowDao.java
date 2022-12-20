@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.appfoodiary.foodiary.entity.FollowCertDto;
 import com.appfoodiary.foodiary.entity.FollowDto;
+import com.appfoodiary.foodiary.entity.FollowMemDto;
 import com.appfoodiary.foodiary.vo.FollowCertVO;
 import com.appfoodiary.foodiary.vo.FollowMemVO;
 
@@ -24,7 +25,7 @@ public interface FollowDao {
 	//팔로우멤버 확인
 	FollowCertVO followCert(FollowCertDto dto);
 	//팔로우멤버 확인 
-	List<FollowMemVO> followMem(int memNo);
+	List<FollowMemVO> followMem(FollowMemDto dto);
 	//팔로워멤버 확인
-	List<FollowMemVO> followerMem(int memNo);
+	List<FollowMemVO> followerMem(FollowMemDto dto);
 }

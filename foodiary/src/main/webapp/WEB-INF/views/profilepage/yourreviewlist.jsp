@@ -97,7 +97,6 @@ li {
  	width: 350px;
  	height: 350px;
  	position: relative;
- 	background-color: yellow;
  	}
 .absolute {
 	width: 50px; 

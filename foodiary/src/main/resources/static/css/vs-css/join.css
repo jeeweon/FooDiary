@@ -47,11 +47,10 @@
    }
    .timer{
    	display: flex;
-   	width: 500px;
-   	justify-content:center;
    	align-items: center;
    	font-weight: bold;
    	color: red;
+   	margin-left: 150px;
    }
    
    * {
@@ -98,15 +97,15 @@ li {
     align-items: center;
 }
 .Mhead img{
-    width: 400px;
-    height: 250px;
-    margin: 30px;
-    margin-right: 200px;
+    width: 200px;
+    height: 150px;
+    padding-top: 100px;
+    
 }
 .Mhead h1{
     font-size: 35px;
-    margin: 30px;
-    margin-right: 200px;
+    margin-bottom: 30px;
+    
 }
 .Mbody-container{
 	width: 1600px;
@@ -116,6 +115,7 @@ li {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-left: 200px;
 }
 .Mbody input{
     width: 450px;

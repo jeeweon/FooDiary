@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appfoodiary.foodiary.entity.FollowCertDto;
+import com.appfoodiary.foodiary.entity.FollowMemDto;
 import com.appfoodiary.foodiary.repository.FollowDao;
 import com.appfoodiary.foodiary.repository.MyprofileDao;
 import com.appfoodiary.foodiary.vo.FollowMemVO;
@@ -111,9 +112,13 @@ public class ProfileRestController {
 	@GetMapping("/profile/followmem")
 	public List<FollowMemVO> followmem(
 			HttpSession session){
-		
 		int memNo=(Integer)session.getAttribute("loginNo");
-		return followDao.followMem(memNo);
+		FollowMemDto dto =FollowMemDto.builder()
+							.memLogin(memNo)
+							.memNo(memNo)
+							.build();
+		
+		return followDao.followMem(dto);
 	}
 	//myprofile 팔로워 멤버
 	@GetMapping("/profile/followermem")
@@ -121,20 +126,35 @@ public class ProfileRestController {
 			HttpSession session){
 		
 		int memNo=(Integer)session.getAttribute("loginNo");
-		return followDao.followerMem(memNo);
+		FollowMemDto dto =FollowMemDto.builder()
+				.memLogin(memNo)
+				.memNo(memNo)
+				.build();
+		return followDao.followerMem(dto);
 	}
 	//yourprofile 팔로우 멤버
 	@GetMapping("/profile/yourfollowmem")
 	public List<FollowMemVO> yourfollowmem(
 			HttpSession session,
 			@RequestParam int memNo){
-		return followDao.followMem(memNo);
+		int memLogin=(Integer)session.getAttribute("loginNo");
+		FollowMemDto dto =FollowMemDto.builder()
+				.memLogin(memLogin)
+				.memNo(memNo)
+				.build();
+		
+		return followDao.followMem(dto);
 	}
 	//yourprofile 팔로워 멤버
 	@GetMapping("/profile/yourfollowermem")
 	public List<FollowMemVO> yourfollowermem(
 			HttpSession session,
 			@RequestParam int memNo){
-		return followDao.followerMem(memNo);
+		int memLogin=(Integer)session.getAttribute("loginNo");
+		FollowMemDto dto =FollowMemDto.builder()
+				.memLogin(memLogin)
+				.memNo(memNo)
+				.build();
+		return followDao.followerMem(dto);
 	}
 }

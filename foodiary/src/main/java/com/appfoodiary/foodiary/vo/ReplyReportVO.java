@@ -1,15 +1,17 @@
 package com.appfoodiary.foodiary.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor @Builder @AllArgsConstructor @Data
-public class FollowMemVO {
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
+public class ReplyReportVO {
+	private int replyReportNo;
+	private int replyNo;
 	private int memNo;
+	private Date replyReportTime;
 	private String memNick;
-	private int attachNo;
-	private int memLevel;
-	private boolean followCheck;
 }
