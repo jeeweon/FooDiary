@@ -274,7 +274,30 @@
 			}
 			memLevel.addClass("level-img");
 			
-			$(".reviewWriter-memNick").append(memLevel);
+			var follow=$("<button>").attr("data-rno",loginNo).text("팔로우");
+			follow.click(function(){
+				var that=$(this);
+				$.ajax({
+					url:"${pageContext.request.contextPath}/rest/review/follow",
+					method:"post",
+					data :{
+						 passiveMemNo : $(this).data("rno")	
+					},
+					success :function(resp){
+						console.log(resp);
+						if(resp){
+							$(that).text("팔로잉");
+						}else{
+							$(that).text("팔로우");
+						}
+					}
+				});
+			});
+			
+			$(".reviewWriter").append(memLevel).append(follow);
+			$(".reviewWriter").click(function(){
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+			});
 		}
 		
 		//별점 옵션 수정
@@ -347,8 +370,10 @@
 	        		var replyReportCnt = value.replyReportCnt;
 	        		
 	        		//replyListHead
+	        		//1. replyListHead-replyNoInput
 	        		var replyNoInput = $("<input>").attr("type","hidden").val(replyNo).addClass("replyNo");
 	        		
+	        		//2. replyListHead-replyMem
 	        		var profile;
 	        		if(value.attachNo == 0) {
 	        			profile = $("<img>").attr("src", "${pageContext.request.contextPath}/images/basic-profile.png");						
@@ -375,25 +400,32 @@
 	    			}
 	    			memLevel.addClass("level-img");
 	    			
-        			var replyReport = $("<input>").val("신고");
+	    			var replyMem = $("<span>").append(profile).append(memNick).append(memLevel);
+	    			replyMem.addClass("replyMem")
+	    			$(".replyMem").click(function(){
+	    				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
+	    			});
+	    			
+	    			//3. replyListHead-replyWriteTime
+	        		var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
+
+	        		var replyReport = $("<input>").val("신고");
         			replyReport.attr("type", "button").addClass("btn-reply-report");
 
         			var replyDelete = $("<input>").val("삭제");
         			replyDelete.attr("type", "button").addClass("btn-reply-delete");
-	        		
-        			//replyListBody
-	        		var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
-	        		
+        			
+	        		//replyListBody
 	        		var replyContent = $("<input>").attr("value", value.replyContent).prop("readonly", true);
 	        		replyContent.addClass("replyContent");
 	        		
 	        		//reply-list
-	        		var replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime);
+	        		var replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime);
 	        		if(loginNo==replyMemNo) {
-	        			replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime)
+	        			replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime)
 													.append(" ").append(replyDelete);
 	        		}else if(loginNo!=replyMemNo){
-		        		replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime)
+		        		replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime)
 		        									.append(" ").append(replyReport);
 	        		}
 	        		replyListHead.addClass("replyListHead");
