@@ -1,113 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <jsp:include page="/WEB-INF/views/admin/admin_header.jsp">
 	<jsp:param value="블라인드 리뷰 상세" name="title" />
 </jsp:include>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/css_admin/blind-review.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/css_admin/blind.css">
 <!-- swiper 의존성-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <style>
-.float-container {
-	width: 1000px;
-	margin-top: 30px;
-	margin-bottom: 50px;
-}
-
-.float-1 {
-	width: 500px;
-}
-
-.float-2 {
-	width: 400px;
-}
-
-.container {
-	width: 1000px;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
-  	justify-content : center;
-  	box-sizing: border-box;
-}
-
-.title {
-	text-align: center;
-	margin: 30px auto;
-}
-
-td > a {
-	color: #E27C5E;
-	font-weight: bold;
-}
-
-th > a {
-	color: black;
-	font-weight: bold;
-}
-
-td > a,
-th > a {
-	text-decoration: none;
-}
-
-th > a:visited {
-	color: black;
-	font-weight: bold;
-}
-
-td > a:visted {
-	color: #E27C5E;
-	font-weight: bold;
-}
-
-.subtitle {
-	margin: 0;
-}
-.history {
-	margin-top: 3px;
-}
-
-.review-list, .history-list {
-	margin-top: 30px;
-}
-
-.swiper {
-    height: 300px;
-    position:static;
-}
-
-.img-div {
-	position:relative;
-}
-
-.blind-clear, .blind-list {
-	width: 250x;
-	height: 40px;
-	padding: 0.5em;
-	font-size: 16px;
-	color: #E27C5E;
-	background-color: #ffffff;
-	border: 1.5px solid #E27C5E;
-	border-radius: 4px;
-}
-
-.blind-clear {
-	margin-right: 20px;
-}
-
-.blind-clear.clear {
-	background-color: #dddddd;
-	color: #aaaaaa;
-	border: 1.5px solid #dddddd;
-}
-
-.action-btn {
-	text-align: center;
-}
 </style>
 </head>
 <body>
@@ -145,7 +49,9 @@ td > a:visted {
 								</div>
 								<div class="sub-info-text">
 									<span class="review-cnt">리뷰 ${rvo.memReviewCnt}</span>
-									<span class="write-time">${rvo.reviewWriteTime}</span>
+									<span class="write-time">
+										<fmt:formatDate value="${rvo.reviewWriteTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+									</span>
 								</div>
 							</div>
 						</div>
@@ -219,7 +125,9 @@ td > a:visted {
 									<td width="10%">${list.reviewReportNo}</td>
 									<td width="20%">${list.memNo}</td>
 								    <td width="30%">${list.memNick}</td>
-								    <td width="20%">${list.reviewReportTime}</td>
+								    <td width="20%">
+								    	<fmt:formatDate value="${list.reviewReportTime}" pattern="yy-MM-dd HH:mm:ss"/>
+								    </td>
 								</tr>
 							</c:forEach>
 						</tbody>

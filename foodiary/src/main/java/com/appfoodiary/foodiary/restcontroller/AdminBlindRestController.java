@@ -25,4 +25,13 @@ public class AdminBlindRestController {
 			return false;
 		}
 	}
+	
+	@PostMapping("/reply/clear")
+	public boolean replyBlindClear(@RequestParam int replyNo) {
+		if(blindDao.replyCntReset(replyNo) && blindDao.replyBlindClear(replyNo)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
