@@ -40,7 +40,7 @@ li {
 }
 .header1{
     position: fixed;
-    top: 50px;
+    top: 20px;
     width: 300px;
     height: 800px;
     box-sizing: border-box;
@@ -139,7 +139,7 @@ li {
     align-items: center;
     position: absolute;
     bottom: 0px;
-    left: 15px;
+    left: 60px;
 }
 #logoutimg{
     width: 30px;
@@ -349,7 +349,7 @@ li {
 .feed{
     flex: 1;
     position: relative;
-    top: 150px;
+    top: 130px;
 }
 .nick-lev {
 	display: flex;
