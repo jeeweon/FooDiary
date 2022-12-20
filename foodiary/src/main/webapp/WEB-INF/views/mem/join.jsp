@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
     
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/join.css"> <!--css 불러오는 링크-->
-
+ 
 </head>
 <body>
  	<div class="wrapper">

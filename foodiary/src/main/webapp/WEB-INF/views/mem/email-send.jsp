@@ -5,49 +5,54 @@
 <html>
 <head>
 	<title>비밀번호 찾기</title>
-<style>
-   .success-message,
-   .fail-message,
-   .wait-message { 
-           display: none;
-        }
-   #success-message,
-   #fail-message { 
-           display: none;
-        }
-   .input.success ~ #success-message{
-   		display : block;
-   }
-   .input.fail ~ #fail-message{
-   		display : block;
-   }
-</style>
+	
+	<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/email-send.css"> <!--css 불러오는 링크-->
+	
 </head>
 <body>
-<form action="email_send" class="email-form" method="post">
-	<div>
-		계정에 연결된 다음 정보가 확인 되었습니다.
-	</div>
-	<div>
-		이메일 : ${param.memEmail}
-	<input class="input" name="memEmail" hidden="true" value="${param.memEmail}">
-	</div>
-	<div>
-		<button type="submit" class="send-btn">인증번호 보내기</button>
-		<div class="wait-message">인증번호 전송중</div>
-	</div>
-	
-    <div class="email-check">
-	    <div id="success-message">인증번호가 확인되었습니다.</div>
-	    <div id="fail-message">인증번호가 확인되지 않았습니다.</div>
-    </div>	
-    
-    <div class="email-check-btn"></div>
-    
-    <div>
-    	<button>다음</button>
-    </div>
-</form>
+
+<div class="wrapper">
+        <div class="PWfind2">
+            <div class="inner">
+                <div class="PWlog">
+                    <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                </div> <!--PWlog-->
+                <div class="PWT">
+                    <fieldset>
+                        <legend>
+                            <form action="email_send" class="email-form" method="post">
+								<div>
+									계정에 연결된 다음 정보가 확인 되었습니다.
+								</div>
+								<div>
+									이메일 : ${param.memEmail}
+								<input class="input" name="memEmail" hidden="true" value="${param.memEmail}">
+								</div>
+								<div>
+									<button type="submit" class="send-btn">인증번호 보내기</button>
+									<div class="wait-message">인증번호 전송중</div>
+								</div>
+								
+							    <div class="email-check">
+								    <div id="success-message">인증번호가 확인되었습니다.</div>
+								    <div id="fail-message">인증번호가 확인되지 않았습니다.</div>
+							    </div>	
+							    
+							    <div class="email-check-btn"></div>
+							    
+							    <div>
+							    	<button>다음</button>
+							    </div>
+							</form>
+                        </legend>
+                    </fieldset>
+                </div> <!--PWT-->
+            </div> <!--inner-->
+        </div> <!--PWfind2-->
+    </div> <!--wrapper-->
+
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">

@@ -1,0 +1,163 @@
+   .success-message,
+   .fail-message { 
+           display: none;
+        }
+   .input.success ~ .success-message{
+   		display : block;
+   }	
+    .input.fail ~ .fail-message { 
+            display: block;
+        }	
+        
+     * {
+margin: 0;
+padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper>div.inner {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+.leave{
+    position: relative;
+}
+.leaveH{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.leaveH img{
+    width: 350px;
+    height: 200px;
+    margin-top: 30px;
+}
+.leaveH h1{
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+.leaveH h2{
+    font-size: 17px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.leaveB{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.leaveB input{
+    width: 450px;
+    height: 50px;
+    border-radius: 10px 10px;
+    border: 1px solid gray;
+    margin: 30px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+.leaveB button{
+    width: 455px;
+    height: 50px;
+    margin: 30px;
+    align-items: center;
+    border-radius: 10px 10px;
+    background-color: #ffe9b1;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    color: #E27C5E;
+}
+#out:hover{
+    cursor: pointer;
+    color: red;
+}
+.fail-message{
+	text-align: center;
+	color: red;
+}
+.success-message{
+	text-align: center;
+	color: green;
+}
+
+@media screen and (max-width: 1420px) {
+    .inner {
+        width: 100%; 
+        padding: 0 20px;
+        box-sizing: border-box;
+        }
+    }
+    @media screen and (max-width: 1240px) {
+        .wrapper > div.inner {
+            display: block;
+        }
+        .leave{
+        width: 100%;
+        height: 105px;
+        margin-bottom: 15px;
+        }
+        .leaveH{
+            position: unset;
+            padding: 150px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        .leaveH a{
+            margin-bottom: 0;
+        }
+        .leaveB{
+            position: relative;
+            top: 100px;
+        }
+        .leaveB p button{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .inner {
+            padding: 0 20px;
+        }
+        .leaveH img{
+            width: 250px;
+        }
+        .leaveB p{
+            width: 100%;
+            font-size: 20px;
+        }
+        .leave button{
+            width: 100%;
+        }
+    }

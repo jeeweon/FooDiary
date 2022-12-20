@@ -5,44 +5,52 @@
 <html>
 <head>
 	<title>회원탈퇴</title>
-<style>
-   .success-message,
-   .fail-message { 
-           display: none;
-        }
-   .input.success ~ .success-message{
-   		display : block;
-   }	
-/*    .input.fail ~ .fail-message { */
-            display: block;
-        }	
-</style>
+	
+	<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/leave.css"> <!--css 불러오는 링크-->
+	
 </head>
 <body>
-	<div>
-		<h1>회원 탈퇴</h1>
-	</div>
-	<div>회원 탈퇴를 위해 비밀번호 확인이 필요합니다</div>
+
+<div class="wrapper">
+        <div class="leave">
+            <div class="inner">
+                <div class="leaveH">
+                    <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <h1>회원 탈퇴</h1>
+                    <h2>회원 탈퇴를 위해 비밀번호 확인이 필요합니다.</h2>
+                </div> <!--leaveH-->
+                <div class="leaveB">
+                    <fieldset>
+                        <legend>
+                            <div>
+								<input name="memPw" class="input" type="password" placeholder="비밀번호">
+								<div class="success-message">비밀번호가 일치합니다.</div>
+					        	<div class="fail-message">비밀번호가 일치하지 않습니다.</div>	
+							</div>
+							<div>
+								<button type="button" class="check-pw">비밀번호 확인</button>
+							</div>
+							<div>
+								<c:if test="${param.error !=null}">
+									비밀번호가 일치하지 않습니다.
+								</c:if>				
+							</div>
+						<form action="leave" method="post" class="goodbye-form">
+							
+							<div>	
+								<button id="out" class="goodbye" disabled>회원탈퇴</button>
+							</div>
+						</form>
+                        </legend>
+                    </fieldset>
+                </div>
+            </div> <!--inner-->
+        </div> <!--leave-->
+    </div> <!--wrapper-->
 	
-		<div>
-			<input name="memPw" class="input" type="password" placeholder="비밀번호">
-			<div class="success-message">비밀번호가 일치합니다.</div>
-        	<div class="fail-message">비밀번호가 일치하지 않습니다.</div>	
-		</div>
-		<div>
-			<button type="button" class="check-pw">비밀번호 확인</button>
-		</div>
-		<div>
-			<c:if test="${param.error !=null}">
-				비밀번호가 일치하지 않습니다.
-			</c:if>				
-		</div>
-	<form action="leave" method="post" class="goodbye-form">
 		
-		<div>	
-			<button class="goodbye" disabled>회원탈퇴</button>
-		</div>
-	</form>
 	
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
