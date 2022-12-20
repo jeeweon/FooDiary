@@ -6,56 +6,58 @@
 <head>
 	<title>비밀번호 변경</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<style>
-   .success-message,
-   .fail-message 
-   		{ 
-           display: none;
-        }
-   .input.success ~ .success-message{
-   		display : block;
-   }	
-   .input.fail ~ .fail-message {
-            display: block;
-        }
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/edit-pw.css"> <!--css 불러오는 링크-->
+
+
 </head>
 <body>
-	<div>
-		<h1>비밀번호 변경</h1>
-	</div>
-	<form action="edit_pw" method="post" class="pw-form">
-		<div>
-			<input name="memNo" value="${memNo}" hidden="true">
-		</div>
-		<div>
-			<label>
-				비밀번호
-				<i class="fa-solid fa-asterisk"></i>
-			</label>
-			<input type="password" class="input" name="memPw" placeholder="비밀번호">
-	        <div class="success-message">사용 가능한 비밀번호입니다.</div>
-	        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
-		</div>
+
+<div class="wrapper">
+        <div class="PWedit">
+            <div class="inner">
+                <div class="pwlog">
+                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <h1>비밀번호 변경</h1>
+                </div>
+                <div class="newpw">
+			                <fieldset>
+			                   <legend>
+			                       <form action="edit_pw" method="post" class="pw-form">
+			                        <div>
+										<input name="memNo" value="${memNo}" hidden="true">
+									</div>
+						                          <div id=pwtag>
+										<label>
+											<p id=p1>비밀번호<i class="fa-solid fa-asterisk"></i></p>
+										</label>
+										<input type="password" class="input" name="memPw" placeholder="비밀번호">
+								        <div class="success-message">사용 가능한 비밀번호입니다.</div>
+								        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
+									</div>
+						                          <div id=pwtag>
+										<label>
+											<p>비밀번호 확인<i class="fa-solid fa-asterisk"></i></p>									
+										</label>
+										<input type="password" class="input" id="pw-re" placeholder="비밀번호 확인">
+										<div class="success-message">비밀번호가 일치합니다.</div>
+								        <div class="fail-message">비밀번호가 일치하지 않습니다.</div>		
+									</div>
+									<div>
+						              <button>비밀번호 변경</button>
+						            </div>
+						            <div>
+										<c:if test="${param.error !=null}">
+											<h2>비밀번호 재설정에 실패하였습니다.</h2>
+										</c:if>	
+									</div>		
+                        		</form>
+                    	</legend>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
 		
-		<div>
-			<label>
-				비밀번호 확인
-				<i class="fa-solid fa-asterisk"></i>
-			</label>
-			<input type="password" class="input" id="pw-re" placeholder="비밀번호 확인">
-			<div class="success-message">비밀번호가 일치합니다.</div>
-	        <div class="fail-message">비밀번호가 일치하지 않습니다.</div>		
-		</div>
-		<button>비밀번호 변경</button>
-		
-		<div>
-			<c:if test="${param.error !=null}">
-				<h2>비밀번호 재설정에 실패하였습니다.</h2>
-			</c:if>	
-		</div>		
-	</form>
-	
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 $(function(){

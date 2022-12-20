@@ -24,7 +24,6 @@
  		width: 350px;
  		height: 350px;
  		position: relative;
- 		background-color: yellow;
  		}
 	.absolute {
 	 	width: 50px; 
@@ -55,8 +54,6 @@
 			dataType : "json",
 			success : function(resp) {
 				reviewList1 = resp;
-				console.log(reviewList1);
-				console.log(reviewList1[0].replyCnt);
 				renderList();
 			}
 		});

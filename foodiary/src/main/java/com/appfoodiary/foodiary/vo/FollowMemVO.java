@@ -11,4 +11,5 @@ public class FollowMemVO {
 	private String memNick;
 	private int attachNo;
 	private int memLevel;
+	private boolean followCheck;
 }
