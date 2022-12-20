@@ -1,0 +1,230 @@
+   .success-message,
+   .fail-message,
+   .NNNNN-message,
+   .NNNNY-message { 
+           display: none;
+        }
+   .input.success ~ .success-message{
+   		display : block;
+   }	
+   .input.fail ~ .fail-message {
+            display: block;
+        }
+   .input.NNNNY ~ .success-message{
+   		display : block;
+   }	   
+   .input.NNNNN ~ .NNNNN-message{
+   		display : block;
+   }
+   .input.NNNNN ~ .success-message{
+   		display : none;
+   }
+   .preview{
+   		border-radius : 50%;
+   		border:1px black solid transparent;
+   }
+   .preview.preview-hover:hover{
+    	opacity : 0.5;
+   }
+   
+ * {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper>div.inner {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+.profile-change{
+    position: relative;
+}
+.profileH{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profileH img{
+    width: 350px;
+    height: 200px;
+    margin-top: 30px;
+}
+.profileH h1{
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+.profileT{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profileT form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ #editT{
+ 	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+ 
+form img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;   
+}
+form label{
+	position: relative;
+	top:20px;
+	right: 190px;
+}
+
+form label i{
+	color: red;
+}
+
+form #btn-top{
+	margin-top: 15px;
+	background: none;
+	outline: none;
+	border: none;
+}
+#btn-top:hover{
+	cursor: pointer;
+}
+
+form span{
+	position: relative;
+	bottom: 20px;
+	left: 180px;
+}
+form #PT{
+	display: flex;
+	flex-direction: row;
+}
+#PT p{
+	position: relative;
+	bottom: 41px;
+	left: 200px;
+	margin-left: 12px;
+	margin-right: 12px;
+} 
+
+.profileT input{
+    width: 450px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 10px 10px;
+    margin: 30px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+.profileT #btn-profile{
+    width: 455px;
+    height: 50px;
+    margin: 30px;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px 10px;
+    background-color: #ffe9b1;
+    font-size: 17px;
+    font-weight: bold;
+}
+.profileT textarea{
+    width: 455px;
+    height: 200px;
+    margin: 30px;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px 10px;
+    font-size: 17px;  
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.Pnick{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (max-width: 1420px) {
+.inner {
+    width: 100%; 
+    padding: 0 20px;
+    box-sizing: border-box;
+    }
+}
+@media screen and (max-width: 1240px) {
+    .wrapper > div.inner {
+        display: block;
+    }
+    .profile-change{
+    width: 100%;
+    height: 105px;
+    margin-bottom: 15px;
+    }
+    .profileH{
+        position: unset;
+        padding: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    .profileH a{
+        margin-bottom: 0;
+    }
+    .profileT{
+        position: relative;
+        top:110px;
+    }
+    .profileT input button{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 768px) {
+    .inner {
+        padding: 0 20px;
+    }
+    .profileH img{
+        width: 250px;
+    }
+    .profileH h1{
+        font-size: 30px;
+    }
+    .profileT input{
+        width: 100%;
+    }
+    .profileT button{
+        width: 105%;
+    }
+}

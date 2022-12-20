@@ -6,7 +6,8 @@
 <style>
         #modal {
           display: none;
-          position: absolute;         
+          position: absolute;   
+          bottom: 10px;         
           width:100%;
           height:100%;
           z-index:1;
@@ -41,7 +42,8 @@
         }  
         #modal2 {
           display: none;
-          position: absolute;         
+          position: absolute;   
+          bottom: 10px;         
           width:100%;
           height:100%;
           z-index:1;
@@ -86,6 +88,10 @@
  		width:30px;
  		height:30px;
  		}
+ 		.mem-info-text{
+        font-weight:bold; 
+        font-size: 20px;
+        }
  </style>
 <script>
  	$(function(){
@@ -109,6 +115,18 @@
 					$(".follower-cnt").text("팔로우 : "+profileList.followerCnt);
 					$(".mem-no").text(profileList.memNo);
 					$(".mem-info").text(profileList.memIntro);
+					
+					 //게시판 팔로우 팔로잉 호버시 포커스
+					 	$(".board-cnt").hover(function(){
+					 		$(this).css("cursor","zoom-in");
+					 	})
+		               $(".follow-cnt").hover(function(){
+		             	  $(this).css("cursor","zoom-in"); 
+		                });
+					 
+		               $(".follower-cnt").hover(function(){
+		             	  $(this).css("cursor","zoom-in"); 
+		                });
 					
 					
 					
@@ -236,6 +254,7 @@
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
 					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+					var hr=$("<hr>");
 					
 					img.addClass("follow-img");
 					//팔로우가 되어있는 상태인지 아닌지확인
@@ -245,6 +264,25 @@
 					}else{
 						var buttonFollow=$("<button>").text("팔로우");
 					}
+					//팔로우 버튼을 클릭했을 때 이벤트 발생
+		               $(buttonFollow).click(function(){
+		            	   var that=$(this);
+		            	 $.ajax({
+		            		 url:"${pageContext.request.contextPath}/rest/review/follow",
+		     				method:"post",
+		     				data:{
+		     					passiveMemNo : value.memNo	
+		     				},
+		     				success:function(resp){
+		     					if(resp){
+		     						$(that).text("팔로잉");			
+		     					}else{
+		     						$(that).text("팔로우");
+		     					}
+		     				}
+		            	 }); 
+		               });
+		               
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
@@ -252,7 +290,7 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					$(".modal_content").css("display","block");
-					$(".modal_content").append(a).append(buttonFollow).append(br);
+					$(".modal_content").append(a).append(buttonFollow).append(hr).append(br);
 				});
 			}else{
 			
@@ -303,6 +341,7 @@
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
 					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+					var hr=$("<hr>");
 					
 					img.addClass("follow-img");
 					//팔로우가 되어있는 상태인지 아닌지확인
@@ -312,6 +351,25 @@
 					}else{
 						var buttonFollow=$("<button>").text("팔로우");
 					}
+					//팔로우 버튼을 클릭했을 때 이벤트 발생
+		               $(buttonFollow).click(function(){
+		            	   var that=$(this);
+		            	 $.ajax({
+		            		 url:"${pageContext.request.contextPath}/rest/review/follow",
+		     				method:"post",
+		     				data:{
+		     					passiveMemNo : value.memNo	
+		     				},
+		     				success:function(resp){
+		     					if(resp){
+		     						$(that).text("팔로잉");			
+		     					}else{
+		     						$(that).text("팔로우");
+		     					}
+		     				}
+		            	 }); 
+		               });
+		               
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
@@ -319,7 +377,7 @@
 						$(img).attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
 					}
 					
-					$(".modal_content2").append(a).append(buttonFollow).append(br);
+					$(".modal_content2").append(a).append(buttonFollow).append(hr).append(br);
 				});
 			}else{
 				var span2=$("<span>").text("선택된 팔로우가 없습니다.");
@@ -356,7 +414,7 @@
 
                     </ul> <!-- boardT2 -->
                     <P>	
-                    	<span>자기소개</span><br><br>
+                    	<span class="mem-info-text">자기소개</span><br><br>
                     	<span class="mem-info"></span>           
                     </P>
                 </div> <!--boardT-->

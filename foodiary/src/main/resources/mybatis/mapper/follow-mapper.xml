@@ -82,7 +82,7 @@
     mem_nick,
     attach_no
     mem_level,
-    decode(follow_no,null,'f인alse','true') follow_check
+    decode(follow_no,null,'false','true') follow_check
     from 
     (select
     	M.mem_no mem_no,
