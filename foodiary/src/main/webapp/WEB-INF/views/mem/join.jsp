@@ -29,7 +29,7 @@
 					<legend>
 						<form action="join" class="join-form" method="post" autocomplete="off">
                     	<div class="text-title">이메일 <i class="fa-solid fa-asterisk"></i></div>						
-						<input type="text" class="input" name="memEmail" placeholder="사용 가능한 이메일을 입력해주세요">
+						<input type="text" class="input" name="memEmail" placeholder="인증 가능한 이메일을 입력해주세요">
 				        <div class="success-message">사용 가능한 이메일입니다. 인증번호를 전송해주세요.</div>
 				        <div class="fail-message">올바르지 않은 이메일 형식입니다.</div>
 				        <div class="NNNNN-message">이미 사용중인 이메일입니다.</div>
