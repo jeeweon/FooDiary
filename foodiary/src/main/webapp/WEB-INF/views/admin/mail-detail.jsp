@@ -3,22 +3,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<title>관리자::이메일 상세</title>
+<jsp:include page="/WEB-INF/views/admin/admin_header.jsp">
+	<jsp:param value="이메일 상세" name="title" />
+</jsp:include>
 <style>
-        .table > thead > tr > th,
-        .table > thead > tr > td,
-        .table > tbody > tr > th,
-        .table > tbody > tr > td,
-        .table > tfoot > tr > th,
-        .table > tfoot > tr > td {  
-           border : 1px solid lightgray;
-        }
+.container {
+	width: 600px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+  	justify-content : center;
+}
+
+.title {
+	text-align: center;
+	margin: 50px auto 20px auto;
+}
 </style>
 </head>
 <body>
-<h1>이메일 상세</h1>
-<div>
-<table class="table" width="800px";>
+<div class="container">
+		<div class="title">
+			<h2>이메일 상세</h2>
+		</div>
+<table class="table table-slit w-100">
 	<tbody>
 	  <tr>
 	    <th class="tg-0pky" width="10%">번호</th>

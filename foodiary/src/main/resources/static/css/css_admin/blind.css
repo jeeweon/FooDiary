@@ -228,7 +228,7 @@ td > a:visted {
 	position:relative;
 }
 
-.blind-clear, .blind-list {
+.blind-clear, .blind-list,.send-btn {
 	width: 250x;
 	height: 40px;
 	padding: 0.5em;

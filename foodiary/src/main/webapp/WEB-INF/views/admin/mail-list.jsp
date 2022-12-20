@@ -3,23 +3,98 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<title>관리자::이메일 리스트</title>
+<jsp:include page="/WEB-INF/views/admin/admin_header.jsp">
+	<jsp:param value="이메일 리스트" name="title" />
+</jsp:include>
 <style>
-        .table > thead > tr > th,
-        .table > thead > tr > td,
-        .table > tbody > tr > th,
-        .table > tbody > tr > td,
-        .table > tfoot > tr > th,
-        .table > tfoot > tr > td {  
-           border : 1px solid lightgray;
-        }
+.container {
+	width: 600px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+  	justify-content : center;
+}
+
+.title {
+	text-align: center;
+	margin: 50px auto 20px auto;
+}
+
+.search-form {
+   	margin: auto;
+}
+
+.search-bar { 
+    position: relative;
+    width: 400px;
+    height: 40px;
+    display: inline-block;
+    border: 1px solid #18253D;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.search-input {
+    padding: 0.5em;
+    padding-right: 30px;
+    width: 100%;
+    height: inherit;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.search-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: inherit;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #18253D;
+    cursor: pointer;
+}
+
+input:focus {
+	outline: none;
+}
+
+td > a {
+	color: #E27C5E;
+	font-weight: bold;
+}
+
+th > a {
+	color: black;
+	font-weight: bold;
+}
+
+td > a,
+th > a {
+	text-decoration: none;
+}
+
+th > a:visited {
+	color: black;
+	font-weight: bold;
+}
+
+td > a:visted {
+	color: #E27C5E;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
-<h1>공지 이메일 리스트</h1>
 
-<div>
-	<table class="table" width="800px" >
+<div class="container">
+	<div class="title">
+		<h2>공지 이메일 목록</h2>
+	</div>
+	<table class="table table-slit w-100" >
 		<thead>
 		  <tr align="center">
 		    <th class="tg-c3ow">번호</th>
@@ -98,10 +173,11 @@
 		
 		<!-- 검색창 -->
 	<div class="row center mt-30" >
-		<form action="mail-list" method="get" autocomplete="off">
-
-			<input class="solid-lines input-list-search" type="search" name="keyword" placeholder="제목 검색" value = "${param.keyword}">
-			<button class="btn btn-positive" type="submit">검색</button>
+		<form class="search-form" action="mail-list" method="get" autocomplete="off">
+			 <div class="search-bar">
+				<input class="search-input solid-lines input-list-search" type="search" name="keyword" placeholder="제목 검색" value = "${param.keyword}">
+				 <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
+			</div>  
 		</form>
 	</div>
 
