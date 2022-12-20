@@ -20,6 +20,7 @@ import com.appfoodiary.foodiary.entity.NoticeEmailDto;
 import com.appfoodiary.foodiary.repository.AdminEmailDao;
 import com.appfoodiary.foodiary.repository.MemDao;
 import com.appfoodiary.foodiary.service.EmailService;
+import com.appfoodiary.foodiary.vo.ListSearchVO;
 import com.appfoodiary.foodiary.vo.MemEmailVO;
 
 @Controller
@@ -61,9 +62,15 @@ public class AdminMailController {
 	}
 	
 	@GetMapping("/mail-list")
-	public String mailList(Model model) {
-		List<NoticeEmailDto> list = adminEmailDao.selectList();
-		model.addAttribute("list",list);
+	public String mailList(Model model,
+			@ModelAttribute(name="vo") ListSearchVO vo) {
+		//페이지네이션 게시글 수
+		int count = adminEmailDao.count(vo);
+		vo.setCount(count);
+		//startRow, endRow 설정
+		vo.setStartRow(vo.startRow());
+		vo.setEndRow(vo.endRow());
+		model.addAttribute("list",adminEmailDao.selectList(vo));
 		return "admin/mail-list";
 	}
 	
