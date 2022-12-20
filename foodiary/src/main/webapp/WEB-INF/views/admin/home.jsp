@@ -8,7 +8,7 @@
 .page {
 	text-align: center;
 	margin: 0 auto;
-	width: 600px;
+	width: 800px;
 }
 
 .logo{
@@ -76,7 +76,10 @@
 			<span>회원 관리</span>		
 		</div>
 		<div class="menu-item mail">
-			<span>이메일 발송</span>		
+			<span>메일 발송</span>		
+		</div>
+		<div class="menu-item sent">
+			<span>보낸 메일함</span>		
 		</div>
 		<div class="menu-item blind">
 			<span>블라인드 관리</span>	
@@ -96,6 +99,10 @@
     	
     	$(".mail").click(function(){
     		window.location = "${pageContext.request.contextPath}/admin/send-mail";
+    	});
+    	
+    	$(".sent").click(function(){
+    		window.location = "${pageContext.request.contextPath}/admin/mail-list";
     	});
     	
     	$(".blind").click(function(){

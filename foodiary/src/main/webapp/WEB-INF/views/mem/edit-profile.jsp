@@ -31,7 +31,7 @@
 						</c:forEach>
 						</c:otherwise>		
 					</c:choose>
-					<button id=btn-top class="profile-delete" type="button">프로필 이미지 초기화</button>
+					<button id=btn-top class="profile-delete" type="button"><i class="fa-solid fa-trash"></i> 프로필 초기화</button>
                              <div>
 					<div class="file"></div>
 						<!--<input type="text" name="attachNo" hidden="true"> -->

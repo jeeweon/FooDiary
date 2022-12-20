@@ -22,12 +22,34 @@
 		select*from notice_email where email_no=#{emailNo}
 	</select>
 	
-	<select id="list" resultType="NoticeEmailDto" >
-		select*from notice_email order by email_no desc
+	<select id="list" resultType="NoticeEmailDto" parameterType="ListSearchVO">
+		            select * from (  
+							   select rownum rn, TMP.* from (  
+                                    select * from notice_email
+								   order by email_no desc
+							   )TMP  
+                        ) where rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="search" resultType="NoticeEmailDto" parameterType="ListSearchVO">
+                        select * from (  
+							   select rownum rn, TMP.* from (  
+                                    select * from notice_email where instr(email_subject,#{keyword})>0
+								   order by email_no desc  
+							   )TMP  
+                        ) where rn between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="emailList" resultType="MemEmailVO">
 		select mem_email from mem
+	</select>
+	
+	<select id="listCount" resultType="int">
+		select count(*) from notice_email
+	</select>
+	
+	<select id="searchCount" resultType="int" parameterType="ListSearchVO">
+		select count(*) from notice_email where instr(email_subject, #{keyword})>0
 	</select>
 	
 

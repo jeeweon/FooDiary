@@ -51,7 +51,10 @@
 		<a href="${pageContext.request.contextPath}/admin/#"><i class="fa-solid fa-user me-10"></i>회원 관리</a> <!-- 주소 수정 필요 -->
 	</div>
 	<div class="row mail">
-		<a href="${pageContext.request.contextPath}/admin/send-mail"><i class="fa-solid fa-envelope me-10"></i>이메일 발송</a>
+		<a href="${pageContext.request.contextPath}/admin/send-mail"><i class="fa-solid fa-envelope me-10"></i>메일 발송</a>
+	</div>
+	<div class="row sent">
+		<a href="${pageContext.request.contextPath}/admin/mail-list"><i class="fa-solid fa-share me-10"></i>보낸 메일함</a>
 	</div>
 	<div class="row review">
 		<a href="${pageContext.request.contextPath}/admin/blind/review"><i class="fa-solid fa-pen-to-square me-10"></i>블라인드 리뷰 관리</a>
@@ -66,12 +69,13 @@
 </aside>
 <script type="text/javascript">
 	$(function(){
-	    var menu = ["mem", "send-mail", "review", "reply"]
+	    var menu = ["mem", "send-mail", "mail-list", "review", "reply"]
 	    var url = location.href;
 	    var getAr0 = url.indexOf(menu[0]);
 	    var getAr1 = url.indexOf(menu[1]);
 	    var getAr2 = url.indexOf(menu[2]);
 	    var getAr3 = url.indexOf(menu[3]);
+	    var getAr4 = url.indexOf(menu[4]);
 	    if(getAr0 != -1){
 	        $(".mem").addClass("active")
 	    };
@@ -79,9 +83,12 @@
 	    	$(".mail").addClass("active")
 	    };
 	    if(getAr2 != -1){
-	    	$(".review").addClass("active")
+	    	$(".sent").addClass("active")
 	    };
 	    if(getAr3 != -1){
+	    	$(".review").addClass("active")
+	    };
+	    if(getAr4 != -1){
 	    	$(".reply").addClass("active")
 	    };
 	});

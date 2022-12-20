@@ -72,11 +72,15 @@ li {
     margin-bottom: 50px;
 }
 .profileH h1{
+
 	position: relative;
 	left: 600px;
     font-size: 35px;
     margin-top: 80px;
     
+
+    margin-bottom: 20px;
+
 }
 .profileT{
     display: flex;
@@ -154,11 +158,12 @@ form #PT{
     height: 50px;
     margin: 30px;
     align-items: center;
-    border: 1px solid gray;
+    border: none;
     border-radius: 10px 10px;
     background-color: #ffe9b1;
     font-size: 17px;
     font-weight: bold;
+    color : #E27C5E
 }
 .profileT textarea{
     width: 455px;

@@ -13,5 +13,4 @@ public class NoticeEmailDto {
 	private int emailNo;
 	private String emailSubject, emailContent;
 	private Date emailWhen;
-
 }

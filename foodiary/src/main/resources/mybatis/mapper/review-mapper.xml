@@ -90,6 +90,9 @@
 			where mem_no = #{memNo}
 		) BM on R.review_no = BM.review_no
 		<where>
+			<![CDATA[
+				and R.review_report_cnt < 5
+			]]>
 			<if test="interestArea != null">
 				and	instr(review_address, #{interestArea}) > 0 
 			</if>
@@ -132,7 +135,11 @@
 			from bookmark 
 			where mem_no = #{memNo}
 		) BM on R.review_no = BM.review_no
-		where F.active_mem_no = #{memNo} order by R.review_no desc
+		where F.active_mem_no = #{memNo}
+			<![CDATA[
+				and R.review_report_cnt < 5
+			]]> 
+		order by R.review_no desc
 	</select>
 	
 	<!-- 맛집 탐색 > 비회원 -->	
@@ -157,18 +164,23 @@
 			from review_attach
 			group by review_no
 		)C on R.review_no = C.review_no
-		<choose>
-	 			<when test="keyword == null">
-	 				<![CDATA[
-						where (sysdate - review_write_time) <= 7
-					]]>	
-	 			</when>
-	 			<when test="keyword != null">
-	 				where instr(review_place, #{keyword}) > 0 
-					or instr(review_address, #{keyword}) > 0 
-					or instr(review_content, #{keyword}) > 0
-	 			</when>
-	 	</choose>
+		<where>
+			<![CDATA[
+				R.review_report_cnt < 5
+			]]>
+			<choose>
+		 			<when test="keyword == null">
+		 				<![CDATA[
+							and (sysdate - review_write_time) <= 7
+						]]>	
+		 			</when>
+		 			<when test="keyword != null">
+		 				and (instr(review_place, #{keyword}) > 0 
+						or instr(review_address, #{keyword}) > 0 
+						or instr(review_content, #{keyword}) > 0)
+		 			</when>
+		 	</choose>
+		</where>
 		order by R.like_cnt desc, R.review_no desc
 	</select>
 	
@@ -206,18 +218,23 @@
 			from bookmark 
 			where mem_no = #{memNo}
 		) BM on R.review_no = BM.review_no
-		<choose>
-	 			<when test="keyword == null">
-	 				<![CDATA[
-						where (sysdate - review_write_time) <= 7
-					]]>	
-	 			</when>
-	 			<when test="keyword != null">
-	 				where instr(review_place, #{keyword}) > 0 
-					or instr(review_address, #{keyword}) > 0 
-					or instr(review_content, #{keyword}) > 0
-	 			</when>
-	 	</choose>
+		<where>
+			<![CDATA[
+				R.review_report_cnt < 5
+			]]>
+			<choose>
+		 			<when test="keyword == null">
+		 				<![CDATA[
+							and (sysdate - review_write_time) <= 7
+						]]>	
+		 			</when>
+		 			<when test="keyword != null">
+		 				and (instr(review_place, #{keyword}) > 0 
+						or instr(review_address, #{keyword}) > 0 
+						or instr(review_content, #{keyword}) > 0)
+		 			</when>
+		 	</choose>
+		</where>
 		order by R.like_cnt desc, R.review_no desc
 	</select>
 	

@@ -211,7 +211,7 @@ public class MemController {
 		
 		
 		if(result) {			
-			return "redirect:login"; //마이 프로필 이동으로 수정하기
+			return "redirect:/profilepage/board";
 		}
 		else {
 			return "redirect:edit_pw?error";
@@ -266,34 +266,13 @@ public class MemController {
 			//닉네임 수정 후 세션에서 지우고 재설정
 			session.removeAttribute(SessionConstant.NICK);
 			session.setAttribute(SessionConstant.NICK, inputDto.getMemNick());
-			return "redirect:/home";
+			return "redirect:/profilepage/board";
 		}
 		else {
 			return "redirect:edit_profile?error";
 		}
 	}
-	
-//	@PostMapping("/edit_profile")
-//	public String editProfile(HttpSession session,
-//								@ModelAttribute MemDto inputDto,
-//								@RequestParam int attachNo ) {
-//		int memNo = (int) session.getAttribute(SessionConstant.NO);
-//		inputDto.setMemNo(memNo);
-//		ProfileAttachDto profileAttachDto = new ProfileAttachDto(attachNo, memNo);
-//
-//		if(memDao.editProfile(inputDto)) {
-//			List<AttachDto> attachments = memDao.findProfile(memNo);
-//			attachmentService.attachmentsDelete(attachments);
-//			memDao.deleteProfile(memNo);
-//			memDao.profileImage(profileAttachDto);
-//			return "redirect:/home";//마이 프로필 이동으로 수정하기
-//		}
-//		else {
-//			return "redirect:edit_profile?error";
-//		}
-//		
-//	}
-	
+		
 	@GetMapping("/leave")
 	public String memLeave() {
 		return "mem/leave";

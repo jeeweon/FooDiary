@@ -99,7 +99,7 @@ li {
 .Mhead img{
     width: 200px;
     height: 150px;
-    padding-top: 100px;
+    padding-top: 40px;
     
 }
 .Mhead h1{
@@ -131,11 +131,12 @@ li {
     height: 50px;
     margin: 30px;
     align-items: center;
-    border: 1px solid gray;
+    border: none;
     border-radius: 10px 10px;
     background-color: #ffe9b1;
     font-size: 17px;
     font-weight: bold;
+    color : #E27C5E
 }
 @media screen and (max-width: 1420px) {
 .inner {

@@ -2,6 +2,8 @@ package com.appfoodiary.foodiary.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +16,7 @@ public class ReviewSearchVO {
 	private String memNick;
 	private String memLevel;
 	private String reviewContent;
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date reviewWriteTime;
 	private float starScore;
 	private String reviewPlace;
