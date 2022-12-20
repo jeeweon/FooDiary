@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
+import com.appfoodiary.foodiary.vo.CheckRpLkBkVO;
 import com.appfoodiary.foodiary.vo.ReviewSearchVO;
+import com.appfoodiary.foodiary.vo.ReviewWriterVO;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
@@ -118,6 +120,33 @@ public class ReviewDaoImpl implements ReviewDao {
 	public boolean plusReviewBlind(Map<String, Object> blind) {
 		int count = sqlSession.update("review.plusReviewBlind", blind);
 		return count >0;
+	}
+
+	
+	//리뷰 상세
+	//작성자 회원정보(+프로필)
+	@Override
+	public ReviewWriterVO selectReviewWriter(int memNo) {
+		return sqlSession.selectOne("review.mem-frofile", memNo);
+	}
+	//로그인회원의 좋아요,북마크 여부
+	@Override
+	public boolean loginIslike(CheckRpLkBkVO checkRpLkBkVO) {
+		int count = sqlSession.selectOne("review.loginIslike",checkRpLkBkVO);
+		if(count >=1) {return true;}
+		else {return false;}
+	}
+	@Override
+	public boolean loginIsbook(CheckRpLkBkVO checkRpLkBkVO) {
+		int count = sqlSession.selectOne("review.loginIsBook",checkRpLkBkVO);
+		if(count >=1) {return true;}
+		else {return false;}
+	}
+	//댓글 총갯수
+	@Override
+	public int replyTotal(int reviewNo) {
+		int count = sqlSession.selectOne("review.replyTotal",reviewNo);
+		return count;
 	}
 
 }

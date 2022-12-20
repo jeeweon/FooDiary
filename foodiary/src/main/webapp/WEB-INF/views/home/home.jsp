@@ -10,21 +10,13 @@
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
-
+	
  </style>
 
 </head>
 <body>
-<!-- 임시 로그인 메뉴 -->
+
 <c:set var="login" value="${loginNo != null}"></c:set>
-<c:choose>
-	<c:when test="${login}">
-		<a href="mem/logout">로그아웃</a>
-	</c:when>
-	<c:otherwise>
-		<a href="mem/login">로그인</a>	
-	</c:otherwise>
-</c:choose>
 
  <div class="wrapper">
     <div class="inner">
@@ -77,7 +69,7 @@
                 </div> <!--sidemenu-->
                 <a href="#" class="review">리뷰하기</a>
                 <div class="btnW">
-                    <a href="mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
+                    <a href="/mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
                     <span><a href="#" class="morebtn">더보기버튼</a></span>
                 </div>
             </div> <!--header1-->              
@@ -151,6 +143,7 @@
              </div> <!--random-->
          </div> <!--sidebar-->
     </div><!--//inner-->
+    <div class="footer"></div>
 </div> <!--wrapper--> 
 
 

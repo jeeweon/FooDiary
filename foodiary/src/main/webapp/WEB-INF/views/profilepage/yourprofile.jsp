@@ -428,7 +428,6 @@
             </div><!--inner-->
         </div><!--boaardF-->
 	</div><!-- wrapper -->
-	<hr>
 	</body>
 	<!-- 팔러우  모달 --> 
  <div id="modal">

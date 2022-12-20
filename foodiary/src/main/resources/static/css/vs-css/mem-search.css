@@ -40,7 +40,7 @@ li {
 }
 .header1{
     position: fixed;
-    top: 50px;
+    top: 20px;
     width: 300px;
     height: 800px;
     box-sizing: border-box;
@@ -81,7 +81,8 @@ li {
 
 .header4{
     position: relative;
-    left: 350px;              
+    left: 350px; 
+    top: 40px;             
 }
 .formdiv{
 	width: 600px;
@@ -165,7 +166,7 @@ li {
 
 .mem-list {
 	width: 600px;
-	margin-top: 40px;
+	margin-top: 80px;
 	margin-bottom: 60px;
 }
 
@@ -303,7 +304,7 @@ li {
     align-items: center;
     position: absolute;
     bottom: 0px;
-    left: 15px;
+    left: 60px;
 }
 #logoutimg{
     width: 30px;

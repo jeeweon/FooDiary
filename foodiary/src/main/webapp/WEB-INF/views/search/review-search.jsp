@@ -11,34 +11,76 @@
 	background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
 }
 
-.level-img {
-	width:24px;
-	margin:0;
-	margin-left: 5px;
-}
- 	
-.nick-lev {
-	display: flex;
-	align-items:center;
-}
-
-.thumbnail {
-	object-fit:cover;
-}
 </style>
 </head>
 <body>
+
+<c:set var="login" value="${loginNo != null}"></c:set>
+
  <div class="wrapper">
         <div class="inner">
             <header class="header">
                 <div class="header1">
                     <h1><a href="/search/review" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
                     <div class="sidemenu">
-                    <ul>
-                        <li><a href="#">맛집 탐색</a></li>
-                        <li><a href="#">맛쟁이 탐색</a></li>
-                    </ul>
+                    <c:if test = "${login}">
+                    <ul id="sideP">
+	                    <li>
+	                    	<c:choose>
+								<c:when test="${empty profile}">
+									<img id="img1" src="${pageContext.request.contextPath}/images/basic-profile.png">
+								</c:when>
+								<c:otherwise>
+								<c:forEach var="profile" items="${profile}">
+										<img id="img1" src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}">
+								</c:forEach>
+								</c:otherwise>		
+							</c:choose>
+	                        ${loginNick}
+	                        <c:choose>
+	                        	<c:when test="${level.memLevel == '6  '}">
+	                        		<img class="level-img" src="${pageContext.request.contextPath}/images/6.피잣집.png">
+								</c:when>
+	                        	<c:when test="${level.memLevel == '5  '}">
+	                        		<img class="level-img" src="${pageContext.request.contextPath}/images/5.피자콜라.png">
+								</c:when>
+	                        	<c:when test="${level.memLevel == '4  '}">
+	                        		<img class="level-img" src="${pageContext.request.contextPath}/images/4.조각피자.png">
+								</c:when>
+	                        	<c:when test="${level.memLevel == '3  '}">
+	                        		<img class="level-img" src="${pageContext.request.contextPath}/images/3.반죽.png">
+								</c:when>
+	                        	<c:when test="${level.memLevel == '2  '}">
+	                        		<img class="level-img" src="${pageContext.request.contextPath}/images/2.밀가루.png">
+								</c:when>
+	                        	<c:otherwise>
+	                        		<img class="level-img" src="${pageContext.request.contextPath}/images/1.밀.png">
+	                        	</c:otherwise>
+	                        </c:choose>
+	                    </li>
+	                </ul>
+	                </c:if>
+                    <ul id="mainicon">
+                    	<c:if test = "${login}">
+	                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="/home">홈</a></li>
+	                    </c:if>
+	                    <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="/search/review">맛집 탐색</a></li>
+	                    <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="/search/mem">맛쟁이 탐색</a></li>
+	                    <c:if test = "${login}">
+	                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="#">알림</a></li>
+	                    </c:if>
+	                    <c:if test = "${login}">
+	                    <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="#">북마크</a></li>
+	                	</c:if>
+	                </ul>            
                     </div> <!--sidemenu-->
+                     <c:if test = "${login}">
+                    <a href="#" class="review">리뷰하기</a>
+	                <div class="btnW">
+	                    <a href="/mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
+	                    <span><a href="#" class="morebtn">더보기버튼</a></span>
+	                </div>
+	                </c:if>
                 </div> <!--header1-->
                 <div class="header2">
                     <div class="formdiv">                      
@@ -92,23 +134,31 @@
                           </div> <!--btn_area-->
                         </div> <!--receipt-->          
                     </div> <!--container-->
-                         <div class="follow">
-                             <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p>
+                    	<c:if test = "${login}">
+                         <div class="follow">                        	
+		                   <h3>오늘의 맛쟁이 추천</h3>
+		                    <ul class="follow-ul">
+		                    </ul>
+		                    <!-- <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p> -->                            
                          </div> <!--follow-->
+                         </c:if>
                      </div> <!--random-->
                  </div> <!--sidebar-->
+            <c:if test = "${!login}">
             <div class="rowbar">
                 <form action="">
                     <fieldset>
                         <legend>
                             "로그인하여 내 주변 맛집 리뷰를 확인하고 회원님이 좋아할 만한 계정을 찾아보세요."
-                            <button id="btn-row"><a href="/mem/login">로그인</a></button>
+                            <button  id="btn-row"><a href="/mem/login">로그인</a></button>
                             <button id="btn-row2"><a href="/mem/join">회원가입</a></button>
                         </legend>
                     </fieldset>
                 </form>  
             </div> <!--rowbar-->
+            </c:if>
         </div><!--//inner-->
+        <div class="footer"></div>
     </div> <!--wrapper-->
 
 <!-- jquery 라이브러리 -->
@@ -496,6 +546,88 @@ resetNum = 0;
 		$(document).on("click", ".review-write-info", function(){
 			window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
 		});
+		
+		//사이드바 프로필 영역 클릭 시, 마이 프로필로 이동
+		$(document).on("click", "#sideP", function(){
+			window.location = "${pageContext.request.contextPath}/profilepage/board";
+		});
+		
+		//맛쟁이 리스트 추천 
+		memRek();
+		let memRekList = [];
+		function memRek() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rest/profile/memrek",
+				method : "get",
+				dataType : "json",
+				success : function(resp) {
+					memRekList = resp;
+					
+					// 회원번호가 있으면 팔로우한 사람 제거하고 출력
+					threeMem();
+			}
+		});
+	};
+		
+		
+		function threeMem(){
+			$.each(memRekList, function(index, value) {
+				var writerLevel;
+				if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+					writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+				} else if (value.memLevel == "5  ") {
+					writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+				} else if (value.memLevel == "4  ") {
+					writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+				} else if (value.memLevel == "3  ") {
+					writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+				} else if (value.memLevel == "2  ") {
+					writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+				} else {
+					writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+				}
+				writerLevel.addClass("level-img");
+				var memImg=$("<img>").attr("src","");
+				var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+				var br=$("<br>");
+				var name=$("<span>").text(value.memNick);
+				var button=$("<button>").attr("data-rno",value.memNo).text("팔로우");
+				var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name).append(writerLevel);
+				var li=$("<li>").append(a).append(button);
+				a.click(function(){
+					window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
+				});
+				
+				button.click(function(){
+					var that=$(this);
+					$.ajax({
+						url:"${pageContext.request.contextPath}/rest/review/follow",
+						method:"post",
+						data :{
+							 passiveMemNo : $(this).data("rno")	
+						},
+						success :function(resp){
+							console.log(resp);
+							if(resp){
+								$(that).text("팔로잉");
+							}else{
+								$(that).text("팔로우");
+							}
+						}
+					});
+				});
+				memImg.addClass("origin");
+				
+				//사진이 있는지 없는지 확인
+			   if(value.attachNo > 0){
+				   	memImg.attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
+				}else{
+					memImg.attr("src","${pageContext.request.contextPath}/images/basic-profile.png");
+				} 
+				
+				$(".follow-ul").append(li);	
+			});
+		};
 	});
 </script>
 </body>
