@@ -143,7 +143,6 @@
         margin: 0;
         padding: 0;
         list-style: none;
-        width: 100%;
         border: none;
         font-size: 16px;
         position: absolute;
