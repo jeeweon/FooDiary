@@ -157,6 +157,9 @@
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 <script>
 
 //런치리스트 배열생성
@@ -386,7 +389,17 @@ function reset() {
 					var reviewCnt = $("<span>").text("리뷰 " + value.memReviewCnt);
 					reviewCnt.addClass("review-cnt");
 					
-					var writeTime = $("<span>").text(value.reviewWriteTime);
+					var today = moment().format('yyyy-MM-dd');
+					var origin = value.reviewWriteTime;
+					var reviewDate = moment(origin).format('yyyy-MM-dd');
+					
+					var writeTime;
+					if(reviewDate == today) {
+						writeTime = $("<span>").html(moment(origin).format('HH:mm'));
+					} else {
+						writeTime = $("<span>").html(moment(origin).format('yyyy-MM-DD'));
+					}
+					
 					writeTime.addClass("write-time");
 					
 					var nickLev = $("<div>").append(writerNick).append(writerLevel);

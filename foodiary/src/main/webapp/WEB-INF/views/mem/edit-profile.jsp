@@ -14,8 +14,8 @@
 	        <div class="profile-change">
 	            <div class="inner">
 	                <div class="profileH">
-	                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
 	                    <h1>프로필 수정</h1>
+	                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
 	                </div> <!--profileH-->
 	                <div class="profileT">
                     <fieldset>

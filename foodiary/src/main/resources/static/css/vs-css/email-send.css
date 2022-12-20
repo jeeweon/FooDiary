@@ -1,0 +1,162 @@
+   .success-message,
+   .fail-message,
+   .wait-message { 
+           display: none;
+        }
+   #success-message,
+   #fail-message { 
+           display: none;
+        }
+   .input.success ~ #success-message{
+   		display : block;
+   }
+   .input.fail ~ #fail-message{
+   		display : block;
+   }
+   
+      * {
+margin: 0;
+padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style: none;
+}
+
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper>div.inner {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+.PWfind2{
+    position: relative;
+}
+.PWlog{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.PWlog img{
+    width: 350px;
+    height: 200px;
+    margin-top: 30px;
+}
+/* .PWlog h2{
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+.PWlog h3{
+    font-size: 17px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+} */
+.PWT{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form p{
+	text-align: center;
+}
+.wait-message{
+	text-align: center;
+}
+.PWT input{
+    width: 450px;
+    height: 50px;
+    border-radius: 10px 10px;
+    border: 1px solid gray;
+    margin: 30px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+.PWT button{
+    width: 455px;
+    height: 50px;
+    margin: 30px;
+    align-items: center;
+    border-radius: 10px 10px;
+    background-color: #ffe9b1;
+    border: none;
+    color: #E27C5E;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1420px) {
+    .inner {
+        width: 100%; 
+        padding: 0 20px;
+        box-sizing: border-box;
+        }
+    }
+    @media screen and (max-width: 1240px) {
+        .wrapper > div.inner {
+            display: block;
+        }
+        .PWfind2{
+        width: 100%;
+        height: 105px;
+        margin-bottom: 15px;
+        }
+        .PWlog{
+            position: unset;
+            padding: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        .PWlog a{
+            margin-bottom: 0;
+        }
+        .PWT{
+            position: relative;
+            top: 100px;
+        }
+        .PWT p button{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .inner {
+            padding: 0 20px;
+        }
+        .PWlog img{
+            width: 250px;
+        }
+        .PWT p{
+            width: 100%;
+            font-size: 20px;
+        }
+        .PWT button{
+            width: 100%;
+        }
+    }
