@@ -61,17 +61,22 @@ li {
 }
 .profileH{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    
 }
 .profileH img{
-    width: 350px;
-    height: 200px;
-    margin-top: 30px;
+    width: 250px;
+    height: 150px;
+    margin-bottom: 50px;
 }
 .profileH h1{
+	position: relative;
+	left: 600px;
     font-size: 35px;
-    margin-bottom: 20px;
+    margin-top: 80px;
+    
 }
 .profileT{
     display: flex;
@@ -197,6 +202,11 @@ form #PT{
         width: 100%;
         height: 100%;
     }
+    h1{
+    	position: unset;
+    	padding-right: 1000px; 
+    	font-size: 10px;
+    }
     .profileH a{
         margin-bottom: 0;
     }
@@ -218,7 +228,7 @@ form #PT{
     .profileH img{
         width: 250px;
     }
-    .profileH h1{
+    .profileH h1{    	
         font-size: 30px;
     }
     .profileT input{

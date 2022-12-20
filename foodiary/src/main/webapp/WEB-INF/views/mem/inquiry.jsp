@@ -7,23 +7,35 @@
 	<title>문의하기</title>
 	
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/inquiry.css"> <!--css 불러오는 링크-->
 
-</style>
 </head>
 <body>
-	<div>
-		<h1>[문의하기]</h1>
-	</div>
+	<div class="wrapper">
+        <div class="inquiry">
+            <div class="inner">
+                <div class="inquiryH">
+                    <h1>[문의하기]</h1>
+                    <a href="/search/review"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                </div> <!--inauiryH-->
+                <div class="inquiryB">
+                    <fieldset>
+                        <legend>
+                            <form action="inquiry" method="post">
+								<div>
+									<textarea name="text" style="resize:none;" rows="30" cols="100"></textarea>
+								</div>
+								<div>
+									<button>등록</button>
+								</div>
+							</form>
+                        </legend>
+                    </fieldset>
+                </div>
+            </div> <!--inner-->          
+        </div> <!--inquiry-->
+    </div> <!--wrapper-->
 	
-	<form action="inquiry" method="post">
-		<div>
-			<textarea name="text" style="resize:none;" rows="30" cols="100"></textarea>
-		</div>
-		<div>
-			<button>등록</button>
-		</div>
-	</form>
 	
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
