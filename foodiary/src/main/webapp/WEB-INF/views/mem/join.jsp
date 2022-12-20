@@ -12,117 +12,74 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightpick@1.6.2/lightpick.min.js"></script>
+    
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/join.css"> <!--css 불러오는 링크-->
 
-<style>
-   .success-message,
-   .fail-message,
-   .NNNNN-message,
-   .NNNNY-message,
-   .wait-message { 
-           display: none;
-        }
-   .input.success ~ .success-message{
-   		display : block;
-   }	
-   .input.fail ~ .fail-message {
-            display: block;
-        }
-   #success-message,
-   #fail-message { 
-           display: none;
-        }
-   .input.success ~ #success-message{
-   		display : block;
-   }
-   .input.fail ~ #fail-message{
-   		display : block;
-   }
-   .input.NNNNY ~ .success-message{
-   		display : block;
-   }	   
-   .input.NNNNN ~ .NNNNN-message{
-   		display : block;
-   }
-   .input.NNNNN ~ .success-message{
-   		display : none;
-   }
-	           
-</style>
 </head>
 <body>
-	
-    
-
-	<div>
-		<h1>회원가입</h1>
-	</div>
-
-<form action="join" class="join-form" method="post" autocomplete="off">
-	<div>
-		<label>
-			이메일
-			<i class="fa-solid fa-asterisk"></i>
-		</label>
-		<input type="text" class="input" name="memEmail" placeholder="사용 가능한 이메일을 입력해주세요">
-        <div class="success-message">사용 가능한 이메일입니다. 인증번호를 전송해주세요.</div>
-        <div class="fail-message">올바르지 않은 이메일 형식입니다.</div>
-        <div class="NNNNN-message">이미 사용중인 이메일입니다.</div>
-		<div><button class="send-btn" type="button" disabled>인증번호 보내기</button></div>
-		<div class="wait-message">인증번호 전송중</div>
-	</div>
-	
-        <div class="email-check">
-	        <div id="success-message">인증번호가 확인되었습니다.</div>
-	     	<div id="fail-message">인증번호가 확인되지 않았습니다.</div>
-        </div>
-        <div class="email-check-btn"></div>
-
-	
-	<div>
-		<label>
-			비밀번호
-			<i class="fa-solid fa-asterisk"></i>
-		</label>
-		<input type="password" class="input" name="memPw" placeholder="비밀번호">
-        <div class="success-message">사용 가능한 비밀번호입니다.</div>
-        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
-	</div>
-	
-	<div>
-		<label>
-			비밀번호 확인
-			<i class="fa-solid fa-asterisk"></i>
-		</label>
-		<input type="password" class="input" id="pw-re" placeholder="비밀번호 확인">
-		<div class="success-message">비밀번호가 일치합니다.</div>
-        <div class="fail-message">비밀번호가 일치하지 않습니다.</div>		
-	</div>
-	
-	<div>
-		<label>
-			닉네임
-			<i class="fa-solid fa-asterisk"></i>
-		</label>
-		<input type="text" class="input" name="memNick" placeholder="닉네임" >
-		<div class="success-message">사용 가능한 닉네임입니다.</div>
-        <div class="fail-message">닉네임은 한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
-        <div class="NNNNN-message">이미 사용중인 닉네임입니다.</div>		
-	</div>
-	
-	<div>
-		<label>
-			생일
-			<i class="fa-solid fa-asterisk"></i>
-		</label>		
-		<input type="text" class="input single-date-picker" name="memBirth" id="memBirth" placeholder="생년월일">
-		<div class="birth">만 14세 이상만 가입이 가능하며 생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요.</div>
-        <div class="fail-message">생년월일을 선택해주세요.</div>
-	</div>
-	
-	<div>
-		<button type="submit" id="form-button">가입하기</button>
-	</div>		
-</form>
+ 	<div class="wrapper">
+        <div class="Mplus">            
+                <div class="Mhead">
+                    <a href="/search/review"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a> 
+                    <h1>회원가입</h1>
+                </div> <!-- Mhead -->              
+                <div class="Mbody">
+                <fieldset>
+					<legend>
+						<form action="join" class="join-form" method="post" autocomplete="off">
+						<div>
+                    	<div class="text-title">이메일 <i class="fa-solid fa-asterisk"></i></div>						
+						<input type="text" class="input" name="memEmail" placeholder="사용 가능한 이메일을 입력해주세요">
+				        <div class="success-message">사용 가능한 이메일입니다. 인증번호를 전송해주세요.</div>
+				        <div class="fail-message">올바르지 않은 이메일 형식입니다.</div>
+				        <div class="NNNNN-message">이미 사용중인 이메일입니다.</div>
+						<div><button class="send-btn" type="button" disabled>인증번호 보내기</button></div>
+						<div class="wait-message">인증번호 전송중</div>
+									
+				        <div class="email-check">
+					        <div id="success-message">인증번호가 확인되었습니다.</div>
+					     	<div id="fail-message">인증번호가 확인되지 않았습니다.</div>
+				        </div>
+				        <div class="email-check-btn"></div>
+						</div>
+						
+						<div>
+						<div class="text-title">비밀번호 <i class="fa-solid fa-asterisk"></i></div>						
+						<input type="password" class="input" name="memPw" placeholder="비밀번호">
+				        <div class="success-message">사용 가능한 비밀번호입니다.</div>
+				        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
+						</div>
+					
+						<div>
+						<div class="text-title">비밀번호 확인 <i class="fa-solid fa-asterisk"></i></div>						
+						<input type="password" class="input" id="pw-re" placeholder="비밀번호 확인">
+						<div class="success-message">비밀번호가 일치합니다.</div>
+				        <div class="fail-message">비밀번호가 일치하지 않습니다.</div>		
+						</div>
+					
+						<div>
+						<div class="text-title">닉네임 <i class="fa-solid fa-asterisk"></i></div>						
+						<input type="text" class="input" name="memNick" placeholder="닉네임" >
+						<div class="success-message">사용 가능한 닉네임입니다.</div>
+				        <div class="fail-message">닉네임은 한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
+				        <div class="NNNNN-message">이미 사용중인 닉네임입니다.</div>		
+						</div>
+						
+						<div>
+						<div class="text-title">생일 <i class="fa-solid fa-asterisk"></i></div>		
+						<input type="text" class="input single-date-picker" name="memBirth" id="memBirth" placeholder="생년월일">
+						<div class="birth">만 14세 이상만 가입이 가능하며 생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요.</div>
+				        <div class="fail-message">생년월일을 선택해주세요.</div>
+						</div>
+					
+						<div><button type="submit" id="form-button">가입하기</button></div>						                                     
+                    	</form>
+					</legend>
+				</fieldset>	
+                </div> <!-- Mbody -->            
+        </div> <!-- Mplus -->
+    </div> <!-- wrapper -->
+     
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
@@ -251,6 +208,7 @@ $(function(){
 			//이메일 전송 시 인증번호 창 생김
 			var div = $("<div>");
 			var div2= $("<div>");
+			var div3= $("<div>");
 			var span= $("<span>");
 			var input = $("<input>").addClass("serial input").attr("placeholder","인증번호");
 			var successMessage = $("#success-message");
@@ -261,7 +219,8 @@ $(function(){
 			$(".email-check").html(div);	
 			div.append(input);
 			$(".email-check-btn").html(div2);
-			div2.append(button).append(span);
+			div2.append(button);
+			div3.append(span);
 			span.text("인증번호 유효시간 : 05:00").addClass("timer");
 			
 			//인증번호 5분 타이머

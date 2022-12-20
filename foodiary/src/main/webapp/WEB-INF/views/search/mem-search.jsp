@@ -5,166 +5,11 @@
 
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/mem-search.css"> <!--css 불러오는 링크--> 
 <style>
-.container {
-	width: 600px;
-	margin: 0 auto;
-}
-
-.search-form {
-   	margin: 0;
-}
-    
-.search-view{
-    width: 400px; 
-    margin: 0 auto;
-    margin-top: 30px;
-}
-
-.search-bar { 
-    position: relative;
-    width: 100%;
-    height: 40px;
-    display: inline-block;
-    border: 1px solid gray;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.search-input {
-    padding: 0.5em;
-    padding-right: 30px;
-    width: 100%;
-    height: inherit;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-    box-sizing: border-box;
-}
-
-.search-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 30px;
-    height: inherit;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.title-div {
-	margin-top: 30px;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.title-area {
-	color: #E27C5E;
-}
-
-.title2 {
-	color: #18253D;
-}
-
-.title {
-	display: block;
-	margin-top: 30px;
-	color: #18253D;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-.subtitle {
-	display: block;
-	margin-top: 5px;
-	color: #707070;
-	font-size: 14px;
-}
-
-.mem-list {
-	width: 600px;
-	margin-top: 40px;
-	margin-bottom: 60px;
-}
-
-.no-mem {
-	margin-top: 100px;
-	text-align: center;
-	color: gray;
-}
-
-.list-item {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.mem-info {
-	display: flex;
-	flex-direction: row;
-    align-items: center;
-    margin: 10px 0;
-    cursor: pointer;
-}
-
-.info-text {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-    align-items: flex-start;
-    margin-left: 10px;
-}
-
-.mem-avatar {
-	width: 50px;
-	height: 50px;
-	border-radius : 50%;
-  	border:1px black solid transparent;
-}
-
-.mem-nick {
-	font-weight: bold;
-}
-
-.review-cnt {
-	font-size: 14px;
-	color: #707070;
-	margin-top: 3px;
-}
-
-.mem-follow-ic {
-	color: #E27C5E;
-	cursor: pointer;
-}
-
-.fa-user-minus {
-	color: #AAAAAA;
-}
-
-.mem-me { /* 맛쟁이 top5에 내가 있으면 클릭 x(팔로우 불가) */
-	padding: 5px 10px;
-	border: 2px solid #E27C5E;
-	border-radius: 20px;
-	font-weight: bold;
-	color: #E27C5E;
-}
-
-
-.level-img {
-	width:24px;
-	margin:0;
-	margin-left: 5px;
-}
- 	
-.nick-lev {
-	display: flex;
-	align-items:center;
-}
+.receipt{
+ 		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
+ 	}
 </style>
 </head>
 <body>
@@ -179,21 +24,200 @@
 	</c:otherwise>
 </c:choose>
 
-<div class="container">
-	<form class="search-form">
-        <div class="search-bar">
-            <input type="text" name="keyword" class="search-input" placeholder="닉네임 검색" autocomplete="off">
-            <button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
-        </div>  
-    </form>
+<div class="wrapper">
+   <div class="inner">
+       <header class="header">
+           <div class="header1">
+               <h1><a href="/home" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+              <div class="sidemenu">
+              <ul id="sideP">
+                  <li>
+                  	<c:choose>
+					<c:when test="${empty profile}">
+						<img id="img1" src="${pageContext.request.contextPath}/images/basic-profile.png">
+					</c:when>
+					<c:otherwise>
+					<c:forEach var="profile" items="${profile}">
+							<img id="img1" src="${pageContext.request.contextPath}/attach/download/${profile.attachNo}">
+					</c:forEach>
+					</c:otherwise>		
+				</c:choose>
+                      ${loginNick}
+                      <c:choose>
+                      	<c:when test="${level.memLevel == '6  '}">
+                      		<img class="level-img" src="${pageContext.request.contextPath}/images/6.피잣집.png">
+					</c:when>
+                      	<c:when test="${level.memLevel == '5  '}">
+                      		<img class="level-img" src="${pageContext.request.contextPath}/images/5.피자콜라.png">
+					</c:when>
+                      	<c:when test="${level.memLevel == '4  '}">
+                      		<img class="level-img" src="${pageContext.request.contextPath}/images/4.조각피자.png">
+					</c:when>
+                      	<c:when test="${level.memLevel == '3  '}">
+                      		<img class="level-img" src="${pageContext.request.contextPath}/images/3.반죽.png">
+					</c:when>
+                      	<c:when test="${level.memLevel == '2  '}">
+                      		<img class="level-img" src="${pageContext.request.contextPath}/images/2.밀가루.png">
+					</c:when>
+                      	<c:otherwise>
+                      		<img class="level-img" src="${pageContext.request.contextPath}/images/1.밀.png">
+                      	</c:otherwise>
+                      </c:choose>
+                  </li>
+              </ul>
+              <ul id="mainicon">
+                  <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="/home">홈</a></li>
+                  <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="/search/review">맛집 탐색</a></li>
+                  <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="/search/mem">맛쟁이 탐색</a></li>
+                  <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="#">알림</a></li>
+                  <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="#">북마크</a></li>
+              </ul>
+              </div> <!--sidemenu-->
+              <a href="#" class="review">리뷰하기</a>
+              <div class="btnW">
+                  <a href="mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
+                  <span><a href="#" class="morebtn">더보기버튼</a></span>
+              </div>
+       		</div> <!--header1-->              
+            <div class="header4">
+               	<div class="formdiv">	               
+					<form class="search-form">
+						<fieldset>
+							<legend class="class="search-bar"">							
+			            		<input type="text" name="keyword" class="search-input" placeholder="닉네임 검색" autocomplete="off">
+			            		<button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 				        		  
+							</legend>
+						</fieldset>					        
+				    </form>	
+			    </div>								   				    					
+               </div> <!-- header4 -->
+            </header> <!--header-->
+            <div class="sideW">
+             <div class="mem-list"></div>	
+                <div class="feed">
+                    <!-- 리뷰 목록 -->
+    				<div class="review-list"></div>
+                </div> <!--feed-->
+                </div> <!--sideW-->
+                <div class="sidebar">
+                    <div class="random">
+                    <div class="container">
+                        <div class="receipt">
+                          <div class="title_text">
+                            <h1>Today~</h1>
+                            <h3>뭐 먹지?</h3>
+                          </div> <!--title_text-->
+                          <div class="menu_print">
+                            <h2></h2>
+                          </div> <!--menu_print-->
+                          <div class="menu_slot">
+                            <div class="slot_container">
+                              <ul class="slide_box">
+                                <li>카레</li>
+                                <li>우동</li>
+                                <li>햄버거</li>
+                                <li>냉면</li>
+                                <li>삼겹살</li>
+                                <li>쌈밥</li>
+                                <li>감자탕</li>
+                                <li>칼국수</li>
+                                <li>짜장면</li>
+                                <li>국밥</li>
+                              </ul> <!--slide_box-->
+                            </div> <!--slot_container-->
+                          </div> <!--menu_slot-->
+                          <div class="btn_area">
+                            <button onclick="lunchIs()">멈 춰 !</button>
+                            <button onclick="reset()">한번 더</button>
+                          </div> <!--btn_area-->
+                        </div> <!--receipt-->          
+                    </div> <!--container-->
+                         <div class="follow">
+                             <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p>
+                         </div> <!--follow-->
+                     </div> <!--random-->
+                 </div> <!--sidebar-->
 
-    <div class="mem-list"></div>
-    
-</div>
+
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
 <script>
+
+//런치리스트 배열생성
+let lunchList = ["카레", "우동", "햄버거", "냉면", "삼겹살","쌈밥","감자탕","칼국수","짜장면","국밥"]
+
+//배열복사
+let firstLunchList = [];
+
+lunchList.forEach(function(item) {
+  firstLunchList.push(item);
+});
+
+
+//제어할 요소선택 후 변수에 담기
+let displaySlot = document.querySelector(".menu_slot"); //menu slot
+let elem = document.querySelector(".menu_print > h2"); //menu print
+let costTxt = document.querySelector("em"); //cost
+
+displaySlot.style.display = "none";
+let lunckPick = shuffle(lunchList)[0];        
+elem.innerHTML = lunckPick;
+elem.style.display = "block";
+
+
+
+//reset check
+let resetNum = 1;
+
+//shuffle 메소드 선언
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+//LunchIs 함수선언
+function lunchIs() {
+  //setTimeout 선언
+  setTimeout(timeFunc, 900);
+
+  function timeFunc() {
+  
+
+    //슬롯애니메이션 감추기
+    displaySlot.style.display = "none";
+
+    //shuffle 메소드를 사용하여 석은 배열에서 index[0]을 가져오기
+    console.log(shuffle(lunchList));
+    let lunckPick = shuffle(lunchList)[0];
+
+    //메뉴 노출
+    console.log(lunckPick);
+    elem.innerHTML = lunckPick;
+
+
+    //reset 되었을 경우에 숨겨진 메뉴를 다시 노출시킴
+    if (resetNum == 0) {
+      elem.style.display = "block";
+    }
+  }
+}
+
+//reset 함수선언
+function reset() {
+  //메뉴 숨기기
+  elem.style.display = "none";
+
+  //슬롯애니메이션 노출
+  displaySlot.style.display = "block";
+
+  //resetNum으로 reset여부를 구분하기 위해 0 할당
+  resetNum = 0;
+}
+
 	$(function() {
 		//세션에서 회원 번호 가져오기 
 		var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";

@@ -27,7 +27,7 @@
           margin:100px auto;
           padding:20px 10px;
           background:#fff;
-          border:2px solid #666;
+          border:10px solid #666;
         }
         
         #modal .modal_layer {
@@ -62,7 +62,7 @@
           margin:100px auto;
           padding:20px 10px;
           background:#fff;
-          border:2px solid #666;
+          border:10px solid #666;
         }
         
         #modal2 .modal_layer {
@@ -78,6 +78,14 @@
         	width:50px;
         	height:50px;
         }
+          .level-img {
+ 		width:10px;
+ 		height:50px;
+ 		}
+ 		.level-img2 {
+ 		width:30px;
+ 		height:30px;
+ 		}
  </style>
 <script>
  	$(function(){
@@ -96,12 +104,39 @@
 				success : function(resp) {
 					profileList = resp;
 					console.log(profileList);
-					$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
+					console.log("회원 레벨"+profileList.memLevel);
+					//$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
 					$(".follower-cnt").text("팔로우 : "+profileList.followerCnt);
 					$(".mem-no").text(profileList.memNo);
 					$(".mem-info").text(profileList.memIntro);
+					
+					
+					
+					//회원레벨 이미지
+					var writerLevel;
+					if( profileList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (profileList.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (profileList.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (profileList.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (profileList.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img");
+					
+					
+					
+					var span=$("<span>").text("유저 닉네임 : "+profileList.memNick);
+					
+					$(".mem-name").append(span).append(writerLevel);
+					
 					var imgClass=$("[name=orgin]");
 					//사진이 있는지 없는지 확인
 					if(profileList.attachNo != 0){
@@ -182,11 +217,29 @@
 				$.each(followMemList, function(index, value) {
 					
 					
+					//팔로우 레벨 이미지
+					var writerLevel;
+					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (followerMemList.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (followerMemList.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (followerMemList.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (followerMemList.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img2");
+					
+					
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span).append(b);
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
 					
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
@@ -225,13 +278,28 @@
 			console.log("팔로우 목록 출력");
 			 if(followerMemList.length != 0) {
 				$.each(followerMemList, function(index, value) {
-					console.log("팔로워 "+value.memNo);
+					//팔로워 레벨 이미지
+					var writerLevel;
+					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+					} else if (followerMemList.memLevel == "5  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+					} else if (followerMemList.memLevel == "4  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+					} else if (followerMemList.memLevel == "3  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+					} else if (followerMemList.memLevel == "2  ") {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+					} else {
+						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+					}
+					writerLevel.addClass("level-img2");
 					
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourprofile?memNo="+value.memNo).append(img).append(span).append(b);
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
 					
 					img.addClass("follow-img");
 					//사진 번호가 있는지 없는지. 
@@ -264,10 +332,10 @@
                 </div><!--boardM-->
                 <div class="boardT">
                     <ul class="boardT1">
-                        <li class="mem-name"> </li>
+                        <li class="mem-name">
+                        
+                         </li>
                         <button class="follow-cert"></button>
-                        <button><a href="">프로필 편집</a></button>
-                        <a href="" id="Ta1"><img src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정"></a>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">

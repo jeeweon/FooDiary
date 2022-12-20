@@ -93,6 +93,23 @@ li {
 	width :350px;
 	height :350px;
 }
+.relative { 
+ 	width: 350px;
+ 	height: 350px;
+ 	position: relative;
+ 	background-color: yellow;
+ 	}
+.absolute {
+	width: 50px; 
+ 	height: 50px;
+ 	position: absolute;
+ 	left: 300px;
+ 	top: 300px;
+ 	background-color:gray;
+ 	opacity: 0.5;
+ 	text-align: center;
+ 	font-size:35px;
+	 	}
 </style> 
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
@@ -121,13 +138,23 @@ li {
 			if(reviewList1.length != 0){
 			$.each(reviewList1, function(index, value) {
 				
+				if(value.imgCnt>1){
+				 var imgP=$("<p>").text("+"+(value.imgCnt-1));
+				imgP.addClass("absolute"); 
 				
 				var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+				reviewImg.addClass("relactive");
 				$(reviewImg).hover(function(){
 					$(this).addClass("feedimg");
 					console.log("호버 완료");
-				})
-				var figure=$("<figure>").html(reviewImg);
+				});
+				
+				var imgDiv=$("<div>").append(reviewImg).append(imgP);
+				imgDiv.addClass("relative");
+				
+				
+				
+				var figure=$("<figure>").html(imgDiv);
 				//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
 				var span2=$("<span>").text("   "+value.likeCnt+" ");
 				var iheart=$("<i>").append(span2);
@@ -151,6 +178,41 @@ li {
 				var feedimg=$("<div>").html(feedli);
 				feedimg.addClass("feedimg");
 				var feedul=$("<ui>").html(feedimg);
+				}else{
+					var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+					$(reviewImg).hover(function(){
+						$(this).addClass("feedimg");
+						console.log("호버 완료");
+					});
+					
+					var span2=$("<span>").text("   "+value.likeCnt+" ");
+					var iheart=$("<i>").append(span2);
+					iheart.addClass("fa-solid fa-heart");
+					
+					var span3=$("<span>").text("   "+value.replyCnt+" ");
+					var imessage=$("<i>").append(span3);
+					imessage.addClass("fa-solid fa-message");
+					
+					var span4=$("<span>").text(" ");
+					
+					var figure=$("<figure>").html(reviewImg);
+					figure.addClass("relative");
+					//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+					var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
+					
+					var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
+					feeda.addClass("review-main");
+					reviewImg.addClass("img-size");
+					
+					
+					//var feedli=$("<li>").html(figure).append(figcaption);
+					
+					var feedli=$("<li>").append(feeda);
+					var feedimg=$("<div>").html(feedli);
+					feedimg.addClass("feedimg");
+					var feedul=$("<ui>").html(feedimg);
+				};
+				
 				
 				//좋아요 사진갯수 댓글갯수
 				

@@ -1,0 +1,195 @@
+.success-message,
+   .fail-message,
+   .NNNNN-message,
+   .NNNNY-message,
+   .wait-message { 
+           display: none;
+           position: relative;
+           left: 25px;
+        }
+   .input.success ~ .success-message{
+   		display : block;
+   }	
+   .input.fail ~ .fail-message {
+            display: block;
+        }
+   #success-message,
+   #fail-message { 
+           display: none;
+        }
+   .input.success ~ #success-message{
+   		display : block;
+   }
+   .input.fail ~ #fail-message{
+   		display : block;
+   }
+   .input.NNNNY ~ .success-message{
+   		display : block;
+   }	   
+   .input.NNNNN ~ .NNNNN-message{
+   		display : block;
+   }
+   .input.NNNNN ~ .success-message{
+   		display : none;
+   }
+   
+
+   .text-title{
+   	position: relative;
+   	top: 20px;
+   	left: 40px;   	
+   }
+   .text-title i{
+   	color: red;
+   }
+   .birth{
+   	color: red;
+   }
+   .timer{
+   	display: flex;
+   	width: 500px;
+   	justify-content:center;
+   	align-items: center;
+   	font-weight: bold;
+   	color: red;
+   }
+   
+   * {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.morebtn {
+    display: none;
+}
+
+li {
+    list-style: none;
+}
+
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper>div.inner {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+
+.Mplus{
+    position: relative;
+}
+.Mhead{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.Mhead img{
+    width: 400px;
+    height: 250px;
+    margin: 30px;
+    margin-right: 200px;
+}
+.Mhead h1{
+    font-size: 35px;
+    margin: 30px;
+    margin-right: 200px;
+}
+.Mbody-container{
+	width: 1600px;
+}
+.Mbody{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.Mbody input{
+    width: 450px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 10px 10px;
+    margin: 30px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+.Mbody button{
+    width: 455px;
+    height: 50px;
+    margin: 30px;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px 10px;
+    background-color: #ffe9b1;
+    font-size: 17px;
+    font-weight: bold;
+}
+@media screen and (max-width: 1420px) {
+.inner {
+    width: 100%; 
+    padding: 0 20px;
+    box-sizing: border-box;
+    }
+}
+@media screen and (max-width: 1240px) {
+    .wrapper > div.inner {
+        display: block;
+    }
+    .Mplus{
+    width: 100%;
+    height: 105px;
+    margin-bottom: 15px;
+    }
+    .Mhead{
+        position: unset;
+        padding: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    .Mhead a{
+        margin-bottom: 0;
+    }
+    .Mbody{
+        position: relative;
+    }
+    .Mbody input button{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 768px) {
+    .inner {
+        padding: 0 20px;
+    }
+    .Mhead img{
+        width: 250px;
+    }
+    .Mhead h1{
+        font-size: 30px;
+    }
+    .Mbody input{
+        width: 100%;
+    }
+    .Mbody button{
+        width: 105%;
+    }
+}
+	           

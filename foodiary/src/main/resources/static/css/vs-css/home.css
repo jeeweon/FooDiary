@@ -61,8 +61,8 @@ li {
     z-index: 999;
     top: -10px;
     padding-top: 60px;
-    right: 37%;
-    width: 600px;
+    right: 33%;
+    width: 700px;
     height: 200px;
     box-sizing: border-box;   
     background-color: #ffffff;
@@ -334,14 +334,19 @@ li {
     position: relative;
     bottom: 40px;
 }
-#sideP img{
+#sideP #img1{
     position: relative;
     top: 15px;
     width: 50px;
     height: 50px;
-    border: 1px solid black;
     border-radius: 50%;
 }
+#sideP .level-img{
+	position: relative;
+	width: 30px;
+	top: 7px;
+}
+
 #mainicon img{
             position: relative;
             top: 15px;
@@ -447,7 +452,7 @@ li {
   .slide_box {
     width: 100px;
     height: 50px * 5;
-    animation: slide 1.5s infinite;
+    animation: slide 2.0s infinite;
     color: black;
   }
   
@@ -474,6 +479,7 @@ li {
     width: 100%;
     height: 80%;
     display: flex;
+    border-radius: 10%;   
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -549,7 +555,6 @@ li {
     right: 0;
     height: 2px;
     width: 0;
-    background: black;
     transition: 400ms ease all;
   }
   .btn_area button:after {
@@ -613,6 +618,36 @@ li {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+.level-img {
+ 		width:24px;
+ 		margin:0;
+ 		margin-left: 5px;
+ 	}
+ 	
+ 	.nick-lev {
+ 		display: flex;
+ 		align-items:center;
+ 	}
+ 	
+ 	.thumbnail {
+ 		object-fit:cover;
+ 	}
+ 	.writer-avatar{
+ 		border-radius: 50%;
+ 	}
+ 		#sideP {
+ 		cursor: pointer;
+ 	}
+
+ 	.origin{
+		width:50px;
+		hight:50px;
+	}
+
+	.follow-ul img{
+		border-radius: 50%;
+	}
+ 
 
 @media screen and (max-width: 1420px) {
     .inner {
