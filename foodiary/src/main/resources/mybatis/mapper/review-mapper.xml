@@ -267,4 +267,17 @@
 		and review_no = #{reviewNo}
 	</update>
 	
+	
+	<!-- 특정 회원의 레벨,닉네임,레벨, 프로필번호 -->
+	<select id="mem-frofile" parameterType="int" resultType="ReviewWriterVO">
+		select
+		    M.mem_no, M.mem_nick, M.mem_level, 
+		    P.attach_no
+		from
+		    mem M 
+		left outer join profile_attach P
+		     on M.mem_no = P.mem_no
+		where M.mem_no = #{memNo}
+	</select>
+	
 </mapper>

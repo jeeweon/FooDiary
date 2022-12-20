@@ -27,6 +27,7 @@ import com.appfoodiary.foodiary.repository.LikeDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.service.AttachmentService;
 import com.appfoodiary.foodiary.service.LevelPointService;
+import com.appfoodiary.foodiary.vo.ReviewWriterVO;
 
 //@CrossOrigin(origins = "http://127.0.0.1:5500/")
 @Controller
@@ -105,6 +106,11 @@ public class ReviewController {
 		//리뷰정보
 		ReviewDto dto = reviewDao.find(reviewNo);
 		model.addAttribute("reviewDto", dto);
+		
+		//회원정보(+프로필)
+		int memNo = dto.getMemNo();
+		ReviewWriterVO reviewWriterVO =  reviewDao.selectReviewWriter(memNo);
+		model.addAttribute("reviewWriter", reviewWriterVO);
 		
 		//첨부파일 조회, 첨부
 		model.addAttribute("attachments", reviewDao.findReviewAttachViewList(reviewNo));

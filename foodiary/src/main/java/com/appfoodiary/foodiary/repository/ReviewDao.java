@@ -6,7 +6,9 @@ import java.util.Map;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
+import com.appfoodiary.foodiary.vo.MemRekVO;
 import com.appfoodiary.foodiary.vo.ReviewSearchVO;
+import com.appfoodiary.foodiary.vo.ReviewWriterVO;
 
 public interface ReviewDao {
 	//리뷰
@@ -44,4 +46,7 @@ public interface ReviewDao {
 	//리뷰블라인드 테이블 : 신고수+1 (update)
 	boolean plusReviewBlind(Map<String, Object> blind);
 	
+	//리뷰 상세
+	//작성자 회원정보(+프로필)
+	ReviewWriterVO selectReviewWriter(int memNo);
 }

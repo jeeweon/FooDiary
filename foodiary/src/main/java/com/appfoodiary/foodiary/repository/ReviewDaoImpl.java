@@ -11,6 +11,7 @@ import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.ReviewAttachDto;
 import com.appfoodiary.foodiary.entity.ReviewDto;
 import com.appfoodiary.foodiary.vo.ReviewSearchVO;
+import com.appfoodiary.foodiary.vo.ReviewWriterVO;
 
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
@@ -118,6 +119,14 @@ public class ReviewDaoImpl implements ReviewDao {
 	public boolean plusReviewBlind(Map<String, Object> blind) {
 		int count = sqlSession.update("review.plusReviewBlind", blind);
 		return count >0;
+	}
+
+	
+	//리뷰 상세
+	//작성자 회원정보(+프로필)
+	@Override
+	public ReviewWriterVO selectReviewWriter(int memNo) {
+		return sqlSession.selectOne("review.mem-frofile", memNo);
 	}
 
 }

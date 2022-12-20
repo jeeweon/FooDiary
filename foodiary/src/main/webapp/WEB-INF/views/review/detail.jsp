@@ -14,6 +14,13 @@
 </c:set>
 
 <style>
+/* 리뷰 관련 style */
+	.level-img {
+ 		width:24px;
+ 		margin:0;
+ 		margin-left: 5px;
+ 	}
+ 	
 /* summernote(좌측), 리뷰장소(우측) 구분용 style */
 	.float-container {
 		width: 850px;
@@ -66,49 +73,55 @@
 
 
 
-<div>
-	<h1>리뷰 상세</h1>
-</div>
-
 <!-- 글번호 -->
 <input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
 
 <div>
 
-작성자 회원번호 : ${reviewDto.memNo} <br>
-<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
-				- (사진,닉네임)클릭시 프로필로 이동 
--->
-
-<!-- 작성일 -->
-<c:choose>
-	<c:when test="${today == current}">
-		작성일 : 
-		<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
-	</c:when>
-	<c:otherwise>
-		작성일 : 
-		<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
-	</c:otherwise>
-</c:choose>	
-
-<!-- 회원 기능 
-	1. 작성자 본인이 아닐 때 : 신고버튼
-		- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
-	2. 작성자 본인일 때 : 수정/삭제
--->	
-	<!-- 신고 -->
-	<c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
-	<c:if test="${member}">
-		<input class="btn-report" type="button" value="신고">
-	</c:if>
-
-	<!-- 수정, 삭제 -->
-	<c:set var="owner" value="${loginNo == reviewDto.memNo}"></c:set>		
-	<c:if test="${owner}">
-		<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
-		<a href="delete?reviewNo=${reviewDto.reviewNo}">삭제</a>
-	</c:if>
+	<%-- 작성자 회원번호 : ${reviewDto.memNo} <br> --%>
+	<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
+					- (사진,닉네임)클릭시 프로필로 이동 
+	-->
+	<div class="reviewWriter">
+		<c:choose>
+			<c:when test="${reviewWriter.attachNo == 0}">
+				<img class="profile" src="${pageContext.request.contextPath}/images/basic-profile.png">
+			</c:when>
+			<c:otherwise>
+				<img class="profile" src="${pageContext.request.contextPath}/attach/download/${reviewWriter.attachNo}">
+			</c:otherwise>
+		</c:choose>
+		<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
+	</div>
+	
+	
+	<!-- 작성일 -->
+	<c:choose>
+		<c:when test="${today == current}">
+			<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
+		</c:when>
+		<c:otherwise>
+			<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
+		</c:otherwise>
+	</c:choose>	
+	
+	<!-- 회원 기능 
+		1. 작성자 본인이 아닐 때 : 신고버튼
+			- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
+		2. 작성자 본인일 때 : 수정/삭제
+	-->	
+		<!-- 신고 -->
+		<c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
+		<c:if test="${member}">
+			<input class="btn-report" type="button" value="신고">
+		</c:if>
+	
+		<!-- 수정, 삭제 -->
+		<c:set var="owner" value="${loginNo == reviewDto.memNo}"></c:set>		
+		<c:if test="${owner}">
+			<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
+			<a href="delete?reviewNo=${reviewDto.reviewNo}">삭제</a>
+		</c:if>
 </div>
 	
 <div class="float-container"> <!-- 사진(좌측)/본문(우측) 배치 -->
@@ -237,7 +250,32 @@
 		//변수 저장
 		//reviewNo = $("input[name=reviewNo]").val()
 		let reviewNo = ${reviewDto.reviewNo}	//리뷰 글번호
+		let reviewWriterNo = ${reviewWriter.memNo}	//리뷰작성자 번호
+		let reviewWriterLevel = ${reviewWriter.memLevel} //리뷰작성자 레벨
 		let loginNo = ${loginNo}	//로그인한 회원번호
+		
+		reviewWriter();
+		
+		//리뷰상단 : 작성자 정보
+		function reviewWriter(){
+			var memLevel;
+			if(reviewWriterLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+			} else if (reviewWriterLevel == "5  ") {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+			} else if (reviewWriterLevel == "4  ") {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+			} else if (reviewWriterLevel == "3  ") {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+			} else if (reviewWriterLevel == "2  ") {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+			} else {
+				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+			}
+			memLevel.addClass("level-img");
+			
+			$(".reviewWriter-memNick").append(memLevel);
+		}
 		
 		//별점 옵션 수정
 		$(".star-score").score({
@@ -321,8 +359,22 @@
 	        		
 	        		var memNick = $("<span>").text(value.memNick);
 	        		
-	        		var memLevel = $("<span>").text(" Lv."+value.memLevel);
-	        		
+	        		var memLevel;
+	    			if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
+	    			} else if (value.memLevel == "5  ") {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
+	    			} else if (value.memLevel == "4  ") {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
+	    			} else if (value.memLevel == "3  ") {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
+	    			} else if (value.memLevel == "2  ") {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
+	    			} else {
+	    				memLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
+	    			}
+	    			memLevel.addClass("level-img");
+	    			
         			var replyReport = $("<input>").val("신고");
         			replyReport.attr("type", "button").addClass("btn-reply-report");
 
@@ -340,7 +392,7 @@
 	        		if(loginNo==replyMemNo) {
 	        			replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime)
 													.append(" ").append(replyDelete);
-	        		}else if(!loginNo.empty){
+	        		}else if(loginNo!=replyMemNo){
 		        		replyListHead = $("<div>").append(replyNoInput).append(profile).append(memNick).append(memLevel).append(replyWriteTime)
 		        									.append(" ").append(replyReport);
 	        		}
