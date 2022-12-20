@@ -38,7 +38,7 @@ li {
     width: 350px;
     height: 350px;
     left: 100px;
-    border: 1px solid black;
+    
     border-radius: 50%;
 }
 
@@ -82,6 +82,11 @@ li {
 }
 .boardT img{
     width: 100px;  
+}
+.boardT .level-img{
+	position: relative;
+	top: 10px;
+	width: 40px;
 }
 
 .boardT .boardT2 {
