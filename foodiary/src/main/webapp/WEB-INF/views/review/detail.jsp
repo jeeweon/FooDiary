@@ -382,6 +382,7 @@
     		var replyContent = $(".input-reply").val();
     		if(memNo==null) {
     			alert("로그인하셔야 댓글을 등록 할 수 있습니다!");
+    			$(".input-reply").val("");
     		}
     		else if(replyContent=="") {
     			alert("내용을 입력해주세요!");
