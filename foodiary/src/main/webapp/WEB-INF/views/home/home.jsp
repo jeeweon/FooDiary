@@ -231,6 +231,9 @@ function reset() {
 
 
 	$(function() {
+		//세션에서 회원 번호 가져오기 
+		var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
+		
 		loadInterestArea();
 		loadReviewAll();
 		
@@ -570,7 +573,12 @@ function reset() {
 		
 		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
 		$(document).on("click", ".review-write-info", function(){
-			window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
+			var clickMemNo = $(this).data("mno");
+			if(clickMemNo == memNo) {
+				window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+			} else {
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");				
+			}
 		});
 		
 		//사이드바 프로필 영역 클릭 시, 마이 프로필로 이동

@@ -544,12 +544,17 @@ resetNum = 0;
 		
 		//프로필 영역 클릭 시, 해당 유저 프로필로 이동
 		$(document).on("click", ".review-write-info", function(){
-			window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
+			var clickMemNo = $(this).data("mno");
+			if(clickMemNo == memNo) {
+				window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+			} else {
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");				
+			}
 		});
 		
 		//사이드바 프로필 영역 클릭 시, 마이 프로필로 이동
 		$(document).on("click", "#sideP", function(){
-			window.location = "${pageContext.request.contextPath}/profilepage/board";
+			window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
 		});
 		
 		//맛쟁이 리스트 추천 
