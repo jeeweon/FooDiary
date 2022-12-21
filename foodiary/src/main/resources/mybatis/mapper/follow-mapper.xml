@@ -80,7 +80,7 @@
 	    select
     mem_no,
     mem_nick,
-    attach_no
+    attach_no,
     mem_level,
     decode(follow_no,null,'false','true') follow_check
     from 

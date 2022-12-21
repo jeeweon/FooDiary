@@ -115,6 +115,7 @@ CREATE TABLE likes ( --like가 예약어라 likes로 대체
 );
 
 CREATE TABLE bookmark (
+
         bookmark_no number primary key,
         mem_no references mem(mem_no) on delete cascade,
         review_no references review(review_no) on delete cascade,
