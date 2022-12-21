@@ -46,7 +46,7 @@
 	<div class="float-container">
 		<!-- summernote -->
 		<div class="float-left">
-			<textarea name="reviewContent"></textarea>
+			<textarea name="reviewContent" class="reviewContent"></textarea>
 		</div>
 		
 		<!-- 리뷰장소 -->
@@ -121,7 +121,44 @@
 				["insert",["link"]],
 				//["view",["fullscreen","codeview","help"]]]	//전체모드, code모드 삭제
 				["view",["help"]]],
+			callbacks: {
+				onChange:function(contents){ //텍스트 글자수
+	                setContentsLength(contents, 0);
+	            }
+			}
 		});
+		//글자수 체크
+		var changeText = $('.reviewContent').summernote('code'); //글자수 초과직전의 내용 미리저장
+		function setContentsLength(str, index) { //글자수 체크
+		    var textCnt = 0; //총 글자수
+		    var maxCnt = 1000; //최대 글자수
+		    var editorText = f_SkipTags_html(str); //에디터에서 태그를 삭제하고 내용만 가져오기
+		    editorText = editorText.replace(/\s/gi,""); //줄바꿈 제거
+		    editorText = editorText.replace(/&nbsp;/gi, ""); //공백제거
+
+	        textCnt = editorText.length;
+	        //console.log(textCnt+" / "+maxCnt);
+	        
+		    if(textCnt == maxCnt) {
+		    	changeText = $('.reviewContent').summernote('code');
+		    	//console.log("저장중"+changeText);
+		    } 
+		    if(textCnt > maxCnt) {
+        		alert("등록오류 : 글자수는 최대 "+maxCnt+"까지 등록이 가능합니다.");
+		    	//console.log("돌아가"+changeText);
+                $('.reviewContent').summernote('code', changeText);
+		    }
+		}
+		//summernote 내용 태그 제거
+		function f_SkipTags_html(input, allowed) {
+			// 허용할 태그는 다음과 같이 소문자로 넘겨받음 (<a><b><c>)
+		    allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
+		    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+		    commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+		    return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+		        return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+		    });
+		}
 		
 		//별점 옵션 수정
 		$(".star-score-edit").score({
