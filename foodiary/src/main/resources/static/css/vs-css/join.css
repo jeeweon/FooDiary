@@ -5,52 +5,98 @@
    .wait-message { 
            display: none;
            position: relative;
-           left: 25px;
+           left: 30px;
         }
    .input.success ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }	
    .input.fail ~ .fail-message {
             display: block;
+            color : red;
+            font-size: 12px;
+        	margin-top: -20px  
+            
         }
    #success-message,
    #fail-message { 
-           display: none;
+           display: none;      
         }
    .input.success ~ #success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px;
+		position: relative;
+        left: 30px;    
    }
    .input.fail ~ #fail-message{
    		display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px;
+		position: relative;
+        left: 30px;    
    }
    .input.NNNNY ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }	   
    .input.NNNNN ~ .NNNNN-message{
    		display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px  
    }
    .input.NNNNN ~ .success-message{
    		display : none;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }
-   
-
+   .wait-message{
+        font-size: 12px;
+        margin-top: -20px;
+  	 	margin-left: 180px;
+   }
+  
    .text-title{
    	position: relative;
    	top: 20px;
-   	left: 40px;   	
+   	left: 30px;   	
    }
    .text-title i{
    	color: red;
    }
    .birth{
-   	color: red;
+   	color: rgb(128, 64, 64);
+   	font-size: 0.75em;
    }
    .timer{
    	display: flex;
    	align-items: center;
-   	font-weight: bold;
+    font-size: 12px;   	
    	color: red;
-   	margin-left: 150px;
+   	margin-left: 30px;
+    margin-top: -20px;   	
+   }
+   
+   .send-btn:disabled{
+   		opacity: 70%;
+   		cursor: no-drop ;
+   		
+   }
+   .serial-btn:disabled{
+   		opacity: 70%;
+   		cursor: no-drop ;   
+   }
+    #form-button:disabled{
+   		opacity: 70%;
+   		cursor: no-drop ;   
    }
    
    * {
@@ -92,19 +138,23 @@ li {
 }
 .Mhead{
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 .Mhead img{
-    width: 200px;
-    height: 150px;
-    padding-top: 40px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-left: 250px;
     
 }
 .Mhead h1{
-    font-size: 35px;
-    margin-bottom: 30px;
+	position: relative;
+	right: 45%;
+    font-size: 30px;
+    padding-top: 100px;    
+/*     margin-bottom: 30px; */
     
 }
 .Mbody-container{
@@ -115,16 +165,20 @@ li {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-left: 200px;
+    margin-left: 70px;
+    padding-top: 30px;     
 }
 .Mbody input{
     width: 450px;
     height: 50px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     border-radius: 10px 10px;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
+}
+.Mbody input:focus{
+    outline: 1px solid lightgrey;
 }
 .Mbody button{
     width: 455px;
@@ -136,7 +190,9 @@ li {
     background-color: #ffe9b1;
     font-size: 17px;
     font-weight: bold;
-    color : #E27C5E
+    color : #E27C5E;
+    cursor: pointer;
+
 }
 @media screen and (max-width: 1420px) {
 .inner {

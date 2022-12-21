@@ -283,6 +283,8 @@ public class MemController {
 		int memNo = (int) session.getAttribute(SessionConstant.NO);
 		MemDto loginDto = memDao.selectOne(memNo);
 			memDao.deleteMem(memNo);
+			session.removeAttribute(SessionConstant.NO);
+			session.removeAttribute(SessionConstant.NICK);			
 			return "redirect:goodbye";
 	}
 	

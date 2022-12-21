@@ -2,12 +2,22 @@
    .fail-message 
    		{ 
            display: none;
+           position: relative;
+           left: 30px;   
         }
    .input.success ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px;		
+        left: 30px;          
    }	
    .input.fail ~ .fail-message {
             display: block;
+            color : red;
+            font-size: 12px;
+        	margin-top: -20px        ;         
+    	    left: 30px;          	
         }
         
 * {
@@ -48,13 +58,14 @@ li {
     align-items: center;
 }
 .pwlog img{
-    width: 350px;
-    height: 200px;
-    margin-top: 30px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 40px;
+    padding-right: 770px;    
 }
 .pwlog h1{
-    font-size: 35px;
-    margin-bottom: 20px;
+    font-size: 30px;
+    margin-bottom: 30px;
 }
 .newpw{
     display: flex;
@@ -66,17 +77,18 @@ form div{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+/*     align-items: center; */
 }
 
 #pwtag p{
 	position: relative;
 	top: 20px;
-	right: 160px;	
+	    right: -30px;
 }
 #pwtag #p1{
 	position: relative;
-	right: 180px;
+	top: 20px;
+	    right: -30px;
 }
 #pwtag p i{
 	color: red;
@@ -84,22 +96,26 @@ form div{
 .newpw input{
     width: 450px;
     height: 50px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     border-radius: 10px 10px;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
 }
+.newpw input:focus{
+	outline: 1px solid lightgrey;
+	}
 .newpw button{
     width: 455px;
     height: 50px;
     margin: 30px;
     align-items: center;
-    border: 1px solid gray;
+    border: none;
     border-radius: 10px 10px;
     background-color: #ffe9b1;
     font-size: 17px;
     font-weight: bold;
+    color : #E27C5E    
 }
 @media screen and (max-width: 1420px) {
 .inner {

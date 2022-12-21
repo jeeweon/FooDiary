@@ -17,16 +17,16 @@
         <div class="PWfind2">
             <div class="inner">
                 <div class="PWlog">
-                    <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                 </div> <!--PWlog-->
                 <div class="PWT">
                     <fieldset>
                         <legend>
                             <form action="email_send" class="email-form" method="post">
-								<div>
-									계정에 연결된 다음 정보가 확인 되었습니다.
+								<div class="m1">
+								<i class="fa-solid fa-magnifying-glass"></i>	계정에 연결된 다음 정보가 확인 되었습니다.
 								</div>
-								<div>
+								<div class="m2">
 									이메일 : ${param.memEmail}
 								<input class="input" name="memEmail" hidden="true" value="${param.memEmail}">
 								</div>
@@ -43,7 +43,7 @@
 							    <div class="email-check-btn"></div>
 							    
 							    <div>
-							    	<button>다음</button>
+							    	<button class="next-btn">다음</button>
 							    </div>
 							</form>
                         </legend>
@@ -62,6 +62,27 @@ $(function(){
 	var judge = {
 			memEmailValid : false,
 	};
+
+	//인증번호 5분 타이머 세팅
+	function startTimer(duration, display){
+		var timer = duration, minutes, seconds;
+		var interval = setInterval(function(){
+			minutes = parseInt(timer/60,10)
+			seconds = parseInt(timer%60,10);
+			
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
+			
+			display.textContent = "인증번호 유효시간 : " + minutes + ":" + seconds;
+			if(--timer<0){
+				timer = duration;
+			}
+			if(timer ==0){
+				clearInterval(interval);
+				display.textContent = "인증번호 입력 시간이 만료되었습니다.";
+			}
+		},1000);
+	}
 	
 	
 	$(".send-btn").click(function(){
@@ -83,6 +104,7 @@ $(function(){
 				waitMessage.css("display","none");	
 				var div = $("<div>");
 				var div2= $("<div>");
+				var span= $("<span>");
 				var input = $("<input>").addClass("serial input").attr("placeholder","인증번호");
 				var successMessage = $("#success-message");
 				var failMessage = $("#fail-message");
@@ -94,8 +116,16 @@ $(function(){
 				$(".email-check").html(div);	
 				div.append(ment).append(ment2).append(input);
 				$(".email-check-btn").html(div2);
-				div2.append(button);				
-								
+				div2.append(button).append(span);		
+				span.text("인증번호 유효시간 : 05:00").addClass("timer");
+				button.addClass("serial-btn");
+				
+				//인증번호 5분 타이머
+				var minutes = 5;
+				var fiveMinutes = (60*minutes) - 1,
+					display = document.querySelector('.timer');
+				startTimer(fiveMinutes,display);
+				
 				button.click(function(){
 					var serial = input.val(); //변수 input의 value 값 
 					if(serial.length !=6) 
@@ -116,6 +146,10 @@ $(function(){
 								$(".serial").after(successMessage);
 								button.prop("hidden",true);
 								btn.prop("hidden",true);
+								$(".next-btn").css("display","block");
+					            ment.remove();
+					            ment2.remove();
+					            $(".timer").remove();
 							}
 					        else {
 					            $(".serial").removeClass("success fail").addClass("input fail");

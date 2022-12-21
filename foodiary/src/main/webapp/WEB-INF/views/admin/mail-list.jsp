@@ -90,6 +90,8 @@ td > a:visted {
 </head>
 <body>
 
+<!-- 테스트용 데이터 출력 -->
+
 <div class="container">
 	<div class="title">
 		<h2>공지 이메일 목록</h2>
@@ -112,7 +114,6 @@ td > a:visted {
 			</tbody>
 	</c:forEach> 
 	</table>
-</div>
 
 <div class="row center">
 	<ul class="pagination">
@@ -150,7 +151,7 @@ td > a:visted {
 		</c:forEach>
 		
 		<!-- 다음을 누르면 다음 구간의 첫 페이지로 안내 -->
-		
+	
 		<c:choose>
 			<c:when test="${vo.hasNext()}">
 				<li><a href="mail-list?p=${vo.nextBlock()}&${vo.parameter()}">&gt;</a></li>
@@ -180,7 +181,7 @@ td > a:visted {
 			</div>  
 		</form>
 	</div>
-
+</div>
 
 
 </body>
