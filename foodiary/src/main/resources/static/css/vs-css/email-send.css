@@ -2,6 +2,8 @@
    .fail-message,
    .wait-message { 
            display: none;
+            position: relative;
+           left: 30px;
         }
    #success-message,
    #fail-message { 
@@ -9,15 +11,33 @@
         }
    .input.success ~ #success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px;
+		position: relative;
+        left: 30px;   
    }
    .input.fail ~ #fail-message{
-   		display : block;
+    	display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px;
+		position: relative;
+        left: 30px;   
    }
    
    .m1,.m2{
    	margin-bottom: 30px;
+   	font-size: 14px;
    }
    
+   .next-btn{
+   	display: none;
+   }
+   
+   p{
+    font-size: 13px;   
+   }
       * {
 margin: 0;
 padding: 0;
@@ -41,6 +61,12 @@ li {
     width: 1400px;
     margin: 0 auto;
 }
+
+   .send-btn:disabled{
+   		opacity: 70%;
+   		cursor: no-drop ;
+   		
+   }
 
 .wrapper>div.inner {
     display: flex;
@@ -86,17 +112,27 @@ form p{
 	text-align: center;
 }
 .wait-message{
-	text-align: center;
+        font-size: 12px;
+        margin-top: -20px;
+  	 	margin-left: 180px;
 }
    #success-message,
    #fail-message{
-   	text-align: center;
+/*    	text-align: center; */
    }
    #success-message{
    color:green;
    }
    #fail-message{
    color:red;
+   }
+   .timer{
+   	display: flex;
+   	align-items: center;
+    font-size: 12px;   	
+   	color: red;
+   	margin-left: 30px;
+    margin-top: -20px;   	
    }      
 .PWT input{
     width: 450px;

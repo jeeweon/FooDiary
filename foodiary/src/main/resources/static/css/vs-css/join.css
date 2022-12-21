@@ -81,7 +81,7 @@
    	align-items: center;
     font-size: 12px;   	
    	color: red;
-   	margin-left: 180px;
+   	margin-left: 30px;
     margin-top: -20px;   	
    }
    
@@ -91,6 +91,10 @@
    		
    }
    .serial-btn:disabled{
+   		opacity: 70%;
+   		cursor: no-drop ;   
+   }
+    #form-button:disabled{
    		opacity: 70%;
    		cursor: no-drop ;   
    }

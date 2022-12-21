@@ -3,12 +3,16 @@
    .NNNNN-message,
    .NNNNY-message { 
            display: none;
+           position: relative;           
+           left: 29px;               
         }
    .input.success ~ .success-message{
    		display : block;
    		color:green;
         font-size: 12px;
-        margin-top: -20px   
+        margin-top: -20px;
+        
+        
    }	
    .input.fail ~ .fail-message {
             display: block;
@@ -113,7 +117,7 @@ li {
  	display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+/*     align-items: center; */
 }
  
 form img{
@@ -124,7 +128,7 @@ form img{
 form label{
 	position: relative;
 	top:20px;
-	right: 190px;
+right: -20px;
 }
 
 form label i{
@@ -144,7 +148,7 @@ form #btn-top{
 form span{
 	position: relative;
 	bottom: 20px;
-	left: 180px;
+    left: 420px;
 }
 form #PT{
 	display: flex;
@@ -163,18 +167,12 @@ form #PT{
     height: 50px;
     border: 1px solid lightgrey;
     border-radius: 10px 10px;
-    margin: 20px;
+    margin: 30px;
     font-size: 15px;
     padding-left: 15px;
 }
 .profileT input:focus{
-    width: 450px;
-    height: 50px;
     outline: 1px solid lightgrey;
-    border-radius: 10px 10px;
-    margin: 20px;
-    font-size: 15px;
-    padding-left: 15px;
 }
 .profileT #btn-profile{
     width: 455px;

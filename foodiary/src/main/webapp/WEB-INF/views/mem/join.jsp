@@ -39,7 +39,7 @@
 					<div>			
 				        <div class="email-check">
 					        <div id="success-message">인증번호가 확인되었습니다.</div>
-					     	<div id="fail-message">인증번호가 확인되지 않았습니다.</div>
+					     	<div id="fail-message">인증번호가 일치하지 않습니다.</div>
 				        </div>
 				        <div class="email-check-btn"></div>
 					</div>

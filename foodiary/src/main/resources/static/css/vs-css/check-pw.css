@@ -64,13 +64,18 @@ form{
 }
 form #pwx{
 	color: red;
+    position: relative;
+    left: -140px;
+    font-size: 12px;
+
 }
 .PWtext input{
     width: 450px;
     height: 50px;
     border: 1px solid lightgrey;
     border-radius: 10px 10px;
-    margin: 30px;
+    margin-top : 30px;
+    margin-bottom: 10px;
     font-size: 15px;
     padding-left: 15px;
 }
@@ -80,7 +85,7 @@ form #pwx{
 .PWtext button{
     width: 455px;
     height: 50px;
-    margin: 30px;
+    margin: 50px;
     align-items: center;
     border: none;
     border-radius: 10px 10px;

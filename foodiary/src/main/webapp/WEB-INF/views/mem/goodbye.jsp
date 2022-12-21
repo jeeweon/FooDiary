@@ -19,17 +19,14 @@
         <div class="goodbye">
             <div class="inner">
                 <div class="goodbyeH">
-                    <a href="/search/review"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
-                    <h1>회원탈퇴 완료</h1>
+<%--                     <a href="/search/review"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a> --%>
                     <h2>회원탈퇴가 완료되었습니다.</h2>
                     <h3>그동안 푸디어리를 이용해주셔서 감사합니다.</h3>
                 </div> <!--goodbyeH-->
                 <div class="goodbyeB">
                     <fieldset>
                         <legend>
-                            <form>
-                                <button><a href="${pageContext.request.contextPath}/search/review">메인으로 이동</a></button>
-                            </form>
+                                <a href="${pageContext.request.contextPath}/search/review"><button>메인으로 이동</button></a>
                         </legend>
                     </fieldset>
                 </div>

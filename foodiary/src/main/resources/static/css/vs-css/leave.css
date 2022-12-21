@@ -1,12 +1,20 @@
    .success-message,
    .fail-message { 
            display: none;
+           position: relative;
+           left: 30px;                
         }
    .input.success ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px;
    }	
     .input.fail ~ .fail-message { 
-            display: block;
+    	display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px;
         }	
         
      * {
@@ -47,18 +55,19 @@ li {
     align-items: center;
 }
 .leaveH img{
-    width: 350px;
-    height: 200px;
-    margin-top: 30px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-right: 770px;
 }
 .leaveH h1{
-    font-size: 27px;
+    font-size: 30px;
     margin-bottom: 20px;
 }
-.leaveH h2{
-    font-size: 17px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.leaveH h3{
+    font-size: 15px;
+    margin: 30px;
+    font-weight: 500;  
 }
 .leaveB{
     display: flex;
@@ -76,10 +85,13 @@ form{
     width: 450px;
     height: 50px;
     border-radius: 10px 10px;
-    border: 1px solid gray;
+    border: 1px solid lightgray;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
+}
+.leaveB input:focus{
+	outline:1px solid lightgrey;
 }
 
 .leaveB button{
@@ -94,17 +106,15 @@ form{
     font-weight: bold;
     color: #E27C5E;
 }
+
+ #out:disabled{
+ 		color : brown;
+   		opacity: 60%;
+   		cursor: no-drop ;
+}
+
 #out:hover{
-    cursor: pointer;
     color: red;
-}
-.fail-message{
-	text-align: center;
-	color: red;
-}
-.success-message{
-	text-align: center;
-	color: green;
 }
 
 @media screen and (max-width: 1420px) {

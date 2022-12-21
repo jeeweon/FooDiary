@@ -2,18 +2,22 @@
    .fail-message 
    		{ 
            display: none;
+           position: relative;
+           left: 30px;   
         }
    .input.success ~ .success-message{
    		display : block;
    		color:green;
         font-size: 12px;
         margin-top: -20px;		
+        left: 30px;          
    }	
    .input.fail ~ .fail-message {
             display: block;
             color : red;
             font-size: 12px;
-        	margin-top: -20px                 
+        	margin-top: -20px        ;         
+    	    left: 30px;          	
         }
         
 * {
@@ -73,17 +77,18 @@ form div{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+/*     align-items: center; */
 }
 
 #pwtag p{
 	position: relative;
 	top: 20px;
-	right: 160px;	
+	    right: -30px;
 }
 #pwtag #p1{
 	position: relative;
-	right: 180px;
+	top: 20px;
+	    right: -30px;
 }
 #pwtag p i{
 	color: red;
