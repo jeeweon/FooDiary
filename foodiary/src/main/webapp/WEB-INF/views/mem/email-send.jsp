@@ -17,7 +17,7 @@
         <div class="PWfind2">
             <div class="inner">
                 <div class="PWlog">
-                    <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                 </div> <!--PWlog-->
                 <div class="PWT">
                     <fieldset>

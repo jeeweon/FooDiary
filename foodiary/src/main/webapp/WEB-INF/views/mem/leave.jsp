@@ -31,7 +31,7 @@
         <div class="leave">
             <div class="inner">
                 <div class="leaveH">
-                    <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     <h1>회원 탈퇴</h1>
                     <h3>회원 탈퇴를 위해 비밀번호 확인이 필요합니다.</h3>
                 </div> <!--leaveH-->

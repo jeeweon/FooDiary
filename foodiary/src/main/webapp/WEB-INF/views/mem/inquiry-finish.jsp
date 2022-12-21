@@ -16,7 +16,7 @@
         <div class="Mplus">
             <div class="inner">
                 <div class="Mhead">
-                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
                 </div> <!--Mhead-->
                 <duv class="Mbody">
                     <p>문의내용 전송이 완료되었습니다 <i class="fa-solid fa-envelope"></i></p> 

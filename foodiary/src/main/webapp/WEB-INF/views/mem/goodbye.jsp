@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<title>이용감사</title>
+	<title>탈퇴 완료</title>
 	
 	<link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -19,9 +19,9 @@
         <div class="goodbye">
             <div class="inner">
                 <div class="goodbyeH">
-<%--                     <a href="/search/review"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a> --%>
+<%--                     <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a> --%>
                     <h2>회원탈퇴가 완료되었습니다.</h2>
-                    <h3>그동안 푸디어리를 이용해주셔서 감사합니다.</h3>
+                    <h3>그동안 푸디어리를 이용해주셔서 감사합니다. <i class="fa-solid fa-face-smile"></i></h3>
                 </div> <!--goodbyeH-->
                 <div class="goodbyeB">
                     <fieldset>
