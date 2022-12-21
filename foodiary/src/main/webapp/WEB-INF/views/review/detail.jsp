@@ -264,8 +264,12 @@
 	</div>
 </div>
 
-<a href="list">목록으로</a>
-
+<br>
+<!-- 뒤로가기 화살표 -->
+<div style="text-align: center">
+	<i class="fa-solid fa-arrow-left-long goBack" style="font-size: 30px;"></i>
+	<div style="margin: -6px;">&nbsp;back</div>
+</div>
 	
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -568,5 +572,9 @@
 			});
 		});
 		
+		//뒤로가기 클릭 이벤트
+		$(".goBack").click(function(){
+			history.back()
+		});
 	});
 </script>
