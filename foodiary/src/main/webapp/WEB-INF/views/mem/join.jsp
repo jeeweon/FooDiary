@@ -35,38 +35,42 @@
 				        <div class="NNNNN-message">이미 사용중인 이메일입니다.</div>
 						<div><button class="send-btn" type="button" disabled>인증번호 보내기</button></div>
 						<div class="wait-message">인증번호 전송중</div>
-									
+						
+					<div>			
 				        <div class="email-check">
 					        <div id="success-message">인증번호가 확인되었습니다.</div>
 					     	<div id="fail-message">인증번호가 확인되지 않았습니다.</div>
 				        </div>
 				        <div class="email-check-btn"></div>
-				
+					</div>
 					
+					<div>
 						<div class="text-title" id="pw2">비밀번호 <i class="fa-solid fa-asterisk"></i></div>						
 						<input type="password" class="input" name="memPw" >
 				        <div class="success-message">사용 가능한 비밀번호입니다.</div>
 				        <div class="fail-message">숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
+					</div>
 					
-					
+					<div>
 						<div class="text-title" id="pw1">비밀번호 확인 <i class="fa-solid fa-asterisk"></i></div>						
 						<input type="password" class="input" id="pw-re" >
 						<div class="success-message">비밀번호가 일치합니다.</div>
 				        <div class="fail-message">비밀번호가 일치하지 않습니다.</div>		
+					</div>
 					
-					
+					<div>
 						<div class="text-title">닉네임 <i class="fa-solid fa-asterisk"></i></div>						
 						<input type="text" class="input" name="memNick"  >
 						<div class="success-message">사용 가능한 닉네임입니다.</div>
 				        <div class="fail-message">한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
 				        <div class="NNNNN-message">이미 사용중인 닉네임입니다.</div>		
+					</div>
 					
-					
-						<div class="text-title">생일 <i class="fa-solid fa-asterisk"></i></div>		
+					<div>
+						<div class="text-title">생일 <i class="fa-solid fa-asterisk"></i> <span class="birth">생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요!</span></div>		
 						<input type="text" class="input single-date-picker" name="memBirth" id="memBirth" >
-						<div class="birth">만 14세 이상만 가입이 가능하며 생년월일은 수정이 불가능하오니 정확한 정보를 입력해주세요.</div>
 				        <div class="fail-message">생년월일을 선택해주세요.</div>
-					
+					</div>
 					
 						<div><button type="submit" id="form-button">가입하기</button></div>						                                     
                     	</form>
@@ -219,6 +223,7 @@ $(function(){
 			$(".email-check-btn").html(div2);
 			div2.append(button).append(span);
 			span.text("인증번호 유효시간 : 05:00").addClass("timer");
+			button.addClass("serial-btn");
 			
 			//인증번호 5분 타이머
 			var minutes = 5;
@@ -247,6 +252,7 @@ $(function(){
 								$(".serial").after(successMessage);
 								button.prop("disabled",true);
 								btn.prop("disabled",true);
+								$(".timer").remove();
 							}
 					        else {
 					            $(".serial").removeClass("success fail").addClass("input fail");

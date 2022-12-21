@@ -5,7 +5,7 @@
    .wait-message { 
            display: none;
            position: relative;
-           left: 25px;
+           left: 30px;
         }
    .input.success ~ .success-message{
    		display : block;
@@ -22,19 +22,23 @@
         }
    #success-message,
    #fail-message { 
-           display: none;
+           display: none;      
         }
    .input.success ~ #success-message{
    		display : block;
    		color:green;
         font-size: 12px;
-        margin-top: -20px   
+        margin-top: -20px;
+		position: relative;
+        left: 30px;    
    }
    .input.fail ~ #fail-message{
    		display : block;
    		color : red;
         font-size: 12px;
-        margin-top: -20px  
+        margin-top: -20px;
+		position: relative;
+        left: 30px;    
    }
    .input.NNNNY ~ .success-message{
    		display : block;
@@ -54,25 +58,41 @@
         font-size: 12px;
         margin-top: -20px   
    }
-   
-
+   .wait-message{
+        font-size: 12px;
+        margin-top: -20px;
+  	 	margin-left: 180px;
+   }
+  
    .text-title{
    	position: relative;
    	top: 20px;
-   	left: 40px;   	
+   	left: 30px;   	
    }
    .text-title i{
    	color: red;
    }
    .birth{
-   	color: red;
+   	color: rgb(128, 64, 64);
+   	font-size: 0.75em;
    }
    .timer{
    	display: flex;
    	align-items: center;
-/*    	font-weight: bold; */
+    font-size: 12px;   	
    	color: red;
-   	margin-left: 150px;
+   	margin-left: 180px;
+    margin-top: -20px;   	
+   }
+   
+   .send-btn:disabled{
+   		opacity: 70%;
+   		cursor: no-drop ;
+   		
+   }
+   .serial-btn:disabled{
+   		opacity: 70%;
+   		cursor: no-drop ;   
    }
    
    * {
@@ -141,7 +161,7 @@ li {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-left: 200px;
+    margin-left: 70px;
     padding-top: 30px;     
 }
 .Mbody input{
@@ -166,7 +186,9 @@ li {
     background-color: #ffe9b1;
     font-size: 17px;
     font-weight: bold;
-    color : #E27C5E
+    color : #E27C5E;
+    cursor: pointer;
+
 }
 @media screen and (max-width: 1420px) {
 .inner {
