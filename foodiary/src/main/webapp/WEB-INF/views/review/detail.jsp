@@ -330,7 +330,6 @@
 						 passiveMemNo : $(this).data("rno")	
 					},
 					success :function(resp){
-						console.log(resp);
 						if(resp){
 							$(that).text("팔로잉");
 						}else{
