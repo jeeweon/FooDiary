@@ -6,7 +6,7 @@
 <head>
 	<title>비밀번호 변경</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/edit-pw.css"> <!--css 불러오는 링크-->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/edit_pw.css"> <!--css 불러오는 링크-->
 
 
 </head>
