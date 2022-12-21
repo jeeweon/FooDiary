@@ -36,17 +36,19 @@ li {
     align-items: center;
 }
 .PWchange img{
-    width: 350px;
-    height: 200px;
-    margin-top: 30px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-right: 770px;
 }
 .PWchange h1{
-    font-size: 35px;
+    font-size: 30px;
     margin-bottom: 20px;
 }
 .PWchange h3{
-    font-size: 20px;
+    font-size: 15px;
     margin: 30px;
+    font-weight: 500;    
 }
 .PWtext{
     display: flex;
@@ -66,22 +68,26 @@ form #pwx{
 .PWtext input{
     width: 450px;
     height: 50px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     border-radius: 10px 10px;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
+}
+.PWtext input:focus{
+    outline: 1px solid lightgrey;
 }
 .PWtext button{
     width: 455px;
     height: 50px;
     margin: 30px;
     align-items: center;
-    border: 1px solid gray;
+    border: none;
     border-radius: 10px 10px;
     background-color: #ffe9b1;
     font-size: 17px;
     font-weight: bold;
+    color : #E27C5E    
 }
 @media screen and (max-width: 1420px) {
 .inner {
