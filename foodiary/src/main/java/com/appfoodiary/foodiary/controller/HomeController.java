@@ -24,16 +24,20 @@ public class HomeController {
 	
 	@GetMapping("")
 	public String home(HttpSession session, Model model) {
-		int memNo = (int) session.getAttribute(SessionConstant.NO);
-		//프로필 조회
-		model.addAttribute("profile",memDao.findProfile(memNo));
-		
-		//레벨, 포인트만 조회
-		model.addAttribute("level", memDao.memLevelAndPoint(memNo));
-		
-		//레벨 업데이트
-		levelPointService.levelUp(memNo);
-		return "home/home";
+		if((Integer) session.getAttribute(SessionConstant.NO) != null) {
+			int memNo = (Integer) session.getAttribute(SessionConstant.NO);
+			//프로필 조회
+			model.addAttribute("profile",memDao.findProfile(memNo));
+			
+			//레벨, 포인트만 조회
+			model.addAttribute("level", memDao.memLevelAndPoint(memNo));
+			
+			//레벨 업데이트
+			levelPointService.levelUp(memNo);
+			return "home/home";
+		} else {
+			return "redirect:search/review";
+		}
 	}
 	
 	@GetMapping("/area/interest")

@@ -86,10 +86,11 @@ li {
 }
 .formdiv{
 	width: 600px;
-	height: 40px;
-	position: fixed;;
-	border: 1px solid gray;
-
+	height: 150px;
+	position: fixed;
+	top: -1px;
+	z-index: 999;
+	background-color:#ffffff; 
 }
 
 .search-form {
@@ -115,7 +116,7 @@ li {
 .search-input {
     padding: 0.5em;
     padding-right: 30px;
-    width: 100%;
+    width: 600px;
     height: inherit;
     border: none;
     border-radius: 4px;
@@ -125,7 +126,7 @@ li {
 
 .search-btn {
     position: absolute;
-    top: 14px;
+    top: 0;
     right: 0;
     width: 30px;
     height: inherit;
