@@ -5,321 +5,81 @@
     <title>관심지역 설정</title>
     <link rel="stylesheet" type="text/css"
    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-
-   <style>
-    .title{
-        text-align: center;
-        margin-top: 50px;
-    }
-    /* 
-        .search-view = .search-bar + .search-list
-        .search-bar = .search-input + .search-btn
-        .search-list = <div<li + span(.btn-add-area)>> * addressList.length
-        .my-area = <div<li + span(.btn-delete-area)>> * interestList.length
-    */
-    .search-form {
-        margin: 0;
-    }
-    
-    .search-view{
-        width: 400px; 
-        margin: 0 auto;
-        margin-top: 30px;
-    }
-
-    .search-bar { 
-        position: relative;
-        width: 100%;
-        height: 40px;
-        display: inline-block;
-        border: 1px solid gray;
-        border-radius: 4px;
-        font-size: 16px;
-    }
-
-    .search-input {
-        padding: 0.5em;
-        padding-right: 30px;
-        width: 100%;
-        height: inherit;
-        border: none;
-        border-radius: 4px;
-        outline: none;
-        box-sizing: border-box;
-    }
-
-    .search-btn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 30px;
-        height: inherit;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        cursor: pointer;
-    }
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/area-interest.css"> <!--css 불러오는 링크--> 
 
 
-    .search-list {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        width: inherit;
-        border: 1px solid gray;
-        border-radius: 4px;
-        font-size: 16px;
-        position: absolute;
-        background-color: white;
-        max-height: 300px;
-        overflow-y: auto;
-        z-index: 99;
-    }
-
-    .search-list::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    .search-list::-webkit-scrollbar-thumb {
-        background-color: #E27C5E;
-        border-radius: 10px;
-        background-clip: padding-box;
-        border: 2px solid transparent;
-    }
-    .search-list::-webkit-scrollbar-track {
-        background-color: #F8F9FB;
-        border-radius: 10px;
-    }
-    .search-list li {
-        display: inline-block;
-        box-sizing: border-box;
-        border: none;
-        border-radius: 4px;
-        padding: 0.5em;
-    }
-
-    .search-list {
-        display: none;
-    }
-
-    .search-list.success {
-        display: block;
-    }
-
-    .search-list.success div {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .search-list.success div:hover {
-        background-color: #FEF7F2;
-    }
-    .search-list.fail,
-    .search-list.fail ~.no-result {
-        display: block;
-    }
-    
-    .no-result {
-        display: none;
-        color: gray;
-        font-size: 16px;
-    }
-
-    .btn-add-area{
-        font-size: 16px;
-        padding-right: 0.5em;
-        cursor: pointer;
-    }
-
-    .my-area{
-        width:600px;
-        margin: 0 auto;
-        margin-top: 70px;
-    }
-
-    .my-area-list{
-        margin: 0;
-        padding: 0;
-        list-style: none;      
-        border: none;
-        font-size: 16px;
-        position: absolute;
-        background-color: white;
-        display: flex;
-    }
-    
-    .my-area-list div{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #FEF7F2;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        width: 140px;
-        height: 50px;
-        padding: 0.5em;
-        margin-right: 10px;
-    }
-
-    .my-area-list li {
-        display: inline-block;
-        box-sizing: border-box;
-        position: relative;
-        padding: 0.5em;
-        color: #E27C5E;
-        font-weight: bold;
-    }
-
-    .btn-delete-area{
-        font-size: 16px;
-        padding-right: 0.5em;
-        cursor: pointer;
-        color: #AAAAAA;
-    }
-
-    .my-area.none .none-interest {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .none-interest {
-        display: none;
-        width: 100%;
-        height: 100px;
-        background-color: #F8F9FB;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        text-align: center;
-    }
-    
-    .nearby-area{
-        width:600px;
-        margin: 0 auto;
-        margin-top: 120px;
-        position: relative;
-    }
-    
-    .nearby-area.none{
-        margin-top: 50px;
-    }
-    
-    .nearby-area.none .none-interest {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .nearby-list{
-	    margin: 0;
-	    padding: 0;
-	    list-style: none;
-	    width: 100%;
-	    border: none;
-	    font-size: 16px;
-	    position: absolute;
-	    background-color: white;
-	    display: flex;
-	    flex-wrap: wrap;
-    }
-    
-    .nearby-list div{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #FEF7F2;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        width: 140px;
-        height: 50px;
-        padding: 0.5em;
-        margin-right: 10px;
-        margin-bottom: 10px;
-    }
-
-    .nearby-list li {
-        display: inline-block;
-        box-sizing: border-box;
-        position: relative;
-        padding: 0.5em;
-        color: #E27C5E;
-        font-weight: bold;
-    }
-    
-    .sub-title {
-    	display: block;
-        margin-bottom: 14px;
-    }
-    
-    .selected-area {
-    	border: 2px solid #E27C5E;
-    }
-    
-    h2 {
-	    margin-bottom: 10px; 
-    }
-</style>
 </head>
 <body>
-<h1 class="title">관심지역을 설정해주세요</h1>
 
-<!-- 검색 -->
-<div class="search-view">
-    <form class="search-form">
-        <div class="search-bar">
-            <input type="text" name="keyword" class="search-input" placeholder="시/도, 시/군/구 검색(ex.영등포구)" autocomplete="off">
-            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
-        </div>  
-    </form>
+<div class="wrapper">
+        <div class="Area">
+            <div class="inner">
+                <div class="AreaH">
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <h1 class="title">관심지역을 설정해주세요</h1>
+                </div>
+                <!-- 검색 -->
+				<div class="search-view">
+				    <form class="search-form">
+				        <div class="search-bar">
+				            <input type="text" name="keyword" class="search-input" placeholder="시/도, 시/군/구 검색(ex.영등포구)" autocomplete="off">
+				            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 
+				        </div>  
+				    </form>
+				
+				    <!-- 검색 결과 화면 -->
+				    <ul class="search-list">
+				        <!-- 
+				            (jQuery)
+				            검색 결과가 있을 때, filterList의 값을 목록으로 출력함
+				            검색 결과가 없을 때, 검색 결과 없음 문구를 출력함
+				        -->
+				    </ul>
+				</div>
+                <div class="AreaB">
+	                <fieldset>
+	                        <legend>
+	                            <form>
+									<button><a href="${pageContext.request.contextPath}/home">홈으로 돌아가기</a></button>
+	                            </form>
+	                        </legend>
+                    </fieldset>                  			
+                </div>
+                <!-- 관심지역 목록  -->
+				<div class="my-area">
+				    <h2>내 관심지역</h2>
+				    <span class="sub-title">📌 자동으로 저장돼요</span>
+				    
+				    <p class="none-interest">자주 찾는 동네, 가고 싶은 여행지를 추가하고<br>
+				    최신 리뷰를 모아보세요!</p>
+				
+				    <ul class="my-area-list">
+				    <!-- 관심지역이 있을 때, 지역 목록 출력 / 없을 때, 안내 문구 노출 -->
+				    </ul>
+				</div>
+				
+				<!-- 인근지역 추천 목록 -->
+				<div class="nearby-area">
+				    <h2>이런 지역 어때요</h2>
+				    <span class="sub-title">👀 ${loginNick}님의 관심지역 주변</span>
+				    
+					<p class="none-interest">관심지역을 추가하면<br>
+					주변지역을 추천해드려요</p>
+				    
+				    <ul class="nearby-list">
+				    <!-- 관심지역 & 인근지역이 있을 때, 지역 목록 출력 / 없을 때, 안내 문구 노출 -->
+				    </ul>
+				</div>               
+            </div> <!-- inner -->
+        </div> <!-- Area -->
+    </div> <!-- wrapper -->
 
-    <!-- 검색 결과 화면 -->
-    <ul class="search-list">
-        <!-- 
-            (jQuery)
-            검색 결과가 있을 때, filterList의 값을 목록으로 출력함
-            검색 결과가 없을 때, 검색 결과 없음 문구를 출력함
-        -->
-    </ul>
-</div>
 
-<!-- 홈으로 돌아가기 버튼으로 디자인 필요 -->
-<div align="center">
-	<br>
-	<a href="${pageContext.request.contextPath}/home">홈으로 돌아가기</a>
-</div>
 
-<!-- 관심지역 목록  -->
-<div class="my-area">
-    <h2>내 관심지역</h2>
-    <span class="sub-title">📌 자동으로 저장돼요</span>
-    
-    <p class="none-interest">자주 찾는 동네, 가고 싶은 여행지를 추가하고<br>
-    최신 리뷰를 모아보세요!</p>
 
-    <ul class="my-area-list">
-    <!-- 관심지역이 있을 때, 지역 목록 출력 / 없을 때, 안내 문구 노출 -->
-    </ul>
-</div>
 
-<!-- 인근지역 추천 목록 -->
-<div class="nearby-area">
-    <h2>이런 지역 어때요</h2>
-    <span class="sub-title">👀 ${loginNick}님의 관심지역 주변</span>
-    
-	<p class="none-interest">관심지역을 추가하면<br>
-	주변지역을 추천해드려요</p>
-    
-    <ul class="nearby-list">
-    <!-- 관심지역 & 인근지역이 있을 때, 지역 목록 출력 / 없을 때, 안내 문구 노출 -->
-    </ul>
-</div>
+
+
 
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
