@@ -412,7 +412,7 @@
 		$(".input-reply").on("change keyup paste",function(){
 			var maxCnt = 50; //DB저장 최대 Byte수
 			var length = getByteLengthOfString($(".input-reply").val()); //총 글자수
-			console.log(length);
+			//console.log(length);
 			
 			if(length <= maxCnt) {
 		    	changeText = $(".input-reply").val();
