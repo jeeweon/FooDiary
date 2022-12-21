@@ -10,6 +10,8 @@
 <section class="section1">	
 		<div class="feed"></div>	
 </section>
+
+
 <style>
 	.orign{
 		width:50px;
@@ -34,14 +36,13 @@
 	 	background-color:gray;
 	 	opacity: 0.5;
 	 	text-align: center;
-	 	font-size:35px;
+	 	font-size:35px;"src/main/webapp/WEB-INF/views/profilepage/board.jsp"
 	 	}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
-<script>
-	
 
+<script>
 	$(function(){
 		reviewList();
 		

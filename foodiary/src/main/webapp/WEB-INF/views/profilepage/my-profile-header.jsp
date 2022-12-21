@@ -501,7 +501,6 @@
    });
   $(".menu-btn").click(function(){
      $("#modal3").fadeOut();
-     location.reload();
      });
     $(".modal_layer").click(function(){
      $("#modal").fadeOut(); 
