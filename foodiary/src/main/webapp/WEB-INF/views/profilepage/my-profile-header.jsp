@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/board.css"> <!--css불러오는 링크-->
+    <head>
+    	<title>프로필</title>
+    </head>
     <style>
         #modal {
           display: none;
@@ -160,6 +163,7 @@
 	 	text-align: center;
 	 	font-size:35px;"src/main/webapp/WEB-INF/views/profilepage/board.jsp"
 	 	}
+	object-fit:cover; 
       
 </style> 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -169,7 +173,9 @@
        followMem();
        followerMem()
        
-       
+       //회원번호 확인
+       var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
+		console.log(memNo);       
     
        //리뷰리스트 조회 
        let reviewList1 = [];
@@ -206,19 +212,19 @@
 				});
 			};
 		});
-	//북마크 리스트 조회 
-	$(".bookmark-btn").click(function(e){
-		$(".feed").empty();
-		reviewList();
-		e.preventDefault();
-	function reviewList() {
-		$.ajax({
-			url : "${pageContext.request.contextPath}/rest/profile/bookmarklist",
-			method : "get",
-			dataType : "json",
-			success : function(resp) {
-				reviewList1 = resp;
-				renderList();
+		//북마크 리스트 조회 
+		$(".bookmark-btn").click(function(e){
+			$(".feed").empty();
+			reviewList();
+			e.preventDefault();
+		function reviewList() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/rest/profile/bookmarklist",
+				method : "get",
+				dataType : "json",
+				success : function(resp) {
+					reviewList1 = resp;
+					renderList();
 			}
 		});
 		};
@@ -260,7 +266,7 @@
 				
 				$(reviewImg).hover(function(){
 					$(this).addClass("feedimg");
-					console.log("호버 완료");
+				
 				});
 				
 				var span2=$("<span>").text("   "+value.likeCnt+" ");
@@ -291,7 +297,7 @@
 					var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 					$(reviewImg).hover(function(){
 						$(this).addClass("feedimg");
-						console.log("호버 완료");
+						
 					});
 					
 					var span2=$("<span>").text("   "+value.likeCnt+" ");
@@ -320,33 +326,10 @@
 					var feedimg=$("<div>").html(feedli);
 					feedimg.addClass("feedimg");
 					var feedul=$("<ui>").html(feedimg);
-					
-					//좋아요 사진갯수 댓글갯수
-					
-					 
-					
-					//리뷰이미지 다운로드 이미지가 없으면 작성한 리뷰가 없습니다.
-					//var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
-					//좋아요 갯수, 이미지 갯수, 리뷰 갯수 
-					//var imgCnt=$("<span>").text("이미지 갯수"+value.imgCnt);
-					//var replyCnt=$("<span>").text("댓글 갯수"+value.replyCnt);
-					//var likeCnt=$("<span>").text("좋아요 갯수"+value.likeCnt);
-					//var cnt=$("<div>").append(replyCnt).append(imgCnt).append(likeCnt);
-					
 					var main=$(".feed").append(feedul);//.append(figcaption);
 				};
 				
-				//좋아요 사진갯수 댓글갯수
-				
-				 
-				
-				//리뷰이미지 다운로드 이미지가 없으면 작성한 리뷰가 없습니다.
-				//var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
-				//좋아요 갯수, 이미지 갯수, 리뷰 갯수 
-				//var imgCnt=$("<span>").text("이미지 갯수"+value.imgCnt);
-				//var replyCnt=$("<span>").text("댓글 갯수"+value.replyCnt);
-				//var likeCnt=$("<span>").text("좋아요 갯수"+value.likeCnt);
-				//var cnt=$("<div>").append(replyCnt).append(imgCnt).append(likeCnt);
+	
 				
 				var main=$(".feed").append(feedul);//.append(figcaption);
 				});
@@ -400,18 +383,7 @@
                    	function(){$(this).text("좋아요").css("font-weight","bold")}
                    	);
                
-               //게시물/북마크/좋아요 버튼을 눌렀을 때
-              /*  $(".board-btn").click(function(e){
-            	   e.preventDefault();
-            	   $.ajax({
-            		   url:"${pageContext.request.contextPath}rest/profilepage/board",
-            		   method:"get",
-            		   success:function(resp){
-            			   console.log(resp);
-            		   }
-            	   });
-               }); */
-               
+             
                
             
                var writerLevel;
@@ -455,7 +427,7 @@
             dataType:"json",
             success:function(resp){
                followMemList=resp;
-               console.log("팔로우 멤버");
+            
                console.log(followMemList);
                renderfollowList();
             }
@@ -489,7 +461,11 @@
                var img=$("<img>").attr("src","");
                var br=$("<br>");
                //a+img+span
-               var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
+               if(memNo != value.memNo){
+			   var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
+				}else{
+					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(b).append(writerLevel);
+				}
                img.addClass("follow-img");
                var hr=$("<hr>");
                //팔로우가 되어있는 상태인지 아닌지확인
@@ -541,7 +517,7 @@
             dataType:"json",
             success:function(resp){
                followerMemList=resp;
-               console.log("팔로워 멤버 조회");
+              
                console.log(followerMemList);
                renderfollowerList()
             }
@@ -603,7 +579,11 @@
                var img=$("<img>").attr("src","");
                var br=$("<br>");
                var hr=$("<hr>");
-               var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
+               if(memNo != value.memNo){
+    			   var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
+    				}else{
+    					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(b).append(writerLevel);
+    				}
                img.addClass("follow-img");
                //사진 번호가 있는지 없는지. 
                if(value.attachNo != 0){
@@ -634,7 +614,7 @@
                         <li class="mem-name">
                         
                          </li>    
-                        <button><a href="${pageContext.request.contextPath}/mem/edit_profile">프로필 편집</a></button>
+                        <a href="${pageContext.request.contextPath}/mem/edit_profile"><i class="fa-solid fa-pencil fa-lg"></i></a>
                         <img class="menu" src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정">
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
@@ -751,20 +731,3 @@
   });  
 </script>
 </html>
-
-
-               <%-- var writerLevel;
-               if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
-                  writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
-               } else if (value.memLevel == "5  ") {
-                  writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
-               } else if (value.memLevel == "4  ") {
-                  writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
-               } else if (value.memLevel == "3  ") {
-                  writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
-               } else if (value.memLevel == "2  ") {
-                  writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
-               } else {
-                  writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
-               }
-               writerLevel.addClass("level-img"); --%>

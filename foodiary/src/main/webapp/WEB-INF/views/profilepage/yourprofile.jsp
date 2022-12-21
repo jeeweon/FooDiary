@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/board.css"> <!--css불러오는 링크-->
+    <head>
+    	<title>프로필</title>
+    </head>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
         #modal {
@@ -99,6 +102,11 @@
  		followCert();	
  		followMem();
  		followerMem();
+ 		
+ 		//회원번호 확인
+        var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
+ 		console.log(memNo);
+ 		
  		//회원조회
  		let profileList = [];
  		function memList() {
@@ -253,7 +261,11 @@
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+					if(memNo != value.memNo){
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+					}else{
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(b).append(writerLevel);
+					}
 					var hr=$("<hr>");
 					
 					img.addClass("follow-img");
@@ -282,6 +294,9 @@
 		     				}
 		            	 }); 
 		               });
+		             //사진 번호가 있는지 없는지. 
+					console.log("팔로우 이미지 넘버");
+					console.log(value.attachNo);
 		               
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
@@ -340,7 +355,11 @@
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
 					var b=$("<a>").attr("href","www.naver.com");
-					var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+					if(memNo != value.memNo){
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+					}else{
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(b).append(writerLevel);
+					}
 					var hr=$("<hr>");
 					
 					img.addClass("follow-img");
@@ -371,6 +390,8 @@
 		               });
 		               
 					//사진 번호가 있는지 없는지. 
+					console.log("팔로워 이미지 넘버");
+					console.log(value.attachNo);
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
 					}else{
