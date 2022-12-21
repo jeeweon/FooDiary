@@ -283,7 +283,9 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- font-awesome -->   
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
- 
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -463,7 +465,18 @@
 	    			
 	    			
 	    			//3. replyListHead-replyWriteTime
-	        		var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
+	    			var today = moment().format('yyyy-MM-dd');
+					var origin = value.replyWriteTime;
+					var replyDate = moment(origin).format('yyyy-MM-dd');
+					
+					var replyWriteTime;
+					if(replyDate == today) {
+						replyWriteTime = $("<span>").html("\n"+moment(origin).format('HH:mm'));
+					} else {
+						replyWriteTime = $("<span>").html("\n"+moment(origin).format('yyyy-MM-DD'));
+					}
+					
+	        		//var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
 
 	        		var replyReport = $("<input>").val("신고");
         			replyReport.attr("type", "button").addClass("btn-reply-report");
