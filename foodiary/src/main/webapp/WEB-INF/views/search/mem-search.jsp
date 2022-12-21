@@ -83,7 +83,7 @@
                	<div class="formdiv">	               
 					<form class="search-form">
 						<fieldset>
-							<legend class="class="search-bar"">							
+							<legend class="search-bar">							
 			            		<input type="text" name="keyword" class="search-input" placeholder="닉네임 검색" autocomplete="off">
 			            		<button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 				        		  
 							</legend>
