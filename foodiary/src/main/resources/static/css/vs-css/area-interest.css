@@ -1,0 +1,386 @@
+    .title{
+    	position: relative;
+    	bottom: 40px;
+        text-align: center;
+    }
+    /* 
+        .search-view = .search-bar + .search-list
+        .search-bar = .search-input + .search-btn
+        .search-list = <div<li + span(.btn-add-area)>> * addressList.length
+        .my-area = <div<li + span(.btn-delete-area)>> * interestList.length
+    */
+    .search-form {
+        margin: 0;
+    }
+    
+    .search-view{
+        width: 400px; 
+        margin: 0 auto;
+    }
+
+    .search-bar { 
+        position: relative;
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        border: 1px solid gray;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .search-input {
+        padding: 0.5em;
+        padding-right: 30px;
+        width: 100%;
+        height: inherit;
+        border: none;
+        border-radius: 4px;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .search-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: inherit;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+
+    .search-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: inherit;
+        border: 1px solid gray;
+        border-radius: 4px;
+        font-size: 16px;
+        position: absolute;
+        background-color: white;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 99;
+    }
+
+    .search-list::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .search-list::-webkit-scrollbar-thumb {
+        background-color: #E27C5E;
+        border-radius: 10px;
+        background-clip: padding-box;
+        border: 2px solid transparent;
+    }
+    .search-list::-webkit-scrollbar-track {
+        background-color: #F8F9FB;
+        border-radius: 10px;
+    }
+    .search-list li {
+        display: inline-block;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5em;
+    }
+
+    .search-list {
+        display: none;
+    }
+
+    .search-list.success {
+        display: block;
+    }
+
+    .search-list.success div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .search-list.success div:hover {
+        background-color: #FEF7F2;
+    }
+    .search-list.fail,
+    .search-list.fail ~.no-result {
+        display: block;
+    }
+    
+    .no-result {
+        display: none;
+        color: gray;
+        font-size: 16px;
+    }
+
+    .btn-add-area{
+        font-size: 16px;
+        padding-right: 0.5em;
+        cursor: pointer;
+    }
+
+    .my-area{
+        width:600px;
+        margin: 0 auto;
+        margin-top: 70px;
+    }
+
+    .my-area-list{
+        margin: 0;
+        padding: 0;
+        list-style: none;      
+        border: none;
+        font-size: 16px;
+        position: absolute;
+        background-color: white;
+        display: flex;
+    }
+    
+    .my-area-list div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FEF7F2;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        width: 140px;
+        height: 50px;
+        padding: 0.5em;
+        margin-right: 10px;
+    }
+
+    .my-area-list li {
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        padding: 0.5em;
+        color: #E27C5E;
+        font-weight: bold;
+    }
+
+    .btn-delete-area{
+        font-size: 16px;
+        padding-right: 0.5em;
+        cursor: pointer;
+        color: #AAAAAA;
+    }
+
+    .my-area.none .none-interest {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .none-interest {
+        display: none;
+        width: 100%;
+        height: 100px;
+        background-color: #F8F9FB;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    .nearby-area{
+        width:600px;
+        margin: 0 auto;
+        margin-top: 120px;
+        position: relative;
+    }
+    
+    .nearby-area.none{
+        margin-top: 50px;
+    }
+    
+    .nearby-area.none .none-interest {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nearby-list{
+	    margin: 0;
+	    padding: 0;
+	    list-style: none;
+	    width: 100%;
+	    border: none;
+	    font-size: 16px;
+	    position: absolute;
+	    background-color: white;
+	    display: flex;
+	    flex-wrap: wrap;
+    }
+    
+    .nearby-list div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FEF7F2;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        width: 140px;
+        height: 50px;
+        padding: 0.5em;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .nearby-list li {
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        padding: 0.5em;
+        color: #E27C5E;
+        font-weight: bold;
+    }
+    
+    .sub-title {
+    	display: block;
+        margin-bottom: 14px;
+    }
+    
+    .selected-area {
+    	border: 2px solid #E27C5E;
+    }
+    
+    h2 {
+	    margin-bottom: 10px; 
+    }
+    * {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.morebtn {
+    display: none;
+}
+
+li {
+    list-style: none;
+}
+
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper>div.inner {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+
+.Area{
+    position: relative;
+}
+
+
+.AreaH img{
+	position: relative;
+	top: 20px;
+	right: 8px;
+    width: 160px;
+    height: 110px;
+    
+}
+.AreaB{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+.AreaB button{
+    width: 400px;
+    height: 40px;
+    margin-top: 30px;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px 10px;
+    background-color: #ffe9b1;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1420px) {
+    .inner {
+        width: 100%; 
+        padding: 0 20px;
+        box-sizing: border-box;
+        }
+    }
+    @media screen and (max-width: 1240px) {
+        .wrapper > div.inner {
+            display: block;
+        }
+        .Area{
+        width: 100%;
+        height: 105px;
+        margin-bottom: 15px;
+        }
+        .AreaH{
+            position: unset;
+            padding: 80px 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        .AreaH img{
+        	position: relative;
+        	bottom: 200px;
+        	left: 50px;
+        }
+        .AreaH h1{
+        	position: relative;
+        	top: 100px;
+        	right: 140px;
+        	font-size: 23px;
+        }
+        .AreaH a{
+            margin-bottom: 0;
+        }
+        .AreaB{
+            position: relative;
+        }
+        .AreaB p button{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    @media screen and (max-width: 768px) {
+        .inner {
+            padding: 0 20px;
+        }
+        .AreaH img{
+            width: 250px;
+        }
+        .AreaH h1{      
+            width: 100%;
+            font-size: 20px;
+        }
+        .AreaB button{
+            width: 100%;
+        }
+    }
+}
