@@ -32,7 +32,7 @@
 		from 
 			review 
 		where
-			mem_no=#{memNo}
+			mem_no=#{memNo} 
 	</select>
 	<!-- 북마크 --> 
 	<select id="bookmark" parameterType="int" resultType="ProfileBookmarkVO">
@@ -123,6 +123,7 @@
 	) RA on R.review_no=RA.review_no
 	left outer join 
 	(select review_no,count(review_no) rcn from reply group by review_no) RP on R.review_no=RP.review_no
+	order by R.review_no desc 
 	</select>
 	<select id="bookmarklist" parameterType="int" resultType="ReviewListVO"> 
 	select

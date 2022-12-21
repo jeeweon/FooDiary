@@ -70,6 +70,4 @@
 			(mem_no, review_no) 
 		values (#{memNo}, #{reviewNo}) 
 	</insert>
-	
-	
 </mapper>
