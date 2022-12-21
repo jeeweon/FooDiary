@@ -84,7 +84,7 @@
 	<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
 					- (사진,닉네임)클릭시 프로필로 이동 
 	-->
-	<div class="reviewWriter">
+	<span class="reviewWriter">
 		<span class="reviewMem">
 			<c:choose>
 				<c:when test="${reviewWriter.attachNo == 0}">
@@ -96,7 +96,7 @@
 			</c:choose>
 			<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
 		</span>
-	</div>
+	</span>
 	
 	
 	<!-- 작성일 -->
@@ -227,7 +227,8 @@
 				<!-- 댓글,좋아요,북마크 -->
 				<div>
 					<span>
-						<i class='fa-regular fa-comment'></i>${checkRpLkBkVO.replyTotal}
+						<i class='fa-regular fa-comment'></i>
+						<span class="replyTotal">${checkRpLkBkVO.replyTotal}</span>
 					</span>
 					<c:choose>
 						<c:when test="${checkRpLkBkVO.likeCheck}">
@@ -287,7 +288,7 @@
 		let reviewNo = ${reviewDto.reviewNo}	//리뷰 글번호
 		let reviewWriterNo = ${reviewWriter.memNo}	//리뷰작성자 번호
 		let reviewWriterLevel = ${reviewWriter.memLevel} //리뷰작성자 레벨
-		let loginNo = ${loginNo}	//로그인한 회원번호
+		let loginNo = ${loginNo} //로그인한 회원번호
 		
 		reviewWriter(); //리뷰상단: 리뷰작성자 정보
 		loadReplyList(); //댓글목록 출력
@@ -312,7 +313,11 @@
 			
 			var reviewMem = $(".reviewMem").append(memLevel);
 			$(".reviewMem").click(function(){
-				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+				if(loginNo==reviewWriterNo) {
+					window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+				}else {
+					window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+				}
 			});
 			
 			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우");
@@ -373,6 +378,9 @@
     		if(memNo==null) {
     			alert("로그인하셔야 댓글을 등록 할 수 있습니다!");
     		}
+    		else if(replyContent=="") {
+    			alert("내용을 입력해주세요!");
+    		}
     		else {
     			axios.post("${pageContext.request.contextPath}/rest/reply", {
     				reviewNo: reviewNo,	
@@ -400,7 +408,9 @@
 			axios.get("${pageContext.request.contextPath}/rest/reply/"+reviewNo)
 			.then(function(resp){
 	        	var replyListVO = resp.data;
-
+				
+				$(".replyTotal").text(resp.data.length); //댓글총개수 업데이트
+	        	
 	        	$(".reply-list").empty();	//목록 초기화
 	        	$.each(replyListVO, function(index, value){
 	        		var replyNo = value.replyNo;
@@ -441,8 +451,13 @@
 	    			var replyMem = $("<span>").append(profile).append(memNick).append(memLevel);
 	    			replyMem.addClass("replyMem")
 	    			$(".replyMem").click(function(){
-	    				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
+	    				if(loginNo==value.memNo) {
+	    					window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+	    				}else {
+	    					window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
+	    				}
 	    			});
+	    			
 	    			
 	    			//3. replyListHead-replyWriteTime
 	        		var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
