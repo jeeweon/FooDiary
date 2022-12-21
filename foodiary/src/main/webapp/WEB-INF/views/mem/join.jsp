@@ -46,7 +46,7 @@
 						<div class="text-title" id="pw2">비밀번호 <i class="fa-solid fa-asterisk"></i></div>						
 						<input type="password" class="input" name="memPw" >
 				        <div class="success-message">사용 가능한 비밀번호입니다.</div>
-				        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
+				        <div class="fail-message">숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
 					
 					
 						<div class="text-title" id="pw1">비밀번호 확인 <i class="fa-solid fa-asterisk"></i></div>						
@@ -58,7 +58,7 @@
 						<div class="text-title">닉네임 <i class="fa-solid fa-asterisk"></i></div>						
 						<input type="text" class="input" name="memNick"  >
 						<div class="success-message">사용 가능한 닉네임입니다.</div>
-				        <div class="fail-message">닉네임은 한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
+				        <div class="fail-message">한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
 				        <div class="NNNNN-message">이미 사용중인 닉네임입니다.</div>		
 					
 					

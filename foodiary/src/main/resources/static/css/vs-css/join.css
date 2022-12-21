@@ -9,9 +9,16 @@
         }
    .input.success ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }	
    .input.fail ~ .fail-message {
             display: block;
+            color : red;
+            font-size: 12px;
+        	margin-top: -20px  
+            
         }
    #success-message,
    #fail-message { 
@@ -19,18 +26,33 @@
         }
    .input.success ~ #success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }
    .input.fail ~ #fail-message{
    		display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px  
    }
    .input.NNNNY ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }	   
    .input.NNNNN ~ .NNNNN-message{
    		display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px  
    }
    .input.NNNNN ~ .success-message{
    		display : none;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }
    
 
@@ -48,7 +70,7 @@
    .timer{
    	display: flex;
    	align-items: center;
-   	font-weight: bold;
+/*    	font-weight: bold; */
    	color: red;
    	margin-left: 150px;
    }
@@ -128,17 +150,11 @@ li {
     border: 1px solid lightgrey;
     border-radius: 10px 10px;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
 }
 .Mbody input:focus{
-    width: 450px;
-    height: 50px;
     outline: 1px solid lightgrey;
-    border-radius: 10px 10px;
-    margin: 30px;
-    font-size: 20px;
-    padding-left: 15px;
 }
 .Mbody button{
     width: 455px;

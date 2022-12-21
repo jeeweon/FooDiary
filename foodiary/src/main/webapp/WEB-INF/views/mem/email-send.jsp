@@ -23,10 +23,10 @@
                     <fieldset>
                         <legend>
                             <form action="email_send" class="email-form" method="post">
-								<div>
+								<div class="m1">
 									계정에 연결된 다음 정보가 확인 되었습니다.
 								</div>
-								<div>
+								<div class="m2">
 									이메일 : ${param.memEmail}
 								<input class="input" name="memEmail" hidden="true" value="${param.memEmail}">
 								</div>

@@ -5,9 +5,15 @@
         }
    .input.success ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   		
    }	
    .input.fail ~ .fail-message {
             display: block;
+            color : red;
+            font-size: 12px;
+        	margin-top: -20px             
         }
         
             * {
@@ -48,13 +54,14 @@ li {
     align-items: center;
 }
 .resetH img{
-    width: 350px;
-    height: 200px;
-    margin-top: 30px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 40px;
+    padding-right: 770px;
 }
 .resetH h1{
-    font-size: 35px;
-    margin-bottom: 20px;
+    font-size: 30px;
+    margin-bottom: 30px;
 }
 .resetB{
     display: flex;
@@ -76,7 +83,7 @@ form{
 }
 #resetT #resetT1{
 	position: relative;
-	right: 175px;
+	right: 180px;
 }
 #resetT label{
 	position: relative;
@@ -86,12 +93,17 @@ form{
 .resetB input{
     width: 450px;
     height: 50px;
+    border: 1px solid lightgrey;
     border-radius: 10px 10px;
-    border: 1px solid gray;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
 }
+
+.resetB input:focus{
+	outline: 1px solid lightgrey;
+	}
+	
 label i{
 	color: red;
 }

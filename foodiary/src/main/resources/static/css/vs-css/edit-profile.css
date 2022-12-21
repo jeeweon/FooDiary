@@ -6,18 +6,33 @@
         }
    .input.success ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }	
    .input.fail ~ .fail-message {
             display: block;
+            color : red;
+            font-size: 12px;
+        	margin-top: -20px  
         }
    .input.NNNNY ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }	   
    .input.NNNNN ~ .NNNNN-message{
    		display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px  
    }
    .input.NNNNN ~ .success-message{
    		display : none;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }
    .preview{
    		border-radius : 50%;
