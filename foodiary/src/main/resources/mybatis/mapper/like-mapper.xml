@@ -13,8 +13,8 @@
 			review_no=#{reviewNo} and mem_no=#{memNo}
 	</select>
 	<insert id="insert" parameterType="int">
-		 insert into likes(review_no,mem_no) 
-		 values(#{reviewNo},#{memNo})
+		 insert into likes(review_no,mem_no,likes_no) 
+		 values(#{reviewNo},#{memNo},like_seq.nextval)
 	</insert>
 	<delete id="delete" parameterType="int">
 		delete 
@@ -70,6 +70,4 @@
 			(mem_no, review_no) 
 		values (#{memNo}, #{reviewNo}) 
 	</insert>
-	
-	
 </mapper>
