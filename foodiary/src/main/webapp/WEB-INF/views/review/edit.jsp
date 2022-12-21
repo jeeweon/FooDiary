@@ -140,36 +140,32 @@
 				}
 		});
 		//글자수 체크
-		var changeText = $('.reviewContent').summernote('code'); //글자수 초과직전의 내용 미리저장
+		//- byte 변환식
+		const getByteLengthOfString = function(s,b,i,c){
+		    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+		    return b;
+		};
+		//-  글자수 초과직전의 내용 미리저장할 변수
+		var changeText = $('.reviewContent').summernote('code');
 		function setContentsLength(str, index) { //글자수 체크
-		    var textCnt = 0; //총 글자수
-		    var maxCnt = 1000; //최대 글자수
-		    var editorText = f_SkipTags_html(str); //에디터에서 태그를 삭제하고 내용만 가져오기
-		    editorText = editorText.replace(/\s/gi,""); //줄바꿈 제거
-		    editorText = editorText.replace(/&nbsp;/gi, ""); //공백제거
-
-	        textCnt = editorText.length;
-	        //console.log(textCnt+" / "+maxCnt);
+		    var maxCnt = 2000; //DB저장 최대 Byte수
+		    var length = getByteLengthOfString($('.reviewContent').summernote('code')); //총 글자수
+	        //console.log(length+" / "+maxCnt);
+	        //console.log("???: "+changeText);
 	        
-		    if(textCnt == maxCnt) {
+	        if(length <= maxCnt) {
 		    	changeText = $('.reviewContent').summernote('code');
-		    	//console.log("저장중"+changeText);
+		    	//console.log("저장값: "+changeText);
+		    	console.log(length+" = "+maxCnt);	//★★입력글자수/최대글자수 확인용★★
 		    } 
-		    if(textCnt > maxCnt) {
-        		alert("등록오류 : 글자수는 최대 "+maxCnt+"까지 등록이 가능합니다.");
-		    	//console.log("돌아가"+changeText);
+		    if(length > maxCnt) {
+		    	//console.log(length+" 전 "+maxCnt);
+		    	length = length-20;	//장문의 태그추가시 byte가 확 많아지기 때문에, 초과시 넉넉히 20 빼 준다
+		    	//console.log(length+" 후 "+maxCnt);
+        		alert("등록오류 : 내용을 줄여주세요.");
+		    	//console.log("돌아가 : "+changeText);
                 $('.reviewContent').summernote('code', changeText);
 		    }
-		}
-		//summernote 내용 태그 제거
-		function f_SkipTags_html(input, allowed) {
-			// 허용할 태그는 다음과 같이 소문자로 넘겨받음 (<a><b><c>)
-		    allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
-		    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
-		    commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
-		    return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
-		        return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
-		    });
 		}
 		
 		//별점 옵션 수정

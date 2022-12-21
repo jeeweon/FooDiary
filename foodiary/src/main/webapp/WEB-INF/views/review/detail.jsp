@@ -400,6 +400,35 @@
     			});
     		}
 		});
+		//댓글 글자수 제한 : byte
+		//- byte 변환식
+		const getByteLengthOfString = function(s,b,i,c){
+		    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+		    return b;
+		};
+		//-  글자수 초과직전의 내용 미리저장할 변수
+		var changeText = $(".input-reply").val();
+		//- 글자수 검사 및 변환
+		$(".input-reply").on("change keyup paste",function(){
+			var maxCnt = 50; //DB저장 최대 Byte수
+			var length = getByteLengthOfString($(".input-reply").val()); //총 글자수
+			console.log(length);
+			
+			if(length <= maxCnt) {
+		    	changeText = $(".input-reply").val();
+		    	//console.log("저장값: "+changeText);
+		    	console.log(length+" = "+maxCnt);	//★★입력글자수/최대글자수 확인용★★
+		    } 
+		    if(length > maxCnt) {
+		    	//console.log(length+" 전 "+maxCnt);
+		    	length = length-3;	//input value는 최대증가값이 3이므로, 3을 빼준다
+		    	//console.log(length+" 후 "+maxCnt);
+        		alert("등록오류 : 내용을 줄여주세요.");
+		    	//console.log("돌아가 : "+changeText);
+                $(".input-reply").val(changeText);
+		    }
+		});
+		
 		//댓글 삭제
 		$(document).on("click", ".btn-reply-delete", function(){ //생성된버튼은 해당방법 사용
     		var replyNo = $(this).siblings(".replyNo").val();
