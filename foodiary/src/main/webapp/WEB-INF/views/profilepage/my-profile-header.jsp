@@ -619,9 +619,9 @@
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">            
-                        <a href="${pageContext.request.contextPath}/profilepage/board">
-                           <li class="board-cnt"></li>
-                       </a>
+                        
+                           <li class="board-cnt board-btn"></li>
+                       
                         <a href="#"><li class="follow-cnt"></li></a>
                         <a href="#"><li class="follower-cnt"></li></a>
                     </ul> <!-- boardT2 -->
