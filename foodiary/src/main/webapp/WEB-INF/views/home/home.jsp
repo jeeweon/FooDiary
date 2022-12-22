@@ -11,6 +11,18 @@
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
+ 	.noti-cnt {
+ 		width:18px;
+ 		height:18px;
+ 		padding: 5px 10px;
+ 		border-radius: 50%;
+ 		text-align: center;
+ 		font-size: 14px;
+		color: #ffffff;
+ 		background-color: #E27C5E;
+        line-height: 18px;
+        margin: 0 10px;
+ 	}
  </style>
 
 </head>
@@ -64,7 +76,7 @@
                     <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/home">홈</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
-                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a><span class="noti-cnt">${cnt}</span></li>
                 </ul>
                 </div> <!--sidemenu-->
                 <a href="${pageContext.request.contextPath}/review/write" class="review">리뷰하기</a>
@@ -313,7 +325,9 @@ $(function() {
 			success : function(resp) {
 				interestList = resp;
 				showInterestArea();
-			
+				if (interestList.length == 0) {
+					$(".review-list").addClass("no-setting-area");
+				}
 			}
 		});
 	};
@@ -649,7 +663,7 @@ $(function() {
 	
 	//사이드바 프로필 영역 클릭 시, 마이 프로필로 이동
 	$(document).on("click", "#sideP", function(){
-		window.location = "${pageContext.request.contextPath}/profilepage/board";
+		window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
 	});
 	
 	//맛쟁이 리스트 추천 
