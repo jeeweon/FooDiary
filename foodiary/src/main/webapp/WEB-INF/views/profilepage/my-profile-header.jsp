@@ -483,25 +483,26 @@
       
           if(followMemList.length != 0) {
             $.each(followMemList, function(index, value) {
-               
+               console.log("팔로우 멤버 레벨");
+               console.log(value.memLevel);
                //팔로우 레벨 이미지 
                var writerLevel;
-               if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+               if( value.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
-               } else if (followMemList.memLevel == "5  ") {
+               } else if (value.memLevel == "5  ") {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
-               } else if (followMemList.memLevel == "4  ") {
+               } else if (value.memLevel == "4  ") {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
-               } else if (followMemList.memLevel == "3  ") {
+               } else if (value.memLevel == "3  ") {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
-               } else if (followMemList.memLevel == "2  ") {
+               } else if (value.memLevel == "2  ") {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
                } else {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
                }
                writerLevel.addClass("level-img2");
                
-               var span=$("<span>").text(value.memNick + value.attachNo);
+               var span=$("<span>").text(value.memNick);
                var img=$("<img>").attr("src","");
                var br=$("<br>");
                //a+img+span
@@ -575,15 +576,15 @@
                
                //팔로 레벨 이미지
                var writerLevel;
-               if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+               if( value.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
-               } else if (followerMemList.memLevel == "5  ") {
+               } else if (value.memLevel == "5  ") {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
-               } else if (followerMemList.memLevel == "4  ") {
+               } else if (value.memLevel == "4  ") {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
-               } else if (followerMemList.memLevel == "3  ") {
+               } else if (value.memLevel == "3  ") {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
-               } else if (followerMemList.memLevel == "2  ") {
+               } else if (value.memLevel == "2  ") {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
                } else {
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
@@ -619,7 +620,7 @@
                });
                
                
-               var span=$("<span>").text(value.memNick + value.attachNo);
+               var span=$("<span>").text(value.memNick);
                var img=$("<img>").attr("src","");
                var br=$("<br>");
                var hr=$("<hr>");
