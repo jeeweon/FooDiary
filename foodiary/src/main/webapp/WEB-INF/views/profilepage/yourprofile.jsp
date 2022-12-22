@@ -349,6 +349,8 @@
 					buttonFollow.attr("data-mno", value.memNo).attr("data-mnick", value.memNick);
 					//팔로우 버튼을 클릭했을 때 이벤트 발생
 		               $(buttonFollow).click(function(){
+		            	   var receiverMemNo = $(this).data("mno");
+		       				var receiverMemNick = $(this).data("mnick");
 		            	   var that=$(this);
 			            	 $.ajax({
 			            		 url:"${pageContext.request.contextPath}/rest/review/follow",
@@ -358,7 +360,20 @@
 			     				},
 			     				success:function(resp){
 			     					if(resp){
-			     						$(that).text("팔로잉");			
+			     						$(that).text("팔로잉");	
+			     						
+			     						//알림 생성 & 전송
+			    	            		var notiData = {
+			    	            				callerMemNo:memNo,
+			    	            				receiverMemNo:receiverMemNo,
+			    	            				receiverMemNick:receiverMemNick,
+			    	            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+			    	            				notiType:"follow",
+			    	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+			    	            				notiCreateDate:moment(),
+			    	            				memNick:memNick
+			    	            		};
+			    	            		socket.send(JSON.stringify(notiData));
 			     					}else{
 			     						$(that).text("팔로우");
 			     					}
@@ -445,6 +460,8 @@
 					//팔로우 버튼을 클릭했을 때 이벤트 발생
 		               $(buttonFollow).click(function(){
 		            	   var that=$(this);
+		            	   var receiverMemNo = $(this).data("mno");
+		       				var receiverMemNick = $(this).data("mnick");
 		            	 $.ajax({
 		            		 url:"${pageContext.request.contextPath}/rest/review/follow",
 		     				method:"post",
@@ -453,7 +470,19 @@
 		     				},
 		     				success:function(resp){
 		     					if(resp){
-		     						$(that).text("팔로잉");			
+		     						$(that).text("팔로잉");		
+		     						//알림 생성 & 전송
+		    	            		var notiData = {
+		    	            				callerMemNo:memNo,
+		    	            				receiverMemNo:receiverMemNo,
+		    	            				receiverMemNick:receiverMemNick,
+		    	            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+		    	            				notiType:"follow",
+		    	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+		    	            				notiCreateDate:moment(),
+		    	            				memNick:memNick
+		    	            		};
+		    	            		socket.send(JSON.stringify(notiData));
 		     					}else{
 		     						$(that).text("팔로우");
 		     					}
