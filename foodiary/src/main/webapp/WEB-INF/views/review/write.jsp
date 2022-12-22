@@ -2,89 +2,79 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<html>
+<head>
 <title>리뷰 작성</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/review-write.css"> <!--css 불러오는 링크--> 
 
-<style>
-/* summernote(좌측), 리뷰장소(우측) 구분용 style */
-	.float-container {}
-    .float-container::after {
-        content: "";        /* 영역에 들어갈 글자 */
-        display: block;   /* block형태 공간 */
-        clear: both;
-    }
-    .float-left {
-        float: left;
-    }
-    .clear {
-        clear: both;
-    }
-/* 주소입력창 초기화 x버튼 */
-	.btn-xmark {
-		padding: 0px;
-		border: none;
-		background: none;
-	}
-	.fa-rectangle-xmark {
-		font-size: 18px;
-	}
-</style>
+</head>
+<body>           
 
-
-
-<form class="form-submit" action="write" method="post" enctype="multipart/form-data">
-
-	<!-- 첨부파일 -->
-	<div>
-		<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
-		<input type="file" name="attachments" multiple>
-	</div>
-	
-	<!-- 별점 -->    
-	별점 : <div class="star-score-edit" data-max="5"></div>
-		
-	<!-- summernote + 리뷰장소 -->	
-	<div class="float-container">
-		<!-- summernote -->
-		<div class="float-left">
-			<textarea name="reviewContent" class="reviewContent"></textarea>
-		</div>
-		
-		<!-- 리뷰장소 -->
-		<div class="float-left">
-	    	<label>리뷰 장소</label>
-	    	<br>
-	        <input type="text" name="reviewAddress" placeholder=" 주소 : 지도에서 주소를 선택하세요" readonly>
-		        <button class="btn-xmark" type="button">
-		        	<i class="fa-regular fa-rectangle-xmark"></i>
-	        	</button>
-	       	<br>
-	        <input type="text" name="reviewPlace" placeholder=" 장소명 : 추가 입력 가능">
-			<div class="map_wrap">
-		    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-			    <div id="menu_wrap" class="bg_white">
-			        <div class="option">
-			            <div>
-			                <!-- <form onsubmit="searchPlaces(); return false;">  -->
-			                    <input type="text" value="당산역 맛집" id="keyword" size="15"> 
-			                    <button type="button" class="keywordMap">검색</button> 
-			                <!--  </form> -->
-			            </div>
-			        </div>
-			        <hr>
-			        <ul id="placesList"></ul>
-			        <div id="pagination"></div>
-			    </div>
-			</div>
-		</div>
-	</div>
-	
-	<div>
-		<button type="submit">등록하기</button>
-	</div>
-
-</form>
-
-<a href="list">목록으로</a> <!-- 리뷰구현 테스트용 : 리뷰구현 끝나면 삭제예정 -->
+<div class="wrapper">
+        <div class="Rwrite">
+            <div class="inner">
+                <div class="RwriteH">
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                </div> <!--RwriteH-->
+                <div class="RwriteB">
+                    <fieldset>
+                        <legend>
+                            <form class="form-submit" action="write" method="post" enctype="multipart/form-data">
+								<!-- 첨부파일 -->
+								<div>
+									<label>첨부파일(1개당 1MB. 최대 10MB 가능)</label>
+									<input type="file" name="attachments" multiple>
+								</div>
+								
+								<!-- 별점 -->    
+								별점 : <div class="star-score-edit" data-max="5"></div>
+									
+								<!-- summernote + 리뷰장소 -->	
+								<div class="float-container">
+									<!-- summernote -->
+									<div class="float-left">
+										<textarea name="reviewContent" class="reviewContent"></textarea>
+									</div>
+									
+									<!-- 리뷰장소 -->
+									<div class="float-left">
+								    	<label>리뷰 장소</label>
+								    	<br>
+								        <input type="text" name="reviewAddress" placeholder=" 주소 : 지도에서 주소를 선택하세요" readonly>
+									        <button class="btn-xmark" type="button">
+									        	<i class="fa-regular fa-rectangle-xmark"></i>
+								        	</button>
+								       	<br>
+								        <input type="text" name="reviewPlace" placeholder=" 장소명 : 추가 입력 가능">
+										<div class="map_wrap">
+									    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+										    <div id="menu_wrap" class="bg_white">
+										        <div class="option">
+										            <div>
+										                <!-- <form onsubmit="searchPlaces(); return false;">  -->
+										                    <input type="text" value="당산역 맛집" id="keyword" size="15"> 
+										                    <button type="button" class="keywordMap">검색</button> 
+										                <!--  </form> -->
+										            </div>
+										        </div>
+										        <hr>
+										        <ul id="placesList"></ul>
+										        <div id="pagination"></div>
+										    </div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="btn-write">
+									<button type="submit">등록하기</button>
+								</div>
+                            </form>
+                        </legend>
+                    </fieldset>
+                </div> <!--RwriteB-->
+            </div> <!--inner-->
+        </div> <!--Rwrite-->
+    </div> <!--wrapper-->
 
 
 <!-- jQuery -->
@@ -188,3 +178,5 @@
 		});
 	});
 </script>
+</body>
+</html>

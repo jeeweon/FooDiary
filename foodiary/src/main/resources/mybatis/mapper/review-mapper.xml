@@ -35,6 +35,17 @@
 		delete review where review_no = #{reviewNo}
 	</delete>
 	
+	<update id="plusReplycnt" parameterType="int">
+		update review
+			set reply_cnt = reply_cnt +1
+			where review_no = #{reviewNo}
+	</update>
+	<update id="minusReplycnt" parameterType="int">
+		update review
+			set reply_cnt = reply_cnt -1
+			where review_no = #{reviewNo}
+	</update>
+	
 	
 	<!-- 리뷰 파일첨부 -->
 	<insert id="insertAttach" parameterType="ReviewAttachDto">

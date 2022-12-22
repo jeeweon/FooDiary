@@ -18,355 +18,9 @@
 </c:set>
 <!-- toast 스타일 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
-<style>
-/* 리뷰 관련 style */
-	.level-img {
- 		width:24px;
- 		margin:0;
- 		margin-left: 5px;
- 	}
- 	
-/* summernote(좌측), 리뷰장소(우측) 구분용 style */
-	.float-container {
-		width: 850px;
-	}
-    .float-container::after {
-        content: "";        /* 영역에 들어갈 글자 */
-        display: block;   /* block형태 공간 */
-        clear: both;
-    }
-    .float-left {
-        float: left;
-        width: 50%;
-    }
-    .clear {
-        clear: both;
-    }
-    
-    .reviewBox {
-    	width: 450px;
-    	border: 1px solid gray;
-    	border-radius: 5px;
-    }
-
-/* 댓글목록 관련 style */
-	.replyBox {
-		width: 450px;
-	}
-	.replyListHead {
-		margin-bottom: 20px;
-		font-size: 14px;
-	}
-	.replyListBody {
-		text-align: center;
-	}
-	.profile {
-		width: 50px;
-	}
-	.replyContent {
-		width: 430px;
-		border: 1px solid transparent;
-		border-radius: 5px;
-		outline: none;
-		padding: 4px;
-	}
-	.input-reply {
-		border: none;
-		width: 550px;
-		padding-top: 10px;
-		padding-left: 5px;
-	}
-	
-	        * {
-    margin: 0;
-    padding: 0;
-}
-.reviewWriter-memNick{
-	position: relative;
-	bottom: 20px;
-}
-.level-img{
-	position: relative;
-	bottom: 15px;
-}
-.reviewmem:hover{
-	cursor: pointer;
-}
-.reviewWriter{
-	position: relative;
-	top: 20px;
-	left: 100px;
-}
-
-.reviewWriter button{
-	position: relative;
-	bottom: 20px;
-	margin-left: 20px;
-	border: none;
-	outline: none;
-    background-color: white;
-    color: #0095f6;
-    cursor: pointer;
-}
-.profile{
-	border-radius: 50%;
-}
-.btn-reply-delete{
-	border: none;
-	outline: none;
-	color: red;
-	background: none;
-}
-.btn-reply-delete:hover{
-	cursor: pointer;
-}
-.replyMem{
-	position: relative;
-	top: 20px;
-}
-.replyMem span{
-	position: relative;
-	bottom: 20px;
-	margin-left: 10px;
-}
-/* .btn-report{
-	background-image: url("/images/신고버튼 이미지.png");
-	background-position: center;
-	width: 40px;
-	height: 20px;
-	border: none;
-} */
-.btn-report:hover{
-	cursor: pointer;
-}
-.btn-reply-report{
-	border: none;
-	background: none;
-	color: blue;
-}
-
-fieldset {
-    border: 0;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-.morebtn{
-    display: none;
-} 
-li {
-    list-style: none;
-}
-.inner {
-    position: relative;
-    width: 1400px;
-    margin: 0 auto;
-}
-
-.wrapper > div.inner{
-    display: flex; 
-    gap: 50px;
-    justify-content: space-between;
-}
-.Rdetail{
-    position: relative;
-}
-.Rhead{
-   position: relative;
-}
- .Rhead a img{
-    position: relative;
-    top: 15px;
-    left: 100px;
-    width: 150px;
-    height: 90px;
-} 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/review-detail.css"> <!--css 불러오는 링크--> 
 
 
-.Rhead .Rhead2{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-.Rhead2 li{
-    position: relative;
-    right: 100px;
-    bottom: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-.Rhead2 li #Rdelete{
-	color: red;	
-}
-.Rbody{
-    position: relative;
-    flex-shrink: 0;
-    vertical-align: top;
-    width: 650px;
-    height: 650px;   
-    overflow: hidden;
-}
-.Rbody img{
-    width: 100%;
-    height: 650px;
-    object-fit:cover;
-}
-.swiper-button-prev{
-            color: white;
-            font-weight: bold;
-}
-.swiper-button-next{
-    color: white;
-    font-weight: bold;
-}
-.swiper-pagination-bullet-active{
-    background: white;
-    width: 10px;
-    height: 10px;
-}
-.LMap{
-    position: relative;
-    width: 100%;
-    height: 450px;
-    border-top: 1px solid gainsboro;
-    border-right: 1px solid gainsboro;
-    border-bottom: 1px solid gainsboro;   
-}
-.LMap ul li label{
-	font-weight: bold;
-}
-.LMap input{
-	width: 500px;
-	height: 30px;
-	border: none;
-	outline: none;
-	margin-top: 5px;	
-}
-.LMap img{
-    width: 380ps;
-    height: 380px;
-}
-.Ltext{
-	position: relative;
-	bottom: 5px;
-	border-right:1px solid gainsboro;
-	border-bottom:1px solid gainsboro;
-    width: 100%;
-    height: 200px; 
-    padding-top: 10px;
-    padding-left: 5px;
-}
-.Ltext ul li{
-    margin-top: 5px;
-    margin-left: 5px;
-}
-.Lreply{
-    position: relative;
-    width: 100%;
-    height: 70px;
-}
-.Lreply ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-}
-.Lreply li{
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-.Licon{
-	border-top: 1px solid gainsboro;
-    position: relative;
-    width: 100%;
-    padding-bottom: 100px;
-}
-.Licon i{
-	font-size: 20px;
-}
-.Licon ul{
-    display: flex;
-    flex-direction: row;
-}
-.Licon li{
-    margin-left: 10px;
-    margin-right: 10px;
-}
-.Lwrite{
-    position: relative;
-    width: 100%;
-    height: 100px;
-    border: 1px solid black;
-}
-.Lwrite input{
-    width: 500px;
-    height: 25px;
-    border: 0;
-    outline: none;
-    padding-left: 10px;
-}
-      
-.Lwrite button{
-    position: absolute;
-    left: 92%;
-    top: 60%;
-    width: 40px;
-    height: 40px;
-    border: 0;
-    outline: none;
-    background-color: white;
-    color: #0095f6;
-    cursor: pointer;
-}
-.bodyWrap {
-    display: flex;
-    justify-content: center;
-}
-.Lbody {
-    width: 550px;
-}
-.btn-reply-Write{
-	position: absolute;
-	top: 45px;
-	left: 515px;
-	border: none;
- 	outline: none;
-    background-color: white;
-    color: #0095f6;
-    cursor: pointer;
-}
-@media screen and (max-width: 1400px) {
-    .inner {
-        width: 100%;
-        padding: 0 20px;
-        box-sizing: border-box;
-    }
-    .Rbody {
-        width: 450px;
-    }
-    .Lbody {
-        width: 500px;
-    }
-}
-@media screen and (max-width: 1024px) {
-    .bodyWrap {
-        display: block; 
-    }
-    .Rbody {
-        width: 500px;
-        height: 400px;
-        margin: 0 auto;
-    }
-    .Lbody {
-        width: 500px;
-        margin: 0 auto;
-    }
-}	
-</style>
 </head>
 <body>
 
@@ -708,43 +362,59 @@ li {
 				}
 			});
 			
-			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우").attr("data-mnick", reviewWriterNick);
-			follow.click(function(){
-				var that=$(this);
-				var no = $(this).data("rno");
-				var nick =  $(this).data("mnick");
+			if(reviewWriterNo!=loginNo) { //본인글이 아닐때 팔로우버튼 생성
+				var follow=$("<button>").attr("data-rno",reviewWriterNo);
+				follow.addClass("follow");
 				$.ajax({
-					url:"${pageContext.request.contextPath}/rest/review/follow",
-					method:"post",
-					data :{
-						 passiveMemNo : $(this).data("rno")	
-					},
+					url:"${pageContext.request.contextPath}/rest/profile/followcert?memNo="+reviewWriterNo,
+					method:"get",
 					success :function(resp){
 						if(resp){
-							$(that).text("팔로잉");
-							//알림 생성 & 전송
-		            		var notiData = {
-		            				callerMemNo:loginNo,
-		            				receiverMemNo:no,
-		            				receiverMemNick:nick,
-		            				notiContent:loginNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
-		            				notiType:"follow",
-		            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNo,
-		            				notiCreateDate:moment(),
-		            				memNick:loginNick
-		            		};
-							if(loginNo != no) {
-			            		socket.send(JSON.stringify(notiData));								
-							}
+							$(".follow").text("팔로잉");
 						}else{
-							$(that).text("팔로우");
+							$(".follow").text("팔로우");
 						}
 					}
 				});
-			});
-			
-			$(".reviewWriter").append(reviewMem).append(follow);
+				
+				$(".reviewWriter").append(reviewMem).append(follow);
+			}
 		}
+		
+		//팔로우버튼 클릭
+		$(".follow").click(function(){
+			var that=$(this);
+			var no = $(this).data("rno");
+			var nick =  $(this).data("mnick");
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/review/follow",
+				method:"post",
+				data :{
+					 passiveMemNo : $(this).data("rno")	
+				},
+				success :function(resp){
+					if(resp){
+						$(that).text("팔로잉");
+						//알림 생성 & 전송
+	            		var notiData = {
+	            				callerMemNo:loginNo,
+	            				receiverMemNo:no,
+	            				receiverMemNick:nick,
+	            				notiContent:loginNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+	            				notiType:"follow",
+	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNo,
+	            				notiCreateDate:moment(),
+	            				memNick:loginNick
+	            		};
+						if(loginNo != no) {
+		            		socket.send(JSON.stringify(notiData));								
+						}
+					}else{
+						$(that).text("팔로우");
+					}
+				}
+			});
+		});
 		
 		//별점 옵션 수정
 		$(".star-score").score({
@@ -795,7 +465,8 @@ li {
     				//console.log(resp);
     				$(".input-reply").val("");
     				loadReplyList();
-    				//알림 생성 & 전송
+    				
+    				/* //알림 생성 & 전송
             		var notiData = {
             				callerMemNo:loginNo,
             				receiverMemNo:reviewWriterNo,
@@ -808,7 +479,7 @@ li {
             		};
     				if(loginNo != reviewWriterNo) {    					
             			socket.send(JSON.stringify(notiData));
-    				}
+    				} */
     			});
     		}
 		});
@@ -907,9 +578,9 @@ li {
 	    			
 	    			
 	    			//3. replyListHead-replyWriteTime
-	    			var today = moment().format('yyyy-MM-dd');
+	    			var today = moment().format('yyyy-MM-DD');
 					var origin = value.replyWriteTime;
-					var replyDate = moment(origin).format('yyyy-MM-dd');
+					var replyDate = moment(origin).format('yyyy-MM-DD');
 					
 					var replyWriteTime;
 					if(replyDate == today) {
@@ -1014,7 +685,7 @@ li {
 	                		url : "${pageContext.request.contextPath}/rest/review/count",
 	    	                method : "post",
 	    				    data : {
-	    		        	   reviewNo:reviewNo
+	    		        	   reviewNo: reviewNo
 	    		           	},
 	    	                success : function(resp) {
 	    	                	$(".like-ic-count").text(resp);    	    	                	
@@ -1027,6 +698,9 @@ li {
 		
 		//북마크 버튼 클릭 이벤트
 		$(document).on("click", ".bookmark-ic", function() {
+			if(loginNo==null) {
+				alert("로그인하셔야 북마크를 사용 할 수 있습니다!");
+			}
 			$.ajax({
 				url : "${pageContext.request.contextPath}/rest/review/bookmark",
                 method : "post",

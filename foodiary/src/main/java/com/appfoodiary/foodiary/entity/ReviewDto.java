@@ -19,4 +19,5 @@ public class ReviewDto {
 	private String reviewPlace;
 	private int reviewReportCnt;
 	private int likeCnt;
+	private int replyCnt;
 }

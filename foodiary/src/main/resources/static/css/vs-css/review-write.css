@@ -1,0 +1,104 @@
+/* summernote(좌측), 리뷰장소(우측) 구분용 style */
+	.float-container {}
+    .float-container::after {
+        content: "";        /* 영역에 들어갈 글자 */
+        display: block;   /* block형태 공간 */
+        clear: both;
+    }
+    .float-left {
+        float: left;
+    }
+    .clear {
+        clear: both;
+    }
+/* 주소입력창 초기화 x버튼 */
+	.btn-xmark {
+		padding: 0px;
+		border: none;
+		background: none;
+	}
+	.fa-rectangle-xmark {
+		font-size: 18px;
+	}
+	
+	       * {
+    margin: 0;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.morebtn{
+    display: none;
+} 
+li {
+    list-style: none;
+}
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper > div.inner{
+    display: flex; 
+    gap: 50px;
+    justify-content: space-between;
+}
+.Rwrite{
+    position: relative;
+}
+.RwriteH{
+   position: relative;
+}
+.RwriteH img{
+    position: relative;
+    left: 100px;
+    width: 150px;
+    height: 90px;
+}
+.RwriteB{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn-write button{
+	background: none;
+	border: none;
+	outline: none;
+	color: #0095f6;
+    cursor: pointer;
+    font-size: 15px;
+}
+.float-left input{
+	border: none;
+}
+@media screen and (max-width: 1400px) {
+    .inner {
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+    .Rwrite {  
+        width: 100%;        
+    }
+    .RwriteB {
+    	padding: 100px 100px;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 1024px) {   
+    .RwriteB form{
+        width: 400px;
+        height: 400px;
+        margin-right: 300px;
+    }
+ 
+}	

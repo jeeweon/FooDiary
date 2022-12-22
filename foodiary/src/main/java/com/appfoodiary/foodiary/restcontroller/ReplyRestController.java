@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.ReplyDto;
+import com.appfoodiary.foodiary.entity.ReviewDto;
 import com.appfoodiary.foodiary.repository.ReplyDao;
+import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.vo.ReplyListVO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.log4j.Log4j2;
 
 @CrossOrigin(origins = "http://127.0.0.1:5500/")
 @Tag(name = "reply controller", description = "댓글")
@@ -32,6 +35,8 @@ public class ReplyRestController {
 	
 	@Autowired
 	ReplyDao replyDao;
+	@Autowired
+	ReviewDao reviewDao;
 	
 	@GetMapping("/{reviewNo}")
 	@Operation(summary = "댓글목록 조회", description = "reviewNo 리뷰의 댓글목록을 조회합니다.")
@@ -46,13 +51,23 @@ public class ReplyRestController {
 		dto.setReplyNo(replyNo);
 		
 		replyDao.write(dto);
+		
+		int reviewNo = dto.getReviewNo();
+		reviewDao.plusReplycnt(reviewNo);
+		
 		return true;
 	}
 	
 	@DeleteMapping("/{replyNo}")
 	@Operation(summary = "댓글 삭제", description = "replyNo 댓글을 삭제합니다.")
 	public boolean delete(@PathVariable int replyNo) {
+		
+		ReplyDto dto = replyDao.find(replyNo);
+		int reviewNo = dto.getReviewNo();
+
 		replyDao.delete(replyNo);
+		reviewDao.minusReplycnt(reviewNo);
+		
 		return true;
 	}
 	

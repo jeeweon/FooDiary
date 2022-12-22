@@ -96,6 +96,13 @@
         font-weight:bold; 
         font-size: 20px;
         }
+        .yourF{
+        	width: 875px;
+        	border-bottom: 1px solid black;
+        }
+        .yourF ul{
+        	text-align: center;
+        }
  </style>
  <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <!-- sockjs 라이브러리 -->
@@ -170,7 +177,7 @@
 				success : function(resp) {
 					profileList = resp;
 					console.log(profileList);
-					//$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
+					//$(".mem-name").text(profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
 					$(".follower-cnt").text("팔로우 : "+profileList.followerCnt);
@@ -210,7 +217,7 @@
 					
 					
 					
-					var span=$("<span>").text("유저 닉네임 : "+profileList.memNick);
+					var span=$("<span>").text(profileList.memNick);
 					$(".follow-cert").attr("data-mnick", profileList.memNick);
 					$(".mem-name").append(span).append(writerLevel);
 					
@@ -539,11 +546,13 @@
                     </P>
                 </div> <!--boardT-->
                 <div class="boardA">
+                	<div class="yourF">
                     <ul>
                         <li>
                             <a href="yourreviewlist?memNo=${memNo}">게시물</a>
                         </li>
                     </ul>
+                    </div>
                 </div> <!-- boardA -->
             </div><!--inner-->
         </div><!--boaardF-->
