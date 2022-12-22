@@ -36,7 +36,7 @@ public class HomeController {
 			levelPointService.levelUp(memNo);
 			return "home/home";
 		} else {
-			return "redirect:search/review";
+			return "redirect:/search/review";
 		}
 	}
 	

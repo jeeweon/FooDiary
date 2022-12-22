@@ -16,7 +16,8 @@
 <c:set var="current">
 	<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
 </c:set>
-
+<!-- toast 스타일 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <style>
 /* 리뷰 관련 style */
 	.level-img {
@@ -186,6 +187,7 @@ li {
     width: 150px;
     height: 90px;
 } 
+
 
 .Rhead .Rhead2{
     display: flex;
@@ -367,10 +369,8 @@ li {
         width: 500px;
         margin: 0 auto;
     }
-}
-	
+}	
 </style>
-
 </head>
 <body>
 
@@ -422,6 +422,7 @@ li {
 							<input class="btn-report" type="button">
 						</c:if>
 					
+
 						<!-- 수정, 삭제 -->
 						<c:if test="${owner}">
 							<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
@@ -567,6 +568,12 @@ li {
   	</div>   
 <a id="Rlist" href="list">목록으로</a>
 
+<!-- 뒤로가기 화살표 -->
+<div style="text-align: center">
+	<i class="fa-solid fa-arrow-left-long goBack" style="font-size: 30px;"></i>
+	<div style="margin: -6px;">&nbsp;back</div>
+</div>
+
 	
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -581,10 +588,22 @@ li {
 <!-- font-awesome -->   
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 
+
 <!--swiper 의존성-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
  
+
+ <script src="${pageContext.request.contextPath}/js/commons.js"></script>
+<!-- sockjs 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<!-- toast 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
+
 
 <script type="text/javascript">
 
@@ -618,9 +637,53 @@ li {
 		let reviewWriterNo = ${reviewWriter.memNo}	//리뷰작성자 번호
 		let reviewWriterLevel = ${reviewWriter.memLevel} //리뷰작성자 레벨
 		let loginNo = ${loginNo}	//로그인한 회원번호
-		
+		let loginNick = "${loginNick}" //로그인한 회원닉네임
+		let reviewWriterNick = "${reviewWriter.memNick}" //리뷰작성자 닉네임
 		reviewWriter(); //리뷰상단: 리뷰작성자 정보
 		loadReplyList(); //댓글목록 출력
+		
+		//웹소켓 연결
+		if(loginNo != null){
+			connectWs();
+		}
+		//웹소켓
+		function connectWs(){
+			console.log("tttttt")
+			var uri = "${pageContext.request.contextPath}/ws/sockjs";
+			socket = new SockJS(uri);
+		
+			socket.onopen = function() {
+				console.log('open');
+			};
+			
+			toastr.options = {
+			  "closeButton": false,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": false,
+			  "positionClass": "toast-top-right",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "100",
+			  "hideDuration": "2000",
+			  "timeOut": "1500",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+			
+			socket.onmessage = function(e){
+				//수신된 e.data는 JSON 문자열
+				var data = JSON.parse(e.data);
+				toastr.info(data.notiContent);
+			};
+
+			socket.onclose = function() {
+			    console.log('close');
+		 	};
+		};
 		
 		//리뷰상단 : 리뷰 작성자 정보
 		function reviewWriter(){
@@ -642,12 +705,18 @@ li {
 			
 			var reviewMem = $(".reviewMem").append(memLevel);
 			$(".reviewMem").click(function(){
-				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+				if(loginNo==reviewWriterNo) {
+					window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+				}else {
+					window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+				}
 			});
 			
-			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우");
+			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우").attr("data-mnick", reviewWriterNick);
 			follow.click(function(){
 				var that=$(this);
+				var no = $(this).data("rno");
+				var nick =  $(this).data("mnick");
 				$.ajax({
 					url:"${pageContext.request.contextPath}/rest/review/follow",
 					method:"post",
@@ -655,9 +724,22 @@ li {
 						 passiveMemNo : $(this).data("rno")	
 					},
 					success :function(resp){
-						console.log(resp);
 						if(resp){
 							$(that).text("팔로잉");
+							//알림 생성 & 전송
+		            		var notiData = {
+		            				callerMemNo:loginNo,
+		            				receiverMemNo:no,
+		            				receiverMemNick:nick,
+		            				notiContent:loginNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+		            				notiType:"follow",
+		            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNo,
+		            				notiCreateDate:moment(),
+		            				memNick:loginNick
+		            		};
+							if(loginNo != no) {
+			            		socket.send(JSON.stringify(notiData));								
+							}
 						}else{
 							$(that).text("팔로우");
 						}
@@ -702,6 +784,10 @@ li {
     		var replyContent = $(".input-reply").val();
     		if(memNo==null) {
     			alert("로그인하셔야 댓글을 등록 할 수 있습니다!");
+    			$(".input-reply").val("");
+    		}
+    		else if(replyContent=="") {
+    			alert("내용을 입력해주세요!");
     		}
     		else {
     			axios.post("${pageContext.request.contextPath}/rest/reply", {
@@ -713,9 +799,52 @@ li {
     				//console.log(resp);
     				$(".input-reply").val("");
     				loadReplyList();
+    				//알림 생성 & 전송
+            		var notiData = {
+            				callerMemNo:loginNo,
+            				receiverMemNo:reviewWriterNo,
+            				receiverMemNick:reviewWriterNick,
+            				notiContent:loginNick+"님이 회원님의 리뷰에 댓글을 남겼어요 👀",
+            				notiType:"reply",
+            				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+reviewNo,
+            				notiCreateDate:moment(),
+            				memNick:loginNick
+            		};
+    				if(loginNo != reviewWriterNo) {    					
+            			socket.send(JSON.stringify(notiData));
+    				}
     			});
     		}
 		});
+		//댓글 글자수 제한 : byte
+		//- byte 변환식
+		const getByteLengthOfString = function(s,b,i,c){
+		    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+		    return b;
+		};
+		//-  글자수 초과직전의 내용 미리저장할 변수
+		var changeText = $(".input-reply").val();
+		//- 글자수 검사 및 변환
+		$(".input-reply").on("change keyup paste",function(){
+			var maxCnt = 50; //DB저장 최대 Byte수
+			var length = getByteLengthOfString($(".input-reply").val()); //총 글자수
+			//console.log(length);
+			
+			if(length <= maxCnt) {
+		    	changeText = $(".input-reply").val();
+		    	//console.log("저장값: "+changeText);
+		    	console.log(length+" = "+maxCnt);	//★★입력글자수/최대글자수 확인용★★
+		    } 
+		    if(length > maxCnt) {
+		    	//console.log(length+" 전 "+maxCnt);
+		    	length = length-3;	//input value는 최대증가값이 3이므로, 3을 빼준다
+		    	//console.log(length+" 후 "+maxCnt);
+        		alert("등록오류 : 내용을 줄여주세요.");
+		    	//console.log("돌아가 : "+changeText);
+                $(".input-reply").val(changeText);
+		    }
+		});
+		
 		//댓글 삭제
 		$(document).on("click", ".btn-reply-delete", function(){ //생성된버튼은 해당방법 사용
     		var replyNo = $(this).siblings(".replyNo").val();
@@ -730,7 +859,9 @@ li {
 			axios.get("${pageContext.request.contextPath}/rest/reply/"+reviewNo)
 			.then(function(resp){
 	        	var replyListVO = resp.data;
-
+				
+				$(".replyTotal").text(resp.data.length); //댓글총개수 업데이트
+	        	
 	        	$(".reply-list").empty();	//목록 초기화
 	        	$.each(replyListVO, function(index, value){
 	        		var replyNo = value.replyNo;
@@ -771,11 +902,27 @@ li {
 	    			var replyMem = $("<span>").append(profile).append(memNick).append(memLevel);
 	    			replyMem.addClass("replyMem")
 	    			$(".replyMem").click(function(){
-	    				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
+	    				if(loginNo==value.memNo) {
+	    					window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+	    				}else {
+	    					window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
+	    				}
 	    			});
 	    			
+	    			
 	    			//3. replyListHead-replyWriteTime
-	        		var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
+	    			var today = moment().format('yyyy-MM-dd');
+					var origin = value.replyWriteTime;
+					var replyDate = moment(origin).format('yyyy-MM-dd');
+					
+					var replyWriteTime;
+					if(replyDate == today) {
+						replyWriteTime = $("<span>").html("\n"+moment(origin).format('HH:mm'));
+					} else {
+						replyWriteTime = $("<span>").html("\n"+moment(origin).format('yyyy-MM-DD'));
+					}
+					
+	        		//var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
 
 	        		var replyReport = $("<input>").val("신고");
         			replyReport.attr("type", "button").addClass("btn-reply-report");
@@ -834,6 +981,8 @@ li {
 		
 		//좋아요 버튼 클릭 이벤트
 		$(document).on("click", ".like-ic", function() {
+			var receiverMemNo = $(this).data("mno");
+			var receiverMemNick = $(this).data("mnick");
 			if(loginNo==null) {
 				alert("로그인하셔야 좋아요를 선택 할 수 있습니다!");
 			}
@@ -849,6 +998,20 @@ li {
 	                		$(".like-ic").removeClass("fa-solid").addClass("fa-regular");
 	                	} else {
 	                		$(".like-ic").removeClass("fa-regular").addClass("fa-solid");
+	                		//알림 생성 & 전송
+	                		var notiData = {
+	                				callerMemNo:loginNo,
+	                				receiverMemNo:receiverMemNo,
+	                				receiverMemNick:receiverMemNick,
+	                				notiContent:loginNick+"님에게 회원님의 리뷰가 도움됐어요 🧡",
+	                				notiType:"like",
+	                				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+reviewNo,
+	                				notiCreateDate:moment(),
+	                				memNick:loginNick
+	                		};
+	                		if(loginNo != receiverMemNo) {
+		                		socket.send(JSON.stringify(notiData));                			
+	                		}
 	                	}
 	                	
 	                	$.ajax({
@@ -884,6 +1047,10 @@ li {
 			});
 		});
 		
+		//뒤로가기 클릭 이벤트
+		$(".goBack").click(function(){
+			history.back()
+		});
 	});
 	
 	 var review = new Swiper('.swiper-container', {
