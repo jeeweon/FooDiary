@@ -1030,7 +1030,7 @@ li {
 	                		url : "${pageContext.request.contextPath}/rest/review/count",
 	    	                method : "post",
 	    				    data : {
-	    		        	   reviewNo:reviewNo
+	    		        	   reviewNo: reviewNo
 	    		           	},
 	    	                success : function(resp) {
 	    	                	$(".like-ic-count").text(resp);    	    	                	
@@ -1043,6 +1043,9 @@ li {
 		
 		//북마크 버튼 클릭 이벤트
 		$(document).on("click", ".bookmark-ic", function() {
+			if(loginNo==null) {
+				alert("로그인하셔야 북마크를 사용 할 수 있습니다!");
+			}
 			$.ajax({
 				url : "${pageContext.request.contextPath}/rest/review/bookmark",
                 method : "post",
