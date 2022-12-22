@@ -84,7 +84,7 @@
 	<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
 					- (사진,닉네임)클릭시 프로필로 이동 
 	-->
-	<div class="reviewWriter">
+	<span class="reviewWriter">
 		<span class="reviewMem">
 			<c:choose>
 				<c:when test="${reviewWriter.attachNo == 0}">
@@ -96,7 +96,7 @@
 			</c:choose>
 			<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
 		</span>
-	</div>
+	</span>
 	
 	
 	<!-- 작성일 -->
@@ -227,7 +227,8 @@
 				<!-- 댓글,좋아요,북마크 -->
 				<div>
 					<span>
-						<i class='fa-regular fa-comment'></i>${checkRpLkBkVO.replyTotal}
+						<i class='fa-regular fa-comment'></i>
+						<span class="replyTotal">${checkRpLkBkVO.replyTotal}</span>
 					</span>
 					<c:choose>
 						<c:when test="${checkRpLkBkVO.likeCheck}">
@@ -263,8 +264,12 @@
 	</div>
 </div>
 
-<a href="list">목록으로</a>
-
+<br>
+<!-- 뒤로가기 화살표 -->
+<div style="text-align: center">
+	<i class="fa-solid fa-arrow-left-long goBack" style="font-size: 30px;"></i>
+	<div style="margin: -6px;">&nbsp;back</div>
+</div>
 	
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -278,7 +283,9 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- font-awesome -->   
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
- 
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -287,7 +294,7 @@
 		let reviewNo = ${reviewDto.reviewNo}	//리뷰 글번호
 		let reviewWriterNo = ${reviewWriter.memNo}	//리뷰작성자 번호
 		let reviewWriterLevel = ${reviewWriter.memLevel} //리뷰작성자 레벨
-		let loginNo = ${loginNo}	//로그인한 회원번호
+		let loginNo = ${loginNo} //로그인한 회원번호
 		
 		reviewWriter(); //리뷰상단: 리뷰작성자 정보
 		loadReplyList(); //댓글목록 출력
@@ -312,7 +319,11 @@
 			
 			var reviewMem = $(".reviewMem").append(memLevel);
 			$(".reviewMem").click(function(){
-				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+				if(loginNo==reviewWriterNo) {
+					window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+				}else {
+					window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
+				}
 			});
 			
 			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우");
@@ -325,7 +336,6 @@
 						 passiveMemNo : $(this).data("rno")	
 					},
 					success :function(resp){
-						console.log(resp);
 						if(resp){
 							$(that).text("팔로잉");
 						}else{
@@ -372,6 +382,10 @@
     		var replyContent = $(".input-reply").val();
     		if(memNo==null) {
     			alert("로그인하셔야 댓글을 등록 할 수 있습니다!");
+    			$(".input-reply").val("");
+    		}
+    		else if(replyContent=="") {
+    			alert("내용을 입력해주세요!");
     		}
     		else {
     			axios.post("${pageContext.request.contextPath}/rest/reply", {
@@ -386,6 +400,35 @@
     			});
     		}
 		});
+		//댓글 글자수 제한 : byte
+		//- byte 변환식
+		const getByteLengthOfString = function(s,b,i,c){
+		    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+		    return b;
+		};
+		//-  글자수 초과직전의 내용 미리저장할 변수
+		var changeText = $(".input-reply").val();
+		//- 글자수 검사 및 변환
+		$(".input-reply").on("change keyup paste",function(){
+			var maxCnt = 50; //DB저장 최대 Byte수
+			var length = getByteLengthOfString($(".input-reply").val()); //총 글자수
+			//console.log(length);
+			
+			if(length <= maxCnt) {
+		    	changeText = $(".input-reply").val();
+		    	//console.log("저장값: "+changeText);
+		    	console.log(length+" = "+maxCnt);	//★★입력글자수/최대글자수 확인용★★
+		    } 
+		    if(length > maxCnt) {
+		    	//console.log(length+" 전 "+maxCnt);
+		    	length = length-3;	//input value는 최대증가값이 3이므로, 3을 빼준다
+		    	//console.log(length+" 후 "+maxCnt);
+        		alert("등록오류 : 내용을 줄여주세요.");
+		    	//console.log("돌아가 : "+changeText);
+                $(".input-reply").val(changeText);
+		    }
+		});
+		
 		//댓글 삭제
 		$(document).on("click", ".btn-reply-delete", function(){ //생성된버튼은 해당방법 사용
     		var replyNo = $(this).siblings(".replyNo").val();
@@ -400,7 +443,9 @@
 			axios.get("${pageContext.request.contextPath}/rest/reply/"+reviewNo)
 			.then(function(resp){
 	        	var replyListVO = resp.data;
-
+				
+				$(".replyTotal").text(resp.data.length); //댓글총개수 업데이트
+	        	
 	        	$(".reply-list").empty();	//목록 초기화
 	        	$.each(replyListVO, function(index, value){
 	        		var replyNo = value.replyNo;
@@ -441,11 +486,27 @@
 	    			var replyMem = $("<span>").append(profile).append(memNick).append(memLevel);
 	    			replyMem.addClass("replyMem")
 	    			$(".replyMem").click(function(){
-	    				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
+	    				if(loginNo==value.memNo) {
+	    					window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+	    				}else {
+	    					window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
+	    				}
 	    			});
 	    			
+	    			
 	    			//3. replyListHead-replyWriteTime
-	        		var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
+	    			var today = moment().format('yyyy-MM-dd');
+					var origin = value.replyWriteTime;
+					var replyDate = moment(origin).format('yyyy-MM-dd');
+					
+					var replyWriteTime;
+					if(replyDate == today) {
+						replyWriteTime = $("<span>").html("\n"+moment(origin).format('HH:mm'));
+					} else {
+						replyWriteTime = $("<span>").html("\n"+moment(origin).format('yyyy-MM-DD'));
+					}
+					
+	        		//var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
 
 	        		var replyReport = $("<input>").val("신고");
         			replyReport.attr("type", "button").addClass("btn-reply-report");
@@ -554,5 +615,9 @@
 			});
 		});
 		
+		//뒤로가기 클릭 이벤트
+		$(".goBack").click(function(){
+			history.back()
+		});
 	});
 </script>
