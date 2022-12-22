@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<html>
+<head>
 <title>리뷰 상세</title>
 
 <c:set var="member" value="${loginNo != null && loginNo != reviewDto.memNo}"></c:set>
@@ -52,8 +54,7 @@
 		width: 450px;
 	}
 	.replyListHead {
-		margin-top: 6px;
-		margin-left: 6px;
+		margin-bottom: 20px;
 		font-size: 14px;
 	}
 	.replyListBody {
@@ -70,207 +71,509 @@
 		padding: 4px;
 	}
 	.input-reply {
-		width: 370px;
+		border: none;
+		width: 550px;
+		padding-top: 10px;
+		padding-left: 5px;
 	}
+	
+	        * {
+    margin: 0;
+    padding: 0;
+}
+.reviewWriter-memNick{
+	position: relative;
+	bottom: 20px;
+}
+.level-img{
+	position: relative;
+	bottom: 15px;
+}
+.reviewmem:hover{
+	cursor: pointer;
+}
+.reviewWriter{
+	position: relative;
+	top: 20px;
+	left: 100px;
+}
+
+.reviewWriter button{
+	position: relative;
+	bottom: 20px;
+	margin-left: 20px;
+	border: none;
+	outline: none;
+    background-color: white;
+    color: #0095f6;
+    cursor: pointer;
+}
+.profile{
+	border-radius: 50%;
+}
+.btn-reply-delete{
+	border: none;
+	outline: none;
+	color: red;
+	background: none;
+}
+.btn-reply-delete:hover{
+	cursor: pointer;
+}
+.replyMem{
+	position: relative;
+	top: 20px;
+}
+.replyMem span{
+	position: relative;
+	bottom: 20px;
+	margin-left: 10px;
+}
+#Rlist{
+	position: relative;
+	left: 500px;
+}
+.btn-report{
+	background-image: url("/images/신고버튼 이미지.png");
+	background-position: center;
+	width: 40px;
+	height: 20px;
+	border: none;
+}
+.btn-report:hover{
+	cursor: pointer;
+}
+.btn-reply-report{
+	border: none;
+	background: none;
+	color: blue;
+}
+
+fieldset {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.morebtn{
+    display: none;
+} 
+li {
+    list-style: none;
+}
+.inner {
+    position: relative;
+    width: 1400px;
+    margin: 0 auto;
+}
+
+.wrapper > div.inner{
+    display: flex; 
+    gap: 50px;
+    justify-content: space-between;
+}
+.Rdetail{
+    position: relative;
+}
+.Rhead{
+   position: relative;
+}
+ .Rhead a img{
+    position: relative;
+    top: 15px;
+    left: 100px;
+    width: 150px;
+    height: 90px;
+} 
+
+
+.Rhead .Rhead2{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.Rhead2 li{
+    position: relative;
+    right: 100px;
+    bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.Rhead2 li #Rdelete{
+	color: red;	
+}
+.Rbody{
+    position: relative;
+    flex-shrink: 0;
+    vertical-align: top;
+    width: 650px;
+    height: 650px;   
+    overflow: hidden;
+}
+.Rbody img{
+    width: 100%;
+    height: 650px;
+    object-fit:cover;
+}
+.swiper-button-prev{
+            color: white;
+            font-weight: bold;
+}
+.swiper-button-next{
+    color: white;
+    font-weight: bold;
+}
+.swiper-pagination-bullet-active{
+    background: white;
+    width: 10px;
+    height: 10px;
+}
+.LMap{
+    position: relative;
+    width: 100%;
+    height: 450px;
+    border-top: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;   
+}
+.LMap ul li label{
+	font-weight: bold;
+}
+.LMap input{
+	width: 500px;
+	height: 30px;
+	border: none;
+	outline: none;
+	margin-top: 5px;	
+}
+.LMap img{
+    width: 380ps;
+    height: 380px;
+}
+.Ltext{
+	position: relative;
+	bottom: 5px;
+	border-right:1px solid gainsboro;
+	border-bottom:1px solid gainsboro;
+    width: 100%;
+    height: 200px; 
+    padding-top: 10px;
+    padding-left: 5px;
+}
+.Ltext ul li{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.Lreply{
+    position: relative;
+    width: 100%;
+    height: 70px;
+}
+.Lreply ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.Lreply li{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.Licon{
+	border-top: 1px solid gainsboro;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100px;
+}
+.Licon i{
+	font-size: 20px;
+}
+.Licon ul{
+    display: flex;
+    flex-direction: row;
+}
+.Licon li{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.Lwrite{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border: 1px solid black;
+}
+.Lwrite input{
+    width: 500px;
+    height: 25px;
+    border: 0;
+    outline: none;
+    padding-left: 10px;
+}
+      
+.Lwrite button{
+    position: absolute;
+    left: 92%;
+    top: 60%;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    outline: none;
+    background-color: white;
+    color: #0095f6;
+    cursor: pointer;
+}
+.bodyWrap {
+    display: flex;
+    justify-content: center;
+}
+.Lbody {
+    width: 550px;
+}
+.btn-reply-Write{
+	position: absolute;
+	top: 45px;
+	left: 515px;
+	border: none;
+ 	outline: none;
+    background-color: white;
+    color: #0095f6;
+    cursor: pointer;
+}
+@media screen and (max-width: 1400px) {
+    .inner {
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+    .Rbody {
+        width: 450px;
+    }
+    .Lbody {
+        width: 500px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .bodyWrap {
+        display: block; 
+    }
+    .Rbody {
+        width: 500px;
+        height: 400px;
+        margin: 0 auto;
+    }
+    .Lbody {
+        width: 500px;
+        margin: 0 auto;
+    }
+}	
 </style>
+</head>
+<body>
 
+	<!-- 글번호 -->
+	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
 
-
-<!-- 글번호 -->
-<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
-
-<div>
-
-	<%-- 작성자 회원번호 : ${reviewDto.memNo} <br> --%>
-	<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
-					- (사진,닉네임)클릭시 프로필로 이동 
-	-->
-	<span class="reviewWriter">
-		<span class="reviewMem">
-			<c:choose>
-				<c:when test="${reviewWriter.attachNo == 0}">
-					<img class="profile" src="${pageContext.request.contextPath}/images/basic-profile.png">
-				</c:when>
-				<c:otherwise>
-					<img class="profile" src="${pageContext.request.contextPath}/attach/download/${reviewWriter.attachNo}">
-				</c:otherwise>
-			</c:choose>
-			<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
-		</span>
-	</span>
-	
-	
-	<!-- 작성일 -->
-	<c:choose>
-		<c:when test="${today == current}">
-			<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
-		</c:when>
-		<c:otherwise>
-			<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
-		</c:otherwise>
-	</c:choose>	
-	
-	<!-- 회원 기능 
-		1. 작성자 본인이 아닐 때 : 신고버튼
-			- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
-		2. 작성자 본인일 때 : 수정/삭제
-	-->	
-		<!-- 신고 -->
-		<c:if test="${member}">
-			<input class="btn-report" type="button" value="신고">
-		</c:if>
-	
-		<!-- 수정, 삭제 -->
-		<c:if test="${owner}">
-			<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
-			<a href="delete?reviewNo=${reviewDto.reviewNo}">삭제</a>
-		</c:if>
-</div>
-	
-<div class="float-container"> <!-- 사진(좌측)/본문(우측) 배치 -->
-	<!-- 첨부파일 : 슬라이딩 기능 필요 -->
-	<div class="float-left">
-		<!-- 사진 --> <br>
-		<c:forEach var="attachDto" items="${attachments}">
-			<img src="${pageContext.request.contextPath}/attach/download/${attachDto.attachNo}" width="400" height="400">
-		</c:forEach>
-	</div>
-	
-	<div class="float-left">
-		<div class="float-container">
-			<div class="reviewBox">
-				<div class="float-left">
-				<!-- 리뷰 : 주소/장소, 별점은 있을 경우에만 출력 -->
-				<!-- 별점 -->
-				<c:if test="${reviewDto.starScore >0}">
-					별점 <div class="star-score" data-max="5" data-rate="${reviewDto.starScore}"></div> <br>
-				</c:if>
-				
-				<c:if test="${reviewDto.reviewAddress!=null || reviewDto.reviewPlace!=null}">
-					<!-- 리뷰장소 : 위치 (본문 상단) -->
-				    	<label>리뷰 장소</label>
-				    	<br>
-				    	<c:choose>
-					    	<c:when test="${reviewDto.reviewPlace==null}">
-						        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>
-								<div class="map_wrap">
-							    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-								    <div id="menu_wrap" class="bg_white">
-								        <div class="option">
-								            <div>
-								                <!-- <form onsubmit="searchPlaces(); return false;">  -->
-								                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
-								                    <button type="button" class="keywordMap">검색</button> 
-								                <!--  </form> -->
-								            </div>
-								        </div>
-								        <hr>
-								        <ul id="placesList"></ul>
-								        <div id="pagination"></div>
-								    </div>
-								</div>
-							</c:when>
-							<c:when test="${reviewDto.reviewAddress==null}">
-						        <input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
-							</c:when>
-							<c:otherwise>
-						        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>
-						       	<br>
-					        	<input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
-								<div class="map_wrap">
-							    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-								    <div id="menu_wrap" class="bg_white">
-								        <div class="option">
-								            <div>
-								                <!-- <form onsubmit="searchPlaces(); return false;">  -->
-								                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
-								                    <button type="button" class="keywordMap">검색</button> 
-								                <!--  </form> -->
-								            </div>
-								        </div>
-								        <hr>
-								        <ul id="placesList"></ul>
-								        <div id="pagination"></div>
-								    </div>
-								</div>
-							</c:otherwise>
-						</c:choose>
-					</c:if>
-				</div>
-		
-				<div class="clear"></div>
-				<br>
-				
-				<!-- 본문 내용 -->
-				<div class="float-left">
-					<!-- 리뷰 내용 -->
-					${reviewDto.reviewContent}
-				</div>
-				
-			<div class="clear"></div>
-			<br>
-		</div>
-		
-			<div class="float-left replyBox">
-				<!-- 댓글 위치 
-					1. 댓글목록 : 최신순, 한번에 10개씩, 더보기클릭
-						- 작성시간 출력
-						- 회원 : 댓글 신고
-						- 내 댓글 : 삭제 가능 (회원탈퇴시 자동삭제)
-					2. 하단 위치 고정 : 좋아요, 북마크, 댓글작성란
-						- 댓글 작성 : 내용없을 때 등록버튼 비활성화
-				-->
-				<!-- 댓글 목록 -->
-				<div class="reply-list">
-				</div>
+    <div class="wrapper">
+        <div class="Rdetail">
+            <div class="inner">
+                <div class="Rhead">
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                 	<%-- 작성자 회원번호 : ${reviewDto.memNo} <br> --%>
+					<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
+									- (사진,닉네임)클릭시 프로필로 이동 
+					-->
+					<div class="reviewWriter">
+						<span class="reviewMem">
+							<c:choose>
+								<c:when test="${reviewWriter.attachNo == 0}">
+									<img class="profile" src="${pageContext.request.contextPath}/images/basic-profile.png">
+								</c:when>
+								<c:otherwise>
+									<img class="profile" src="${pageContext.request.contextPath}/attach/download/${reviewWriter.attachNo}">
+								</c:otherwise>
+							</c:choose>
+							<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
+						</span>
+					</div>                                
+                    <ul class="Rhead2">
+                    	 <li>
+                        	<!-- 작성일 -->
+							<c:choose>
+								<c:when test="${today == current}">
+									<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
+								</c:when>
+								<c:otherwise>
+									<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
+								</c:otherwise>
+							</c:choose>	
+                        </li> 
+                        <li>
+                        <!-- 회원 기능 
+						1. 작성자 본인이 아닐 때 : 신고버튼
+							- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
+						2. 작성자 본인일 때 : 수정/삭제
+					-->	
+						<!-- 신고 -->
+						<c:if test="${member}">
+							<input class="btn-report" type="button">
+						</c:if>
 					
-	    		<hr>
-				<!-- 댓글,좋아요,북마크 -->
-				<div>
-					<span>
-						<i class='fa-regular fa-comment'></i>
-						<span class="replyTotal">${checkRpLkBkVO.replyTotal}</span>
-					</span>
-					<c:choose>
-						<c:when test="${checkRpLkBkVO.likeCheck}">
-							<span>
-								<i class='fa-solid fa-heart like-ic' data-mno="${reviewWriter.memNo}" data-mnick="${reviewWriter.memNick}"></i>
-								<span class="like-ic-count">${reviewDto.likeCnt}</span>
-							</span>
-						</c:when>
-						<c:otherwise>
-							<span>
-								<i class='fa-regular fa-heart like-ic' data-mno="${reviewWriter.memNo}" data-mnick="${reviewWriter.memNick}"></i>
-								<span class="like-ic-count">${reviewDto.likeCnt}</span>
-							</span>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${checkRpLkBkVO.bookmarkCheck}">
-							<span><i class='fa-solid fa-bookmark bookmark-ic'></i></span>
-						</c:when>
-						<c:otherwise>
-							<span><i class='fa-regular fa-bookmark bookmark-ic'></i></span>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<!-- 댓글 작성 -->
-				<div>
-					<textarea class="input-reply" name="replyContent" 
-								rows="3" style="resize:none;" placeholder="내용을 입력해주세요."></textarea>
-					<button class="btn-reply-Write" type="button">등록</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
-<br>
+						<!-- 수정, 삭제 -->
+						<c:if test="${owner}">
+							<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
+							<a href="delete?reviewNo=${reviewDto.reviewNo}" id="Rdelete">삭제</a>
+						</c:if>
+                        </li>                      
+                    </ul>
+                </div> <!--Rhead-->
+            </div> <!--inner-->
+        </div> <!--Rdetail-->
+        <div class="bodyContent">
+            <div class="inner">
+                <div class="bodyWrap">
+                    <div class="Rbody">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <c:forEach var="attachDto" items="${attachments}">
+                                <div class="review swiper-slide">
+									<img src="${pageContext.request.contextPath}/attach/download/${attachDto.attachNo}" alt="피드사진">
+                                </div>                                
+								</c:forEach>                               
+                            </div> <!--swiper-wrapper-->   
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>        
+                        </div> <!--swiper-container-->
+                    </div> <!--Rbody-->
+                    <div class="Lbody">
+                        <div class="LMap">
+                        <ul>
+                            <li>
+                            	<c:if test="${reviewDto.starScore >0}">
+									별점 <div class="star-score" data-max="5" data-rate="${reviewDto.starScore}"></div> 
+								</c:if>
+                            </li>
+                            <li>
+                            	<c:if test="${reviewDto.reviewAddress!=null || reviewDto.reviewPlace!=null}">
+								<!-- 리뷰장소 : 위치 (본문 상단) -->
+							    	<label>리뷰 장소</label>							    
+							    	<c:choose>
+								    	<c:when test="${reviewDto.reviewPlace==null}">
+									        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>
+											<div class="map_wrap">
+										    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+											    <div id="menu_wrap" class="bg_white">
+											        <div class="option">
+											            <div>
+											                <!-- <form onsubmit="searchPlaces(); return false;">  -->
+											                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
+											                    <button type="button" class="keywordMap">검색</button> 
+											                <!--  </form> -->
+											            </div>
+											        </div>											      
+											        <ul id="placesList"></ul>
+											        <div id="pagination"></div>
+											    </div>
+											</div>
+										</c:when>
+										<c:when test="${reviewDto.reviewAddress==null}">
+									        <input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
+										</c:when>
+										<c:otherwise>
+									        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>									       	
+								        	<input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
+											<div class="map_wrap">
+										    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+											    <div id="menu_wrap" class="bg_white">
+											        <div class="option">
+											            <div>
+											                <!-- <form onsubmit="searchPlaces(); return false;">  -->
+											                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
+											                    <button type="button" class="keywordMap">검색</button> 
+											                <!--  </form> -->
+											            </div>
+											        </div>
+											        <hr>
+											        <ul id="placesList"></ul>
+											        <div id="pagination"></div>
+											    </div>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+                            </li>                            
+                        </ul>
+                        </div><!--LMap-->
+                        <div class="Ltext">
+                            <ul>
+                                <li>
+                                   	<!-- 리뷰 내용 -->
+									${reviewDto.reviewContent}
+                                </li>
+                            </ul>
+                        </div> <!--Ltext-->
+                        <div class="Lreply">                      	
+						<!-- 댓글 위치 
+							1. 댓글목록 : 최신순, 한번에 10개씩, 더보기클릭
+								- 작성시간 출력
+								- 회원 : 댓글 신고
+								- 내 댓글 : 삭제 가능 (회원탈퇴시 자동삭제)
+							2. 하단 위치 고정 : 좋아요, 북마크, 댓글작성란
+								- 댓글 작성 : 내용없을 때 등록버튼 비활성화
+						-->
+						<!-- 댓글 목록 -->
+							<div class="reply-list">				                                                 
+                        </div> <!--Lreply-->
+                    <div class="Licon">                   	
+							<span>
+								<i class='fa-regular fa-comment'></i>${checkRpLkBkVO.replyTotal}
+							</span>
+							<c:choose>
+								<c:when test="${checkRpLkBkVO.likeCheck}">
+									<span>
+										<i class='fa-solid fa-heart like-ic' style="color: red;"></i>
+										<span class="like-ic-count">${reviewDto.likeCnt}</span>
+									</span>
+								</c:when>
+								<c:otherwise>
+									<span>
+										<i class='fa-regular fa-heart like-ic' style="color: red;"></i>
+										<span class="like-ic-count">${reviewDto.likeCnt}</span>
+									</span>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${checkRpLkBkVO.bookmarkCheck}">
+									<span><i class='fa-solid fa-bookmark bookmark-ic'></i></span>
+								</c:when>
+								<c:otherwise>
+									<span><i class='fa-regular fa-bookmark bookmark-ic'></i></span>
+								</c:otherwise>
+							</c:choose>				
+							<!-- 댓글 작성 -->				
+							<textarea class="input-reply" name="replyContent" 
+										rows="3" style="resize:none;" placeholder="내용을 입력해주세요."></textarea>
+							<button class="btn-reply-Write" type="button">등록</button>			                   
+                    </div> <!--Licon-->
+                   
+                    </div> <!--Lbody-->
+                </div><!--//bodyWrap-->
+            </div><!--//inner-->
+        </div><!--//bodyContent-->           
+  	</div>   
+<a id="Rlist" href="list">목록으로</a>
+
 <!-- 뒤로가기 화살표 -->
 <div style="text-align: center">
 	<i class="fa-solid fa-arrow-left-long goBack" style="font-size: 30px;"></i>
 	<div style="margin: -6px;">&nbsp;back</div>
 </div>
+
 	
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -285,6 +588,12 @@
 <!-- font-awesome -->   
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 
+
+<!--swiper 의존성-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+ 
+
  <script src="${pageContext.request.contextPath}/js/commons.js"></script>
 <!-- sockjs 라이브러리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
@@ -295,7 +604,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 
+
 <script type="text/javascript">
+
+	var reviewslide = new Swiper('.swiper-container', {
+    
+    direction:'horizontal',
+    loop:true,
+    
+    pagination:{
+          el: ".swiper-pagination",
+        type: "bullets",
+        clickable:true,
+    },    
+
+    navigation:{
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+
+    autoplay:false,
+    
+    effect:"slide",
+                        
+    });
+
+
 	$(function(){
 		//변수 저장
 		//reviewNo = $("input[name=reviewNo]").val()
@@ -718,4 +1052,28 @@
 			history.back()
 		});
 	});
+	
+	 var review = new Swiper('.swiper-container', {
+         
+         direction:'horizontal',
+         loop:true,
+         
+         pagination:{
+               el: ".swiper-pagination",
+             type: "bullets",
+             clickable:true,
+         },    
+
+         navigation:{
+             nextEl: '.swiper-button-next',
+             prevEl: '.swiper-button-prev',
+         },
+
+         autoplay:false,
+         
+         effect:"slide",
+                             
+         });
 </script>
+</body>
+</html>
