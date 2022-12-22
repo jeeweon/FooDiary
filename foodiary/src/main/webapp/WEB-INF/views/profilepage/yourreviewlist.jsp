@@ -135,7 +135,7 @@ li {
 	
 	//리뷰 목록 출력
 	function renderList(){
-			if(reviewList1.length != 0){
+			if(reviewList1.length != 0 && reviewList1[0].reviewNo != 0){
 			$.each(reviewList1, function(index, value) {
 				
 				if(value.imgCnt>1){
