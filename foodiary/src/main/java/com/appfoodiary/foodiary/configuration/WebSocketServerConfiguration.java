@@ -19,10 +19,6 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
 	@Override
 	public void registerWebSocketHandlers(
 							WebSocketHandlerRegistry registry) {
-		//등록 시 주의사항
-		//- 절대로 다른 페이지와 주소가 겹치면 안된다
-		//- HTTP가 사용중이면 웹소켓 서버는 정상 작동하지 않는다
-		//HttpSessionHandshakeInterceptor는 HttpSession을 WebSocketSession으로 넘겨준다
 		registry.addHandler(notiWebsocketServer, "/ws/sockjs")
 						.addInterceptors(new HttpSessionHandshakeInterceptor())
 						.withSockJS();
