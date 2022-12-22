@@ -19,6 +19,9 @@ public interface ReviewDao {
 	ReviewDto find(int reviewNo);
 	boolean edit(ReviewDto dto);
 	boolean delete(int reviewNo);
+	//리뷰-댓글cnt
+	boolean plusReplycnt(int reviewNo);
+	boolean minusReplycnt(int reviewNo);
 	
 	//리뷰 첨부파일
 	void addReviewAttach(ReviewAttachDto dto);	//파일첨부
