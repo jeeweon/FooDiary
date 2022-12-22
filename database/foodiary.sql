@@ -68,6 +68,7 @@ CREATE TABLE review (
 alter table review add  reply_cnt number default 0;
 alter table review modify reply_cnt not null check (reply_cnt>=0);
 alter table review add  review_address varchar2(120);
+alter table review modify review_content varchar2(2000);
 create view review_attach_view as
 select
     R.review_no, A.*
@@ -96,6 +97,7 @@ create table reply(
         reply_write_time date default sysdate not null,
         reply_report_cnt number default 0 not null check(reply_report_cnt>=0) 
 );
+alter table reply modify reply_content varchar2(300);
 create view reply_mem_attach_view as
 select
     R.*, 

@@ -190,7 +190,7 @@ position:absolute; top:50%; left:50%;
 						reviewNo:$(this).data("review-no")
 					},
 					success:function(resp){
-						console.log(resp);
+						//console.log(resp);
 						if(resp>0){
 							$(that).text("♥");
 						}else{
@@ -204,7 +204,7 @@ position:absolute; top:50%; left:50%;
 									reviewNo:$(that).data("review-no")		
 								},
 								success:function(resp2){
-									console.log(resp2);					
+									//console.log(resp2);					
 									$(that).next().text(resp2);
 									$(".hover-btn").text("♥"+resp2);
 									
