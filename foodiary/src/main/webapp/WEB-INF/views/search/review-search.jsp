@@ -72,7 +72,7 @@
 	                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a></li>
 	                    </c:if>
 	                    <c:if test = "${login}">
-	                    <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="#">북마크</a></li>
+	                    <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="/profilepage/bookmark">북마크</a></li>
 	                	</c:if>
 	                </ul>            
                     </div> <!--sidemenu-->
@@ -107,8 +107,8 @@
                     <div class="container">
                         <div class="receipt">
                           <div class="title_text">
-                            <h1>Today~</h1>
-                            <h3>뭐 먹지?</h3>
+                            <h1>오늘 뭐 먹 지 ?</h1>
+                            <h3>일단골라.</h3>
                           </div> <!--title_text-->
                           <div class="menu_print">
                             <h2></h2>
@@ -130,8 +130,8 @@
                             </div> <!--slot_container-->
                           </div> <!--menu_slot-->
                           <div class="btn_area">
-                            <button onclick="lunchIs()">멈 춰 !</button>
-                            <button onclick="reset()">한번 더</button>
+                            <button onclick="lunchIs()">멈춰!</button>
+                            <button onclick="reset()">추천해줘!</button>
                           </div> <!--btn_area-->
                         </div> <!--receipt-->          
                     </div> <!--container-->

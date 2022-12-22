@@ -250,11 +250,12 @@ li {
   }
   
   .receipt .title_text h1 {
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 30px;
   }
   
   .receipt .title_text h3 {
+  	  font-size: 5px;
       margin-top: 10px;
       margin-bottom: 15px;
   }
@@ -366,13 +367,30 @@ li {
 }
 
 .origin{
-	width:50px;
-	hight:50px;
-}
+ 		position: relative;
+ 		top:10px;
+ 		border-radius: 50%;
+		width:50px;
+	}
 
 .follow-ul img{
 	border-radius: 50%;
 }
+.follow-ul li button{
+	position: relative;
+	bottom: 5px;
+	margin-left: 10px;
+	border: none;
+	background: none;
+	color: #0095f6;
+   	cursor: pointer;
+}
+.follow-ul li span{
+	position: relative;
+	bottom: 5px;
+	margin-left: 10px;
+}
+
 .rowbar{
     position: fixed;
     right: 250px;

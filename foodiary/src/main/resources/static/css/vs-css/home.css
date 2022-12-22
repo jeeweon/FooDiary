@@ -345,7 +345,7 @@ li {
 }
 #sideP .level-img{
 	position: relative;
-	width: 30px;
+	width: 24px;
 	top: 7px;
 }
 
@@ -496,11 +496,12 @@ li {
   }
   
   .receipt .title_text h1 {
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 30px;
   }
   
   .receipt .title_text h3 {
+ 	  font-size: 5px;
       margin-top: 10px;
       margin-bottom: 15px;
   }
@@ -588,9 +589,8 @@ li {
     position: relative;
     border-top: 1px dotted black;
     font-size: 17px;
-    text-align: center;
     white-space: normal;
-    top: 120px;  
+    top: 50px;  
 }
 .feed{
     flex: 1;
@@ -600,9 +600,10 @@ li {
 
 
 .level-img {
+		position: relative;
  		width:24px;
  		margin:0;
- 		margin-left: 5px;
+ 		margin-left: 10px;
  	}
  	
  	.nick-lev {
@@ -621,13 +622,26 @@ li {
  	}
 
  	.origin{
+ 		position: relative;
+ 		top:10px;
+ 		border-radius: 50%;
 		width:50px;
-		hight:50px;
+	}
+	.follow-ul li button{
+		position: relative;
+		bottom: 5px;
+		margin-left: 10px;
+		border: none;
+		background: none;
+		color: #0095f6;
+    	cursor: pointer;
+	}
+	.follow-ul li span{
+		position: relative;
+		bottom: 5px;
+		margin-left: 10px;
 	}
 
-	.follow-ul img{
-		border-radius: 50%;
-	}
 
 @media screen and (max-width: 1420px) {
     .inner {
@@ -663,6 +677,7 @@ li {
     .header1 h1 {
         margin-bottom: 0;
     }
+    
     .sidebar .random {
         position: relative;
     }
