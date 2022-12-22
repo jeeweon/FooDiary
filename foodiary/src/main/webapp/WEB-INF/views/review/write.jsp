@@ -46,7 +46,7 @@
 	<div class="float-container">
 		<!-- summernote -->
 		<div class="float-left">
-			<textarea name="reviewContent"></textarea>
+			<textarea name="reviewContent" class="reviewContent"></textarea>
 		</div>
 		
 		<!-- 리뷰장소 -->
@@ -121,7 +121,40 @@
 				["insert",["link"]],
 				//["view",["fullscreen","codeview","help"]]]	//전체모드, code모드 삭제
 				["view",["help"]]],
+			callbacks: {
+				onChange:function(contents){ //텍스트 글자수
+	                setContentsLength(contents, 0);
+	            }
+			}
 		});
+		//글자수 체크
+		//- byte 변환식
+		const getByteLengthOfString = function(s,b,i,c){
+		    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+		    return b;
+		};
+		//-  글자수 초과직전의 내용 미리저장할 변수
+		var changeText = $('.reviewContent').summernote('code');
+		function setContentsLength(str, index) { //글자수 체크
+		    var maxCnt = 2000; //DB저장 최대 Byte수
+		    var length = getByteLengthOfString($('.reviewContent').summernote('code')); //총 글자수
+	        //console.log(length+" / "+maxCnt);
+	        //console.log("???: "+changeText);
+	        
+	        if(length <= maxCnt) {
+		    	changeText = $('.reviewContent').summernote('code');
+		    	//console.log("저장값: "+changeText);
+		    	console.log(length+" = "+maxCnt);	//★★입력글자수/최대글자수 확인용★★
+		    } 
+		    if(length > maxCnt) {
+		    	//console.log(length+" 전 "+maxCnt);
+		    	length = length-20;	//장문의 태그추가시 byte가 확 많아지기 때문에, 초과시 넉넉히 20 빼 준다
+		    	//console.log(length+" 후 "+maxCnt);
+        		alert("등록오류 : 내용을 줄여주세요.");
+		    	//console.log("돌아가 : "+changeText);
+                $('.reviewContent').summernote('code', changeText);
+		    }
+		}
 		
 		//별점 옵션 수정
 		$(".star-score-edit").score({
