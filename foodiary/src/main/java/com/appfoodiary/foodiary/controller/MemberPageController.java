@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
-import com.appfoodiary.foodiary.entity.FollowDto;
+import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.repository.FollowDao;
 import com.appfoodiary.foodiary.repository.MemDao;
 import com.appfoodiary.foodiary.repository.MyprofileDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.vo.FollowVO;
 
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/profilepage")

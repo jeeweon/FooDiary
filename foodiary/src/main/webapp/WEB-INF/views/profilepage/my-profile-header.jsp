@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/board.css"> <!--css불러오는 링크-->
+    <!-- toast 스타일 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
     <head>
     	<title>프로필</title>
     </head>
@@ -203,6 +205,10 @@
       
 </style> 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- sockjs 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<!-- toast 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     $(function(){
        memList();
@@ -211,8 +217,51 @@
        
        //회원번호 확인
        var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
-		console.log(memNo);       
-    
+       
+	    //웹소켓 연결
+	   	if(memNo != null){
+	   		connectWs();
+	   	}
+	   	
+	   	//웹소켓
+	   	function connectWs(){
+	   		console.log("tttttt")
+	   		var uri = "${pageContext.request.contextPath}/ws/sockjs";
+	   		socket = new SockJS(uri);
+	   	
+	   		socket.onopen = function() {
+	   			console.log('open');
+	   		};
+	   		
+	   		toastr.options = {
+	   		  "closeButton": false,
+	   		  "debug": false,
+	   		  "newestOnTop": false,
+	   		  "progressBar": false,
+	   		  "positionClass": "toast-top-right",
+	   		  "preventDuplicates": false,
+	   		  "onclick": null,
+	   		  "showDuration": "100",
+	   		  "hideDuration": "2000",
+	   		  "timeOut": "1500",
+	   		  "extendedTimeOut": "1000",
+	   		  "showEasing": "swing",
+	   		  "hideEasing": "linear",
+	   		  "showMethod": "fadeIn",
+	   		  "hideMethod": "fadeOut"
+	   		}
+	   		
+	   		socket.onmessage = function(e){
+	   			//수신된 e.data는 JSON 문자열
+	   			var data = JSON.parse(e.data);
+	   			toastr.info(data.notiContent);
+	   		};
+	
+	   		socket.onclose = function() {
+	   		    console.log('close');
+	   	 	};
+	   	};
+   	
        //리뷰리스트 조회 
        let reviewList1 = [];
        

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/views/profilepage/yourprofile.jsp">
-	<jsp:param value="주문내역페이지" name="title"/>
+	<jsp:param value="유저 프로필" name="title"/>
 </jsp:include> 
 <style>
 * {
@@ -112,7 +112,7 @@ li {
 	object-fit:cover; 
 </style> 
 
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(function(){
 		reviewList();
