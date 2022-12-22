@@ -31,30 +31,34 @@ li {
     position: relative;
 }
 .goodbyeH{
+	margin-top : 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .goodbyeH img{
-    width: 350px;
-    height: 200px;
-    margin-top: 30px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-right : 765px;
 }
 .goodbyeH h1{
+	position: relative;
+/* 	right: 45%; */
     font-size: 35px;
     margin-top: 50px;
     margin-bottom: 50px;
 }
 .goodbyeH h2{
-    font-size: 17px;
+    font-size: 18px;
     margin-top: 50px;
-    font-weight: lighter;
+	color : rgb(128, 64, 64);
 }
 .goodbyeH h3{
-    font-size: 17px;
+    font-size: 18px;
     margin-top: 50px;
     margin-bottom: 50px;
-    font-weight: lighter;
+	color : rgb(128, 64, 64);
 }
 .goodbyeB{
     display: flex;

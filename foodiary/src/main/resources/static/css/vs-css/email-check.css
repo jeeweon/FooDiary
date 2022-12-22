@@ -36,12 +36,13 @@ li {
     align-items: center;
 }
 .PWlog img{
-    width: 350px;
-    height: 200px;
-    margin-top: 30px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-right: 770px;
 }
 .PWlog h1{
-    font-size: 35px;
+    font-size: 30px;
     margin-bottom: 20px;
 }
 .PWT{
@@ -60,10 +61,14 @@ form{
     width: 450px;
     height: 50px;
     border-radius: 10px 10px;
-    border: 1px solid gray;
+    border: 1px solid lightgrey;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
+}
+
+.PWT input:focus{
+    outline: 1px solid lightgrey;
 }
 .PWT button{
     width: 455px;
