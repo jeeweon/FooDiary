@@ -15,6 +15,7 @@ public class NotiVO {
 	private int notiNo;
 	private int callerMemNo;
 	private int receiverMemNo;
+	private String receiverMemNick;
 	private String notiType;
 	private String notiContent;
 	private String notiUrl;

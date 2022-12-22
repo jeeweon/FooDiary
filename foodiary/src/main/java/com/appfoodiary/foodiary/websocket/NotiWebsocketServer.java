@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class SockJSWebsocketServer extends TextWebSocketHandler{
+public class NotiWebsocketServer extends TextWebSocketHandler{
 	// 로그인 중인 개별유저
 	//private Set<WebSocketSession> users = new CopyOnWriteArraySet<>();
 	
@@ -56,10 +56,12 @@ public class SockJSWebsocketServer extends TextWebSocketHandler{
 		String payload = mapper.writeValueAsString(json);
 		TextMessage jsonMessage = new TextMessage(payload);
 		
-		WebSocketSession receiverMemName = userSessionsMap.get(json.getReceiverMemNo());
+		//WebSocketSession receiverMemName = userSessionsMap.get(json.getReceiverMemNo());
+		WebSocketSession receiverSession = userSessionsMap.get(json.getReceiverMemNick());
+		
 				
 		//전송(broadcast)
-		receiverMemName.sendMessage(jsonMessage);
+		receiverSession.sendMessage(jsonMessage);
 	}
 	
 	private String currentUserName(WebSocketSession session) {
