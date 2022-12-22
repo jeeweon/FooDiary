@@ -923,9 +923,9 @@ li {
 	    			
 	    			
 	    			//3. replyListHead-replyWriteTime
-	    			var today = moment().format('yyyy-MM-dd');
+	    			var today = moment().format('yyyy-MM-DD');
 					var origin = value.replyWriteTime;
-					var replyDate = moment(origin).format('yyyy-MM-dd');
+					var replyDate = moment(origin).format('yyyy-MM-DD');
 					
 					var replyWriteTime;
 					if(replyDate == today) {
