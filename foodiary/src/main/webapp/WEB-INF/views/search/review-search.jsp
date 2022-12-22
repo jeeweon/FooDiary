@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/review-search.css"> <!--css 불러오는 링크--> 
+<!-- toast 스타일 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <style>
 .receipt{
 	background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
@@ -164,6 +166,10 @@
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
+<!-- sockjs 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<!-- toast 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- moment 라이브러리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
@@ -245,12 +251,54 @@ resetNum = 0;
 	$(function() {
 		//세션에서 회원 번호 가져오기
 		var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
+		var memNick = "<%=(String)session.getAttribute("loginNick")%>";
         if(memNo == "null"){
         	loadReviewForGuest();
         } else {
         	loadReviewForMem();
+        	//웹소켓 연결
+        	connectWs();
         }
 
+      //웹소켓
+    	function connectWs(){
+    		console.log("tttttt")
+    		var uri = "${pageContext.request.contextPath}/ws/sockjs";
+    		socket = new SockJS(uri);
+    	
+    		socket.onopen = function() {
+    			console.log('open');
+    		};
+    		
+    		toastr.options = {
+    		  "closeButton": false,
+    		  "debug": false,
+    		  "newestOnTop": false,
+    		  "progressBar": false,
+    		  "positionClass": "toast-top-right",
+    		  "preventDuplicates": false,
+    		  "onclick": null,
+    		  "showDuration": "100",
+    		  "hideDuration": "2000",
+    		  "timeOut": "1500",
+    		  "extendedTimeOut": "1000",
+    		  "showEasing": "swing",
+    		  "hideEasing": "linear",
+    		  "showMethod": "fadeIn",
+    		  "hideMethod": "fadeOut"
+    		}
+    		
+    		socket.onmessage = function(e){
+    			//수신된 e.data는 JSON 문자열
+    			var data = JSON.parse(e.data);
+    			toastr.info(data.notiContent);
+    		};
+
+    		socket.onclose = function() {
+    		    console.log('close');
+    	 	};
+    	};
+        
 		let reviewList = [];
 		//이번주 인기 리뷰 목록 조회(비회원)
 		function loadReviewForGuest() {
@@ -440,6 +488,8 @@ resetNum = 0;
 						likeIc = $("<span>").html("<i class='fa-regular fa-heart'></i>");
 					}
 					likeIc.attr("data-rno", value.reviewNo);
+					likeIc.attr("data-writer-no", value.memNo);
+					likeIc.attr("data-writer-nick", value.memNick);
 					var likeCnt = $("<span>").text("도움됐어요"+ " " +value.likeCnt);
 					likeIc.addClass("like-ic")
 					likeCnt.addClass("like-cnt");
@@ -485,6 +535,8 @@ resetNum = 0;
 			} else {//회원
 				var clickedHeart = $(this);
 				var no = $(this).data("rno");
+				var receiverMemNo = $(this).data("writer-no");
+				var receiverMemNick = $(this).data("writer-nick");
 				$.ajax({
 					url : "${pageContext.request.contextPath}/rest/review/like2",
 	                method : "post",
@@ -496,6 +548,20 @@ resetNum = 0;
 	                		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
 	                	} else {
 	                		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
+	                		//알림 생성 & 전송
+	                		var notiData = {
+	                				callerMemNo:memNo,
+	                				receiverMemNo:receiverMemNo,
+	                				receiverMemNick:receiverMemNick,
+	                				notiContent:memNick+"님에게 회원님의 리뷰가 도움됐어요 🧡",
+	                				notiType:"like",
+	                				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+no,
+	                				notiCreateDate:moment(),
+	                				memNick:memNick
+	                		};
+	                		if(memNo != receiverMemNo) {
+		                		socket.send(JSON.stringify(notiData));	                			
+	                		}
 	                	}
 	                	
 	                	$.ajax({
