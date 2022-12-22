@@ -48,18 +48,14 @@ li {
     margin-left: 550px;
     margin-top : 30px;
 }
-
+  
 .boardT .boardT1 {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 }
-.boardT1 a{
-	position: relative;
-	top: 20px;
-	right: 150px;
-}
+
 .fa-2x{
 	font-size: 20px;
 }
