@@ -36,12 +36,17 @@ public class HomeController {
 			levelPointService.levelUp(memNo);
 			return "home/home";
 		} else {
-			return "redirect:search/review";
+			return "redirect:/search/review";
 		}
 	}
 	
 	@GetMapping("/area/interest")
 	public String areaInterest() {
 		return "home/area-interest";
+	}
+	
+	@GetMapping("/sockjs")
+	public String sockJs() {
+		return "sockjs";
 	}
 }

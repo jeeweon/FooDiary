@@ -1,6 +1,6 @@
 package com.appfoodiary.foodiary.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

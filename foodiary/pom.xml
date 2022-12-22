@@ -104,7 +104,11 @@
 		    <artifactId>springdoc-openapi-ui</artifactId>
 		    <version>1.6.12</version>
 		</dependency>
-		
+		<!-- 웹소켓 의존성 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
