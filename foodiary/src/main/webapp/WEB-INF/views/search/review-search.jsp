@@ -64,12 +64,12 @@
 	                </c:if>
                     <ul id="mainicon">
                     	<c:if test = "${login}">
-	                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="/home">홈</a></li>
+	                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/home">홈</a></li>
 	                    </c:if>
-	                    <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="/search/review">맛집 탐색</a></li>
-	                    <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="/search/mem">맛쟁이 탐색</a></li>
+	                    <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
+	                    <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
 	                    <c:if test = "${login}">
-	                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="#">알림</a></li>
+	                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a></li>
 	                    </c:if>
 	                    <c:if test = "${login}">
 	                    <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="#">북마크</a></li>
@@ -77,10 +77,9 @@
 	                </ul>            
                     </div> <!--sidemenu-->
                      <c:if test = "${login}">
-                    <a href="#" class="review">리뷰하기</a>
+                    <a href="${pageContext.request.contextPath}/review/write" class="review">리뷰하기</a>
 	                <div class="btnW">
 	                    <a href="${pageContext.request.contextPath}/mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
-	                    <span><a href="#" class="morebtn">더보기버튼</a></span>
 	                </div>
 	                </c:if>
                 </div> <!--header1-->
