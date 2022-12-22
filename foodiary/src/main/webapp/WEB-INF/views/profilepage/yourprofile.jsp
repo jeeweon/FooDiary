@@ -183,7 +183,7 @@
 					if(resp){
 						$(".follow-cert").text("팔로잉");
 					}else{
-						$(".follow-cert").text("팔로우");
+						$(".follow-cert").text("#");
 					}
 				}
 			});
@@ -260,9 +260,8 @@
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
-					var b=$("<a>").attr("href","www.naver.com");
 					if(memNo != value.memNo){
-						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
 					}else{
 						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(b).append(writerLevel);
 					}
@@ -354,9 +353,8 @@
 					var span=$("<span>").text(value.memNick + value.attachNo);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
-					var b=$("<a>").attr("href","www.naver.com");
 					if(memNo != value.memNo){
-						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
 					}else{
 						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(b).append(writerLevel);
 					}
