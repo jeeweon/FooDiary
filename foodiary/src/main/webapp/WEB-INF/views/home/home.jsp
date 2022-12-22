@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/home.css"> <!--css 불러오는 링크--> 
- 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
  <style>
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
@@ -152,6 +152,8 @@
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
 <!-- sockjs 라이브러리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<!-- toast 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- moment 라이브러리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
@@ -255,17 +257,28 @@ $(function() {
 			console.log('open');
 		};
 		
+		toastr.options = {
+		  "closeButton": false,
+		  "debug": false,
+		  "newestOnTop": false,
+		  "progressBar": false,
+		  "positionClass": "toast-top-right",
+		  "preventDuplicates": false,
+		  "onclick": null,
+		  "showDuration": "100",
+		  "hideDuration": "2000",
+		  "timeOut": "1500",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		}
+		
 		socket.onmessage = function(e){
 			//수신된 e.data는 JSON 문자열
 			var data = JSON.parse(e.data);
-			//console.log(data);
-			let $socketAlert = $('div#socketAlert');
-				$socketAlert.html(data.notiContent)
-				$socketAlert.css('display', 'block');
-				
-				setTimeout(function(){
-					$socketAlert.css('display','none');
-				}, 3000);
+			toastr.info(data.notiContent);
 		};
 
 		socket.onclose = function() {
@@ -557,6 +570,8 @@ $(function() {
 	$(document).on("click", ".like-ic", function() {
 		var clickedHeart = $(this);
 		var no = $(this).data("rno");
+		var recieverMemNo = $(this).data("writer-no");
+		var receiverMemNick = $(this).data("writer-nick");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/rest/review/like2",
                method : "post",
@@ -568,6 +583,18 @@ $(function() {
                		clickedHeart.find("i").removeClass("fa-solid").addClass("fa-regular");
                	} else {
                		clickedHeart.find("i").removeClass("fa-regular").addClass("fa-solid");
+					//알림 생성 & 전송
+            		var notiData = {
+            				callerMemNo:memNo,
+            				receiverMemNo:recieverMemNo,
+            				receiverMemNick:receiverMemNick,
+            				notiContent:memNick+"님에게 회원님의 리뷰가 도움됐어요 🧡",
+            				notiType:"like",
+            				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+no,
+            				notiCreateDate:moment(),
+            				memNick:memNick
+            		};
+            		socket.send(JSON.stringify(notiData));
                	}
                	
                	$.ajax({
@@ -582,19 +609,7 @@ $(function() {
                	});
                }
 		});
-		
-		var notiData = {
-				callerMemNo:memNo,
-				receiverMemNo:$(this).data("writer-no"),
-				receiverMemNick:$(this).data("writer-nick"),
-				notiContent:memNick+"님에게 회원님의 리뷰가 도움됐어요.",
-				notiType:"follow",
-				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+no,
-				notiCreateDate:moment(),
-				memNick:memNick
-			};
-			socket.send(JSON.stringify(notiData));
-		});
+	});
 	
 	//북마크 버튼 클릭 이벤트
 	$(document).on("click", ".bookmark-ic", function() {
