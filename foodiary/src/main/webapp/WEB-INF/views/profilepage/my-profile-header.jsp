@@ -492,7 +492,7 @@
                img.addClass("level-img");
                var iInfo=$("<i>");
                iInfo.addClass("fa-sharp fa-solid fa-circle-info");
-               iInfo.css("padding","10px");  
+               iInfo.css("padding","5px");  
                $(".mem-name").append(span).append(writerLevel).append(iInfo);            
                var imgClass=$("[name=orgin]");
                //사진이 있는지 없는지 확인

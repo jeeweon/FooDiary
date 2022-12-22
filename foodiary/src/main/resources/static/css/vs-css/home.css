@@ -347,6 +347,7 @@ li {
 	position: relative;
 	width: 24px;
 	top: 7px;
+	margin-left: -1px;
 }
 
 #mainicon img{
@@ -576,8 +577,8 @@ li {
 
 .follow h3 {
     font-size: 18px;
-    margin-top: 100px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     text-align: center;
 }
 .follow ul li{
@@ -589,6 +590,7 @@ li {
     position: relative;
     border-top: 1px dotted black;
     font-size: 17px;
+    text-align: center;    
     white-space: normal;
     top: 50px;  
 }
@@ -603,7 +605,7 @@ li {
 		position: relative;
  		width:24px;
  		margin:0;
- 		margin-left: 10px;
+ 		margin-left: 5px;
  	}
  	
  	.nick-lev {
@@ -626,6 +628,7 @@ li {
  		top:10px;
  		border-radius: 50%;
 		width:50px;
+		height : 50px
 	}
 	.follow-ul li button{
 		position: relative;

@@ -239,7 +239,7 @@ li {
 .level-img {
 	width:24px;
 	margin:0;
-	margin-left: 5px;
+	margin-left: -1px;
 }
  	
 .nick-lev {

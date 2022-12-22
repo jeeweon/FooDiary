@@ -287,7 +287,7 @@
 							passiveMemNo : ${memNo}
 						},
 						success:function(resp){
-								$(".follow-cnt").text("팔로워 : "+resp);
+								$(".follow-cnt").text("팔로워  "+resp);
 						}
 					});
 				}
