@@ -708,43 +708,59 @@ li {
 				}
 			});
 			
-			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우").attr("data-mnick", reviewWriterNick);
-			follow.click(function(){
-				var that=$(this);
-				var no = $(this).data("rno");
-				var nick =  $(this).data("mnick");
+			if(reviewWriterNo!=loginNo) { //본인글이 아닐때 팔로우버튼 생성
+				var follow=$("<button>").attr("data-rno",reviewWriterNo);
+				follow.addClass("follow");
 				$.ajax({
-					url:"${pageContext.request.contextPath}/rest/review/follow",
-					method:"post",
-					data :{
-						 passiveMemNo : $(this).data("rno")	
-					},
+					url:"${pageContext.request.contextPath}/rest/profile/followcert?memNo="+reviewWriterNo,
+					method:"get",
 					success :function(resp){
 						if(resp){
-							$(that).text("팔로잉");
-							//알림 생성 & 전송
-		            		var notiData = {
-		            				callerMemNo:loginNo,
-		            				receiverMemNo:no,
-		            				receiverMemNick:nick,
-		            				notiContent:loginNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
-		            				notiType:"follow",
-		            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNo,
-		            				notiCreateDate:moment(),
-		            				memNick:loginNick
-		            		};
-							if(loginNo != no) {
-			            		socket.send(JSON.stringify(notiData));								
-							}
+							$(".follow").text("팔로잉");
 						}else{
-							$(that).text("팔로우");
+							$(".follow").text("팔로우");
 						}
 					}
 				});
-			});
-			
-			$(".reviewWriter").append(reviewMem).append(follow);
+				
+				$(".reviewWriter").append(reviewMem).append(follow);
+			}
 		}
+		
+		//팔로우버튼 클릭
+		$(".follow").click(function(){
+			var that=$(this);
+			var no = $(this).data("rno");
+			var nick =  $(this).data("mnick");
+			$.ajax({
+				url:"${pageContext.request.contextPath}/rest/review/follow",
+				method:"post",
+				data :{
+					 passiveMemNo : $(this).data("rno")	
+				},
+				success :function(resp){
+					if(resp){
+						$(that).text("팔로잉");
+						//알림 생성 & 전송
+	            		var notiData = {
+	            				callerMemNo:loginNo,
+	            				receiverMemNo:no,
+	            				receiverMemNick:nick,
+	            				notiContent:loginNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+	            				notiType:"follow",
+	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNo,
+	            				notiCreateDate:moment(),
+	            				memNick:loginNick
+	            		};
+						if(loginNo != no) {
+		            		socket.send(JSON.stringify(notiData));								
+						}
+					}else{
+						$(that).text("팔로우");
+					}
+				}
+			});
+		});
 		
 		//별점 옵션 수정
 		$(".star-score").score({
