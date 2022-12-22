@@ -14,7 +14,8 @@
 <c:set var="current">
 	<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
 </c:set>
-
+<!-- toast 스타일 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <style>
 /* 리뷰 관련 style */
 	.level-img {
@@ -232,13 +233,13 @@
 					<c:choose>
 						<c:when test="${checkRpLkBkVO.likeCheck}">
 							<span>
-								<i class='fa-solid fa-heart like-ic'></i>
+								<i class='fa-solid fa-heart like-ic' data-mno="${reviewWriter.memNo}" data-mnick="${reviewWriter.memNick}"></i>
 								<span class="like-ic-count">${reviewDto.likeCnt}</span>
 							</span>
 						</c:when>
 						<c:otherwise>
 							<span>
-								<i class='fa-regular fa-heart like-ic'></i>
+								<i class='fa-regular fa-heart like-ic' data-mno="${reviewWriter.memNo}" data-mnick="${reviewWriter.memNick}"></i>
 								<span class="like-ic-count">${reviewDto.likeCnt}</span>
 							</span>
 						</c:otherwise>
@@ -278,7 +279,15 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- font-awesome -->   
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
- 
+
+ <script src="${pageContext.request.contextPath}/js/commons.js"></script>
+<!-- sockjs 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<!-- toast 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -288,9 +297,54 @@
 		let reviewWriterNo = ${reviewWriter.memNo}	//리뷰작성자 번호
 		let reviewWriterLevel = ${reviewWriter.memLevel} //리뷰작성자 레벨
 		let loginNo = ${loginNo}	//로그인한 회원번호
+		let loginNick = "${loginNick}" //로그인한 회원닉네임
+		let reviewWriterNick = "${reviewWriter.memNick}" //리뷰작성자 닉네임
 		
 		reviewWriter(); //리뷰상단: 리뷰작성자 정보
 		loadReplyList(); //댓글목록 출력
+		
+		//웹소켓 연결
+		if(loginNo != null){
+			connectWs();
+		}
+		//웹소켓
+		function connectWs(){
+			console.log("tttttt")
+			var uri = "${pageContext.request.contextPath}/ws/sockjs";
+			socket = new SockJS(uri);
+		
+			socket.onopen = function() {
+				console.log('open');
+			};
+			
+			toastr.options = {
+			  "closeButton": false,
+			  "debug": false,
+			  "newestOnTop": false,
+			  "progressBar": false,
+			  "positionClass": "toast-top-right",
+			  "preventDuplicates": false,
+			  "onclick": null,
+			  "showDuration": "100",
+			  "hideDuration": "2000",
+			  "timeOut": "1500",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut"
+			}
+			
+			socket.onmessage = function(e){
+				//수신된 e.data는 JSON 문자열
+				var data = JSON.parse(e.data);
+				toastr.info(data.notiContent);
+			};
+
+			socket.onclose = function() {
+			    console.log('close');
+		 	};
+		};
 		
 		//리뷰상단 : 리뷰 작성자 정보
 		function reviewWriter(){
@@ -315,9 +369,11 @@
 				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+reviewWriterNo;
 			});
 			
-			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우");
+			var follow=$("<button>").attr("data-rno",reviewWriterNo).text("팔로우").attr("data-mnick", reviewWriterNick);
 			follow.click(function(){
 				var that=$(this);
+				var no = $(this).data("rno");
+				var nick =  $(this).data("mnick");
 				$.ajax({
 					url:"${pageContext.request.contextPath}/rest/review/follow",
 					method:"post",
@@ -328,6 +384,18 @@
 						console.log(resp);
 						if(resp){
 							$(that).text("팔로잉");
+							//알림 생성 & 전송
+		            		var notiData = {
+		            				callerMemNo:loginNo,
+		            				receiverMemNo:no,
+		            				receiverMemNick:nick,
+		            				notiContent:loginNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+		            				notiType:"follow",
+		            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNo,
+		            				notiCreateDate:moment(),
+		            				memNick:loginNick
+		            		};
+		            		socket.send(JSON.stringify(notiData));
 						}else{
 							$(that).text("팔로우");
 						}
@@ -383,6 +451,18 @@
     				//console.log(resp);
     				$(".input-reply").val("");
     				loadReplyList();
+    				//알림 생성 & 전송
+            		var notiData = {
+            				callerMemNo:loginNo,
+            				receiverMemNo:reviewWriterNo,
+            				receiverMemNick:reviewWriterNick,
+            				notiContent:loginNick+"님이 회원님의 리뷰에 댓글을 남겼어요 👀",
+            				notiType:"reply",
+            				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+reviewNo,
+            				notiCreateDate:moment(),
+            				memNick:loginNick
+            		};
+            		socket.send(JSON.stringify(notiData));
     			});
     		}
 		});
@@ -504,6 +584,8 @@
 		
 		//좋아요 버튼 클릭 이벤트
 		$(document).on("click", ".like-ic", function() {
+			var recieverMemNo = $(this).data("mno");
+			var receiverMemNick = $(this).data("mnick");
 			if(loginNo==null) {
 				alert("로그인하셔야 좋아요를 선택 할 수 있습니다!");
 			}
@@ -519,6 +601,18 @@
 	                		$(".like-ic").removeClass("fa-solid").addClass("fa-regular");
 	                	} else {
 	                		$(".like-ic").removeClass("fa-regular").addClass("fa-solid");
+	                		//알림 생성 & 전송
+	                		var notiData = {
+	                				callerMemNo:loginNo,
+	                				receiverMemNo:recieverMemNo,
+	                				receiverMemNick:receiverMemNick,
+	                				notiContent:loginNick+"님에게 회원님의 리뷰가 도움됐어요 🧡",
+	                				notiType:"like",
+	                				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+reviewNo,
+	                				notiCreateDate:moment(),
+	                				memNick:loginNick
+	                		};
+	                		socket.send(JSON.stringify(notiData));
 	                	}
 	                	
 	                	$.ajax({
