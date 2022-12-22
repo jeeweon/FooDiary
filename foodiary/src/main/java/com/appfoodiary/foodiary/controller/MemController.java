@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,8 +23,8 @@ import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.entity.AttachDto;
 import com.appfoodiary.foodiary.entity.MemDto;
 import com.appfoodiary.foodiary.entity.ProfileAttachDto;
-import com.appfoodiary.foodiary.repository.AttachDao;
 import com.appfoodiary.foodiary.repository.MemDao;
+import com.appfoodiary.foodiary.repository.NotiDao;
 import com.appfoodiary.foodiary.service.AttachmentService;
 import com.appfoodiary.foodiary.service.EmailService;
 
@@ -44,6 +43,9 @@ public class MemController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private NotiDao notiDao;
 	
 	@GetMapping("/join")
 	public String join() {
@@ -161,19 +163,6 @@ public class MemController {
 		}
 	}
 	
-//	@PostMapping("/reset_pw")
-//	public String resetPw(@ModelAttribute MemDto memDto) {
-//		MemDto memDto = memDao.findByEmail(memEmail);
-//		boolean result = memDao.resetPw(memDto);
-//		
-//		if(result) {			
-//			return "redirect:login";
-//		}
-//		else {
-//			return "redirect:reset_pw?error";
-//		}
-//	}
-	
 	@GetMapping("/check_pw")
 	public String checkPw() {
 		return "mem/check-pw";
@@ -217,24 +206,6 @@ public class MemController {
 			return "redirect:edit_pw?error";
 		}
 	}
-	
-//	@PostMapping("/edit_pw")
-//	public String editPw(@RequestParam int memNo,
-//							@RequestParam String memPw) {
-//		
-//		MemDto loginDto = memDao.selectOne(memNo);
-//		
-//		loginDto.setMemPw(memPw);
-//		boolean result = memDao.resetPw(loginDto);
-//		
-//		
-//		if(result) {			
-//			return "redirect:login"; //마이 프로필 이동으로 수정하기
-//		}
-//		else {
-//			return "redirect:edit_pw?error";
-//		}
-//	}
 	
 	@GetMapping("/edit_profile")
 	public String editProfile(HttpSession session,
@@ -307,5 +278,11 @@ public class MemController {
 		return "mem/inquiry-finish";
 	}
 	
-
+	//알림 내역
+	@GetMapping("/noti")
+	public String noti(HttpSession session, Model model) {
+		int memNo = (int) session.getAttribute("loginNo");
+		model.addAttribute("list", notiDao.myNotiList(memNo));
+		return "mem/noti";
+	}
 }

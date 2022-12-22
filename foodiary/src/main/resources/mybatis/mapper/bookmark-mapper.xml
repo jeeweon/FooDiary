@@ -25,7 +25,7 @@
 		insert into
 
 			bookmark(bookmark_no,review_no,mem_no)
-		values(bookmark_seq,#{reviewNo},#{memNo})
+		values(bookmark_seq.nextval,#{reviewNo},#{memNo})
 	</insert>
 	<delete id="delete" parameterType="int">
 		delete 

@@ -236,7 +236,7 @@
 					if(resp){
 						$(".follow-cert").text("팔로잉");
 					}else{
-						$(".follow-cert").text("#");
+						$(".follow-cert").text("팔로우");
 					}
 				}
 			});

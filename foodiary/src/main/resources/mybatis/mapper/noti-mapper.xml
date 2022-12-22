@@ -6,7 +6,7 @@
 <mapper namespace="noti">
 	<insert id="save" parameterType="NotiDto">
 		insert into mem_noti(noti_no, caller_mem_no, receiver_mem_no, noti_content, noti_type, noti_url)
-		values(mem_noti_seq.nextval, #{callerMemNo}, #{receiverMemNo}, #{noti_content}, #{notiType}, #{notiUrl})
+		values(mem_noti_seq.nextval, #{callerMemNo}, #{receiverMemNo}, #{notiContent}, #{notiType}, #{notiUrl})
 	</insert>
 	
 	<!-- 최근 14일의 로그인 유저 알림 목록 조회(내 알림 목록) -->

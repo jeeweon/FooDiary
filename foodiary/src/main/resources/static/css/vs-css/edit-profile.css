@@ -193,20 +193,12 @@ form #PT{
     align-items: center;
     border: 1px solid lightgrey;
     border-radius: 10px 10px;
-    font-size: 15px;  
-    padding-left: 10px;
-    padding-top: 5px;
+    font-size: 14px;  
+    padding: 10px;
+/*     padding-top: 5px; */
 }
 .profileT textarea:focus{
-    width: 455px;
-    height: 150px;
-    margin: 20px;
-    align-items: center;
     outline: 1px solid lightgrey;
-    border-radius: 10px 10px;
-    font-size: 15px;  
-    padding-left: 10px;
-    padding-top: 5px;
 }
 .Pnick{
     display: flex;

@@ -118,6 +118,7 @@
           padding:20px 10px;
           background:#fff;
           border:10px solid #666;
+          font-size:13px
         }
         
         #modal3 .modal_layer {
@@ -332,13 +333,12 @@
 			});
 		};
 	});
-		 
+	
 		
 	//리뷰 목록 출력
 	function renderList(){
-			if(reviewList1.length != 0){
+			if(reviewList1.length != 0 && reviewList1[0].reviewNo != 0){
 			$.each(reviewList1, function(index, value) {
-				
 				// 사진갯수가 0 이상이라면 
 				if(value.imgCnt>1){
 				
@@ -456,8 +456,6 @@
                });
                //게시물/북마크/좋아요 hover시 css 진하게
                $(".board-btn").hover(
-	            	function(){$(this).text("게시물").css("font-weight","bolder")},
-    	        	function(){$(this).text("게시물").css("font-weight","bold")}
         	    	);
                $(".bookmark-btn").hover(
                    	function(){$(this).text("북마크").css("font-weight","bolder")},
@@ -493,6 +491,7 @@
                img.addClass("level-img");
                var iInfo=$("<i>");
                iInfo.addClass("fa-sharp fa-solid fa-circle-info");
+               iInfo.css("padding","10px");  
                $(".mem-name").append(span).append(writerLevel).append(iInfo);            
                var imgClass=$("[name=orgin]");
                //사진이 있는지 없는지 확인
@@ -532,8 +531,6 @@
       
           if(followMemList.length != 0) {
             $.each(followMemList, function(index, value) {
-               console.log("팔로우 멤버 레벨");
-               console.log(value.memLevel);
                //팔로우 레벨 이미지 
                var writerLevel;
                if( value.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
@@ -708,8 +705,8 @@
                         <li class="mem-name">
                         
                          </li>    
-                        <a href="${pageContext.request.contextPath}/mem/edit_profile"><i class="fa-solid fa-pencil fa-lg"></i></a>
-                        <img class="menu" src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정">
+                        <a href="${pageContext.request.contextPath}/mem/edit_profile"><i class="fa-solid fa-pencil fa-2x" style="padding:10px"></i></a>
+                        <i id="Timg1" alt="설정" class="menu fa-solid fa-gears fa-2x" style="padding:15px"></i>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">            
@@ -839,5 +836,8 @@
      $("#modal3").fadeOut();
      location.reload();
   });  
+    $(".level-condition").click(function(){
+    	$("#modal4").fadeOut();
+    });
 </script>
 </html>

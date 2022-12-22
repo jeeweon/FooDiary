@@ -129,17 +129,13 @@
 	bottom: 20px;
 	margin-left: 10px;
 }
-#Rlist{
-	position: relative;
-	left: 500px;
-}
-.btn-report{
+/* .btn-report{
 	background-image: url("/images/신고버튼 이미지.png");
 	background-position: center;
 	width: 40px;
 	height: 20px;
 	border: none;
-}
+} */
 .btn-report:hover{
 	cursor: pointer;
 }
@@ -419,7 +415,7 @@ li {
 					-->	
 						<!-- 신고 -->
 						<c:if test="${member}">
-							<input class="btn-report" type="button">
+							<input class="btn-report" type="button" value="신고">
 						</c:if>
 					
 
@@ -531,7 +527,8 @@ li {
                         </div> <!--Lreply-->
                     <div class="Licon">                   	
 							<span>
-								<i class='fa-regular fa-comment'></i>${checkRpLkBkVO.replyTotal}
+								<i class='fa-regular fa-comment'></i>
+								<span class="replyTotal">${checkRpLkBkVO.replyTotal}</span>
 							</span>
 							<c:choose>
 								<c:when test="${checkRpLkBkVO.likeCheck}">
@@ -566,7 +563,6 @@ li {
             </div><!--//inner-->
         </div><!--//bodyContent-->           
   	</div>   
-<a id="Rlist" href="list">목록으로</a>
 
 <!-- 뒤로가기 화살표 -->
 <div style="text-align: center">

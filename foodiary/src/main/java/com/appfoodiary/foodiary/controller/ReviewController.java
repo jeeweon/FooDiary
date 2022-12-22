@@ -166,9 +166,9 @@ public class ReviewController {
 		if(result) {	//리뷰삭제 성공
 			//(DB: attach테이블), 실제파일 삭제
 			attachmentService.attachmentsDelete(attachments);
-			return "redirect:list";
+			return "redirect:/profilepage/my-profile-header";
 		}
-		return "redirect:list";	//삭제 실패
+		return "redirect:/profilepage/my-profile-header"; //삭제 실패 (차후 에러페이지로 변경)
 	}
 	
 }	
