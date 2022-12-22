@@ -118,6 +118,7 @@
           padding:20px 10px;
           background:#fff;
           border:10px solid #666;
+          font-size:13px
         }
         
         #modal3 .modal_layer {
@@ -490,6 +491,7 @@
                img.addClass("level-img");
                var iInfo=$("<i>");
                iInfo.addClass("fa-sharp fa-solid fa-circle-info");
+               iInfo.css("padding","10px");  
                $(".mem-name").append(span).append(writerLevel).append(iInfo);            
                var imgClass=$("[name=orgin]");
                //사진이 있는지 없는지 확인
@@ -703,8 +705,8 @@
                         <li class="mem-name">
                         
                          </li>    
-                        <a href="${pageContext.request.contextPath}/mem/edit_profile"><i class="fa-solid fa-pencil fa-lg"></i></a>
-                        <img class="menu" src="${pageContext.request.contextPath}/images/설정icon.png" id="Timg1" alt="설정">
+                        <a href="${pageContext.request.contextPath}/mem/edit_profile"><i class="fa-solid fa-pencil fa-2x" style="padding:10px"></i></a>
+                        <i id="Timg1" alt="설정" class="menu fa-solid fa-gears fa-2x" style="padding:15px"></i>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">            

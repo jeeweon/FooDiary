@@ -15,17 +15,6 @@
 </style>
 </head>
 <body>
-<!-- 임시 로그인 메뉴 -->
-<c:set var="login" value="${loginNo != null}"></c:set>
-<c:choose>
-	<c:when test="${login}">
-		<a href="/mem/logout">로그아웃</a>
-	</c:when>
-	<c:otherwise>
-		<a href="/mem/login">로그인</a>	
-	</c:otherwise>
-</c:choose>
-
 <div class="wrapper">
    <div class="inner">
        <header class="header">
@@ -68,17 +57,16 @@
                   </li>
               </ul>
               <ul id="mainicon">
-                  <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="/home">홈</a></li>
-                  <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="/search/review">맛집 탐색</a></li>
-                  <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="/search/mem">맛쟁이 탐색</a></li>
-                  <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="#">알림</a></li>
+                  <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/home">홈</a></li>
+                  <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
+                  <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
+                  <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a></li>
                   <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="#">북마크</a></li>
               </ul>
               </div> <!--sidemenu-->
-              <a href="#" class="review">리뷰하기</a>
+              <a href="${pageContext.request.contextPath}/review/write" class="review">리뷰하기</a>
               <div class="btnW">
-                  <a href="mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
-                  <span><a href="#" class="morebtn">더보기버튼</a></span>
+                  <a href="${pageContext.request.contextPath}/mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
               </div>
        		</div> <!--header1-->              
             <div class="header4">
@@ -87,7 +75,7 @@
 						<fieldset>
 							<legend class="search-bar">							
 			            		<input type="text" name="keyword" class="search-input" placeholder="닉네임 검색" autocomplete="off">
-			            		<button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 				        		  
+			            		<button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 				        		  
 							</legend>
 						</fieldset>					        
 				    </form>	
@@ -378,7 +366,9 @@ function reset() {
 		};
 		
 		//검색 버튼 클릭 시, 검색어가 닉네임에 포함된 유저 조회
-		$(document).on("click", ".search-btn", function() {
+		//$(document).on("click", ".search-btn", function() {
+		$(".search-form").submit(e=>{
+            e.preventDefault();
             const keyword = $("[name=keyword]").val();
             console.log(keyword);
 			$(".mem-list").empty();
