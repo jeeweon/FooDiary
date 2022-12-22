@@ -42,7 +42,6 @@ public class NotiWebsocketServer extends TextWebSocketHandler{
 	// 클라이언트가 Data 전송 시
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		// 특정 유저에게 보내기
 		log.debug("메세지 - {}", message.getPayload());
 	
 		//변환 도구 생성
@@ -56,11 +55,9 @@ public class NotiWebsocketServer extends TextWebSocketHandler{
 		String payload = mapper.writeValueAsString(json);
 		TextMessage jsonMessage = new TextMessage(payload);
 		
-		//WebSocketSession receiverMemName = userSessionsMap.get(json.getReceiverMemNo());
 		WebSocketSession receiverSession = userSessionsMap.get(json.getReceiverMemNick());
 		
-				
-		//전송(broadcast)
+		//전송(알림 받을 유저 1명)
 		receiverSession.sendMessage(jsonMessage);
 	}
 	
