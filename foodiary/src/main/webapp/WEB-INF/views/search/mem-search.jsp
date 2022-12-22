@@ -66,7 +66,7 @@
               </div> <!--sidemenu-->
               <a href="#" class="review">리뷰하기</a>
               <div class="btnW">
-                  <a href="mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
+                  <a href="${pageContext.request.contextPath}/mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
                   <span><a href="#" class="morebtn">더보기버튼</a></span>
               </div>
        		</div> <!--header1-->              

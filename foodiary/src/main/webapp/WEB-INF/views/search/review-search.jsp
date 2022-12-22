@@ -79,7 +79,7 @@
                      <c:if test = "${login}">
                     <a href="#" class="review">리뷰하기</a>
 	                <div class="btnW">
-	                    <a href="/mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
+	                    <a href="${pageContext.request.contextPath}/mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
 	                    <span><a href="#" class="morebtn">더보기버튼</a></span>
 	                </div>
 	                </c:if>
@@ -152,8 +152,8 @@
                     <fieldset>
                         <legend>
                             "로그인하여 내 주변 맛집 리뷰를 확인하고 회원님이 좋아할 만한 계정을 찾아보세요."
-                            <button  id="btn-row"><a href="/mem/login">로그인</a></button>
-                            <button id="btn-row2"><a href="/mem/join">회원가입</a></button>
+                            <button  id="btn-row"><a href="${pageContext.request.contextPath}/mem/login">로그인</a></button>
+                            <button id="btn-row2"><a href="${pageContext.request.contextPath}/mem/join">회원가입</a></button>
                         </legend>
                     </fieldset>
                 </form>  
