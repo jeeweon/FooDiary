@@ -5,7 +5,8 @@
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/home.css"> <!--css 불러오는 링크--> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+<!-- toast 스타일 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
  <style>
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
