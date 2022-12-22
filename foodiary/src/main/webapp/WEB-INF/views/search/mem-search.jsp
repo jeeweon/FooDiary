@@ -6,6 +6,8 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/mem-search.css"> <!--css 불러오는 링크--> 
+<!-- toast 스타일 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <style>
 .receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
@@ -142,6 +144,13 @@
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/commons.js"></script>
+<!-- sockjs 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<!-- toast 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 <script>
 
 //런치리스트 배열생성
@@ -221,13 +230,55 @@ function reset() {
 	$(function() {
 		//세션에서 회원 번호 가져오기 
 		var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
+		var memNick = "<%=(String)session.getAttribute("loginNick")%>";
 		if(memNo == "null"){
 			loadGuestSameInterestList();
         } else {
         	loadInterestArea();
+        	//웹소켓 연결
+        	connectWs();
         }
         loadPointTopList();
 		
+    	//웹소켓
+    	function connectWs(){
+    		console.log("tttttt")
+    		var uri = "${pageContext.request.contextPath}/ws/sockjs";
+    		socket = new SockJS(uri);
+    	
+    		socket.onopen = function() {
+    			console.log('open');
+    		};
+    		
+    		toastr.options = {
+    		  "closeButton": false,
+    		  "debug": false,
+    		  "newestOnTop": false,
+    		  "progressBar": false,
+    		  "positionClass": "toast-top-right",
+    		  "preventDuplicates": false,
+    		  "onclick": null,
+    		  "showDuration": "100",
+    		  "hideDuration": "2000",
+    		  "timeOut": "1500",
+    		  "extendedTimeOut": "1000",
+    		  "showEasing": "swing",
+    		  "hideEasing": "linear",
+    		  "showMethod": "fadeIn",
+    		  "hideMethod": "fadeOut"
+    		}
+    		
+    		socket.onmessage = function(e){
+    			//수신된 e.data는 JSON 문자열
+    			var data = JSON.parse(e.data);
+    			toastr.info(data.notiContent);
+    		};
+
+    		socket.onclose = function() {
+    		    console.log('close');
+    	 	};
+    	};
+        
         let memList = [];
 		//관심지역 같은 유저 조회(비회원)
 		function loadGuestSameInterestList(){
@@ -407,7 +458,7 @@ function reset() {
 						memFollow = $("<span>").html("<i class='fa-solid fa-user-plus fa-2x'></i>");
 						memFollow.addClass("mem-follow-ic");
 					}
-					memFollow.attr("data-mno", value.memNo);
+					memFollow.attr("data-mno", value.memNo).attr("data-mnick", value.memNick);
 					
 					var infoDiv = $("<div>").append(memAvatar).append(infoText)
 						.attr("data-mno", value.memNo);
@@ -432,6 +483,7 @@ function reset() {
 			} else {//회원
 				var clickedBtn = $(this);
 				var no = $(this).data("mno");
+				var nick =  $(this).data("mnick");
 				$.ajax({
 					url : "${pageContext.request.contextPath}/rest/review/follow",
 	                method : "post",
@@ -441,6 +493,18 @@ function reset() {
 	                success : function(resp) {
 	                	if(resp) {
 	                		clickedBtn.find("i").removeClass("fa-user-plus").addClass("fa-user-minus");
+	                		//알림 생성 & 전송
+		            		var notiData = {
+		            				callerMemNo:memNo,
+		            				receiverMemNo:no,
+		            				receiverMemNick:nick,
+		            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+		            				notiType:"follow",
+		            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+		            				notiCreateDate:moment(),
+		            				memNick:memNick
+		            		};
+		            		socket.send(JSON.stringify(notiData));
 	                	} else {
 	                		clickedBtn.find("i").removeClass("fa-user-minus").addClass("fa-user-plus");
 	                	}
