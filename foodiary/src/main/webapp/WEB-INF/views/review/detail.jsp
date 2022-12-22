@@ -1049,27 +1049,6 @@ li {
 		});
 	});
 	
-	 var review = new Swiper('.swiper-container', {
-         
-         direction:'horizontal',
-         loop:true,
-         
-         pagination:{
-               el: ".swiper-pagination",
-             type: "bullets",
-             clickable:true,
-         },    
-
-         navigation:{
-             nextEl: '.swiper-button-next',
-             prevEl: '.swiper-button-prev',
-         },
-
-         autoplay:false,
-         
-         effect:"slide",
-                             
-         });
 </script>
 </body>
 </html>

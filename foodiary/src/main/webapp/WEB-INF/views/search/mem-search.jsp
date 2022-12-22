@@ -15,6 +15,11 @@
 </style>
 </head>
 <body>
+
+
+<c:set var="login" value="${loginNo != null}"></c:set>
+
+
 <div class="wrapper">
    <div class="inner">
        <header class="header">
@@ -57,6 +62,7 @@
                   </li>
               </ul>
               <ul id="mainicon">
+
                   <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/home">홈</a></li>
                   <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
                   <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
@@ -93,8 +99,8 @@
                     <div class="container">
                         <div class="receipt">
                           <div class="title_text">
-                            <h1>Today~</h1>
-                            <h3>뭐 먹지?</h3>
+                            <h1>오늘 뭐 먹 지 ?</h1>
+                            <h3>일단골라.</h3>
                           </div> <!--title_text-->
                           <div class="menu_print">
                             <h2></h2>
@@ -116,13 +122,13 @@
                             </div> <!--slot_container-->
                           </div> <!--menu_slot-->
                           <div class="btn_area">
-                            <button onclick="lunchIs()">멈 춰 !</button>
-                            <button onclick="reset()">한번 더</button>
+                            <button onclick="lunchIs()">멈춰!</button>
+                            <button onclick="reset()">추천해줘!</button>
                           </div> <!--btn_area-->
                         </div> <!--receipt-->          
                     </div> <!--container-->
                          <div class="follow">
-                             <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p>
+                            <!--  <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p> -->
                          </div> <!--follow-->
                      </div> <!--random-->
                  </div> <!--sidebar-->
