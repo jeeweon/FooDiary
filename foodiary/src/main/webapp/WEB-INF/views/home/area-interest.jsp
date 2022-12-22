@@ -4,10 +4,10 @@
 <head>
     <title>관심지역 설정</title>
     <link rel="stylesheet" type="text/css"
-   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/area-interest.css"> <!--css 불러오는 링크--> 
-<!-- toast 스타일 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
+   	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/area-interest.css"> <!--css 불러오는 링크--> 
+	<!-- toast 스타일 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 </head>
 <body>
 
