@@ -11,7 +11,6 @@
  	.receipt{
  		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
  	}
-	
  </style>
 
 </head>
@@ -65,7 +64,7 @@
                     <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="/search/review">맛집 탐색</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="/search/mem">맛쟁이 탐색</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="#">알림</a></li>
-                    <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="#">북마크</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="/profilepage/bookmark">북마크</a></li>
                 </ul>
                 </div> <!--sidemenu-->
                 <a href="#" class="review">리뷰하기</a>
@@ -107,8 +106,8 @@
             <div class="container">
                 <div class="receipt">
                   <div class="title_text">
-                    <h1>Today~</h1>
-                    <h3>뭐 먹지?</h3>
+                    <h1>오늘 뭐 먹 지 ?</h1>
+                    <h3>일단돌려.</h3>
                   </div>
                   <div class="menu_print">
                     <h2></h2>
@@ -130,8 +129,8 @@
                     </div>
                   </div>
                   <div class="btn_area">
-                    <button onclick="lunchIs()">멈 춰 !</button>
-                    <button onclick="reset()">한번 더</button>
+                    <button onclick="lunchIs()">멈춰!</button>
+                    <button onclick="reset()">추천해줘!</button>
                   </div>
                 </div>          
             </div>
@@ -139,7 +138,7 @@
                     <h3>오늘의 맛쟁이 추천</h3>
                      <ul class="follow-ul">
                      </ul>
-                     <!-- <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p> -->
+                     <p id="follow1">이용약관 개인정보처리방침 쿠키정책 및 자세한 안내가 필요하신 분은 문의사항 부탁드립니다</p>                     
                  </div> <!--follow-->
              </div> <!--random-->
          </div> <!--sidebar-->
@@ -731,6 +730,7 @@ $(function() {
 		});
 	};
 });
+
 </script>
 </body>
 </html>
