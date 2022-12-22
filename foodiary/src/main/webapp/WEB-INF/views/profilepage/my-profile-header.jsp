@@ -333,13 +333,12 @@
 			});
 		};
 	});
-		 
+	
 		
 	//리뷰 목록 출력
 	function renderList(){
-			if(reviewList1.length != 0){
+			if(reviewList1.length != 0 && reviewList1[0].reviewNo != 0){
 			$.each(reviewList1, function(index, value) {
-				
 				// 사진갯수가 0 이상이라면 
 				if(value.imgCnt>1){
 				
@@ -457,8 +456,6 @@
                });
                //게시물/북마크/좋아요 hover시 css 진하게
                $(".board-btn").hover(
-	            	function(){$(this).text("게시물").css("font-weight","bolder")},
-    	        	function(){$(this).text("게시물").css("font-weight","bold")}
         	    	);
                $(".bookmark-btn").hover(
                    	function(){$(this).text("북마크").css("font-weight","bolder")},
@@ -534,8 +531,6 @@
       
           if(followMemList.length != 0) {
             $.each(followMemList, function(index, value) {
-               console.log("팔로우 멤버 레벨");
-               console.log(value.memLevel);
                //팔로우 레벨 이미지 
                var writerLevel;
                if( value.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
@@ -841,5 +836,8 @@
      $("#modal3").fadeOut();
      location.reload();
   });  
+    $(".level-condition").click(function(){
+    	$("#modal4").fadeOut();
+    });
 </script>
 </html>
