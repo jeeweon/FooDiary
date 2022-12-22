@@ -200,7 +200,7 @@ public class MemController {
 		
 		
 		if(result) {			
-			return "redirect:/profilepage/board";
+			return "redirect:/profilepage/my-profile-header";
 		}
 		else {
 			return "redirect:edit_pw?error";
@@ -237,7 +237,7 @@ public class MemController {
 			//닉네임 수정 후 세션에서 지우고 재설정
 			session.removeAttribute(SessionConstant.NICK);
 			session.setAttribute(SessionConstant.NICK, inputDto.getMemNick());
-			return "redirect:/profilepage/board";
+			return "redirect:/profilepage/my-profile-header";
 		}
 		else {
 			return "redirect:edit_profile?error";
