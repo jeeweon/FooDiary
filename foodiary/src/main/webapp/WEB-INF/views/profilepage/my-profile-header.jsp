@@ -103,7 +103,8 @@
         }
         
         #modal3 h2 {
-          margin:0;
+          margin-top: 5px;
+          margin-bottom: 5px;
           text-align: center;
         }
         #modal3 button {
@@ -119,7 +120,7 @@
           background:#fff;
           border:10px solid #666;
           font-size:13px
-        }
+        }      
         
         #modal3 .modal_layer {
           position:fixed;
@@ -436,7 +437,7 @@
             dataType : "json",
             success : function(resp) {
                profileList = resp;
-               //$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
+               //$(".mem-name").text(profileList.memNick);
                $(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
                $(".follow-cnt").text("팔로워 : "+profileList.followCnt);
                $(".follower-cnt").text("팔로우: "+profileList.followerCnt);
@@ -486,7 +487,7 @@
                writerLevel.addClass("level-img");
                
                
-               var span=$("<span>").text("유저 닉네임 : "+profileList.memNick);
+               var span=$("<span>").text(profileList.memNick);
                var img=$("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
                img.addClass("level-img");
                var iInfo=$("<i>");
@@ -706,7 +707,7 @@
                         
                          </li>    
                         <a href="${pageContext.request.contextPath}/mem/edit_profile"><i class="fa-solid fa-pencil fa-2x" style="padding:10px"></i></a>
-                        <i id="Timg1" alt="설정" class="menu fa-solid fa-gears fa-2x" style="padding:15px"></i>
+                        <a href=#><i id="Timg1" alt="설정" class="menu fa-solid fa-gears fa-2x" style="padding:15px"></i></a>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">            

@@ -170,7 +170,7 @@
 				success : function(resp) {
 					profileList = resp;
 					console.log(profileList);
-					//$(".mem-name").text("유저 닉네임 : "+profileList.memNick);
+					//$(".mem-name").text(profileList.memNick);
 					$(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 : "+profileList.followCnt);
 					$(".follower-cnt").text("팔로우 : "+profileList.followerCnt);
@@ -210,7 +210,7 @@
 					
 					
 					
-					var span=$("<span>").text("유저 닉네임 : "+profileList.memNick);
+					var span=$("<span>").text(profileList.memNick);
 					$(".follow-cert").attr("data-mnick", profileList.memNick);
 					$(".mem-name").append(span).append(writerLevel);
 					
