@@ -71,9 +71,6 @@
 	                    <c:if test = "${login}">
 	                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a></li>
 	                    </c:if>
-	                    <c:if test = "${login}">
-	                    <li><img src="${pageContext.request.contextPath}/images/북마크아이콘.png"><a href="/profilepage/bookmark">북마크</a></li>
-	                	</c:if>
 	                </ul>            
                     </div> <!--sidemenu-->
                      <c:if test = "${login}">
