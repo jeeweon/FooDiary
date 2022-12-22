@@ -12,7 +12,18 @@
 .receipt{
 	background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
 }
-
+.noti-cnt {
+	width:18px;
+	height:18px;
+	padding: 5px 10px;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 14px;
+	color: #ffffff;
+	background-color: #E27C5E;
+    line-height: 18px;
+    margin: 0 10px;
+}
 </style>
 </head>
 <body>
@@ -69,7 +80,7 @@
 	                    <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
 	                    <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
 	                    <c:if test = "${login}">
-	                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a></li>
+	                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a><span class="noti-cnt">${cnt}</span></li>
 	                    </c:if>
 	                </ul>            
                     </div> <!--sidemenu-->
