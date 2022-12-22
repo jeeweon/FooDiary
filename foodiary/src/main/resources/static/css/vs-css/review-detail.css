@@ -29,6 +29,12 @@
     }
 
 /* 댓글목록 관련 style */
+	.lastHr {
+	
+	}
+	.replyList {
+		margin-bottom: 10px;	
+	}
 	.replyBox {
 		width: 450px;
 	}
@@ -43,15 +49,16 @@
 		width: 50px;
 	}
 	.replyContent {
-		width: 430px;
+		width: 620px;
 		border: 1px solid transparent;
 		border-radius: 5px;
 		outline: none;
 		padding: 4px;
+		margin-bottom: 10px;	
 	}
 	.input-reply {
 		border: none;
-		width: 550px;
+		width: 100%;
 		padding-top: 10px;
 		padding-left: 5px;
 	}
@@ -188,6 +195,9 @@ li {
     width: 650px;
     height: 650px;   
     overflow: hidden;
+    /* border-left: 4px solid rgb(255,192,98);
+    border-top: 4px solid rgb(255,192,98);
+    border-bottom: 4px solid rgb(255,192,98); */
 }
 .Rbody img{
     width: 100%;
@@ -207,13 +217,18 @@ li {
     width: 10px;
     height: 10px;
 }
+.LReview {
+	border: 1px solid gainsboro;
+	margin-bottom: 10px;
+}
 .LMap{
     position: relative;
     width: 100%;
-    height: 450px;
-    border-top: 1px solid gainsboro;
-    border-right: 1px solid gainsboro;
-    border-bottom: 1px solid gainsboro;   
+    /* height: 450px; */
+    /* border-top: 1px solid gainsboro; */
+    /* border-right: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro; */
+    margin: 10px;  
 }
 .LMap ul li label{
 	font-weight: bold;
@@ -229,13 +244,29 @@ li {
     width: 380ps;
     height: 380px;
 }
+.LMap-star {
+	width: 100%;
+    /* height: 450px; */
+    /* border-top: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+    border-bottom: 1px solid gainsboro; */
+    margin: 10px;  
+}
+.LMap-map {
+	width: 100%;
+    /* height: 450px; */
+    /* border-top: 1px solid gainsboro;
+    border-right: 1px solid gainsboro; */
+    /* border-bottom: 1px solid gainsboro; */
+    margin: 10px;  
+}
 .Ltext{
 	position: relative;
 	bottom: 5px;
-	border-right:1px solid gainsboro;
-	border-bottom:1px solid gainsboro;
+	/* border-right:1px solid gainsboro; */
+	/* border-bottom:1px solid gainsboro; */
     width: 100%;
-    height: 200px; 
+    /* height: 200px;  */
     padding-top: 10px;
     padding-left: 5px;
 }
@@ -261,10 +292,12 @@ li {
     margin-bottom: 5px;
 }
 .Licon{
-	border-top: 1px solid gainsboro;
+	border: 1px solid gainsboro;
+	border-radius: 20px;
     position: relative;
     width: 100%;
-    padding-bottom: 100px;
+    padding-bottom: 40px;
+    margin-top: 10px;
 }
 .Licon i{
 	font-size: 20px;
@@ -309,6 +342,12 @@ li {
 }
 .Lbody {
     width: 550px;
+    overflow-x:hidden; 
+    width:650px; 
+    height:650px;
+    /* padding: 10px; */
+    margin: 10px;
+    /* border: 4px solid rgb(255,192,98); */
 }
 .btn-reply-Write{
 	position: absolute;
