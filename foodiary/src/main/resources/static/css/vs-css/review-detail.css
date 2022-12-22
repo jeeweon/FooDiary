@@ -2,7 +2,7 @@
 	.level-img {
  		width:24px;
  		margin:0;
- 		margin-left: 5px;
+/*  		margin-left: 5px; */
  	}
  	
 /* summernote(좌측), 리뷰장소(우측) 구분용 style */
@@ -41,6 +41,7 @@
 	}
 	.profile {
 		width: 50px;
+		height : 50px;
 	}
 	.replyContent {
 		width: 430px;
@@ -63,6 +64,7 @@
 .reviewWriter-memNick{
 	position: relative;
 	bottom: 20px;
+	font-size : 17px;
 }
 .level-img{
 	position: relative;
@@ -162,7 +164,7 @@ li {
     top: 15px;
     left: 100px;
     width: 150px;
-    height: 90px;
+    height: 110px;
 } 
 
 

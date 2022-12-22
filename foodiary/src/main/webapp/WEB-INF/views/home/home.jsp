@@ -134,7 +134,7 @@
                 </div>          
             </div>
                  <div class="follow">
-                    <h3>오늘의 맛쟁이 추천</h3>
+                    <h3>오늘의 맛쟁이 추천 <i class="fa-solid fa-user-group"></i></h3>
                      <ul class="follow-ul">
                      </ul>
                      <p id="follow1">이용약관 개인정보처리방침 쿠키정책 및 자세한 안내가 필요하신 분은 문의사항 부탁드립니다</p>                     

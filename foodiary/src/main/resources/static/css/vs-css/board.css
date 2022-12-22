@@ -35,8 +35,8 @@ li {
 
 .boardM img {
     position: relative;
-    width: 160px;
-    height: 160px;
+    width: 130px;
+    height: 130px;
     left: 340px;
     bottom: 30px;
     border-radius: 50%;
@@ -46,6 +46,7 @@ li {
     position: relative;
     bottom: 150px;
     margin-left: 550px;
+    margin-top : 30px;
 }
   
 .boardT .boardT1 {
@@ -110,6 +111,7 @@ li {
     justify-content: center;
     font-weight: bold;
     font-size: 17px;
+    margin-top : 20px;
 }
 
 .boardT2 li {

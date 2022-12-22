@@ -12,6 +12,9 @@
     .search-form {
         margin: 0;
     }
+    .logo{
+    	z-index: 9;
+    }
     
     .search-view{
         width: 400px; 
