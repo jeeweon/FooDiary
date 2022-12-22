@@ -476,7 +476,7 @@ function reset() {
 			}
 		};
 		
-		//팔로우 버튼 클릭 이벤트 -> rest API 나오면 수정 예정
+		//팔로우 버튼 클릭 이벤트
 		$(document).on("click", ".mem-follow-ic", function() {
 			if(memNo == "null") {//비회원
 				alert("로그인이 필요한 기능입니다."); //모달로 변경 -> 취소, 로그인하러가기				
@@ -504,7 +504,9 @@ function reset() {
 		            				notiCreateDate:moment(),
 		            				memNick:memNick
 		            		};
-		            		socket.send(JSON.stringify(notiData));
+	                		if(memNo != no) {
+			            		socket.send(JSON.stringify(notiData));	                			
+	                		}
 	                	} else {
 	                		clickedBtn.find("i").removeClass("fa-user-minus").addClass("fa-user-plus");
 	                	}
