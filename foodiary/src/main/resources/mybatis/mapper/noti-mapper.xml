@@ -10,10 +10,22 @@
 	</insert>
 	
 	<!-- 최근 14일의 로그인 유저 알림 목록 조회(내 알림 목록) -->
-	<select id="list" parameterType="int">
+	<select id="list" parameterType="int" resultType="NotiDto">
 		select N.*, M.mem_nick  from  mem_noti N
 		left outer join mem M on N.caller_mem_no = M.mem_no
 		where N.receiver_mem_no = #{memNo}
 		and N.noti_create_date >= sysdate-14
+	</select>
+	
+	<!-- 읽은 알림 시간 업데이트 -->
+	<update id="read" parameterType="int">
+		update mem_noti set noti_read_date = sysdate where noti_no = #{notiNo}
+	</update>
+	
+	<!-- 읽지 않은 알림 수 -->
+	<select id="no-read-cnt" parameterType="int" resultType="int">
+		select count(*) cnt from(
+			select * from mem_noti where noti_read_date is null
+		) where receiver_mem_no = #{memNo}
 	</select>
 </mapper>
