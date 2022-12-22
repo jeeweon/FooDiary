@@ -230,9 +230,7 @@ li {
 </script>
 
 <section class="section1">
-	<div class="inner">
 		<div class="feed">
 		</div>
-	</div>
 </section>
 
