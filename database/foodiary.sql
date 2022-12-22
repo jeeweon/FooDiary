@@ -110,12 +110,14 @@ inner join mem M
 left outer join profile_attach P
      on M.mem_no = P.mem_no;
 
+create sequence like_seq;
 CREATE TABLE likes ( --like가 예약어라 likes로 대체
         likes_no number primary key,
         review_no references review(review_no) on delete cascade,
         mem_no references mem(mem_no) on delete cascade
 );
 
+create sequence bookmark_seq;
 CREATE TABLE bookmark (
 
         bookmark_no number primary key,
