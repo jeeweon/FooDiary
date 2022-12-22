@@ -15,17 +15,6 @@
 </style>
 </head>
 <body>
-<!-- 임시 로그인 메뉴 -->
-<c:set var="login" value="${loginNo != null}"></c:set>
-<c:choose>
-	<c:when test="${login}">
-		<a href="/mem/logout">로그아웃</a>
-	</c:when>
-	<c:otherwise>
-		<a href="/mem/login">로그인</a>	
-	</c:otherwise>
-</c:choose>
-
 <div class="wrapper">
    <div class="inner">
        <header class="header">
@@ -87,7 +76,7 @@
 						<fieldset>
 							<legend class="search-bar">							
 			            		<input type="text" name="keyword" class="search-input" placeholder="닉네임 검색" autocomplete="off">
-			            		<button type="button" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 				        		  
+			            		<button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button> 				        		  
 							</legend>
 						</fieldset>					        
 				    </form>	
@@ -378,7 +367,9 @@ function reset() {
 		};
 		
 		//검색 버튼 클릭 시, 검색어가 닉네임에 포함된 유저 조회
-		$(document).on("click", ".search-btn", function() {
+		//$(document).on("click", ".search-btn", function() {
+		$(".search-form").submit(e=>{
+            e.preventDefault();
             const keyword = $("[name=keyword]").val();
             console.log(keyword);
 			$(".mem-list").empty();
