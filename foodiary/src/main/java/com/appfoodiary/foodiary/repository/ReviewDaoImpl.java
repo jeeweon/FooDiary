@@ -53,6 +53,18 @@ public class ReviewDaoImpl implements ReviewDao {
 		int count = sqlSession.delete("review.delete", reviewNo);
 		return count >0;
 	}
+	
+	//리뷰의 총댓글 수
+	@Override
+	public boolean plusReplycnt(int reviewNo) {
+		int count = sqlSession.update("review.plusReplycnt",reviewNo);
+		return count >0;
+	}
+	@Override
+	public boolean minusReplycnt(int reviewNo) {
+		int count = sqlSession.update("review.minusReplycnt",reviewNo);
+		return count >0;
+	}
 
 	//리뷰 파일첨부
 	@Override

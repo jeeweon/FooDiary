@@ -811,7 +811,8 @@ li {
     				//console.log(resp);
     				$(".input-reply").val("");
     				loadReplyList();
-    				//알림 생성 & 전송
+    				
+    				/* //알림 생성 & 전송
             		var notiData = {
             				callerMemNo:loginNo,
             				receiverMemNo:reviewWriterNo,
@@ -824,7 +825,7 @@ li {
             		};
     				if(loginNo != reviewWriterNo) {    					
             			socket.send(JSON.stringify(notiData));
-    				}
+    				} */
     			});
     		}
 		});
