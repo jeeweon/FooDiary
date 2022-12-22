@@ -1,6 +1,6 @@
 package com.appfoodiary.foodiary.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,6 +15,7 @@ public class NotiVO {
 	private int notiNo;
 	private int callerMemNo;
 	private int receiverMemNo;
+	private String receiverMemNick;
 	private String notiType;
 	private String notiContent;
 	private String notiUrl;

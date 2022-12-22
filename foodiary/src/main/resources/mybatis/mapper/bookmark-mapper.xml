@@ -23,8 +23,9 @@
 	</select>
 	<insert id="insert" parameterType="int">
 		insert into
-			bookmark(review_no,mem_no,bookmark_no)
-		values(#{reviewNo},#{memNo},bookmark_seq.nextval)
+
+			bookmark(bookmark_no,review_no,mem_no)
+		values(bookmark_seq,#{reviewNo},#{memNo})
 	</insert>
 	<delete id="delete" parameterType="int">
 		delete 

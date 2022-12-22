@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/board.css"> <!--css불러오는 링크-->
+    <!-- toast 스타일 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
     <head>
     	<title>프로필</title>
     </head>
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
         #modal {
           display: none;
@@ -96,6 +97,14 @@
         font-size: 20px;
         }
  </style>
+ <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<!-- sockjs 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<!-- toast 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- moment 라이브러리 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/ko.min.js"></script>
 <script>
  	$(function(){
  		memList();
@@ -105,8 +114,52 @@
  		
  		//회원번호 확인
         var memNo = "<%=(Integer)session.getAttribute("loginNo")%>";
- 		console.log(memNo);
+        var memNick = "<%=(String)session.getAttribute("loginNick")%>";
  		
+      	//웹소켓 연결
+    	if(memNo != null){
+    		connectWs();
+    	}
+    	
+    	//웹소켓
+    	function connectWs(){
+    		console.log("tttttt")
+    		var uri = "${pageContext.request.contextPath}/ws/sockjs";
+    		socket = new SockJS(uri);
+    	
+    		socket.onopen = function() {
+    			console.log('open');
+    		};
+    		
+    		toastr.options = {
+    		  "closeButton": false,
+    		  "debug": false,
+    		  "newestOnTop": false,
+    		  "progressBar": false,
+    		  "positionClass": "toast-top-right",
+    		  "preventDuplicates": false,
+    		  "onclick": null,
+    		  "showDuration": "100",
+    		  "hideDuration": "2000",
+    		  "timeOut": "1500",
+    		  "extendedTimeOut": "1000",
+    		  "showEasing": "swing",
+    		  "hideEasing": "linear",
+    		  "showMethod": "fadeIn",
+    		  "hideMethod": "fadeOut"
+    		}
+    		
+    		socket.onmessage = function(e){
+    			//수신된 e.data는 JSON 문자열
+    			var data = JSON.parse(e.data);
+    			toastr.info(data.notiContent);
+    		};
+
+    		socket.onclose = function() {
+    		    console.log('close');
+    	 	};
+    	};
+        
  		//회원조회
  		let profileList = [];
  		function memList() {
@@ -158,7 +211,7 @@
 					
 					
 					var span=$("<span>").text("유저 닉네임 : "+profileList.memNick);
-					
+					$(".follow-cert").attr("data-mnick", profileList.memNick);
 					$(".mem-name").append(span).append(writerLevel);
 					
 					var imgClass=$("[name=orgin]");
@@ -183,7 +236,7 @@
 					if(resp){
 						$(".follow-cert").text("팔로잉");
 					}else{
-						$(".follow-cert").text("팔로우");
+						$(".follow-cert").text("#");
 					}
 				}
 			});
@@ -191,6 +244,10 @@
 		
 		// 팔로우버튼 클릭시 
 		$(".follow-cert").click(function(){
+			var receiverMemNo = $(this).data("mno");
+			var receiverMemNick = $(this).data("mnick");
+			console.log("no="+receiverMemNo);
+			console.log("nick="+receiverMemNick);
 			$.ajax({
 				url:"${pageContext.request.contextPath}/rest/review/follow",
 				method:"post",
@@ -200,6 +257,19 @@
 				success:function(resp){
 					if(resp){
 						$(".follow-cert").text("팔로잉");
+						
+						//알림 생성 & 전송
+	            		var notiData = {
+	            				callerMemNo:memNo,
+	            				receiverMemNo:receiverMemNo,
+	            				receiverMemNick:receiverMemNick,
+	            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+	            				notiType:"follow",
+	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+	            				notiCreateDate:moment(),
+	            				memNick:memNick
+	            		};
+	            		socket.send(JSON.stringify(notiData));
 					}else{
 						$(".follow-cert").text("팔로우");
 					}
@@ -241,15 +311,15 @@
 					
 					//팔로우 레벨 이미지
 					var writerLevel;
-					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+					if( value.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
-					} else if (followerMemList.memLevel == "5  ") {
+					} else if (value.memLevel == "5  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
-					} else if (followerMemList.memLevel == "4  ") {
+					} else if (value.memLevel == "4  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
-					} else if (followerMemList.memLevel == "3  ") {
+					} else if (value.memLevel == "3  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
-					} else if (followerMemList.memLevel == "2  ") {
+					} else if (value.memLevel == "2  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
 					} else {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
@@ -257,12 +327,11 @@
 					writerLevel.addClass("level-img2");
 					
 					
-					var span=$("<span>").text(value.memNick + value.attachNo);
+					var span=$("<span>").text(value.memNick);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
-					var b=$("<a>").attr("href","www.naver.com");
 					if(memNo != value.memNo){
-						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
 					}else{
 						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(b).append(writerLevel);
 					}
@@ -272,28 +341,44 @@
 					//팔로우가 되어있는 상태인지 아닌지확인
 					var buttonFollow;
 					if(value.followCheck){
-						var buttonFollow=$("<button>").text("팔로잉");
+						var buttonFollow=$("<button>").text("팔로잉")
 					}else{
 						var buttonFollow=$("<button>").text("팔로우");
 					}
+					buttonFollow.attr("data-mno", value.memNo).attr("data-mnick", value.memNick);
 					//팔로우 버튼을 클릭했을 때 이벤트 발생
 		               $(buttonFollow).click(function(){
+		            	   var receiverMemNo = $(this).data("mno");
+		       				var receiverMemNick = $(this).data("mnick");
 		            	   var that=$(this);
-		            	 $.ajax({
-		            		 url:"${pageContext.request.contextPath}/rest/review/follow",
-		     				method:"post",
-		     				data:{
-		     					passiveMemNo : value.memNo	
-		     				},
-		     				success:function(resp){
-		     					if(resp){
-		     						$(that).text("팔로잉");			
-		     					}else{
-		     						$(that).text("팔로우");
-		     					}
-		     				}
-		            	 }); 
-		               });
+			            	 $.ajax({
+			            		 url:"${pageContext.request.contextPath}/rest/review/follow",
+			     				method:"post",
+			     				data:{
+			     					passiveMemNo : value.memNo	
+			     				},
+			     				success:function(resp){
+			     					if(resp){
+			     						$(that).text("팔로잉");	
+			     						
+			     						//알림 생성 & 전송
+			    	            		var notiData = {
+			    	            				callerMemNo:memNo,
+			    	            				receiverMemNo:receiverMemNo,
+			    	            				receiverMemNick:receiverMemNick,
+			    	            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+			    	            				notiType:"follow",
+			    	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+			    	            				notiCreateDate:moment(),
+			    	            				memNick:memNick
+			    	            		};
+			    	            		socket.send(JSON.stringify(notiData));
+			     					}else{
+			     						$(that).text("팔로우");
+			     					}
+			     				}
+			            	 }); 
+			               });
 		             //사진 번호가 있는지 없는지. 
 					console.log("팔로우 이미지 넘버");
 					console.log(value.attachNo);
@@ -336,29 +421,28 @@
 				$.each(followerMemList, function(index, value) {
 					//팔로워 레벨 이미지
 					var writerLevel;
-					if( followerMemList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
+					if( value.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
-					} else if (followerMemList.memLevel == "5  ") {
+					} else if (value.memLevel == "5  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/5.피자콜라.png");
-					} else if (followerMemList.memLevel == "4  ") {
+					} else if (value.memLevel == "4  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/4.조각피자.png");
-					} else if (followerMemList.memLevel == "3  ") {
+					} else if (value.memLevel == "3  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/3.반죽.png");
-					} else if (followerMemList.memLevel == "2  ") {
+					} else if (value.memLevel == "2  ") {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/2.밀가루.png");
 					} else {
 						writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
 					}
 					writerLevel.addClass("level-img2");
 					
-					var span=$("<span>").text(value.memNick + value.attachNo);
+					var span=$("<span>").text(value.memNick);
 					var img=$("<img>").attr("src","");
 					var br=$("<br>");
-					var b=$("<a>").attr("href","www.naver.com");
 					if(memNo != value.memNo){
-						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(b).append(writerLevel);
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
 					}else{
-						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(b).append(writerLevel);
+						var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/my-profile-header").append(img).append(span).append(writerLevel);
 					}
 					var hr=$("<hr>");
 					
@@ -370,9 +454,12 @@
 					}else{
 						var buttonFollow=$("<button>").text("팔로우");
 					}
+					buttonFollow.attr("data-mno", value.memNo).attr("data-mnick", value.memNick);
 					//팔로우 버튼을 클릭했을 때 이벤트 발생
 		               $(buttonFollow).click(function(){
 		            	   var that=$(this);
+		            	   var receiverMemNo = $(this).data("mno");
+		       				var receiverMemNick = $(this).data("mnick");
 		            	 $.ajax({
 		            		 url:"${pageContext.request.contextPath}/rest/review/follow",
 		     				method:"post",
@@ -381,7 +468,19 @@
 		     				},
 		     				success:function(resp){
 		     					if(resp){
-		     						$(that).text("팔로잉");			
+		     						$(that).text("팔로잉");		
+		     						//알림 생성 & 전송
+		    	            		var notiData = {
+		    	            				callerMemNo:memNo,
+		    	            				receiverMemNo:receiverMemNo,
+		    	            				receiverMemNick:receiverMemNick,
+		    	            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+		    	            				notiType:"follow",
+		    	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+		    	            				notiCreateDate:moment(),
+		    	            				memNick:memNick
+		    	            		};
+		    	            		socket.send(JSON.stringify(notiData));
 		     					}else{
 		     						$(that).text("팔로우");
 		     					}
@@ -423,7 +522,7 @@
                         <li class="mem-name">
                         
                          </li>
-                        <button class="follow-cert"></button>
+                        <button class="follow-cert" data-mno="${memNo}"></button>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
