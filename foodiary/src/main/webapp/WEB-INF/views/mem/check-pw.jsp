@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<title>비밀번호 변경</title>
+	<title>비밀번호 확인</title>
 	
 	<link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -19,8 +19,8 @@
         <div class="PW">
             <div class="inner">
                 <div class="PWchange">
-                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
-                    <h1>비밀번호 변경</h1>
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <h1>비밀번호 확인</h1>
                     <h3>비밀번호 변경을 하려면 비밀번호 확인이 필요합니다.</h3>
                 </div> <!--PWchange-->
                 <div class="PWtext">

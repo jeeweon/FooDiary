@@ -23,6 +23,7 @@
 	</select>
 	<insert id="insert" parameterType="int">
 		insert into
+
 			bookmark(bookmark_no,review_no,mem_no)
 		values(bookmark_seq,#{reviewNo},#{memNo})
 	</insert>

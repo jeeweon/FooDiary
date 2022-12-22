@@ -15,7 +15,7 @@
 	            <div class="inner">
 	                <div class="profileH">
 	                    <h1>프로필 수정</h1>
-	                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+	                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
 	                </div> <!--profileH-->
 	                <div class="profileT">
                     <fieldset>
@@ -44,7 +44,7 @@
 						</label>
 						<input type="text" class="input" name="memNick" value="${memDto.memNick}" placeholder="닉네임">
 						<div class="success-message">사용 가능한 닉네임입니다.</div>
-				        <div class="fail-message">닉네임은 한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
+				        <div class="fail-message">한글과 숫자를 이용하여 2~10글자로 작성해주세요.</div>
 				        <div class="NNNNN-message">이미 사용중인 닉네임입니다.</div>			
 					</div>
 					<div id=editT>

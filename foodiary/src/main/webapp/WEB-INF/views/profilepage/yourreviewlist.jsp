@@ -109,6 +109,7 @@ li {
  	text-align: center;
  	font-size:35px;
 	 	}
+	object-fit:cover; 
 </style> 
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
@@ -145,7 +146,7 @@ li {
 				reviewImg.addClass("relactive");
 				$(reviewImg).hover(function(){
 					$(this).addClass("feedimg");
-					console.log("호버 완료");
+					
 				});
 				
 				var imgDiv=$("<div>").append(reviewImg).append(imgP);
@@ -181,7 +182,7 @@ li {
 					var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 					$(reviewImg).hover(function(){
 						$(this).addClass("feedimg");
-						console.log("호버 완료");
+						
 					});
 					
 					var span2=$("<span>").text("   "+value.likeCnt+" ");
@@ -213,17 +214,6 @@ li {
 				};
 				
 				
-				//좋아요 사진갯수 댓글갯수
-				
-				 
-				
-				//리뷰이미지 다운로드 이미지가 없으면 작성한 리뷰가 없습니다.
-				//var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
-				//좋아요 갯수, 이미지 갯수, 리뷰 갯수 
-				//var imgCnt=$("<span>").text("이미지 갯수"+value.imgCnt);
-				//var replyCnt=$("<span>").text("댓글 갯수"+value.replyCnt);
-				//var likeCnt=$("<span>").text("좋아요 갯수"+value.likeCnt);
-				//var cnt=$("<div>").append(replyCnt).append(imgCnt).append(likeCnt);
 				
 				var main=$(".feed").append(feedul);//.append(figcaption);
 				});

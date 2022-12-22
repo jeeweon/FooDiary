@@ -6,7 +6,7 @@
 <head>
 	<title>비밀번호 변경</title>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/edit-pw.css"> <!--css 불러오는 링크-->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/edit_pw.css"> <!--css 불러오는 링크-->
 
 
 </head>
@@ -16,7 +16,7 @@
         <div class="PWedit">
             <div class="inner">
                 <div class="pwlog">
-                    <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     <h1>비밀번호 변경</h1>
                 </div>
                 <div class="newpw">
@@ -28,15 +28,15 @@
 									</div>
 						                          <div id=pwtag>
 										<label>
-											<p id=p1>비밀번호<i class="fa-solid fa-asterisk"></i></p>
+											<p id=p1>비밀번호 <i class="fa-solid fa-asterisk"></i></p>
 										</label>
 										<input type="password" class="input" name="memPw" placeholder="비밀번호">
 								        <div class="success-message">사용 가능한 비밀번호입니다.</div>
-								        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
+								        <div class="fail-message">숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
 									</div>
 						                          <div id=pwtag>
 										<label>
-											<p>비밀번호 확인<i class="fa-solid fa-asterisk"></i></p>									
+											<p>비밀번호 확인 <i class="fa-solid fa-asterisk"></i></p>									
 										</label>
 										<input type="password" class="input" id="pw-re" placeholder="비밀번호 확인">
 										<div class="success-message">비밀번호가 일치합니다.</div>

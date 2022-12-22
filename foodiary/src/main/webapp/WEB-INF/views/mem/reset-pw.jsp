@@ -16,7 +16,7 @@
         <div class="resetPW">
             <div class="inner">
                 <div class="resetH">
-                    <a href=""><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     <h1>비밀번호 재설정</h1>
                 </div> <!--resetH-->
                 <div class="resetB">
@@ -33,7 +33,7 @@
 									</label>
 									<input type="password" class="input" name="memPw" placeholder="비밀번호">
 							        <div class="success-message">사용 가능한 비밀번호입니다.</div>
-							        <div class="fail-message">비밀번호는 숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
+							        <div class="fail-message">숫자, 영문 소문자, 특수문자를 반드시 1개 이상 포함하여 8~16자로 작성해주세요.</div>		
 								</div>								
 								<div id="resetT">
 									<label>

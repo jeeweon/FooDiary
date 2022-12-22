@@ -2,6 +2,8 @@
    .fail-message,
    .wait-message { 
            display: none;
+            position: relative;
+           left: 30px;
         }
    #success-message,
    #fail-message { 
@@ -9,11 +11,33 @@
         }
    .input.success ~ #success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px;
+		position: relative;
+        left: 30px;   
    }
    .input.fail ~ #fail-message{
-   		display : block;
+    	display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px;
+		position: relative;
+        left: 30px;   
    }
    
+   .m1,.m2{
+   	margin-bottom: 30px;
+   	font-size: 14px;
+   }
+   
+   .next-btn{
+   	display: none;
+   }
+   
+   p{
+    font-size: 13px;   
+   }
       * {
 margin: 0;
 padding: 0;
@@ -38,6 +62,12 @@ li {
     margin: 0 auto;
 }
 
+   .send-btn:disabled{
+   		opacity: 70%;
+   		cursor: no-drop ;
+   		
+   }
+
 .wrapper>div.inner {
     display: flex;
     gap: 50px;
@@ -52,9 +82,10 @@ li {
     align-items: center;
 }
 .PWlog img{
-    width: 350px;
-    height: 200px;
-    margin-top: 30px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-right: 770px;
 }
 /* .PWlog h2{
     font-size: 27px;
@@ -81,16 +112,39 @@ form p{
 	text-align: center;
 }
 .wait-message{
-	text-align: center;
+        font-size: 12px;
+        margin-top: -20px;
+  	 	margin-left: 180px;
 }
+   #success-message,
+   #fail-message{
+/*    	text-align: center; */
+   }
+   #success-message{
+   color:green;
+   }
+   #fail-message{
+   color:red;
+   }
+   .timer{
+   	display: flex;
+   	align-items: center;
+    font-size: 12px;   	
+   	color: red;
+   	margin-left: 30px;
+    margin-top: -20px;   	
+   }      
 .PWT input{
     width: 450px;
     height: 50px;
     border-radius: 10px 10px;
-    border: 1px solid gray;
+    border: 1px solid lightgrey;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
+}
+.PWT input:focus{
+    outline: 1px solid lightgrey;	
 }
 
 .PWT button{

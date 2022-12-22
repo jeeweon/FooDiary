@@ -15,8 +15,8 @@
         <div class="inquiry">
             <div class="inner">
                 <div class="inquiryH">
-                    <h1>[문의하기]</h1>
-                    <a href="/search/review"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <h1>문의하기 <i class="fa-solid fa-pencil"></i></h1>
+                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                 </div> <!--inauiryH-->
                 <div class="inquiryB">
                     <fieldset>

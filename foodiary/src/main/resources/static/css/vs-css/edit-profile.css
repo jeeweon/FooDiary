@@ -3,21 +3,40 @@
    .NNNNN-message,
    .NNNNY-message { 
            display: none;
+           position: relative;           
+           left: 29px;               
         }
    .input.success ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px;
+        
+        
    }	
    .input.fail ~ .fail-message {
             display: block;
+            color : red;
+            font-size: 12px;
+        	margin-top: -20px  
         }
    .input.NNNNY ~ .success-message{
    		display : block;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }	   
    .input.NNNNN ~ .NNNNN-message{
    		display : block;
+   		color : red;
+        font-size: 12px;
+        margin-top: -20px  
    }
    .input.NNNNN ~ .success-message{
    		display : none;
+   		color:green;
+        font-size: 12px;
+        margin-top: -20px   
    }
    .preview{
    		border-radius : 50%;
@@ -67,18 +86,17 @@ li {
     
 }
 .profileH img{
-    width: 250px;
-    height: 150px;
-    margin-bottom: 50px;
+    width: 150px;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-right: 1000px;
 }
 .profileH h1{
-
 	position: relative;
-	left: 600px;
-    font-size: 35px;
+/* 	left: 600px; */
+	left: 43%;
+/*     font-size: 35px; */
     margin-top: 80px;
-    
-
     margin-bottom: 20px;
 
 }
@@ -99,7 +117,7 @@ li {
  	display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+/*     align-items: center; */
 }
  
 form img{
@@ -110,7 +128,7 @@ form img{
 form label{
 	position: relative;
 	top:20px;
-	right: 190px;
+right: -20px;
 }
 
 form label i{
@@ -130,7 +148,7 @@ form #btn-top{
 form span{
 	position: relative;
 	bottom: 20px;
-	left: 180px;
+    left: 420px;
 }
 form #PT{
 	display: flex;
@@ -147,16 +165,19 @@ form #PT{
 .profileT input{
     width: 450px;
     height: 50px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     border-radius: 10px 10px;
     margin: 30px;
-    font-size: 20px;
+    font-size: 15px;
     padding-left: 15px;
+}
+.profileT input:focus{
+    outline: 1px solid lightgrey;
 }
 .profileT #btn-profile{
     width: 455px;
     height: 50px;
-    margin: 30px;
+/*     margin: 10px; */
     align-items: center;
     border: none;
     border-radius: 10px 10px;
@@ -167,12 +188,23 @@ form #PT{
 }
 .profileT textarea{
     width: 455px;
-    height: 200px;
-    margin: 30px;
+    height: 150px;
+    margin: 20px;
     align-items: center;
-    border: 1px solid gray;
+    border: 1px solid lightgrey;
     border-radius: 10px 10px;
-    font-size: 17px;  
+    font-size: 15px;  
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.profileT textarea:focus{
+    width: 455px;
+    height: 150px;
+    margin: 20px;
+    align-items: center;
+    outline: 1px solid lightgrey;
+    border-radius: 10px 10px;
+    font-size: 15px;  
     padding-left: 10px;
     padding-top: 5px;
 }
