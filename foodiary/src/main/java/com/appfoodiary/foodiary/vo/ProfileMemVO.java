@@ -15,4 +15,5 @@ private int followCnt;
 private int followerCnt;
 private int attachNo;
 private int memLevel;
+private int memPoint;
 }
