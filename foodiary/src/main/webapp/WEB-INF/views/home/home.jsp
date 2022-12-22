@@ -571,7 +571,7 @@ $(function() {
 	$(document).on("click", ".like-ic", function() {
 		var clickedHeart = $(this);
 		var no = $(this).data("rno");
-		var recieverMemNo = $(this).data("writer-no");
+		var receiverMemNo = $(this).data("writer-no");
 		var receiverMemNick = $(this).data("writer-nick");
 		$.ajax({
 			url : "${pageContext.request.contextPath}/rest/review/like2",
@@ -587,7 +587,7 @@ $(function() {
 					//알림 생성 & 전송
             		var notiData = {
             				callerMemNo:memNo,
-            				receiverMemNo:recieverMemNo,
+            				receiverMemNo:receiverMemNo,
             				receiverMemNick:receiverMemNick,
             				notiContent:memNick+"님에게 회원님의 리뷰가 도움됐어요 🧡",
             				notiType:"like",
@@ -595,7 +595,9 @@ $(function() {
             				notiCreateDate:moment(),
             				memNick:memNick
             		};
-            		socket.send(JSON.stringify(notiData));
+					if(memNo != receiverMemNo) {
+	            		socket.send(JSON.stringify(notiData));						
+					}
                	}
                	
                	$.ajax({
