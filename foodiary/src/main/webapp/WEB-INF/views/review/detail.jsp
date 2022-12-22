@@ -395,7 +395,9 @@
 		            				notiCreateDate:moment(),
 		            				memNick:loginNick
 		            		};
-		            		socket.send(JSON.stringify(notiData));
+							if(loginNo != no) {
+			            		socket.send(JSON.stringify(notiData));								
+							}
 						}else{
 							$(that).text("팔로우");
 						}
@@ -462,7 +464,9 @@
             				notiCreateDate:moment(),
             				memNick:loginNick
             		};
-            		socket.send(JSON.stringify(notiData));
+    				if(loginNo != reviewWriterNo) {    					
+            			socket.send(JSON.stringify(notiData));
+    				}
     			});
     		}
 		});
@@ -584,7 +588,7 @@
 		
 		//좋아요 버튼 클릭 이벤트
 		$(document).on("click", ".like-ic", function() {
-			var recieverMemNo = $(this).data("mno");
+			var receiverMemNo = $(this).data("mno");
 			var receiverMemNick = $(this).data("mnick");
 			if(loginNo==null) {
 				alert("로그인하셔야 좋아요를 선택 할 수 있습니다!");
@@ -604,7 +608,7 @@
 	                		//알림 생성 & 전송
 	                		var notiData = {
 	                				callerMemNo:loginNo,
-	                				receiverMemNo:recieverMemNo,
+	                				receiverMemNo:receiverMemNo,
 	                				receiverMemNick:receiverMemNick,
 	                				notiContent:loginNick+"님에게 회원님의 리뷰가 도움됐어요 🧡",
 	                				notiType:"like",
@@ -612,7 +616,9 @@
 	                				notiCreateDate:moment(),
 	                				memNick:loginNick
 	                		};
-	                		socket.send(JSON.stringify(notiData));
+	                		if(loginNo != receiverMemNo) {
+		                		socket.send(JSON.stringify(notiData));                			
+	                		}
 	                	}
 	                	
 	                	$.ajax({
