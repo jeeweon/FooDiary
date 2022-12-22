@@ -19,6 +19,12 @@
 <!-- toast 스타일 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/review-detail.css"> <!--css 불러오는 링크--> 
+<style type="text/css">
+	.backDiv i {
+		position: realtive;
+		bottom: 20px;
+	}
+</style>
 
 
 </head>
@@ -100,65 +106,74 @@
                             <div class="swiper-pagination"></div>        
                         </div> <!--swiper-container-->
                     </div> <!--Rbody-->
+                    
+                    
                     <div class="Lbody">
-                        <div class="LMap">
+                    	<div class="LReview">
                         <ul>
-                            <li>
-                            	<c:if test="${reviewDto.starScore >0}">
-									별점 <div class="star-score" data-max="5" data-rate="${reviewDto.starScore}"></div> 
-								</c:if>
-                            </li>
-                            <li>
-                            	<c:if test="${reviewDto.reviewAddress!=null || reviewDto.reviewPlace!=null}">
-								<!-- 리뷰장소 : 위치 (본문 상단) -->
-							    	<label>리뷰 장소</label>							    
-							    	<c:choose>
-								    	<c:when test="${reviewDto.reviewPlace==null}">
-									        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>
-											<div class="map_wrap">
-										    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-											    <div id="menu_wrap" class="bg_white">
-											        <div class="option">
-											            <div>
-											                <!-- <form onsubmit="searchPlaces(); return false;">  -->
-											                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
-											                    <button type="button" class="keywordMap">검색</button> 
-											                <!--  </form> -->
-											            </div>
-											        </div>											      
-											        <ul id="placesList"></ul>
-											        <div id="pagination"></div>
-											    </div>
-											</div>
-										</c:when>
-										<c:when test="${reviewDto.reviewAddress==null}">
-									        <input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
-										</c:when>
-										<c:otherwise>
-									        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>									       	
-								        	<input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
-											<div class="map_wrap">
-										    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-											    <div id="menu_wrap" class="bg_white">
-											        <div class="option">
-											            <div>
-											                <!-- <form onsubmit="searchPlaces(); return false;">  -->
-											                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
-											                    <button type="button" class="keywordMap">검색</button> 
-											                <!--  </form> -->
-											            </div>
-											        </div>
-											        <hr>
-											        <ul id="placesList"></ul>
-											        <div id="pagination"></div>
-											    </div>
-											</div>
-										</c:otherwise>
-									</c:choose>
-								</c:if>
-                            </li>                            
+	                        <div class="LMap">
+                        	<div class="LMap-star">
+	                            <li>
+	                            	<c:if test="${reviewDto.starScore >0}">
+										별점 <div class="star-score" data-max="5" data-rate="${reviewDto.starScore}"></div> 
+									</c:if>
+	                            </li>
+                            </div><!--LMap-star-->
+                            
+                            <div class="LMap-map">
+	                            <li>
+	                            	<c:if test="${reviewDto.reviewAddress!=null || reviewDto.reviewPlace!=null}">
+									<!-- 리뷰장소 : 위치 (본문 상단) -->
+								    	<label>리뷰 장소</label>							    
+								    	<c:choose>
+									    	<c:when test="${reviewDto.reviewPlace==null}">
+										        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>
+												<div class="map_wrap">
+											    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+												    <div id="menu_wrap" class="bg_white">
+												        <div class="option">
+												            <div>
+												                <!-- <form onsubmit="searchPlaces(); return false;">  -->
+												                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
+												                    <button type="button" class="keywordMap">검색</button> 
+												                <!--  </form> -->
+												            </div>
+												        </div>											      
+												        <ul id="placesList"></ul>
+												        <div id="pagination"></div>
+												    </div>
+												</div>
+											</c:when>
+											<c:when test="${reviewDto.reviewAddress==null}">
+										        <input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
+											</c:when>
+											<c:otherwise>
+										        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>									       	
+									        	<input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
+												<div class="map_wrap">
+											    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+												    <div id="menu_wrap" class="bg_white">
+												        <div class="option">
+												            <div>
+												                <!-- <form onsubmit="searchPlaces(); return false;">  -->
+												                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
+												                    <button type="button" class="keywordMap">검색</button> 
+												                <!--  </form> -->
+												            </div>
+												        </div>
+												        <hr>
+												        <ul id="placesList"></ul>
+												        <div id="pagination"></div>
+												    </div>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+	                            </li>   
+                            </div><!--LMap-map-->                       
+                        	</div><!--LMap-->
                         </ul>
-                        </div><!--LMap-->
+                        
                         <div class="Ltext">
                             <ul>
                                 <li>
@@ -167,6 +182,11 @@
                                 </li>
                             </ul>
                         </div> <!--Ltext-->
+                        
+                        </div><!--LReview-->
+                        
+                        <hr>
+                        
                         <div class="Lreply">                      	
 						<!-- 댓글 위치 
 							1. 댓글목록 : 최신순, 한번에 10개씩, 더보기클릭
@@ -179,6 +199,9 @@
 						<!-- 댓글 목록 -->
 							<div class="reply-list">				                                                 
                         </div> <!--Lreply-->
+                        
+                        <hr>
+                        
                     <div class="Licon">                   	
 							<span>
 								<i class='fa-regular fa-comment'></i>
@@ -219,7 +242,7 @@
   	</div>   
 
 <!-- 뒤로가기 화살표 -->
-<div style="text-align: center">
+<div class="backDiv" style="text-align: center">
 	<i class="fa-solid fa-arrow-left-long goBack" style="font-size: 30px;"></i>
 	<div style="margin: -6px;">&nbsp;back</div>
 </div>
@@ -493,7 +516,7 @@
 		var changeText = $(".input-reply").val();
 		//- 글자수 검사 및 변환
 		$(".input-reply").on("change keyup paste",function(){
-			var maxCnt = 50; //DB저장 최대 Byte수
+			var maxCnt = 300; //DB저장 최대 Byte수
 			var length = getByteLengthOfString($(".input-reply").val()); //총 글자수
 			//console.log(length);
 			
