@@ -77,6 +77,7 @@
         	M.mem_nick,
         	M.mem_intro,
         	M.mem_level,
+        	M.mem_point,
         	coalesce(RC.cnt, 0) review_cnt,
         	coalesce(FP.cnt2, 0) follow_cnt,
         	coalesce(FT.cnt3, 0) follower_cnt,
