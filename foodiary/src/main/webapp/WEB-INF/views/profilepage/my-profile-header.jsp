@@ -438,9 +438,9 @@
             success : function(resp) {
                profileList = resp;
                //$(".mem-name").text(profileList.memNick);
-               $(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
-               $(".follow-cnt").text("팔로워 : "+profileList.followCnt);
-               $(".follower-cnt").text("팔로우: "+profileList.followerCnt);
+               $(".board-cnt").text("리뷰 "+profileList.reviewCnt);
+               $(".follow-cnt").text("팔로워 "+profileList.followCnt);
+               $(".follower-cnt").text("팔로우 "+profileList.followerCnt);
                $(".mem-no").text(profileList.memNo);
                $(".mem-info").text(profileList.memIntro);
                
@@ -718,14 +718,14 @@
                         <a href="#"><li class="follower-cnt"></li></a>
                     </ul> <!-- boardT2 -->
                     <P>   
-                       <span class="mem-info-text">자기소개</span><br><br>
+                       <span class="mem-info-text"></span><br><br>
                        <span class="mem-info"></span>           
                     </P>
                 </div> <!--boardT-->
                 <div class="boardA">
                     <ul>
                         <li>
-                            <a href="board" class="board-btn">게시물</a>
+                            <a href="board" class="board-btn">리뷰</a>
                             <a href="bookmark" class="bookmark-btn">북마크</a>
                             <a href="like" class="like-btn">좋아요</a>
                         </li>
