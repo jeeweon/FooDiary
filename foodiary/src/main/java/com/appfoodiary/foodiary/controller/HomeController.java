@@ -44,9 +44,4 @@ public class HomeController {
 	public String areaInterest() {
 		return "home/area-interest";
 	}
-	
-	@GetMapping("/sockjs")
-	public String sockJs() {
-		return "sockjs";
-	}
 }
