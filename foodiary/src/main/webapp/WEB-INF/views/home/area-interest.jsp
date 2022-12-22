@@ -15,7 +15,7 @@
         <div class="Area">
             <div class="inner">
                 <div class="AreaH">
-                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <img class="logo" src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로">
                     <h1 class="title">관심지역을 설정해주세요</h1>
                 </div>
                 <!-- 검색 -->
@@ -39,9 +39,9 @@
                 <div class="AreaB">
 	                <fieldset>
 	                        <legend>
-	                            <form>
-									<button><a href="${pageContext.request.contextPath}/home">홈으로 돌아가기</a></button>
-	                            </form>
+<!-- 	                            <form> -->
+<%-- 									<button><a href="${pageContext.request.contextPath}/home">홈으로 돌아가기</a></button> --%>
+<!-- 	                            </form> -->
 	                        </legend>
                     </fieldset>                  			
                 </div>
@@ -332,6 +332,10 @@
                 }
             });
         };
+        
+        $(document).on("click", ".logo", function(){
+    		window.location = "${pageContext.request.contextPath}/home";
+    	});
     });
 </script>
 </body>
