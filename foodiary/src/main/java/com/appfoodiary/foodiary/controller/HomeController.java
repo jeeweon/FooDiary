@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.appfoodiary.foodiary.constant.SessionConstant;
 import com.appfoodiary.foodiary.repository.MemDao;
+import com.appfoodiary.foodiary.repository.NotiDao;
 import com.appfoodiary.foodiary.service.LevelPointService;
 
 @Controller
@@ -21,6 +22,9 @@ public class HomeController {
 	
 	@Autowired
 	private MemDao memDao;
+	
+	@Autowired
+	private NotiDao notiDao;
 	
 	@GetMapping("")
 	public String home(HttpSession session, Model model) {
@@ -34,6 +38,10 @@ public class HomeController {
 			
 			//레벨 업데이트
 			levelPointService.levelUp(memNo);
+			
+			//알림 내역 조회
+			model.addAttribute("list", notiDao.myNotiList(memNo));
+			model.addAttribute("cnt", notiDao.noReadCnt(memNo));
 			return "home/home";
 		} else {
 			return "redirect:/search/review";

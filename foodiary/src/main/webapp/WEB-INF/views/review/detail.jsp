@@ -19,13 +19,20 @@
 <!-- toast 스타일 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/review-detail.css"> <!--css 불러오는 링크--> 
+<style type="text/css">
+	.backDiv i {
+		position: realtive;
+		bottom: 20px;
+	}
+</style>
 
 
 </head>
 <body>
-
 	<!-- 글번호 -->
 	<input type="hidden" name="reviewNo" value="${reviewDto.reviewNo}">
+	<!-- 로그인번호 -->
+	<input type="hidden" class="loginNoHidden" value="${loginNo}">
 
     <div class="wrapper">
         <div class="Rdetail">
@@ -38,14 +45,16 @@
 					-->
 					<div class="reviewWriter">
 						<span class="reviewMem">
-							<c:choose>
-								<c:when test="${reviewWriter.attachNo == 0}">
-									<img class="profile" src="${pageContext.request.contextPath}/images/basic-profile.png">
-								</c:when>
-								<c:otherwise>
-									<img class="profile" src="${pageContext.request.contextPath}/attach/download/${reviewWriter.attachNo}">
-								</c:otherwise>
-							</c:choose>
+							<span class="attachBox">
+								<c:choose>
+									<c:when test="${reviewWriter.attachNo == 0}">
+										<img class="profile" src="${pageContext.request.contextPath}/images/basic-profile.png">
+									</c:when>
+									<c:otherwise>
+										<img class="profile" src="${pageContext.request.contextPath}/attach/download/${reviewWriter.attachNo}">
+									</c:otherwise>
+								</c:choose>
+							</span>
 							<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
 						</span>
 					</div>                                
@@ -100,65 +109,74 @@
                             <div class="swiper-pagination"></div>        
                         </div> <!--swiper-container-->
                     </div> <!--Rbody-->
+                    
+                    
                     <div class="Lbody">
-                        <div class="LMap">
+                    	<div class="LReview">
                         <ul>
-                            <li>
-                            	<c:if test="${reviewDto.starScore >0}">
-									별점 <div class="star-score" data-max="5" data-rate="${reviewDto.starScore}"></div> 
-								</c:if>
-                            </li>
-                            <li>
-                            	<c:if test="${reviewDto.reviewAddress!=null || reviewDto.reviewPlace!=null}">
-								<!-- 리뷰장소 : 위치 (본문 상단) -->
-							    	<label>리뷰 장소</label>							    
-							    	<c:choose>
-								    	<c:when test="${reviewDto.reviewPlace==null}">
-									        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>
-											<div class="map_wrap">
-										    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-											    <div id="menu_wrap" class="bg_white">
-											        <div class="option">
-											            <div>
-											                <!-- <form onsubmit="searchPlaces(); return false;">  -->
-											                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
-											                    <button type="button" class="keywordMap">검색</button> 
-											                <!--  </form> -->
-											            </div>
-											        </div>											      
-											        <ul id="placesList"></ul>
-											        <div id="pagination"></div>
-											    </div>
-											</div>
-										</c:when>
-										<c:when test="${reviewDto.reviewAddress==null}">
-									        <input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
-										</c:when>
-										<c:otherwise>
-									        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>									       	
-								        	<input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
-											<div class="map_wrap">
-										    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-											    <div id="menu_wrap" class="bg_white">
-											        <div class="option">
-											            <div>
-											                <!-- <form onsubmit="searchPlaces(); return false;">  -->
-											                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
-											                    <button type="button" class="keywordMap">검색</button> 
-											                <!--  </form> -->
-											            </div>
-											        </div>
-											        <hr>
-											        <ul id="placesList"></ul>
-											        <div id="pagination"></div>
-											    </div>
-											</div>
-										</c:otherwise>
-									</c:choose>
-								</c:if>
-                            </li>                            
+	                        <div class="LMap">
+                        	<div class="LMap-star">
+	                            <li>
+	                            	<c:if test="${reviewDto.starScore >0}">
+										별점 <div class="star-score" data-max="5" data-rate="${reviewDto.starScore}"></div> 
+									</c:if>
+	                            </li>
+                            </div><!--LMap-star-->
+                            
+                            <div class="LMap-map">
+	                            <li>
+	                            	<c:if test="${reviewDto.reviewAddress!=null || reviewDto.reviewPlace!=null}">
+									<!-- 리뷰장소 : 위치 (본문 상단) -->
+								    	<label>리뷰 장소</label>							    
+								    	<c:choose>
+									    	<c:when test="${reviewDto.reviewPlace==null}">
+										        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>
+												<div class="map_wrap">
+											    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+												    <div id="menu_wrap" class="bg_white">
+												        <div class="option">
+												            <div>
+												                <!-- <form onsubmit="searchPlaces(); return false;">  -->
+												                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
+												                    <button type="button" class="keywordMap">검색</button> 
+												                <!--  </form> -->
+												            </div>
+												        </div>											      
+												        <ul id="placesList"></ul>
+												        <div id="pagination"></div>
+												    </div>
+												</div>
+											</c:when>
+											<c:when test="${reviewDto.reviewAddress==null}">
+										        <input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
+											</c:when>
+											<c:otherwise>
+										        <input type="text" name="reviewAddress" value="${reviewDto.reviewAddress}" readonly>									       	
+									        	<input type="text" name="reviewPlace" value="${reviewDto.reviewPlace}" readonly>
+												<div class="map_wrap">
+											    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+												    <div id="menu_wrap" class="bg_white">
+												        <div class="option">
+												            <div>
+												                <!-- <form onsubmit="searchPlaces(); return false;">  -->
+												                    <input type="text" value="${reviewDto.reviewAddress}" id="keyword" size="15" readonly> 
+												                    <button type="button" class="keywordMap">검색</button> 
+												                <!--  </form> -->
+												            </div>
+												        </div>
+												        <hr>
+												        <ul id="placesList"></ul>
+												        <div id="pagination"></div>
+												    </div>
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+	                            </li>   
+                            </div><!--LMap-map-->                       
+                        	</div><!--LMap-->
                         </ul>
-                        </div><!--LMap-->
+                        
                         <div class="Ltext">
                             <ul>
                                 <li>
@@ -167,6 +185,11 @@
                                 </li>
                             </ul>
                         </div> <!--Ltext-->
+                        
+                        </div><!--LReview-->
+                        
+                        <hr>
+                        
                         <div class="Lreply">                      	
 						<!-- 댓글 위치 
 							1. 댓글목록 : 최신순, 한번에 10개씩, 더보기클릭
@@ -179,6 +202,9 @@
 						<!-- 댓글 목록 -->
 							<div class="reply-list">				                                                 
                         </div> <!--Lreply-->
+                        
+                        <hr>
+                        
                     <div class="Licon">                   	
 							<span>
 								<i class='fa-regular fa-comment'></i>
@@ -187,13 +213,13 @@
 							<c:choose>
 								<c:when test="${checkRpLkBkVO.likeCheck}">
 									<span>
-										<i class='fa-solid fa-heart like-ic' style="color: red;"></i>
+										<i class='fa-solid fa-heart like-ic' style="color: red;" data-mno="${reviewWriter.memNo}" data-mnick="${reviewWriter.memNick}"></i>
 										<span class="like-ic-count">${reviewDto.likeCnt}</span>
 									</span>
 								</c:when>
 								<c:otherwise>
 									<span>
-										<i class='fa-regular fa-heart like-ic' style="color: red;"></i>
+										<i class='fa-regular fa-heart like-ic' style="color: red;" data-mno="${reviewWriter.memNo}" data-mnick="${reviewWriter.memNick}"></i>
 										<span class="like-ic-count">${reviewDto.likeCnt}</span>
 									</span>
 								</c:otherwise>
@@ -219,7 +245,7 @@
   	</div>   
 
 <!-- 뒤로가기 화살표 -->
-<div style="text-align: center">
+<div class="backDiv" style="text-align: center">
 	<i class="fa-solid fa-arrow-left-long goBack" style="font-size: 30px;"></i>
 	<div style="margin: -6px;">&nbsp;back</div>
 </div>
@@ -280,20 +306,24 @@
     });
 
 
+	//변수 저장
+	//reviewNo = $("input[name=reviewNo]").val()
+	let reviewNo = ${reviewDto.reviewNo};	//리뷰 글번호
+	let reviewWriterNo = ${reviewWriter.memNo};	//리뷰작성자 번호
+	let reviewWriterLevel = ${reviewWriter.memLevel}; //리뷰작성자 레벨
+	let loginNo = ${checkRpLkBkVO.memNo}	//로그인한 회원번호
+	
+	let loginNoW = "<%=(Integer)session.getAttribute("loginNo")%>";	//로그인한 회원번호
+	let loginNickW = "<%=(String)session.getAttribute("loginNick")%>"; 
+	let reviewWriterNick = "${reviewWriter.memNick}"; //리뷰작성자 닉네임
+	
 	$(function(){
-		//변수 저장
-		//reviewNo = $("input[name=reviewNo]").val()
-		let reviewNo = ${reviewDto.reviewNo};	//리뷰 글번호
-		let reviewWriterNo = ${reviewWriter.memNo};	//리뷰작성자 번호
-		let reviewWriterLevel = ${reviewWriter.memLevel}; //리뷰작성자 레벨
-		let loginNo = "<%=(Integer)session.getAttribute("loginNo")%>";	//로그인한 회원번호
-		let loginNick = "<%=(String)session.getAttribute("loginNick")%>"; 
-		let reviewWriterNick = "${reviewWriter.memNick}"; //리뷰작성자 닉네임
 		reviewWriter(); //리뷰상단: 리뷰작성자 정보
 		loadReplyList(); //댓글목록 출력
 		
+		
 		//웹소켓 연결
-		if(loginNo != null){
+		if(loginNoW != null){
 			connectWs();
 		}
 		//웹소켓
@@ -362,8 +392,9 @@
 				}
 			});
 			
-			if(reviewWriterNo!=loginNo) { //본인글이 아닐때 팔로우버튼 생성
+			if(loginNo!=0 && reviewWriterNo!=loginNo) { //본인글이 아닐때 팔로우버튼 생성
 				var follow=$("<button>").attr("data-rno",reviewWriterNo);
+				follow.attr("data-mnick", reviewWriterNick);
 				follow.addClass("follow");
 				$.ajax({
 					url:"${pageContext.request.contextPath}/rest/profile/followcert?memNo="+reviewWriterNo,
@@ -385,7 +416,7 @@
 		$(".follow").click(function(){
 			var that=$(this);
 			var no = $(this).data("rno");
-			var nick =  $(this).data("mnick");
+			var nick =  $(this).data("mnick");	
 			$.ajax({
 				url:"${pageContext.request.contextPath}/rest/review/follow",
 				method:"post",
@@ -397,16 +428,16 @@
 						$(that).text("팔로잉");
 						//알림 생성 & 전송
 	            		var notiData = {
-	            				callerMemNo:loginNo,
+	            				callerMemNo:loginNoW,
 	            				receiverMemNo:no,
 	            				receiverMemNick:nick,
-	            				notiContent:loginNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
+	            				notiContent:loginNickW+"님이 회원님을 팔로우하기 시작했어요 🙌",
 	            				notiType:"follow",
-	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNo,
+	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNoW,
 	            				notiCreateDate:moment(),
-	            				memNick:loginNick
+	            				memNick:loginNickW
 	            		};
-						if(loginNo != no) {
+						if(loginNoW != no) {
 		            		socket.send(JSON.stringify(notiData));								
 						}
 					}else{
@@ -446,10 +477,10 @@
 		
 		//댓글 입력
 		$(".btn-reply-write").click(function(){
-			var memNo = loginNo;
+			var memNo = loginNoW;
     		var replyContent = $(".input-reply").val();
-    		if(memNo==null) {
-    			alert("로그인하셔야 댓글을 등록 할 수 있습니다!");
+    		if(memNo==0) {
+    			alert("회원 전용 기능입니다.");
     			$(".input-reply").val("");
     		}
     		else if(replyContent=="") {
@@ -466,20 +497,20 @@
     				$(".input-reply").val("");
     				loadReplyList();
     				
-    				/* //알림 생성 & 전송
+    				//알림 생성 & 전송
             		var notiData = {
-            				callerMemNo:loginNo,
+            				callerMemNo:loginNoW,
             				receiverMemNo:reviewWriterNo,
             				receiverMemNick:reviewWriterNick,
-            				notiContent:loginNick+"님이 회원님의 리뷰에 댓글을 남겼어요 👀",
+            				notiContent:loginNickW+"님이 회원님의 리뷰에 댓글을 남겼어요 👀",
             				notiType:"reply",
             				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+reviewNo,
             				notiCreateDate:moment(),
-            				memNick:loginNick
+            				memNick:loginNickW
             		};
-    				if(loginNo != reviewWriterNo) {    					
+    				if(loginNoW != reviewWriterNo) {    					
             			socket.send(JSON.stringify(notiData));
-    				} */
+    				}
     			});
     		}
 		});
@@ -493,7 +524,7 @@
 		var changeText = $(".input-reply").val();
 		//- 글자수 검사 및 변환
 		$(".input-reply").on("change keyup paste",function(){
-			var maxCnt = 50; //DB저장 최대 Byte수
+			var maxCnt = 300; //DB저장 최대 Byte수
 			var length = getByteLengthOfString($(".input-reply").val()); //총 글자수
 			//console.log(length);
 			
@@ -538,6 +569,7 @@
 	        		//replyListHead
 	        		//1. replyListHead-replyNoInput
 	        		var replyNoInput = $("<input>").attr("type","hidden").val(replyNo).addClass("replyNo");
+	        		var replyMemInput = $("<input>").attr("type","hidden").val(replyMemNo).addClass("replyMemNo");
 	        		
 	        		//2. replyListHead-replyMem
 	        		var profile;
@@ -566,16 +598,8 @@
 	    			}
 	    			memLevel.addClass("level-img");
 	    			
-	    			var replyMem = $("<span>").append(profile).append(memNick).append(memLevel);
+	    			var replyMem = $("<span>").attr("text", replyMemNo).append(profile).append(memNick).append(memLevel);
 	    			replyMem.addClass("replyMem")
-	    			$(".replyMem").click(function(){
-	    				if(loginNo==value.memNo) {
-	    					window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
-	    				}else {
-	    					window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo;
-	    				}
-	    			});
-	    			
 	    			
 	    			//3. replyListHead-replyWriteTime
 	    			var today = moment().format('yyyy-MM-DD');
@@ -590,7 +614,7 @@
 					}
 					
 	        		//var replyWriteTime = $("<span>").text("\n"+value.replyWriteTime);
-
+					
 	        		var replyReport = $("<input>").val("신고");
         			replyReport.attr("type", "button").addClass("btn-reply-report");
 
@@ -608,12 +632,13 @@
 	        		replyContent.addClass("replyContent");
 	        		
 	        		//reply-list
-	        		var replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime);
-	        		if(loginNo==replyMemNo) {
-	        			replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime)
+	        		if(loginNo==0) {
+		        		var replyListHead = $("<div>").append(replyNoInput).append(replyMemInput).append(replyMem).append(replyWriteTime);
+	        		}else if(loginNo==replyMemNo) {
+	        			replyListHead = $("<div>").append(replyNoInput).append(replyMemInput).append(replyMem).append(replyWriteTime)
 													.append(" ").append(replyDelete);
 	        		}else if(loginNo!=replyMemNo){
-		        		replyListHead = $("<div>").append(replyNoInput).append(replyMem).append(replyWriteTime)
+		        		replyListHead = $("<div>").append(replyNoInput).append(replyMemInput).append(replyMem).append(replyWriteTime)
 		        									.append(" ").append(replyReport);
 	        		}
 	        		replyListHead.addClass("replyListHead");
@@ -625,6 +650,16 @@
 	        	}); //$.each끝
 			}); //axios끝
 		} //목록조회끝
+		
+		//댓글 프로필 이동
+		$(document).on("click",".replyMem", function(){
+			var replyMemNo = $(this).siblings(".replyMemNo").val();
+			if(loginNo==replyMemNo) {
+				window.location = "${pageContext.request.contextPath}/profilepage/my-profile-header";
+			}else {
+				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+replyMemNo;
+			}
+		});
 		
 		//댓글 신고
 		$(document).on("click", ".btn-reply-report", function(){ //생성된버튼은 해당방법 사용
@@ -641,6 +676,7 @@
 					if(resp.data) {	//response가 true일 경우
 						alert("신고가 접수되었습니다.");
 						$(that).prop("disabled", true);
+						loadReplyList();
 					}
 				});
 			}
@@ -650,8 +686,8 @@
 		$(document).on("click", ".like-ic", function() {
 			var receiverMemNo = $(this).data("mno");
 			var receiverMemNick = $(this).data("mnick");
-			if(loginNo==null) {
-				alert("로그인하셔야 좋아요를 선택 할 수 있습니다!");
+			if(loginNo==0) {
+				alert("회원 전용 기능입니다.");
 			}
 			else {
 				$.ajax({
@@ -667,16 +703,16 @@
 	                		$(".like-ic").removeClass("fa-regular").addClass("fa-solid");
 	                		//알림 생성 & 전송
 	                		var notiData = {
-	                				callerMemNo:loginNo,
+	                				callerMemNo:loginNoW,
 	                				receiverMemNo:receiverMemNo,
 	                				receiverMemNick:receiverMemNick,
-	                				notiContent:loginNick+"님에게 회원님의 리뷰가 도움됐어요 🧡",
+	                				notiContent:loginNickW+"님에게 회원님의 리뷰가 도움됐어요 🧡",
 	                				notiType:"like",
 	                				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+reviewNo,
 	                				notiCreateDate:moment(),
-	                				memNick:loginNick
+	                				memNick:loginNickW
 	                		};
-	                		if(loginNo != receiverMemNo) {
+	                		if(loginNoW != receiverMemNo) {
 		                		socket.send(JSON.stringify(notiData));                			
 	                		}
 	                	}
@@ -698,8 +734,8 @@
 		
 		//북마크 버튼 클릭 이벤트
 		$(document).on("click", ".bookmark-ic", function() {
-			if(loginNo==null) {
-				alert("로그인하셔야 북마크를 사용 할 수 있습니다!");
+			if(loginNo==0) {
+				alert("회원 전용 기능입니다.");
 			}
 			$.ajax({
 				url : "${pageContext.request.contextPath}/rest/review/bookmark",
