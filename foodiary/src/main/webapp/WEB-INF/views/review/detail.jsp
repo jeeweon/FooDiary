@@ -129,13 +129,13 @@
 	bottom: 20px;
 	margin-left: 10px;
 }
-/* .btn-report{
-	background-image: url("/images/신고버튼 이미지.png");
-	background-position: center;
-	width: 40px;
-	height: 20px;
+.btn-report{
 	border: none;
-} */
+	background: none;
+	outline: none;
+	color: blue;
+
+} 
 .btn-report:hover{
 	cursor: pointer;
 }
@@ -148,7 +148,9 @@
 fieldset {
     border: 0;
 }
-
+.wrapper{
+	overflow-x:hidden;
+}
 a {
     text-decoration: none;
     color: black;
