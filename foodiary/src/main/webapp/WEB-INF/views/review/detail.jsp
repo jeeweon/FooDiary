@@ -629,12 +629,12 @@ li {
 	$(function(){
 		//변수 저장
 		//reviewNo = $("input[name=reviewNo]").val()
-		let reviewNo = ${reviewDto.reviewNo}	//리뷰 글번호
-		let reviewWriterNo = ${reviewWriter.memNo}	//리뷰작성자 번호
-		let reviewWriterLevel = ${reviewWriter.memLevel} //리뷰작성자 레벨
-		let loginNo = ${loginNo}	//로그인한 회원번호
-		let loginNick = "${loginNick}" //로그인한 회원닉네임
-		let reviewWriterNick = "${reviewWriter.memNick}" //리뷰작성자 닉네임
+		let reviewNo = ${reviewDto.reviewNo};	//리뷰 글번호
+		let reviewWriterNo = ${reviewWriter.memNo};	//리뷰작성자 번호
+		let reviewWriterLevel = ${reviewWriter.memLevel}; //리뷰작성자 레벨
+		let loginNo = "<%=(Integer)session.getAttribute("loginNo")%>";	//로그인한 회원번호
+		let loginNick = "<%=(String)session.getAttribute("loginNick")%>"; 
+		let reviewWriterNick = "${reviewWriter.memNick}"; //리뷰작성자 닉네임
 		reviewWriter(); //리뷰상단: 리뷰작성자 정보
 		loadReplyList(); //댓글목록 출력
 		
