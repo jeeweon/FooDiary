@@ -355,6 +355,12 @@ li {
 	display: flex;
 	align-items:center;
 }
+.nick-lev .level-img{
+	margin-left: 10px;
+}
+.follow-ul a .level-img{
+	margin-left: 5px;
+}
 
 .thumbnail {
 	object-fit:cover;

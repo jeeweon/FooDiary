@@ -186,10 +186,10 @@ li {
   background-color: rgba(0,0,0,0.7);
 
   position: absolute; /* 이미지와 겹치게 처리 */
-  top: 0; left: 0;
+  top: 0; left: 0; ;
 
   color: #fff; text-align: center;
-  line-height: 350px;
+  line-height: 260px;
 
   opacity: 0; /* 처음엔 안보이고 */
  
