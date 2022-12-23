@@ -71,6 +71,7 @@ li {
   width: 100%; height: 100%;
 }
 .feedimg figcaption{
+  object-fit:cover;
   width: 100%; height: 100%;
   background-color: rgba(0,0,0,0.7);
 
@@ -138,10 +139,11 @@ li {
 	function renderList(){
 			if(reviewList1.length != 0 && reviewList1[0].reviewNo != 0){
 			$.each(reviewList1, function(index, value) {
-				
+				if(value.reviewReportCnt>=5){
+				}else{
 				if(value.imgCnt>1){
 				 //var imgP=$("<p>").text("+"+(value.imgCnt-1));
-				var moreIc=$("<p>").html("<i class='fa-solid fa-plus'></i>"+(value.imgCnt-1));
+				var moreIc=$("<p>").html("<i class='fa-solid fa-plus fa-xs'></i>"+(value.imgCnt-1));
 				moreIc.addClass("absolute"); 
 				
 				var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
@@ -213,6 +215,7 @@ li {
 					feedimg.addClass("feedimg");
 					var feedul=$("<ui>").html(feedimg);
 				};
+				};
 				
 				
 				
@@ -222,6 +225,7 @@ li {
 				var noReview = $("<div>").append("<span class='no-review'>작성한 리뷰가 없습니다.</span>");
 				$(".feed").append(noReview);
 			}
+			
 	};		
 	//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
 	$(document).on("click", ".review-main", function(){
