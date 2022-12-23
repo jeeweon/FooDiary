@@ -47,9 +47,9 @@
 	<div class="row center mb-30">
 		<span class="today"></span>
 	</div>
-	<div class="row mem">
+	<%-- <div class="row mem">
 		<a href="${pageContext.request.contextPath}/admin/#"><i class="fa-solid fa-user me-10"></i>회원 관리</a> <!-- 주소 수정 필요 -->
-	</div>
+	</div> --%>
 	<div class="row mail">
 		<a href="${pageContext.request.contextPath}/admin/send-mail"><i class="fa-solid fa-envelope me-10"></i>메일 발송</a>
 	</div>

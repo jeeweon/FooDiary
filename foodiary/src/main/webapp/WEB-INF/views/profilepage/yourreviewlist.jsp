@@ -94,8 +94,8 @@ li {
 	height :250px;
 }
 .relative { 
- 	width: 350px;
- 	height: 350px;
+ 	width: 250px;
+ 	height: 250px;
  	position: relative;
  	}
 .absolute {

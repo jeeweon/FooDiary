@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.appfoodiary.foodiary.interceptor.AdminInterceptor;
 import com.appfoodiary.foodiary.interceptor.MemInterceptor;
 import com.appfoodiary.foodiary.interceptor.ReplyOwnerCheckInterceptor;
 import com.appfoodiary.foodiary.interceptor.ReviewOwnerCheckInterceptor;
@@ -20,6 +21,9 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	
 	@Autowired
 	private ReplyOwnerCheckInterceptor replyOwnerCheckInterceptor;
+	
+	@Autowired
+	private AdminInterceptor adminInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -49,5 +53,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 				.addPathPatterns(
 						"/rest/reply/"
 						);
+		// 관리자 구분
+		registry.addInterceptor(adminInterceptor)
+								.addPathPatterns(
+										"/admin/*"
+										)
+								.excludePathPatterns(
+										"/admin/login"
+										);
 	}
 }
