@@ -139,7 +139,8 @@ li {
 	function renderList(){
 			if(reviewList1.length != 0 && reviewList1[0].reviewNo != 0){
 			$.each(reviewList1, function(index, value) {
-				
+				if(value.reviewReportCnt>=5){
+				}else{
 				if(value.imgCnt>1){
 				 //var imgP=$("<p>").text("+"+(value.imgCnt-1));
 				var moreIc=$("<p>").html("<i class='fa-solid fa-plus'></i>"+(value.imgCnt-1));
@@ -214,6 +215,7 @@ li {
 					feedimg.addClass("feedimg");
 					var feedul=$("<ui>").html(feedimg);
 				};
+				};
 				
 				
 				
@@ -223,6 +225,7 @@ li {
 				var noReview = $("<div>").append("<span class='no-review'>작성한 리뷰가 없습니다.</span>");
 				$(".feed").append(noReview);
 			}
+			
 	};		
 	//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
 	$(document).on("click", ".review-main", function(){
