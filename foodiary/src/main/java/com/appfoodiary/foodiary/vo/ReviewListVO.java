@@ -12,4 +12,5 @@ private int reviewNo;
 private int likeCnt;
 private int imgCnt;
 private int replyCnt;
+private int reviewReportCnt;
 }

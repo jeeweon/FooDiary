@@ -203,6 +203,9 @@
           background:rgba(0, 0, 0, 0.5);
           z-index:-1;
         } 
+        .center{
+        text-align: center;
+        }
 	object-fit:cover; 
       
 </style> 
@@ -418,10 +421,13 @@
 	
 				
 				var main=$(".feed").append(feedul);//.append(figcaption);
+				
 				});
 			}else{
-				var noReview = $("<div>").append("<span class='no-review'>작성한 리뷰가 없습니다.</span>");
-				$(".main").append(noReview);
+				var noReview = $("<div>").append("<span class='no-review'>게시글이 없습니다.</span>");
+				noReview.addClass("center");
+				$(".feed").append(noReview);
+				
 			}
 	};		
 	//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
