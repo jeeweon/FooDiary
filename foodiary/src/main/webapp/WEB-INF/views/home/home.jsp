@@ -149,7 +149,8 @@
                     <h3>오늘의 맛쟁이 추천 <i class="fa-solid fa-user-group"></i></h3>
                      <ul class="follow-ul">
                      </ul>
-                     <p id="follow1">이용약관 개인정보처리방침 쿠키정책 및 자세한 안내가 필요하신 분은 문의 부탁드립니다</p>                     
+                     <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p>
+                     <p id="follow2">자세한 사항은 문의부탁드립니다</p>                     
                  </div> <!--follow-->
              </div> <!--random-->
          </div> <!--sidebar-->

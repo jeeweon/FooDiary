@@ -34,6 +34,33 @@
           background:#fff;
           border:10px solid #666;
         }
+        .modal_content a span{
+        	position: relative;
+        	top: 7px;
+        	margin-right: 5px;
+        	margin-left: 5px;
+        }
+        .modal_content .level-img2{
+        	position: relative;
+        	width: 24px;
+        	height: 24px;
+        	top: 12px;
+        }
+        .modal_content button{
+        	position: relative;
+        	bottom: 13px;
+        	font-size: 15px;
+        	border: none;
+        	background: none;
+        	outline: none;
+        	color: #0095f6;
+        }
+        
+        .modal_content .follow-img{
+        	position: relative;
+        	top: 15px;
+        	border-radius: 50%;
+        }
         
         #modal .modal_layer {
           position:fixed;
@@ -52,6 +79,13 @@
           height:100%;
           z-index:1;
         }
+        #modal2 .level-img2{
+        	position: relative;
+        	width: 24px;
+        	height: 24px;
+        	bottom: 8px;
+        }
+        
         
         #modal2 h2 {
           margin:0;
@@ -69,6 +103,33 @@
           padding:20px 10px;
           background:#fff;
           border:10px solid #666;
+        }
+        .modal_content2 a span{
+        	position: relative;
+        	bottom: 16px;
+        	margin-left: 10px;
+        	margin-right: 10px;
+        }
+       
+        .modal_content2 .follow-img{
+        	position: relative;
+        	width: 30px;
+        	height: 30px;
+        	border-radius: 50%;
+        	top: 1px;
+        	margin-top: 10px;
+        	margin-bottom: 10px;
+        	margin-left: 10px;
+        }
+        .modal_content2 button{
+        	position: relative;
+        	border: none;
+        	background: none;
+        	outline: none;
+        	color: #0095f6;
+        	bottom: 14px;
+        	left: 100px;
+        	font-size: 15px;
         }
         
         #modal2 .modal_layer {
@@ -152,19 +213,20 @@
  		margin-left: 5px;
  	}	
  	.relative { 
- 		width: 350px;
- 		height: 350px;
+ 		width: 250px;
+ 		height: 250px;
  		position: relative;
  		}
 	.absolute {
 	 	width: 50px; 
 	 	height: 50px;
 	 	position: absolute;
-	 	left: 300px;
-	 	top: 300px;
+	 	left: 200px;
+	 	top: 200px;
 	 	background-color:gray;
 	 	opacity: 0.5;
 	 	text-align: center;
+	 	color:white;
 	 	font-size:35px;"src/main/webapp/WEB-INF/views/profilepage/board.jsp"
 	 	}
 	 	 #modal4 {
@@ -203,6 +265,9 @@
           background:rgba(0, 0, 0, 0.5);
           z-index:-1;
         } 
+        .center{
+        text-align: center;
+        }
 	object-fit:cover; 
       
 </style> 
@@ -341,87 +406,168 @@
 			if(reviewList1.length != 0 && reviewList1[0].reviewNo != 0){
 			$.each(reviewList1, function(index, value) {
 				// 사진갯수가 0 이상이라면 
-				if(value.imgCnt>1){
-				
-				var imgspan=$("<p>").text("+"+(value.imgCnt-1));
-				imgspan.addClass("absolute");
-				var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
-				reviewImg.addClass("relative");
-				var imgDiv=$("<div>").append(reviewImg).append(imgspan);
-				imgDiv.addClass("relative");
-				
-				$(reviewImg).hover(function(){
-					$(this).addClass("feedimg");
-				
-				});
-				
-				var span2=$("<span>").text("   "+value.likeCnt+" ");
-				var iheart=$("<i>").append(span2);
-				iheart.addClass("fa-solid fa-heart");
-				
-				var span3=$("<span>").text("   "+value.replyCnt+" ");
-				var imessage=$("<i>").append(span3);
-				imessage.addClass("fa-solid fa-message");
-				
-				var span4=$("<span>").text(" ");
-				
-				var figure=$("<figure>").html(imgDiv);
-				//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
-				var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
-				
-				var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
-				feeda.addClass("review-main");
-				reviewImg.addClass("img-size");
-				
-				
-				//var feedli=$("<li>").html(figure).append(figcaption);
-				var feedli=$("<li>").append(feeda);
-				var feedimg=$("<div>").html(feedli);
-				feedimg.addClass("feedimg");
-				var feedul=$("<ui>").html(feedimg);
-				}else{
-					var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
-					$(reviewImg).hover(function(){
-						$(this).addClass("feedimg");
+				if(value.reviewReportCnt>=5){
+					if(value.imgCnt>1){
+						//var imgspan=$("<p>").text("+"+(value.imgCnt-1));
+						var moreIc=$("<p>").html("<i class='fa-solid fa-plus'></i>"+(value.imgCnt-1));
+						moreIc.addClass("absolute");
 						
-					});
-					
-					var span2=$("<span>").text("   "+value.likeCnt+" ");
-					var iheart=$("<i>").append(span2);
-					iheart.addClass("fa-solid fa-heart");
-					
-					var span3=$("<span>").text("   "+value.replyCnt+" ");
-					var imessage=$("<i>").append(span3);
-					imessage.addClass("fa-solid fa-message");
-					
-					var span4=$("<span>").text(" ");
-					
-					var figure=$("<figure>").html(reviewImg);
-					figure.addClass("relative");
-					//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
-					var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
-					
-					var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
-					feeda.addClass("review-main");
-					reviewImg.addClass("img-size");
-					
-					
-					//var feedli=$("<li>").html(figure).append(figcaption);
-					
-					var feedli=$("<li>").append(feeda);
-					var feedimg=$("<div>").html(feedli);
-					feedimg.addClass("feedimg");
-					var feedul=$("<ui>").html(feedimg);
-					var main=$(".feed").append(feedul);//.append(figcaption);
-				};
+						var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+						reviewImg.addClass("relative");
+						var imgDiv=$("<div>").append(reviewImg).append(moreIc);
+						imgDiv.addClass("relative");
+						
+						$(reviewImg).hover(function(){
+							$(this).addClass("feedimg");
+						});
+						
+						var span2=$("<span>").text("블라인드 처리된 게시글입니다.");
+						var iheart=$("<i>").append(span2);
+						iheart.addClass("fa-solid fa-heart");
+						
+						var span3=$("<span>").text("   "+value.replyCnt+" ");
+						var imessage=$("<i>").append(span3);
+						imessage.addClass("fa-solid fa-message");
+						
+						var span4=$("<span>").text(" ");
+						
+						var figure=$("<figure>").html(imgDiv);
+						//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+						var figcaption=$("<figcaption>").append(span2);
+						
+						var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
+						feeda.addClass("review-main");
+						reviewImg.addClass("img-size");
+						
+						
+						//var feedli=$("<li>").html(figure).append(figcaption);
+						var feedli=$("<li>").append(feeda);
+						var feedimg=$("<div>").html(feedli);
+						feedimg.addClass("feedimg");
+						var feedul=$("<ui>").html(feedimg);
+						
+						}else{
+							var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+							$(reviewImg).hover(function(){
+								$(this).addClass("feedimg");
+								
+							});
+							
+							var span2=$("<span>").text("   "+value.likeCnt+" ");
+							var iheart=$("<i>").append(span2);
+							iheart.addClass("fa-solid fa-heart");
+							
+							var span3=$("<span>").text("   "+value.replyCnt+" ");
+							var imessage=$("<i>").append(span3);
+							imessage.addClass("fa-solid fa-message");
+							
+							var span4=$("<span>").text(" ");
+							
+							var figure=$("<figure>").html(reviewImg);
+							figure.addClass("relative");
+							//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+							var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
+							
+							var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
+							feeda.addClass("review-main");
+							reviewImg.addClass("img-size");
+							
+							
+							//var feedli=$("<li>").html(figure).append(figcaption);
+							
+							var feedli=$("<li>").append(feeda);
+							var feedimg=$("<div>").html(feedli);
+							feedimg.addClass("feedimg");
+							var feedul=$("<ui>").html(feedimg);
+							var main=$(".feed").append(feedul);//.append(figcaption);
+						};
+				}else{
+					if(value.imgCnt>1){
+						//var imgspan=$("<p>").text("+"+(value.imgCnt-1));
+						var moreIc=$("<p>").html("<i class='fa-solid fa-plus'></i>"+(value.imgCnt-1));
+						moreIc.addClass("absolute");
+						
+						var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+						reviewImg.addClass("relative");
+						var imgDiv=$("<div>").append(reviewImg).append(moreIc);
+						imgDiv.addClass("relative");
+						
+						$(reviewImg).hover(function(){
+							$(this).addClass("feedimg");
+						
+						});
+						
+						var span2=$("<span>").text("   "+value.likeCnt+" ");
+						var iheart=$("<i>").append(span2);
+						iheart.addClass("fa-solid fa-heart");
+						
+						var span3=$("<span>").text("   "+value.replyCnt+" ");
+						var imessage=$("<i>").append(span3);
+						imessage.addClass("fa-solid fa-message");
+						
+						var span4=$("<span>").text(" ");
+						
+						var figure=$("<figure>").html(imgDiv);
+						//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+						var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
+						
+						var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
+						feeda.addClass("review-main");
+						reviewImg.addClass("img-size");
+						
+						
+						//var feedli=$("<li>").html(figure).append(figcaption);
+						var feedli=$("<li>").append(feeda);
+						var feedimg=$("<div>").html(feedli);
+						feedimg.addClass("feedimg");
+						var feedul=$("<ui>").html(feedimg);
+						
+						}else{
+							var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
+							$(reviewImg).hover(function(){
+								$(this).addClass("feedimg");
+								
+							});
+							
+							var span2=$("<span>").text("   "+value.likeCnt+" ");
+							var iheart=$("<i>").append(span2);
+							iheart.addClass("fa-solid fa-heart");
+							
+							var span3=$("<span>").text("   "+value.replyCnt+" ");
+							var imessage=$("<i>").append(span3);
+							imessage.addClass("fa-solid fa-message");
+							
+							var span4=$("<span>").text(" ");
+							
+							var figure=$("<figure>").html(reviewImg);
+							figure.addClass("relative");
+							//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
+							var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
+							
+							var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
+							feeda.addClass("review-main");
+							reviewImg.addClass("img-size");
+							
+							
+							//var feedli=$("<li>").html(figure).append(figcaption);
+							
+							var feedli=$("<li>").append(feeda);
+							var feedimg=$("<div>").html(feedli);
+							feedimg.addClass("feedimg");
+							var feedul=$("<ui>").html(feedimg);
+							var main=$(".feed").append(feedul);//.append(figcaption);
+						};
+				}
 				
-	
 				
 				var main=$(".feed").append(feedul);//.append(figcaption);
+				
 				});
 			}else{
-				var noReview = $("<div>").append("<span class='no-review'>작성한 리뷰가 없습니다.</span>");
-				$(".main").append(noReview);
+				var noReview = $("<div>").append("<span class='no-review'>게시글이 없습니다.</span>");
+				noReview.addClass("center");
+				$(".feed").append(noReview);
+				
 			}
 	};		
 	//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
@@ -492,7 +638,7 @@
                img.addClass("level-img");
                var iInfo=$("<i>");
                iInfo.addClass("fa-sharp fa-solid fa-circle-info");
-               iInfo.css("padding","5px");  
+               iInfo.css("padding","10px");  
                $(".mem-name").append(span).append(writerLevel).append(iInfo);            
                var imgClass=$("[name=orgin]");
                //사진이 있는지 없는지 확인
@@ -718,14 +864,14 @@
                         <a href="#"><li class="follower-cnt"></li></a>
                     </ul> <!-- boardT2 -->
                     <P>   
-                       <span class="mem-info-text"></span><br><br>
+                       <span class="mem-info-text">자기소개</span><br><br>
                        <span class="mem-info"></span>           
                     </P>
                 </div> <!--boardT-->
                 <div class="boardA">
                     <ul>
                         <li>
-                            <a href="board" class="board-btn">리뷰</a>
+                            <a href="board" class="board-btn">게시물</a>
                             <a href="bookmark" class="bookmark-btn">북마크</a>
                             <a href="like" class="like-btn">좋아요</a>
                         </li>

@@ -330,7 +330,7 @@ li {
 .sidemenu {
     padding-left: 15px;
     box-sizing: border-box;
-    margin-bottom: 150px;
+    margin-bottom: 80px;
 }
 .sidemenu #sideP{
     position: relative;
@@ -345,7 +345,7 @@ li {
 }
 #sideP .level-img{
 	position: relative;
-	width: 24px;
+	width: 30px;
 	top: 7px;
 	margin-left: -1px;
 }
@@ -385,7 +385,7 @@ li {
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 0px;
+    bottom: 150px;
     left: 60px;
 }
 #logoutimg{
@@ -588,11 +588,18 @@ li {
 }
 #follow1{
     position: relative;
-    border-top: 1px dotted black;
+    border-top: 1px solid gray;
     font-size: 17px;
     text-align: center;    
     white-space: normal;
     top: 50px;  
+}
+#follow2{
+	position: relative;
+    font-size: 17px;
+    text-align: center;    
+    white-space: normal;
+    top: 50px;    
 }
 .feed{
     flex: 1;
@@ -653,7 +660,7 @@ li {
         box-sizing: border-box;
     }
 }
-@media screen and (max-width: 1240px) {
+@media screen and (max-width: 1050px) {
     .wrapper > div.inner {
         display: block;
     }

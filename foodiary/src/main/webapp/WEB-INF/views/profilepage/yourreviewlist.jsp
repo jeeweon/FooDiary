@@ -78,7 +78,7 @@ li {
   top: 0; left: 0;
 
   color: #fff; text-align: center;
-  line-height: 300px;
+  line-height: 260px;
 
   opacity: 0; /* 처음엔 안보이고 */
  
@@ -90,23 +90,24 @@ li {
   opacity: 1;
 }
 .img-size{
-	width :350px;
-	height :350px;
+	width :250px;
+	height :250px;
 }
 .relative { 
- 	width: 350px;
- 	height: 350px;
+ 	width: 250px;
+ 	height: 250px;
  	position: relative;
  	}
 .absolute {
 	width: 50px; 
  	height: 50px;
  	position: absolute;
- 	left: 300px;
- 	top: 300px;
+ 	left: 200px;
+ 	top: 200px;
  	background-color:gray;
  	opacity: 0.5;
  	text-align: center;
+ 	color:white;
  	font-size:35px;
 	 	}
 	object-fit:cover; 
@@ -139,19 +140,19 @@ li {
 			$.each(reviewList1, function(index, value) {
 				
 				if(value.imgCnt>1){
-				 var imgP=$("<p>").text("+"+(value.imgCnt-1));
-				imgP.addClass("absolute"); 
+				 //var imgP=$("<p>").text("+"+(value.imgCnt-1));
+				var moreIc=$("<p>").html("<i class='fa-solid fa-plus'></i>"+(value.imgCnt-1));
+				moreIc.addClass("absolute"); 
 				
 				var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 				reviewImg.addClass("relactive");
+				var imgDiv=$("<div>").append(reviewImg).append(moreIc);
+				imgDiv.addClass("relative");
+				
 				$(reviewImg).hover(function(){
 					$(this).addClass("feedimg");
 					
 				});
-				
-				var imgDiv=$("<div>").append(reviewImg).append(imgP);
-				imgDiv.addClass("relative");
-				
 				
 				
 				var figure=$("<figure>").html(imgDiv);
@@ -219,7 +220,7 @@ li {
 				});
 			}else{
 				var noReview = $("<div>").append("<span class='no-review'>작성한 리뷰가 없습니다.</span>");
-				$(".main").append(noReview);
+				$(".feed").append(noReview);
 			}
 	};		
 	//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
