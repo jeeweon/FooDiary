@@ -72,9 +72,9 @@
 <h2 class="title">안녕하세요, ${loginId}님</h2>
 <h3 class="subtitle">이동할 메뉴를 선택해주세요.</h3>
 	<div class="menu-list">
-		<!-- <div class="menu-item mem">
+		<div class="menu-item mem">
 			<span>회원 관리</span>		
-		</div> -->
+		</div>
 		<div class="menu-item mail">
 			<span>메일 발송</span>		
 		</div>
@@ -94,7 +94,7 @@
 <script>
     $(function(){
     	$(".mem").click(function(){ //회원관리 주소 수정 필요
-    		window.location = "${pageContext.request.contextPath}/admin/#";
+    		window.location = "${pageContext.request.contextPath}/admin/mem";
     	});
     	
     	$(".mail").click(function(){
