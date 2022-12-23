@@ -90,8 +90,8 @@ li {
   opacity: 1;
 }
 .img-size{
-	width :350px;
-	height :350px;
+	width :250px;
+	height :250px;
 }
 .relative { 
  	width: 350px;
@@ -102,11 +102,12 @@ li {
 	width: 50px; 
  	height: 50px;
  	position: absolute;
- 	left: 300px;
- 	top: 300px;
+ 	left: 200px;
+ 	top: 200px;
  	background-color:gray;
  	opacity: 0.5;
  	text-align: center;
+ 	color:white;
  	font-size:35px;
 	 	}
 	object-fit:cover; 
@@ -139,19 +140,19 @@ li {
 			$.each(reviewList1, function(index, value) {
 				
 				if(value.imgCnt>1){
-				 var imgP=$("<p>").text("+"+(value.imgCnt-1));
-				imgP.addClass("absolute"); 
+				 //var imgP=$("<p>").text("+"+(value.imgCnt-1));
+				var moreIc=$("<p>").html("<i class='fa-solid fa-plus'></i>"+(value.imgCnt-1));
+				moreIc.addClass("absolute"); 
 				
 				var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 				reviewImg.addClass("relactive");
+				var imgDiv=$("<div>").append(reviewImg).append(moreIc);
+				imgDiv.addClass("relative");
+				
 				$(reviewImg).hover(function(){
 					$(this).addClass("feedimg");
 					
 				});
-				
-				var imgDiv=$("<div>").append(reviewImg).append(imgP);
-				imgDiv.addClass("relative");
-				
 				
 				
 				var figure=$("<figure>").html(imgDiv);
