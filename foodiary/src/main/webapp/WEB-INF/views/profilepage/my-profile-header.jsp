@@ -34,6 +34,33 @@
           background:#fff;
           border:10px solid #666;
         }
+        .modal_content a span{
+        	position: relative;
+        	top: 7px;
+        	margin-right: 5px;
+        	margin-left: 5px;
+        }
+        .modal_content .level-img2{
+        	position: relative;
+        	width: 24px;
+        	height: 24px;
+        	top: 12px;
+        }
+        .modal_content button{
+        	position: relative;
+        	bottom: 13px;
+        	font-size: 15px;
+        	border: none;
+        	background: none;
+        	outline: none;
+        	color: #0095f6;
+        }
+        
+        .modal_content .follow-img{
+        	position: relative;
+        	top: 15px;
+        	border-radius: 50%;
+        }
         
         #modal .modal_layer {
           position:fixed;
@@ -52,6 +79,13 @@
           height:100%;
           z-index:1;
         }
+        #modal2 .level-img2{
+        	position: relative;
+        	width: 24px;
+        	height: 24px;
+        	bottom: 8px;
+        }
+        
         
         #modal2 h2 {
           margin:0;
@@ -69,6 +103,33 @@
           padding:20px 10px;
           background:#fff;
           border:10px solid #666;
+        }
+        .modal_content2 a span{
+        	position: relative;
+        	bottom: 16px;
+        	margin-left: 10px;
+        	margin-right: 10px;
+        }
+       
+        .modal_content2 .follow-img{
+        	position: relative;
+        	width: 30px;
+        	height: 30px;
+        	border-radius: 50%;
+        	top: 1px;
+        	margin-top: 10px;
+        	margin-bottom: 10px;
+        	margin-left: 10px;
+        }
+        .modal_content2 button{
+        	position: relative;
+        	border: none;
+        	background: none;
+        	outline: none;
+        	color: #0095f6;
+        	bottom: 14px;
+        	left: 100px;
+        	font-size: 15px;
         }
         
         #modal2 .modal_layer {
@@ -152,16 +213,16 @@
  		margin-left: 5px;
  	}	
  	.relative { 
- 		width: 350px;
- 		height: 350px;
+ 		width: 250px;
+ 		height: 250px;
  		position: relative;
  		}
 	.absolute {
 	 	width: 50px; 
 	 	height: 50px;
 	 	position: absolute;
-	 	left: 300px;
-	 	top: 300px;
+	 	left: 200px;
+	 	top: 200px;
 	 	background-color:gray;
 	 	opacity: 0.5;
 	 	text-align: center;

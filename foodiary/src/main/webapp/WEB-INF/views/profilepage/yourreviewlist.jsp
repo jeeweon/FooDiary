@@ -94,16 +94,16 @@ li {
 	height :350px;
 }
 .relative { 
- 	width: 350px;
- 	height: 350px;
+ 	width: 250px;
+ 	height: 250px;
  	position: relative;
  	}
 .absolute {
 	width: 50px; 
  	height: 50px;
  	position: absolute;
- 	left: 300px;
- 	top: 300px;
+ 	left: 200px;
+ 	top: 200px;
  	background-color:gray;
  	opacity: 0.5;
  	text-align: center;
