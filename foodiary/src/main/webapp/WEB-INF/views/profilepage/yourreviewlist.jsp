@@ -78,7 +78,7 @@ li {
   top: 0; left: 0;
 
   color: #fff; text-align: center;
-  line-height: 300px;
+  line-height: 260px;
 
   opacity: 0; /* 처음엔 안보이고 */
  
