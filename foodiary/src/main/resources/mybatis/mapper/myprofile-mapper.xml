@@ -120,7 +120,7 @@
 		from 
 		(select * from mem where mem_no=#{memNo}) M
 	left outer join 	
-	(select * from review <![CDATA[where review_report_cnt >=5]]>) 
+	<![CDATA[(select * from review where review_report_cnt <=5)]]> 
 	R on M.mem_no=R.mem_no
 	left outer join 
 		(select review_no,count(review_no) rc from review_attach group by review_no
@@ -140,7 +140,7 @@
 		from 
 		(select * from bookmark where mem_no=#{memNo}) M
 	left outer join 
-	(select * from review <![CDATA[where review_report_cnt >=5]]>) 
+	<![CDATA[(select * from review where review_report_cnt <=5)]]> 
 	R on M.review_no=R.review_no
 	left outer join 
 		(select review_no,count(review_no) rc from review_attach group by review_no
@@ -160,7 +160,7 @@
 		from 
 		(select * from likes where mem_no=#{memNo}) M
 	left outer join
-	(select * from review <![CDATA[where review_report_cnt >=5]]>) 
+	<![CDATA[(select * from review where review_report_cnt <=5)]]> 
 	R on M.review_no=R.review_no
 	left outer join 
 		(select review_no,count(review_no) rc from review_attach group by review_no
