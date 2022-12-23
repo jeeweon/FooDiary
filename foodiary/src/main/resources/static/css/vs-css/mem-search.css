@@ -64,6 +64,9 @@ li {
  		display: flex;
  		align-items:center;
  	}
+ 	.nick-lev .level-img{
+ 		margin-left: 10px;
+ 	}
  	
  	.thumbnail {
  		object-fit:cover;
@@ -493,6 +496,10 @@ li {
   }
 
 /* 슬롯머신 끝 */
+.noti-cnt{
+	position: relative;
+	bottom: 4px;
+}
 
 .follow h3 {
     font-size: 18px;
