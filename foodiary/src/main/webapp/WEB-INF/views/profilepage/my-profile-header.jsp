@@ -128,7 +128,7 @@
         	outline: none;
         	color: #0095f6;
         	bottom: 14px;
-        	left: 100px;
+        	left: 20px;
         	font-size: 15px;
         }
         
