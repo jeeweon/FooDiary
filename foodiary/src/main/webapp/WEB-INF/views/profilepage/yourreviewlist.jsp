@@ -219,7 +219,7 @@ li {
 				});
 			}else{
 				var noReview = $("<div>").append("<span class='no-review'>작성한 리뷰가 없습니다.</span>");
-				$(".main").append(noReview);
+				$(".feed").append(noReview);
 			}
 	};		
 	//이미지~텍스트 영역 클릭 시, 리뷰 상세로 이동
