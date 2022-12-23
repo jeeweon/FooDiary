@@ -142,7 +142,7 @@ li {
 				}else{
 				if(value.imgCnt>1){
 				 //var imgP=$("<p>").text("+"+(value.imgCnt-1));
-				var moreIc=$("<p>").html("<i class='fa-solid fa-plus'></i>"+(value.imgCnt-1));
+				var moreIc=$("<p>").html("<i class='fa-solid fa-plus fa-xs'></i>"+(value.imgCnt-1));
 				moreIc.addClass("absolute"); 
 				
 				var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
