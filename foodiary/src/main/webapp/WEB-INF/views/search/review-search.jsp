@@ -13,6 +13,8 @@
 	background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
 }
 .noti-cnt {
+	position: relative;
+	bottom: 4px;
 	width:18px;
 	height:18px;
 	padding: 5px 10px;
@@ -23,6 +25,7 @@
 	background-color: #E27C5E;
     line-height: 18px;
     margin: 0 10px;
+    
 }
 </style>
 </head>
