@@ -395,7 +395,7 @@ li {
 .rowbar{
     position: fixed;
     right: 250px;
-    bottom: 50px;
+    bottom: 1px;
     font-size: 23px;
     width: 1400px; height: 80px;
     background-color: #ffe9b1;
