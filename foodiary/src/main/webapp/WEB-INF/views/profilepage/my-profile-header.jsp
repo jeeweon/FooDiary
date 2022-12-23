@@ -584,9 +584,9 @@
             success : function(resp) {
                profileList = resp;
                //$(".mem-name").text(profileList.memNick);
-               $(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
-               $(".follow-cnt").text("팔로워 : "+profileList.followCnt);
-               $(".follower-cnt").text("팔로우: "+profileList.followerCnt);
+               $(".board-cnt").text("리뷰 "+profileList.reviewCnt);
+               $(".follow-cnt").text("팔로워 "+profileList.followCnt);
+               $(".follower-cnt").text("팔로우 "+profileList.followerCnt);
                $(".mem-no").text(profileList.memNo);
                $(".mem-info").text(profileList.memIntro);
                
