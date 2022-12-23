@@ -38,6 +38,7 @@
            <div class="header1">
                <h1><a href="/home" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
               <div class="sidemenu">
+              <c:if test = "${login}">
               <ul id="sideP">
                   <li>
                   	<c:choose>
@@ -73,18 +74,24 @@
                       </c:choose>
                   </li>
               </ul>
+              </c:if>
               <ul id="mainicon">
-
+				  <c:if test = "${login}">
                   <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/home">홈</a></li>
+                  </c:if>
                   <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
                   <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
+                  <c:if test = "${login}">
                   <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a><span class="noti-cnt">${cnt}</span></li>
+              	  </c:if>
               </ul>
               </div> <!--sidemenu-->
+              <c:if test = "${login}">
               <a href="${pageContext.request.contextPath}/review/write" class="review">리뷰하기</a>
               <div class="btnW">
                   <a href="${pageContext.request.contextPath}/mem/logout" class="logout"><img src="${pageContext.request.contextPath}/images/임시2.png" id="logoutimg"> 로그아웃</a>
               </div>
+              </c:if>
        		</div> <!--header1-->              
             <div class="header4">
                	<div class="formdiv">	               
