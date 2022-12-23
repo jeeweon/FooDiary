@@ -226,6 +226,7 @@
 	 	background-color:gray;
 	 	opacity: 0.5;
 	 	text-align: center;
+	 	color:white;
 	 	font-size:35px;"src/main/webapp/WEB-INF/views/profilepage/board.jsp"
 	 	}
 	 	 #modal4 {
@@ -407,11 +408,13 @@
 				// 사진갯수가 0 이상이라면 
 				if(value.imgCnt>1){
 				
-				var imgspan=$("<p>").text("+"+(value.imgCnt-1));
-				imgspan.addClass("absolute");
+				//var imgspan=$("<p>").text("+"+(value.imgCnt-1));
+				var moreIc=$("<p>").html("<i class='fa-solid fa-plus'></i>"+(value.imgCnt-1));
+				moreIc.addClass("absolute");
+				
 				var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 				reviewImg.addClass("relative");
-				var imgDiv=$("<div>").append(reviewImg).append(imgspan);
+				var imgDiv=$("<div>").append(reviewImg).append(moreIc);
 				imgDiv.addClass("relative");
 				
 				$(reviewImg).hover(function(){
@@ -505,9 +508,9 @@
             success : function(resp) {
                profileList = resp;
                //$(".mem-name").text(profileList.memNick);
-               $(".board-cnt").text("리뷰 "+profileList.reviewCnt);
-               $(".follow-cnt").text("팔로워 "+profileList.followCnt);
-               $(".follower-cnt").text("팔로우 "+profileList.followerCnt);
+               $(".board-cnt").text("게시물 수 : "+profileList.reviewCnt);
+               $(".follow-cnt").text("팔로워 : "+profileList.followCnt);
+               $(".follower-cnt").text("팔로우: "+profileList.followerCnt);
                $(".mem-no").text(profileList.memNo);
                $(".mem-info").text(profileList.memIntro);
                
@@ -559,7 +562,7 @@
                img.addClass("level-img");
                var iInfo=$("<i>");
                iInfo.addClass("fa-sharp fa-solid fa-circle-info");
-               iInfo.css("padding","5px");  
+               iInfo.css("padding","10px");  
                $(".mem-name").append(span).append(writerLevel).append(iInfo);            
                var imgClass=$("[name=orgin]");
                //사진이 있는지 없는지 확인
@@ -785,14 +788,14 @@
                         <a href="#"><li class="follower-cnt"></li></a>
                     </ul> <!-- boardT2 -->
                     <P>   
-                       <span class="mem-info-text"></span><br><br>
+                       <span class="mem-info-text">자기소개</span><br><br>
                        <span class="mem-info"></span>           
                     </P>
                 </div> <!--boardT-->
                 <div class="boardA">
                     <ul>
                         <li>
-                            <a href="board" class="board-btn">리뷰</a>
+                            <a href="board" class="board-btn">게시물</a>
                             <a href="bookmark" class="bookmark-btn">북마크</a>
                             <a href="like" class="like-btn">좋아요</a>
                         </li>
