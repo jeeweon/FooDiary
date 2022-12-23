@@ -193,6 +193,9 @@ li {
 .Rhead2 li #Rdelete{
 	color: red;	
 }
+.Rhead2 li #Rupdate{
+	color: blue;
+}
 .Rbody{
     position: relative;
     flex-shrink: 0;
