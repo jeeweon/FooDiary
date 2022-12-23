@@ -138,13 +138,14 @@
 		from 
 		(select * from bookmark where mem_no=#{memNo}) M
 	left outer join 
-	<![CDATA[(select * from review where review_report_cnt <=5)]]> 
+	review
 	R on M.review_no=R.review_no
 	left outer join 
 		(select review_no,count(review_no) rc from review_attach group by review_no
 	) RA on R.review_no=RA.review_no
 	left outer join 
 	(select review_no,count(review_no) rcn from reply group by review_no) RP on R.review_no=RP.review_no
+	where 5>review_report_cnt
 	order by M.bookmark_no desc
 	</select>
 	<select id="likelist" parameterType="int" resultType="ReviewListVO">
@@ -158,13 +159,14 @@
 		from 
 		(select * from likes where mem_no=#{memNo}) M
 	left outer join
-	<![CDATA[(select * from review where review_report_cnt <=5)]]> 
+	review
 	R on M.review_no=R.review_no
 	left outer join 
 		(select review_no,count(review_no) rc from review_attach group by review_no
 	) RA on R.review_no=RA.review_no
 	left outer join 
 	(select review_no,count(review_no) rcn from reply group by review_no) RP on R.review_no=RP.review_no
+	where 5>review_report_cnt
 	order by M.likes_no desc
 	</select>
 	<!-- 회원추천 --> 

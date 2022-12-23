@@ -85,8 +85,8 @@
 						<!-- 수정, 삭제 -->
 						<c:if test="${owner}">
 							<!-- 리뷰신고수 5미만(블라인드 아닐때)만 수정가능 -->
-							<c:if test="${reviewDto.reviewReportCnt}<5">
-								<a href="edit?reviewNo=${reviewDto.reviewNo}">수정</a>
+							<c:if test="${reviewDto.reviewReportCnt < 5}">
+								<a href="edit?reviewNo=${reviewDto.reviewNo}" id="Rupdate">수정</a>
 							</c:if>
 							<a href="delete?reviewNo=${reviewDto.reviewNo}" id="Rdelete">삭제</a>
 						</c:if>

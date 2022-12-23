@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
     <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/board.css"> <!--css불러오는 링크-->
     <!-- toast 스타일 -->
@@ -44,6 +46,33 @@
           background:rgba(0, 0, 0, 0.5);
           z-index:-1;
         }  
+        .modal_content a span{
+        	position: relative;
+        	top: 7px;
+        	margin-right: 5px;
+        	margin-left: 5px;
+        }
+        .modal_content .level-img2{
+        	position: relative;
+        	width: 24px;
+        	height: 24px;
+        	top: 12px;
+        }
+        .modal_content button{
+        	position: relative;
+        	bottom: 13px;
+        	font-size: 15px;
+        	border: none;
+        	background: none;
+        	outline: none;
+        	color: #0095f6;
+        }
+        
+        .modal_content .follow-img{
+        	position: relative;
+        	top: 15px;
+        	border-radius: 50%;
+        }
         #modal2 {
           display: none;
           position: absolute;   
@@ -80,9 +109,42 @@
           background:rgba(0, 0, 0, 0.5);
           z-index:-1;
         }  
+        .modal_content2 a span{
+        	position: relative;
+        	bottom: 15px;
+        	margin-left: 10px;
+        	margin-right: 10px;
+        }
+       
+        .modal_content2 .follow-img{
+        	position: relative;
+        	width: 30px;
+        	height: 30px;
+        	border-radius: 50%;
+        	top: 1px;
+        	margin-top: 10px;
+        	margin-bottom: 10px;
+        	margin-left: 10px;
+        }
+        .modal_content2 button{
+        	position: relative;
+        	border: none;
+        	background: none;
+        	outline: none;
+        	color: #0095f6;
+        	bottom: 14px;
+        	left: 20px;
+        	font-size: 15px;
+        }
+        .modal_content2 .level-img2{
+        	position: relative;
+        	width: 24px;
+        	height: 24px;
+        	bottom: 11px;
+        }
         .follow-img{
-        	width:50px;
-        	height:50px;
+        	width:30px;
+        	height:30px;
         }
           .level-img {
  		width:10px;
@@ -515,6 +577,8 @@
  	});
 </script>
 <body>
+	<c:set var="login" value="${loginNo != null}"></c:set>
+
 	<div class="wrapper">
         <div class="boardF">
             <div class="inner">
@@ -529,7 +593,9 @@
                         <li class="mem-name">
                         
                          </li>
+                         <c:if test = "${login}">
                         <button class="follow-cert" data-mno="${memNo}"></button>
+                        </c:if>
                         <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">

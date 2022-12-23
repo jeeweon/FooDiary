@@ -400,14 +400,14 @@ li {
 
 .rowbar{
     position: fixed;
-    right: 250px;
     bottom: 1px;
-    font-size: 23px;
-    width: 1400px; height: 80px;
+    font-size: 18px;
+    width: 1000px; height: 80px;
     background-color: #ffe9b1;
     color: #000;
     line-height: 80px;
     text-align: center;
+    margin-left: 150px;
 }
 .rowbar legend{
     font-weight: lighter;
@@ -419,7 +419,6 @@ li {
     font-size: 17px;
     padding-top: 4px;
     padding-bottom: 4px;
-    margin-left: 50px;
     width: 110px;
 }
 #btn-row a{
@@ -432,7 +431,6 @@ li {
     font-size: 17px;
     padding-top: 4px;
     padding-bottom: 4px;
-    margin-left: 50px;
     width: 110px;
 }
 #btn-row2 a{
