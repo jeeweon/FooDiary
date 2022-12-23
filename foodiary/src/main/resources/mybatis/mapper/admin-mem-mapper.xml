@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin-mem">
+	<!-- 블라인드 리뷰 목록 -->
+	<select id="list" parameterType="String" resultType="MemDto">
+		select * from mem
+		<if test="keyword != null">
+			where instr(mem_nick, #{keyword}) > 0
+		</if>
+		order by mem_no desc
+	</select>
+	
+</mapper>
