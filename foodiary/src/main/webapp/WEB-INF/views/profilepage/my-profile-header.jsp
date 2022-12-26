@@ -292,14 +292,9 @@
 	   	
 	   	//웹소켓
 	   	function connectWs(){
-	   		console.log("tttttt")
 	   		var uri = "${pageContext.request.contextPath}/ws/sockjs";
 	   		socket = new SockJS(uri);
 	   	
-	   		socket.onopen = function() {
-	   			console.log('open');
-	   		};
-	   		
 	   		toastr.options = {
 	   		  "closeButton": false,
 	   		  "debug": false,
@@ -323,10 +318,6 @@
 	   			var data = JSON.parse(e.data);
 	   			toastr.info(data.notiContent);
 	   		};
-	
-	   		socket.onclose = function() {
-	   		    console.log('close');
-	   	 	};
 	   	};
    	
        //리뷰리스트 조회 
@@ -408,7 +399,6 @@
 				// 사진갯수가 0 이상이라면 
 				if(value.reviewReportCnt>=5){
 					if(value.imgCnt>1){
-						//var imgspan=$("<p>").text("+"+(value.imgCnt-1));
 						var moreIc=$("<p>").html("<i class='fa-solid fa-plus fa-xs'></i>"+(value.imgCnt-1));
 						moreIc.addClass("absolute");
 						
@@ -432,15 +422,11 @@
 						var span4=$("<span>").text(" ");
 						
 						var figure=$("<figure>").html(imgDiv);
-						//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
 						var figcaption=$("<figcaption>").append(span2);
 						
 						var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
 						feeda.addClass("review-main");
 						reviewImg.addClass("img-size");
-						
-						
-						//var feedli=$("<li>").html(figure).append(figcaption);
 						var feedli=$("<li>").append(feeda);
 						var feedimg=$("<div>").html(feedli);
 						feedimg.addClass("feedimg");
@@ -465,25 +451,20 @@
 							
 							var figure=$("<figure>").html(reviewImg);
 							figure.addClass("relative");
-							//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
 							var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
 							
 							var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
 							feeda.addClass("review-main");
 							reviewImg.addClass("img-size");
 							
-							
-							//var feedli=$("<li>").html(figure).append(figcaption);
-							
 							var feedli=$("<li>").append(feeda);
 							var feedimg=$("<div>").html(feedli);
 							feedimg.addClass("feedimg");
 							var feedul=$("<ui>").html(feedimg);
-							var main=$(".feed").append(feedul);//.append(figcaption);
+							var main=$(".feed").append(feedul);
 						};
 				}else{
 					if(value.imgCnt>1){
-						//var imgspan=$("<p>").text("+"+(value.imgCnt-1));
 						var moreIc=$("<p>").html("<i class='fa-solid fa-plus fa-xs'></i>"+(value.imgCnt-1));
 						moreIc.addClass("absolute");
 						
@@ -508,15 +489,11 @@
 						var span4=$("<span>").text(" ");
 						
 						var figure=$("<figure>").html(imgDiv);
-						//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
 						var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
 						
 						var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
 						feeda.addClass("review-main");
 						reviewImg.addClass("img-size");
-						
-						
-						//var feedli=$("<li>").html(figure).append(figcaption);
 						var feedli=$("<li>").append(feeda);
 						var feedimg=$("<div>").html(feedli);
 						feedimg.addClass("feedimg");
@@ -541,26 +518,19 @@
 							
 							var figure=$("<figure>").html(reviewImg);
 							figure.addClass("relative");
-							//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
 							var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
 							
 							var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
 							feeda.addClass("review-main");
 							reviewImg.addClass("img-size");
-							
-							
-							//var feedli=$("<li>").html(figure).append(figcaption);
-							
 							var feedli=$("<li>").append(feeda);
 							var feedimg=$("<div>").html(feedli);
 							feedimg.addClass("feedimg");
 							var feedul=$("<ui>").html(feedimg);
-							var main=$(".feed").append(feedul);//.append(figcaption);
+							var main=$(".feed").append(feedul);
 						};
 				}
-				
-				
-				var main=$(".feed").append(feedul);//.append(figcaption);
+				var main=$(".feed").append(feedul);
 				
 				});
 			}else{
@@ -583,7 +553,6 @@
             dataType : "json",
             success : function(resp) {
                profileList = resp;
-               //$(".mem-name").text(profileList.memNick);
                $(".board-cnt").text("리뷰 "+profileList.reviewCnt);
                $(".follow-cnt").text("팔로워 "+profileList.followCnt);
                $(".follower-cnt").text("팔로우 "+profileList.followerCnt);
@@ -613,9 +582,6 @@
                    	function(){$(this).text("좋아요").css("font-weight","bold")}
                    	);
                
-             
-               
-            
                var writerLevel;
                if( profileList.memLevel== "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
                   writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/6.피잣집.png");
@@ -666,8 +632,6 @@
             dataType:"json",
             success:function(resp){
                followMemList=resp;
-            
-               console.log(followMemList);
                renderfollowList();
             }
          }); 
@@ -675,7 +639,6 @@
       
       //팔로우 목록 출력
       function renderfollowList(){
-      
           if(followMemList.length != 0) {
             $.each(followMemList, function(index, value) {
                //팔로우 레벨 이미지 
@@ -698,7 +661,6 @@
                var span=$("<span>").text(value.memNick);
                var img=$("<img>").attr("src","");
                var br=$("<br>");
-               //a+img+span
                if(memNo != value.memNo){
 			   var a=$("<a>").attr("href","${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+value.memNo).append(img).append(span).append(writerLevel);
 				}else{
@@ -756,7 +718,6 @@
             success:function(resp){
                followerMemList=resp;
               
-               console.log(followerMemList);
                renderfollowerList()
             }
          }); 

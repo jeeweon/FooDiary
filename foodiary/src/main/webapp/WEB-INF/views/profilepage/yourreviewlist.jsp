@@ -128,8 +128,6 @@ li {
 			dataType : "json",
 			success : function(resp) {
 				reviewList1 = resp;
-				console.log(reviewList1);
-				console.log(reviewList1[0].replyCnt);
 				renderList();
 			}
 		});

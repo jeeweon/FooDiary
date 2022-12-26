@@ -137,8 +137,6 @@ $(function(){
 		$(this).removeClass("fail NNNNN NNNNY");
 		$(this).removeClass("success fail")
 		
-// 		console.log("정규표현식 성공"+validChecker.memNickValid);
-		
 		var nowNick = "${memDto.memNick}"
 		
 		//지금 닉네임과 다를 때 정규표현식, 중복검사
@@ -157,15 +155,11 @@ $(function(){
 							$(that).addClass("NNNNN");
 							validChecker.memNickTest = false;	
 							$(this).removeClass("success fail").addClass("success");
-	// 						console.log("N");
-	// 						console.log(validChecker.memNickValid);
 						}
 						else if(resp="NNNNY"){
 							$(that).addClass("NNNNY");
 							validChecker.memNickTest = true;
 							$(this).removeClass("success fail").addClass("fail");
-	// 						console.log("Y");
-	// 						console.log(validChecker.memNickValid);
 						}
 					},
 					error:function(){}
@@ -179,7 +173,6 @@ $(function(){
 		else{
 			validChecker.memNickValid = true;
 			validChecker.memNickTest = true;
-// 			console.log(validChecker.memNickValid);
 		}
 		
 	});
@@ -204,15 +197,11 @@ $(function(){
 
 		$(this).find("input, textarea, select").blur();
 
-// 			console.log(validChecker.memNickTest);
 		if(validChecker.memNickValid&&validChecker.memNickTest){
 			this.submit();			
 		}
 	});
 });
-
-
-
 </script>
 </body>	
 </html>

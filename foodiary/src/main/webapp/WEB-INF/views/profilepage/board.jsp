@@ -77,7 +77,6 @@
 				
 				$(reviewImg).hover(function(){
 					$(this).addClass("feedimg");
-					console.log("호버 완료");
 				});
 				
 				var span2=$("<span>").text("   "+value.likeCnt+" ");
@@ -91,7 +90,6 @@
 				var span4=$("<span>").text(" ");
 				
 				var figure=$("<figure>").html(imgDiv);
-				//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
 				var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
 				
 				var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
@@ -99,7 +97,6 @@
 				reviewImg.addClass("img-size");
 				
 				
-				//var feedli=$("<li>").html(figure).append(figcaption);
 				var feedli=$("<li>").append(feeda);
 				var feedimg=$("<div>").html(feedli);
 				feedimg.addClass("feedimg");
@@ -108,7 +105,6 @@
 					var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 					$(reviewImg).hover(function(){
 						$(this).addClass("feedimg");
-						console.log("호버 완료");
 					});
 					
 					var span2=$("<span>").text("   "+value.likeCnt+" ");
@@ -123,49 +119,19 @@
 					
 					var figure=$("<figure>").html(reviewImg);
 					figure.addClass("relative");
-					//var figcaption=$("<figcaption>").text("좋아요"+value.likeCnt+"사진갯수"+value.imgCnt+"댓글갯수"+value.replyCnt);
 					var figcaption=$("<figcaption>").append(iheart).append(span4).append(imessage);
 					
 					var feeda = $("<a>").attr("data-rno", value.reviewNo).append(figure).append(figcaption);
 					feeda.addClass("review-main");
 					reviewImg.addClass("img-size");
 					
-					
-					//var feedli=$("<li>").html(figure).append(figcaption);
-					
 					var feedli=$("<li>").append(feeda);
 					var feedimg=$("<div>").html(feedli);
 					feedimg.addClass("feedimg");
 					var feedul=$("<ui>").html(feedimg);
-					
-					//좋아요 사진갯수 댓글갯수
-					
-					 
-					
-					//리뷰이미지 다운로드 이미지가 없으면 작성한 리뷰가 없습니다.
-					//var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
-					//좋아요 갯수, 이미지 갯수, 리뷰 갯수 
-					//var imgCnt=$("<span>").text("이미지 갯수"+value.imgCnt);
-					//var replyCnt=$("<span>").text("댓글 갯수"+value.replyCnt);
-					//var likeCnt=$("<span>").text("좋아요 갯수"+value.likeCnt);
-					//var cnt=$("<div>").append(replyCnt).append(imgCnt).append(likeCnt);
-					
-					var main=$(".feed").append(feedul);//.append(figcaption);
+					var main=$(".feed").append(feedul);
 				};
-				
-				//좋아요 사진갯수 댓글갯수
-				
-				 
-				
-				//리뷰이미지 다운로드 이미지가 없으면 작성한 리뷰가 없습니다.
-				//var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
-				//좋아요 갯수, 이미지 갯수, 리뷰 갯수 
-				//var imgCnt=$("<span>").text("이미지 갯수"+value.imgCnt);
-				//var replyCnt=$("<span>").text("댓글 갯수"+value.replyCnt);
-				//var likeCnt=$("<span>").text("좋아요 갯수"+value.likeCnt);
-				//var cnt=$("<div>").append(replyCnt).append(imgCnt).append(likeCnt);
-				
-				var main=$(".feed").append(feedul);//.append(figcaption);
+				var main=$(".feed").append(feedul);
 				});
 			}else{
 				var noReview = $("<div>").append("<span class='no-review'>작성한 리뷰가 없습니다.</span>");

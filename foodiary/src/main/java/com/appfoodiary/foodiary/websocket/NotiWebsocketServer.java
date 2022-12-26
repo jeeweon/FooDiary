@@ -31,8 +31,6 @@ public class NotiWebsocketServer extends TextWebSocketHandler{
 	// 클라이언트가 서버로 연결 시
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		log.debug("Socket 연결");
-		log.debug(currentUserName(session));//현재 접속한 사람
 		String senderId = currentUserName(session);
 		userSessionsMap.put(senderId,session);
 	}
@@ -41,20 +39,16 @@ public class NotiWebsocketServer extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		userSessionsMap.remove(currentUserName(session), session);
-		log.debug("종료");
 	}
 	
 	// 클라이언트가 Data 전송 시
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		log.debug("메세지 - {}", message.getPayload());
-	
 		//변환 도구 생성
 		ObjectMapper mapper = new ObjectMapper();
 
 		NotiVO json = mapper.readValue(
 				message.getPayload(), NotiVO.class);
-		log.debug("json = {}", json);
 		
 		//바뀐 정보를 이용하여 신규 메세지 생성
 		String payload = mapper.writeValueAsString(json);

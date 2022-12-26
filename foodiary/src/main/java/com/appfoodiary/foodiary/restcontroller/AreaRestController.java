@@ -48,10 +48,10 @@ public class AreaRestController {
 			if(!list.contains(dto)) {
 				areaDao.addInterest(dto);	
 			} else {
-				log.debug("이미 추가된 관심지역");
+				log.debug("이미 추가된 관심지역"); //로그파일 확인용으로 남김
 			}
 		} else {
-			log.debug("관심지역 설정 개수 제한 초과(최대 3개)");
+			log.debug("관심지역 설정 개수 제한 초과(최대 3개)"); //로그파일 확인용으로 남김
 		}
 	}
 	

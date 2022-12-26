@@ -101,13 +101,8 @@
     	
     	//웹소켓
     	function connectWs(){
-    		console.log("tttttt")
     		var uri = "${pageContext.request.contextPath}/ws/sockjs";
     		socket = new SockJS(uri);
-    	
-    		socket.onopen = function() {
-    			console.log('open');
-    		};
     		
     		toastr.options = {
     		  "closeButton": false,
@@ -132,10 +127,6 @@
     			var data = JSON.parse(e.data);
     			toastr.info(data.notiContent);
     		};
-
-    		socket.onclose = function() {
-    		    console.log('close');
-    	 	};
     	};
     	
         //관심지역 목록 조회

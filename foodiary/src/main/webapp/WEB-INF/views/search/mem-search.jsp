@@ -212,11 +212,9 @@ function lunchIs() {
     displaySlot.style.display = "none";
 
     //shuffle 메소드를 사용하여 석은 배열에서 index[0]을 가져오기
-    console.log(shuffle(lunchList));
     let lunckPick = shuffle(lunchList)[0];
 
     //메뉴 노출
-    console.log(lunckPick);
     elem.innerHTML = lunckPick;
 
 
@@ -254,14 +252,9 @@ function reset() {
 		
     	//웹소켓
     	function connectWs(){
-    		console.log("tttttt")
     		var uri = "${pageContext.request.contextPath}/ws/sockjs";
     		socket = new SockJS(uri);
     	
-    		socket.onopen = function() {
-    			console.log('open');
-    		};
-    		
     		toastr.options = {
     		  "closeButton": false,
     		  "debug": false,
@@ -285,10 +278,6 @@ function reset() {
     			var data = JSON.parse(e.data);
     			toastr.info(data.notiContent);
     		};
-
-    		socket.onclose = function() {
-    		    console.log('close');
-    	 	};
     	};
         
         let memList = [];
@@ -394,7 +383,6 @@ function reset() {
 		$(".search-form").submit(e=>{
             e.preventDefault();
             const keyword = $("[name=keyword]").val();
-            console.log(keyword);
 			$(".mem-list").empty();
 			if(!keyword){
 				if(memNo == "null"){

@@ -226,16 +226,13 @@ setTimeout(timeFunc, 900);
 
 function timeFunc() {
 
-
 //슬롯애니메이션 감추기
 displaySlot.style.display = "none";
 
 //shuffle 메소드를 사용하여 석은 배열에서 index[0]을 가져오기
-console.log(shuffle(lunchList));
 let lunckPick = shuffle(lunchList)[0];
 
 //메뉴 노출
-console.log(lunckPick);
 elem.innerHTML = lunckPick;
 
 
@@ -272,13 +269,8 @@ resetNum = 0;
 
       //웹소켓
     	function connectWs(){
-    		console.log("tttttt")
     		var uri = "${pageContext.request.contextPath}/ws/sockjs";
     		socket = new SockJS(uri);
-    	
-    		socket.onopen = function() {
-    			console.log('open');
-    		};
     		
     		toastr.options = {
     		  "closeButton": false,
@@ -303,10 +295,6 @@ resetNum = 0;
     			var data = JSON.parse(e.data);
     			toastr.info(data.notiContent);
     		};
-
-    		socket.onclose = function() {
-    		    console.log('close');
-    	 	};
     	};
         
 		let reviewList = [];
@@ -688,7 +676,6 @@ resetNum = 0;
 							 passiveMemNo : $(this).data("rno")	
 						},
 						success :function(resp){
-							console.log(resp);
 							if(resp){
 								$(that).text("팔로잉");
 							}else{
