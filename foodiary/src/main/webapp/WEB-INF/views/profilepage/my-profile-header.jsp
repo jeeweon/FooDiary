@@ -218,16 +218,19 @@
  		position: relative;
  		}
 	.absolute {
-	 	width: 50px; 
-	 	height: 50px;
-	 	position: absolute;
-	 	left: 200px;
-	 	top: 200px;
-	 	background-color:gray;
-	 	opacity: 0.5;
-	 	text-align: center;
-	 	color:white;
-	 	font-size:35px;"src/main/webapp/WEB-INF/views/profilepage/board.jsp"
+		width: 50px;
+	    height: 50px;
+	    position: absolute;
+	    left: 200px;
+	    top: 200px;
+	    background-color: rgba(0,0,0,0.5);
+	    text-align: center;
+	    color: white;
+	    font-size: 20px;
+	    border-radius: 4px;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
 	 	}
 	 	 #modal4 {
           display: none;

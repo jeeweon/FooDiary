@@ -20,17 +20,22 @@
  		width: 350px;
  		height: 350px;
  		position: relative;
+ 		object-fit:cover;
  		}
 	.absolute {
-	 	width: 50px; 
-	 	height: 50px;
-	 	position: absolute;
-	 	left: 300px;
-	 	top: 300px;
-	 	background-color:gray;
-	 	opacity: 0.5;
-	 	text-align: center;
-	 	font-size:35px;
+		width: 50px;
+	    height: 50px;
+	    position: absolute;
+	    left: 200px;
+	    top: 200px;
+	    background-color: rgba(0,0,0,0.5);
+	    text-align: center;
+	    color: white;
+	    font-size: 20px;
+	    border-radius: 4px;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
 	 	}
 </style>
 
