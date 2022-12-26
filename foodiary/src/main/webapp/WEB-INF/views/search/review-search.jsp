@@ -37,7 +37,7 @@
         <div class="inner">
             <header class="header">
                 <div class="header1">
-                    <h1><a href="/search/review" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+                    <h1><a href="${pageContext.request.contextPath}/search/review" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
                     <div class="sidemenu">
                     <c:if test = "${login}">
                     <ul id="sideP">

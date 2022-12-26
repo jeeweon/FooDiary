@@ -815,7 +815,7 @@
                          </li>    
                         <a href="${pageContext.request.contextPath}/mem/edit_profile"><i class="fa-solid fa-pencil fa-2x" style="padding:10px"></i></a>
                         <a href=#><i id="Timg1" alt="설정" class="menu fa-solid fa-gears fa-2x" style="padding:15px"></i></a>
-                        <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                        <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">            
                         
