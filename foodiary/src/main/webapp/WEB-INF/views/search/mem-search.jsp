@@ -379,7 +379,6 @@ function reset() {
 		};
 		
 		//검색 버튼 클릭 시, 검색어가 닉네임에 포함된 유저 조회
-		//$(document).on("click", ".search-btn", function() {
 		$(".search-form").submit(e=>{
             e.preventDefault();
             const keyword = $("[name=keyword]").val();

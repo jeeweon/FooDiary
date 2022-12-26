@@ -433,8 +433,6 @@
 			     				}
 			            	 }); 
 			               });
-		             //사진 번호가 있는지 없는지. 
-		               
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);

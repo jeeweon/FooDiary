@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-<jsp:include page="/WEB-INF/views/profilepage/my-profile-header.jsp">
-	<jsp:param value="주문내역페이지" name="title"/>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/profilepage/my-profile-header.jsp">
+	<jsp:param value="좋아요" name="title"/>
 </jsp:include> 
 <style>
 	.orign{
