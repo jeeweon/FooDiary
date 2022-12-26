@@ -161,7 +161,7 @@
                 <form action="">
                     <fieldset>
                         <legend>
-                            "로그인하여 내 주변 맛집 리뷰를 확인하고 회원님이 좋아할 만한 계정을 찾아보세요."
+                            로그인하여 내 주변 맛집 리뷰를 확인하고 회원님이 좋아할 만한 계정을 찾아보세요.
                             <button  id="btn-row"><a href="${pageContext.request.contextPath}/mem/login">로그인</a></button>
                             <button id="btn-row2"><a href="${pageContext.request.contextPath}/mem/join">회원가입</a></button>
                         </legend>
