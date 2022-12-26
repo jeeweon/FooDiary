@@ -90,6 +90,7 @@ li {
     height: 100px;
     padding-bottom: 50px;
     padding-right: 1000px;
+    object-fit:cover;
 }
 .profileH h1{
 	position: relative;
@@ -124,6 +125,7 @@ form img{
     width: 120px;
     height: 120px;
     border-radius: 50%;   
+    object-fit:cover;
 }
 form label{
 	position: relative;
