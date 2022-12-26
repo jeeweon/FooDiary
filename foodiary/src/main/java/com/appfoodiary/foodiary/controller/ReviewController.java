@@ -36,6 +36,7 @@ import com.appfoodiary.foodiary.vo.CheckRpLkBkVO;
 public class ReviewController {
 	
 	private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
+	//private final File dir = new File(System.getProperty("user.home") + "/upload"); //OS 무관 파일 경로
 	@PostConstruct	//최초 실행 시, 딱 한번만 실행
 	public void prepare() {
 		dir.mkdirs();	//파일 생성
