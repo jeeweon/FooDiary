@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/admin_header.jsp">
+<jsp:include page="/WEB-INF/views/admin/admin_header.jsp">
 	<jsp:param value="공지 이메일 발송" name="title" />
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/css_admin/blind.css">
