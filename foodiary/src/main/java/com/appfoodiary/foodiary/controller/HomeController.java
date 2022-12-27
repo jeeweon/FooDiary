@@ -14,7 +14,6 @@ import com.appfoodiary.foodiary.repository.NotiDao;
 import com.appfoodiary.foodiary.service.LevelPointService;
 
 @Controller
-@RequestMapping("/home")
 public class HomeController {
 	
 	@Autowired
@@ -26,7 +25,7 @@ public class HomeController {
 	@Autowired
 	private NotiDao notiDao;
 	
-	@GetMapping("")
+	@GetMapping("/")
 	public String home(HttpSession session, Model model) {
 		if((Integer) session.getAttribute(SessionConstant.NO) != null) {
 			int memNo = (Integer) session.getAttribute(SessionConstant.NO);

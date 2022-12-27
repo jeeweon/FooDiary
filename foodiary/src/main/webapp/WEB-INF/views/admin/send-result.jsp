@@ -29,7 +29,7 @@
 		<p>이메일 발송이 완료되었습니다.</p>
 	</div>
 	<div class="row center mt-50">
-		<a href="${pageContext.request.contextPath}/home" style="text-decoration: none; color:black;"> 홈으로 <i class="fa-solid fa-house"></i></a>
+		<a href="${pageContext.request.contextPath}/" style="text-decoration: none; color:black;"> 홈으로 <i class="fa-solid fa-house"></i></a>
 	</div>
 </div>
 </body>

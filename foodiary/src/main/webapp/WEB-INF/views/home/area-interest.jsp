@@ -36,15 +36,7 @@
 				        -->
 				    </ul>
 				</div>
-                <div class="AreaB">
-	                <fieldset>
-	                        <legend>
-<!-- 	                            <form> -->
-<%-- 									<button><a href="${pageContext.request.contextPath}/home">홈으로 돌아가기</a></button> --%>
-<!-- 	                            </form> -->
-	                        </legend>
-                    </fieldset>                  			
-                </div>
+                
                 <!-- 관심지역 목록  -->
 				<div class="my-area">
 				    <h2>내 관심지역</h2>
@@ -325,7 +317,7 @@
         };
         
         $(document).on("click", ".logo", function(){
-    		window.location = "${pageContext.request.contextPath}/home";
+    		window.location = "${pageContext.request.contextPath}/";
     	});
     });
 </script>

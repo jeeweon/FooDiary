@@ -88,7 +88,7 @@ public class MemController {
 			
 			//로그인 시간 업데이트
 			memDao.updateLoginDate(findDto.getMemNo());
-			return "redirect:/home";
+			return "redirect:/";
 		}
 		else {
 			return "redirect:login?error";

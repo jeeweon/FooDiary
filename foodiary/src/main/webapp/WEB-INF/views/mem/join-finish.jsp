@@ -16,7 +16,7 @@
         <div class="Mplus">
             <div class="inner">
                 <div class="Mhead">
-                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
+                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고"></a> <!--홈으로-->
                 </div> <!--Mhead-->
                 <duv class="Mbody">
                     <p>회원가입이 완료되었습니다 <i class="fa-solid fa-face-smile-wink"></i></p>

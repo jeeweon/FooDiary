@@ -36,7 +36,7 @@
     <div class="inner">
         <header class="header">
             <div class="header1">
-                <h1><a href="${pageContext.request.contextPath}/home" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+                <h1><a href="${pageContext.request.contextPath}/" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
                 <div class="sidemenu">
                 <ul id="sideP">
                     <li>
@@ -75,7 +75,7 @@
                 </ul>
                 <ul id="mainicon">
 
-                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/home">홈</a></li>
+                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/">홈</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a><span class="noti-cnt">${cnt}</span></li>
@@ -300,11 +300,11 @@ $(function() {
 
 	//관심지역 설정 화면으로 이동(배너, 설정 버튼)
 	$(document).on("click", ".set-area-banner", function() {
-		window.location = "${pageContext.request.contextPath}/home/area/interest";
+		window.location = "${pageContext.request.contextPath}/area/interest";
 	});
 
 	$(document).on("click", ".set-area-btn", function() {
-		window.location = "${pageContext.request.contextPath}/home/area/interest";
+		window.location = "${pageContext.request.contextPath}/area/interest";
 	});
 
 	//관심지역 목록 조회

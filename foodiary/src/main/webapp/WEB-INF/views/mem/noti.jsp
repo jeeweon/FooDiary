@@ -81,7 +81,7 @@
 </style>
 </head>
 <body>
-<h1><a href="${pageContext.request.contextPath}/home" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+<h1><a href="${pageContext.request.contextPath}/" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
 <h1 class="title">알림</h1>
 
 <div class="noti-list">

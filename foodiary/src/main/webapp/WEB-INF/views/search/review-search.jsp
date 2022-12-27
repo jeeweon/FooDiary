@@ -37,7 +37,7 @@
         <div class="inner">
             <header class="header">
                 <div class="header1">
-                    <h1><a href="${pageContext.request.contextPath}/search/review" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+                    <h1><a href="${pageContext.request.contextPath}/" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
                     <div class="sidemenu">
                     <c:if test = "${login}">
                     <ul id="sideP">
@@ -78,7 +78,7 @@
 	                </c:if>
                     <ul id="mainicon">
                     	<c:if test = "${login}">
-	                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/home">홈</a></li>
+	                    <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/">홈</a></li>
 	                    </c:if>
 	                    <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
 	                    <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
