@@ -42,9 +42,9 @@
 
 
 ## 테스트 정보
-- 접속 url: https://sysout.co.kr/foodiary/
+- 서비스 접속 url: https://sysout.co.kr/foodiary/
+- 어드민 접속 url: https://sysout.co.kr/foodiary/admin/login
 
 ### 계정 정보
 - 일반 유저: user7@foodiary.com / user1234! (user1~20까지 로그인 가능, 비밀번호 동일)
 - 관리자: admin1 / admin1234
-  - 진입 경로: /foodiary/admin/login
