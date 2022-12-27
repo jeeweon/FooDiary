@@ -14,7 +14,7 @@
         <div class="Rwrite">
             <div class="inner">
                 <div class="RwriteH">
-                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                 </div> <!--RwriteH-->
                 <div class="RwriteB">
                     <fieldset>

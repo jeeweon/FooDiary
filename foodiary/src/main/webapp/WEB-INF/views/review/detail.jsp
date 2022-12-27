@@ -38,7 +38,7 @@
         <div class="Rdetail">
             <div class="inner">
                 <div class="Rhead">
-                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                  	<%-- 작성자 회원번호 : ${reviewDto.memNo} <br> --%>
 					<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
 									- (사진,닉네임)클릭시 프로필로 이동 

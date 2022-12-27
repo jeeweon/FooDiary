@@ -21,7 +21,7 @@
         <div class="Mplus">
             <div class="inner">
                 <div class="Mhead">
-                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a> 
+                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a> 
                     <h1>회원가입</h1>
                 </div> <!-- Mhead -->
                 <div class="Mbody">

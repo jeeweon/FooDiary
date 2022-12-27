@@ -16,7 +16,7 @@
         <div class="PWedit">
             <div class="inner">
                 <div class="pwlog">
-                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     <h1>비밀번호 변경</h1>
                 </div>
                 <div class="newpw">

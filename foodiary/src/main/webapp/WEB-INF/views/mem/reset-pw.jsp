@@ -16,7 +16,7 @@
         <div class="resetPW">
             <div class="inner">
                 <div class="resetH">
-                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     <h1>비밀번호 재설정</h1>
                 </div> <!--resetH-->
                 <div class="resetB">

@@ -15,7 +15,7 @@
 	            <div class="inner">
 	                <div class="profileH">
 	                    <h1>프로필 수정</h1>
-	                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+	                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
 	                </div> <!--profileH-->
 	                <div class="profileT">
                     <fieldset>

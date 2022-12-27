@@ -17,7 +17,7 @@
         <div class="PWfind">
             <div class="inner">
                 <div class="PWlog">
-                    <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     <h1>비밀번호 찾기</h1>
                 </div> <!--PWFlog-->
                 <div class="PWT">

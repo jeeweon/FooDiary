@@ -33,7 +33,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 						"/review/write",//리뷰 쓰기
 //						"/rest/review/report/*",//리뷰 신고
 //						"/rest/review/like",
-						"/home/area/interest"//관심지역 설정
+						"/area/interest"//관심지역 설정
 						)
 				
 				.excludePathPatterns(

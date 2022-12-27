@@ -573,7 +573,7 @@
                          <c:if test = "${login}">
                         <button class="follow-cert" data-mno="${memNo}"></button>
                         </c:if>
-                        <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                        <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
                     <a href="${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo=${memNo}">
