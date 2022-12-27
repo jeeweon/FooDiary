@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/profilepage/yourprofile.jsp">
+<jsp:include page="/WEB-INF/views/profilepage/yourprofile.jsp">
 	<jsp:param value="유저 프로필" name="title"/>
 </jsp:include> 
 <style>
