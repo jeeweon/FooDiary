@@ -427,7 +427,7 @@
 	            				receiverMemNick:nick,
 	            				notiContent:loginNickW+"님이 회원님을 팔로우하기 시작했어요 🙌",
 	            				notiType:"follow",
-	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+loginNoW,
+	            				notiUrl:"/profilepage/yourreviewlist?memNo="+loginNoW,
 	            				notiCreateDate:moment(),
 	            				memNick:loginNickW
 	            		};
@@ -496,12 +496,12 @@
             				receiverMemNick:reviewWriterNick,
             				notiContent:loginNickW+"님이 회원님의 리뷰에 댓글을 남겼어요 👀",
             				notiType:"reply",
-            				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+reviewNo,
+            				notiUrl:"/review/detail?reviewNo="+reviewNo,
             				notiCreateDate:moment(),
             				memNick:loginNickW
             		};
     				if(loginNoW != reviewWriterNo) {    					
-            			socket.send(JSON.stringify(notiData));
+    		  			socket.send(JSON.stringify(notiData));
     				}
     			});
     		}
@@ -694,7 +694,7 @@
 	                				receiverMemNick:receiverMemNick,
 	                				notiContent:loginNickW+"님에게 회원님의 리뷰가 도움됐어요 🧡",
 	                				notiType:"like",
-	                				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+reviewNo,
+	                				notiUrl:"/review/detail?reviewNo="+reviewNo,
 	                				notiCreateDate:moment(),
 	                				memNick:loginNickW
 	                		};

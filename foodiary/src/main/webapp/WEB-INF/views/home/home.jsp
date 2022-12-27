@@ -595,7 +595,7 @@ $(function() {
             				receiverMemNick:receiverMemNick,
             				notiContent:memNick+"님에게 회원님의 리뷰가 도움됐어요 🧡",
             				notiType:"like",
-            				notiUrl:"${pageContext.request.contextPath}/review/detail?reviewNo="+no,
+            				notiUrl:"/review/detail?reviewNo="+no,
             				notiCreateDate:moment(),
             				memNick:memNick
             		};

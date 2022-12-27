@@ -122,7 +122,7 @@ $(document).on("click", ".noti-item", function(){
 		success : function(resp) {
 		}
 	});
-	window.location = $(this).data("url");
+	window.location = "${pageContext.request.contextPath}" + $(this).data("url");
 });
 </script>
 </body>

@@ -321,7 +321,7 @@
 	            				receiverMemNick:receiverMemNick,
 	            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
 	            				notiType:"follow",
-	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+	            				notiUrl:"/profilepage/yourreviewlist?memNo="+memNo,
 	            				notiCreateDate:moment(),
 	            				memNick:memNick
 	            		};
@@ -422,7 +422,7 @@
 			    	            				receiverMemNick:receiverMemNick,
 			    	            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
 			    	            				notiType:"follow",
-			    	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+			    	            				notiUrl:"/profilepage/yourreviewlist?memNo="+memNo,
 			    	            				notiCreateDate:moment(),
 			    	            				memNick:memNick
 			    	            		};
@@ -524,7 +524,7 @@
 		    	            				receiverMemNick:receiverMemNick,
 		    	            				notiContent:memNick+"님이 회원님을 팔로우하기 시작했어요 🙌",
 		    	            				notiType:"follow",
-		    	            				notiUrl:"${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+memNo,
+		    	            				notiUrl:"/profilepage/yourreviewlist?memNo="+memNo,
 		    	            				notiCreateDate:moment(),
 		    	            				memNick:memNick
 		    	            		};
