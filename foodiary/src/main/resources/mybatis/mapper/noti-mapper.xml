@@ -15,6 +15,7 @@
 		left outer join mem M on N.caller_mem_no = M.mem_no
 		where N.receiver_mem_no = #{memNo}
 		and N.noti_create_date >= sysdate-14
+		order by noti_no desc
 	</select>
 	
 	<!-- 읽은 알림 시간 업데이트 -->

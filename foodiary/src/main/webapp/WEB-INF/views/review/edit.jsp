@@ -150,20 +150,13 @@
 		function setContentsLength(str, index) { //글자수 체크
 		    var maxCnt = 2000; //DB저장 최대 Byte수
 		    var length = getByteLengthOfString($('.reviewContent').summernote('code')); //총 글자수
-	        //console.log(length+" / "+maxCnt);
-	        //console.log("???: "+changeText);
 	        
 	        if(length <= maxCnt) {
 		    	changeText = $('.reviewContent').summernote('code');
-		    	//console.log("저장값: "+changeText);
-		    	console.log(length+" = "+maxCnt);	//★★입력글자수/최대글자수 확인용★★
 		    } 
 		    if(length > maxCnt) {
-		    	//console.log(length+" 전 "+maxCnt);
 		    	length = length-20;	//장문의 태그추가시 byte가 확 많아지기 때문에, 초과시 넉넉히 20 빼 준다
-		    	//console.log(length+" 후 "+maxCnt);
         		alert("등록오류 : 내용을 줄여주세요.");
-		    	//console.log("돌아가 : "+changeText);
                 $('.reviewContent').summernote('code', changeText);
 		    }
 		}

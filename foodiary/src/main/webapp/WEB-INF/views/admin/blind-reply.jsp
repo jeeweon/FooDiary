@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<jsp:include page="/WEB-INF/views/admin/admin_header.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/admin_header.jsp">
 	<jsp:param value="블라인드 댓글" name="title" />
 </jsp:include>
 <style>

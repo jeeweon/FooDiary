@@ -46,18 +46,13 @@
 			dataType : "json",
 			success : function(resp) {
 				memRekList = resp;
-				console.log(memRekList);
-				console.log("세션"+${sessionScope.loginNo});
-				
-				// 회원번호 가 있으면 팔로우한 사람제거 하고 출력
+				// 회원번호가 있으면 팔로우한 사람제거 하고 출력
 					threeMem();
 			}
 		});
 	};
 	function threeMem(){
 		$.each(memRekList, function(index, value) {
-			
-			
 			
 			var writerLevel;
 			if(value.memLevel == "6  ") { //db에 char(3)으로 넣어서 한 자리인 경우 공백 생김
@@ -74,10 +69,6 @@
 				writerLevel = $("<img>").attr("src", "${pageContext.request.contextPath}/images/1.밀.png");
 			}
 			writerLevel.addClass("level-img");
-			
-// 			console.log(value);
-// 			console.log(value.memNo);
-			console.log(value.attachNo);
 			var memImg=$("<img>").attr("src","");
 			var reviewImg = $("<img>").attr("src","${pageContext.request.contextPath}/attach/downloadReviewAttach/"+value.reviewNo);
 			var br=$("<br>");
@@ -86,15 +77,10 @@
 			var a=$("<a>").attr("data-mno",value.memNo).append(memImg).append(name).append(writerLevel);
 			var li=$("<li>").append(a).append(button);
 			a.click(function(){
-				console.log("a클릭");
 				window.location = "${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo="+$(this).data("mno");
 			});
 			
-			
-			
-			
 			button.click(function(){
-				console.log("팔로우 클릭");
 				var that=$(this);
 				$.ajax({
 					url:"${pageContext.request.contextPath}/rest/review/follow",
@@ -103,7 +89,6 @@
 						 passiveMemNo : $(this).data("rno")	
 					},
 					success :function(resp){
-						console.log(resp);
 						if(resp){
 							$(that).text("팔로잉");
 						}else{
@@ -126,23 +111,14 @@
 });
 </script>
 
+<div class="follow">
+	<h3>먹는거 좋아하는 사람</h3>
+	<ul class="follow-ul">
+	</ul>
+</div>
 
- 				 <div class="follow">
-                    <h3>먹는거 좋아하는 사람</h3>
-                     <ul class="follow-ul">
-                     </ul>
-                 </div>
-                 
-              <div class="relative">
-              	<img class="relative" src="${pageContext.request.contextPath}/images/6.피잣집.png">
-    			<p class="absolute">adsfas</p>
-			 </div>
-			 
-			 
-			 
-			 
-                 
-             
-
-
-
+<div class="relative">
+	<img class="relative"
+		src="${pageContext.request.contextPath}/images/6.피잣집.png">
+	<p class="absolute">adsfas</p>
+</div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="/WEB-INF/views/profilepage/yourprofile.jsp">
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/profilepage/yourprofile.jsp">
 	<jsp:param value="유저 프로필" name="title"/>
 </jsp:include> 
 <style>
@@ -98,20 +98,23 @@ li {
  	width: 250px;
  	height: 250px;
  	position: relative;
+ 	object-fit: cover;
  	}
 .absolute {
-	width: 50px; 
- 	height: 50px;
- 	position: absolute;
- 	left: 200px;
- 	top: 200px;
- 	background-color:gray;
- 	opacity: 0.5;
- 	text-align: center;
- 	color:white;
- 	font-size:35px;
+	width: 50px;
+	    height: 50px;
+	    position: absolute;
+	    left: 200px;
+	    top: 200px;
+	    background-color: rgba(0,0,0,0.5);
+	    text-align: center;
+	    color: white;
+	    font-size: 20px;
+	    border-radius: 4px;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
 	 	}
-	object-fit:cover; 
 </style> 
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -128,8 +131,6 @@ li {
 			dataType : "json",
 			success : function(resp) {
 				reviewList1 = resp;
-				console.log(reviewList1);
-				console.log(reviewList1[0].replyCnt);
 				renderList();
 			}
 		});

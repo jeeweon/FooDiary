@@ -37,7 +37,7 @@
         <div class="inner">
             <header class="header">
                 <div class="header1">
-                    <h1><a href="/search/review" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+                    <h1><a href="${pageContext.request.contextPath}/search/review" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
                     <div class="sidemenu">
                     <c:if test = "${login}">
                     <ul id="sideP">
@@ -161,7 +161,7 @@
                 <form action="">
                     <fieldset>
                         <legend>
-                            "로그인하여 내 주변 맛집 리뷰를 확인하고 회원님이 좋아할 만한 계정을 찾아보세요."
+                            로그인하여 내 주변 맛집 리뷰를 확인하고 회원님이 좋아할 만한 계정을 찾아보세요.
                             <button  id="btn-row"><a href="${pageContext.request.contextPath}/mem/login">로그인</a></button>
                             <button id="btn-row2"><a href="${pageContext.request.contextPath}/mem/join">회원가입</a></button>
                         </legend>
@@ -226,16 +226,13 @@ setTimeout(timeFunc, 900);
 
 function timeFunc() {
 
-
 //슬롯애니메이션 감추기
 displaySlot.style.display = "none";
 
 //shuffle 메소드를 사용하여 석은 배열에서 index[0]을 가져오기
-console.log(shuffle(lunchList));
 let lunckPick = shuffle(lunchList)[0];
 
 //메뉴 노출
-console.log(lunckPick);
 elem.innerHTML = lunckPick;
 
 
@@ -272,13 +269,8 @@ resetNum = 0;
 
       //웹소켓
     	function connectWs(){
-    		console.log("tttttt")
     		var uri = "${pageContext.request.contextPath}/ws/sockjs";
     		socket = new SockJS(uri);
-    	
-    		socket.onopen = function() {
-    			console.log('open');
-    		};
     		
     		toastr.options = {
     		  "closeButton": false,
@@ -303,10 +295,6 @@ resetNum = 0;
     			var data = JSON.parse(e.data);
     			toastr.info(data.notiContent);
     		};
-
-    		socket.onclose = function() {
-    		    console.log('close');
-    	 	};
     	};
         
 		let reviewList = [];
@@ -688,7 +676,6 @@ resetNum = 0;
 							 passiveMemNo : $(this).data("rno")	
 						},
 						success :function(resp){
-							console.log(resp);
 							if(resp){
 								$(that).text("팔로잉");
 							}else{

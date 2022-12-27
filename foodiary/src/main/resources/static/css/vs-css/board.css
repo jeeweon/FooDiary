@@ -40,6 +40,7 @@ li {
     left: 340px;
     bottom: 30px;
     border-radius: 50%;
+    object-fit:cover;
 }
 
 .boardT {
@@ -99,6 +100,7 @@ li {
 	height: 24px;
 	margin-left: 5px;
 	margin-right: 5px;
+	object-fit:cover;
 }
 
 .boardT .boardT2 {
@@ -181,6 +183,7 @@ li {
 
 .feedimg figure{
   width: 100%; height: 100%;
+  object-fit:cover;
 }
 .feedimg figcaption{
   object-fit:cover;
@@ -200,6 +203,7 @@ li {
 .feedimg .relative{
 	width: 250px;
 	height: 250px;
+	object-fit:cover;
 }
 
 .feedimg a:hover figcaption, .feedimg a:focus figcaption{
@@ -209,7 +213,7 @@ li {
 .img-size{
 	width:250px;
 	height:250px;
-	
+	object-fit:cover;
 	
 }
 @media screen and (max-width: 1420px) {

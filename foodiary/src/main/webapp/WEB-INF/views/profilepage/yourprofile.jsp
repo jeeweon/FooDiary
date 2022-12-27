@@ -192,14 +192,9 @@
     	
     	//웹소켓
     	function connectWs(){
-    		console.log("tttttt")
     		var uri = "${pageContext.request.contextPath}/ws/sockjs";
     		socket = new SockJS(uri);
-    	
-    		socket.onopen = function() {
-    			console.log('open');
-    		};
-    		
+  
     		toastr.options = {
     		  "closeButton": false,
     		  "debug": false,
@@ -223,10 +218,6 @@
     			var data = JSON.parse(e.data);
     			toastr.info(data.notiContent);
     		};
-
-    		socket.onclose = function() {
-    		    console.log('close');
-    	 	};
     	};
         
  		//회원조회
@@ -238,8 +229,6 @@
 				dataType : "json",
 				success : function(resp) {
 					profileList = resp;
-					console.log(profileList);
-					//$(".mem-name").text(profileList.memNick);
 					$(".board-cnt").text("리뷰 "+profileList.reviewCnt);
 					$(".follow-cnt").text("팔로워 "+profileList.followCnt);
 					$(".follower-cnt").text("팔로우 "+profileList.followerCnt);
@@ -315,8 +304,6 @@
 		$(".follow-cert").click(function(){
 			var receiverMemNo = $(this).data("mno");
 			var receiverMemNick = $(this).data("mnick");
-			console.log("no="+receiverMemNo);
-			console.log("nick="+receiverMemNick);
 			$.ajax({
 				url:"${pageContext.request.contextPath}/rest/review/follow",
 				method:"post",
@@ -366,8 +353,6 @@
 				success:function(resp){
 					followMemList=resp;
 					renderfollowList()
-					console.log("팔로우 멤버");
-					console.log(followMemList);
 				}
 			}); 
 		};
@@ -448,10 +433,6 @@
 			     				}
 			            	 }); 
 			               });
-		             //사진 번호가 있는지 없는지. 
-					console.log("팔로우 이미지 넘버");
-					console.log(value.attachNo);
-		               
 					//사진 번호가 있는지 없는지. 
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
@@ -478,8 +459,6 @@
 				success:function(resp){
 					followerMemList=resp;
 					renderfollowerList();
-					console.log("팔로워 멤버");
-					console.log(followerMemList);
 				}
 			}); 
 		};
@@ -558,8 +537,6 @@
 		               });
 		               
 					//사진 번호가 있는지 없는지. 
-					console.log("팔로워 이미지 넘버");
-					console.log(value.attachNo);
 					if(value.attachNo != 0){
 						$(img).attr("src","${pageContext.request.contextPath}/attach/download/"+value.attachNo);
 					}else{
@@ -596,7 +573,7 @@
                          <c:if test = "${login}">
                         <button class="follow-cert" data-mno="${memNo}"></button>
                         </c:if>
-                        <a href="/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+                        <a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
                     </ul> <!-- boardT1 -->
                     <ul class="boardT2">
                     <a href="${pageContext.request.contextPath}/profilepage/yourreviewlist?memNo=${memNo}">

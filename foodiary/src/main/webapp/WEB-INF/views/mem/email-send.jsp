@@ -158,9 +158,6 @@ $(function(){
 						}
 					});
 				});
-				
-// 				$(".email-check").html(div);		
-// 				div.append(ment).append(ment2).append(input).append(button);
 				}
 			});
 		});
@@ -168,7 +165,7 @@ $(function(){
 	$(".email-form").submit(function(e){
 		e.preventDefault();
 		
-		if(!judge.memEmailValid) return alert('이메일 인증을 완료해주세요'); //모달로 바꾸기(?)
+		if(!judge.memEmailValid) return alert('이메일 인증을 완료해주세요');
 
 		if(judge.memEmailValid){
 			this.submit();			

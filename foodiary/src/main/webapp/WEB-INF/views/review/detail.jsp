@@ -331,13 +331,8 @@
 		}
 		//웹소켓
 		function connectWs(){
-			console.log("tttttt")
 			var uri = "${pageContext.request.contextPath}/ws/sockjs";
 			socket = new SockJS(uri);
-		
-			socket.onopen = function() {
-				console.log('open');
-			};
 			
 			toastr.options = {
 			  "closeButton": false,
@@ -362,10 +357,6 @@
 				var data = JSON.parse(e.data);
 				toastr.info(data.notiContent);
 			};
-
-			socket.onclose = function() {
-			    console.log('close');
-		 	};
 		};
 		
 		//리뷰상단 : 리뷰 작성자 정보
@@ -469,7 +460,6 @@
 			if(result) {
 				axios.post("${pageContext.request.contextPath}/rest/review/report/"+reviewNo)
 				.then(function(response){
-					//console.log(response);
 					if(response.data) {	//response가 true일 경우
 						alert("신고가 접수되었습니다.");
 						$(that).prop("disabled", true);
@@ -496,7 +486,6 @@
     				replyContent: replyContent
     			})
     			.then(function(resp){
-    				//console.log(resp);
     				$(".input-reply").val("");
     				loadReplyList();
     				
@@ -529,19 +518,13 @@
 		$(".input-reply").on("change keyup paste",function(){
 			var maxCnt = 300; //DB저장 최대 Byte수
 			var length = getByteLengthOfString($(".input-reply").val()); //총 글자수
-			//console.log(length);
 			
 			if(length <= maxCnt) {
 		    	changeText = $(".input-reply").val();
-		    	//console.log("저장값: "+changeText);
-		    	console.log(length+" = "+maxCnt);	//★★입력글자수/최대글자수 확인용★★
 		    } 
 		    if(length > maxCnt) {
-		    	//console.log(length+" 전 "+maxCnt);
 		    	length = length-3;	//input value는 최대증가값이 3이므로, 3을 빼준다
-		    	//console.log(length+" 후 "+maxCnt);
         		alert("등록오류 : 내용을 줄여주세요.");
-		    	//console.log("돌아가 : "+changeText);
                 $(".input-reply").val(changeText);
 		    }
 		});

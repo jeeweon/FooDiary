@@ -36,7 +36,6 @@ if(ReadKeyword) {	//속성이 readonly일 경우
 	$(".keywordMap").prop("disabled", true);
 }
 $(".keywordMap").click(function(){
-	//console.log("클릭");
 	
 	var keyword = document.getElementById('keyword').value;
 	if (!keyword.replace(/^\s+|\s+$/g, '')) {

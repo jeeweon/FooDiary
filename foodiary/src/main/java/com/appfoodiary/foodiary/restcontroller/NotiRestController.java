@@ -10,7 +10,6 @@ import com.appfoodiary.foodiary.repository.NotiDao;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequestMapping("/rest/noti")
 public class NotiRestController {
@@ -19,8 +18,6 @@ public class NotiRestController {
 	
 	@GetMapping("/read/{notiNo}")
 	public boolean updateReadDate(@PathVariable int notiNo) {
-		log.debug("들어옴");
-		log.debug("notiNo=" + notiNo);
 		return notiDao.updateReadDate(notiNo);
 	}
 }

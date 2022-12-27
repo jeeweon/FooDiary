@@ -36,7 +36,7 @@
     <div class="inner">
         <header class="header">
             <div class="header1">
-                <h1><a href="/home" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+                <h1><a href="${pageContext.request.contextPath}/home" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
                 <div class="sidemenu">
                 <ul id="sideP">
                     <li>
@@ -220,11 +220,9 @@ function lunchIs() {
     displaySlot.style.display = "none";
 
     //shuffle 메소드를 사용하여 석은 배열에서 index[0]을 가져오기
-    console.log(shuffle(lunchList));
     let lunckPick = shuffle(lunchList)[0];
 
     //메뉴 노출
-    console.log(lunckPick);
     elem.innerHTML = lunckPick;
 
 
@@ -263,14 +261,9 @@ $(function() {
 	}
 	//웹소켓
 	function connectWs(){
-		console.log("tttttt")
 		var uri = "${pageContext.request.contextPath}/ws/sockjs";
 		socket = new SockJS(uri);
 	
-		socket.onopen = function() {
-			console.log('open');
-		};
-		
 		toastr.options = {
 		  "closeButton": false,
 		  "debug": false,
@@ -294,10 +287,6 @@ $(function() {
 			var data = JSON.parse(e.data);
 			toastr.info(data.notiContent);
 		};
-
-		socket.onclose = function() {
-		    console.log('close');
-	 	};
 	};
 	
 	$(".label-all").addClass("label-selected");
@@ -724,7 +713,6 @@ $(function() {
 						 passiveMemNo : $(this).data("rno")	
 					},
 					success :function(resp){
-						console.log(resp);
 						if(resp){
 							$(that).text("팔로잉");
 						}else{
