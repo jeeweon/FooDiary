@@ -119,7 +119,6 @@
                         <div class="receipt">
                           <div class="title_text">
                             <h1>오늘 뭐 먹 지 ?</h1>
-                            <h3>일단골라.</h3>
                           </div> <!--title_text-->
                           <div class="menu_print">
                             <h2></h2>
