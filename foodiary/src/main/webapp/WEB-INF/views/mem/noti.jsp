@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -9,6 +10,16 @@
 
 
 <style>
+.fixed-top {
+	position: fixed;
+	width: 100%;
+	height:120px;
+	top: 0;
+	box-sizing: border-box;   
+    background-color: #ffffff;
+	z-index: 99;
+}
+
 .logo{
     position: absolute;
     top: 30px;
@@ -21,12 +32,13 @@
 
 .title {
 	text-align: center;
-	margin-top: 80px;
+	margin-top: 65px;
 }
 
 .noti-list {
 	width: 600px;
 	margin: 0 auto;
+	margin-top: 120px;
 	margin-bottom: 100px;
 }
 
@@ -77,35 +89,52 @@
 	color: #57B9F9;
 }
 
-
+.no-item {
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 200px;
+	text-align: center;
+	color: gray;
+}
 </style>
 </head>
 <body>
-<h1><a href="${pageContext.request.contextPath}/" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
-<h1 class="title">알림</h1>
+<div class="fixed-top">
+	<h1><a href="${pageContext.request.contextPath}/" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
+	<h1 class="title">알림</h1>
+</div>
 
 <div class="noti-list">
-		<c:forEach var="list" items="${list}">
-			<div class="noti-item" data-url="${list.notiUrl}" data-no="${list.notiNo}">
-				<div class="noti-icon">
-					<c:choose>
-						<c:when test="${list.notiType == 'follow'}">
-							<span><i class="fa-solid fa-user fa-2x"></i></span>
-						</c:when>
-						<c:when test="${list.notiType == 'like'}">
-							<span><i class="fa-solid fa-heart fa-2x"></i></span>
-						</c:when>
-						<c:when test="${list.notiType == 'reply'}">
-							<span><i class="fa-solid fa-comment fa-2x"></i></span>
-						</c:when>
-					</c:choose>
+	<c:choose>
+		<c:when test="${fn:length(list) != 0}">
+			<c:forEach var="list" items="${list}">
+				<div class="noti-item" data-url="${list.notiUrl}" data-no="${list.notiNo}">
+					<div class="noti-icon">
+						<c:choose>
+							<c:when test="${list.notiType == 'follow'}">
+								<span><i class="fa-solid fa-user fa-2x"></i></span>
+							</c:when>
+							<c:when test="${list.notiType == 'like'}">
+								<span><i class="fa-solid fa-heart fa-2x"></i></span>
+							</c:when>
+							<c:when test="${list.notiType == 'reply'}">
+								<span><i class="fa-solid fa-comment fa-2x"></i></span>
+							</c:when>
+						</c:choose>
+					</div>
+					<div class="noti-info">
+						<span class="noti-content">${list.notiContent}</span>
+						<span class="noti-time">${list.notiCreateDate}</span>
+					</div>
 				</div>
-				<div class="noti-info">
-					<span class="noti-content">${list.notiContent}</span>
-					<span class="noti-time">${list.notiCreateDate}</span>
-				</div>
+			</c:forEach>
+		</c:when>
+		<c:otherwise>
+			<div class="no-item">
+				<span>받은 알림이 없어요.</span>
 			</div>
-		</c:forEach>
+		</c:otherwise>
+	</c:choose>
 </div>
 <!-- jquery 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
