@@ -80,22 +80,25 @@
 	position: relative;
 	bottom: 15px;
 }
-.reviewmem:hover{
+
+.reviewMem{
+	margin-right: 870px;	
+}
+.reviewMem:hover{
 	cursor: pointer;
 }
 .reviewWriter{
 	position: relative;
-	top: 20px;
-	left: 100px;
+	display: flex;
+	align-items: center;
+	top: 0px;
+	left: 30px;
 }
 
-.reviewWriter button{
+.follow {
+	margin-left: 20px;
 	position: relative;
 	bottom: 20px;
-	margin-left: 20px;
-	border: none;
-	outline: none;
-    background-color: white;
     color: #0095f6;
     cursor: pointer;
 }
@@ -168,11 +171,7 @@ li {
    position: relative;
 }
  .Rhead a img{
-    position: relative;
-    top: 15px;
-    left: 100px;
-    width: 150px;
-    height: 110px;
+    width: 100%;
 } 
 
 
@@ -188,10 +187,10 @@ li {
     margin-left: 10px;
     margin-right: 10px;
 }
-.Rhead2 li #Rdelete{
+.info-action #Rdelete{
 	color: red;	
 }
-.Rhead2 li #Rupdate{
+.info-action #Rupdate{
 	color: blue;
 }
 .Rbody{

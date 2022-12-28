@@ -24,6 +24,11 @@
 		position: realtive;
 		bottom: 20px;
 	}
+	
+	.logo {
+		width: 10%;
+		margin-right: 10px;
+	}
 </style>
 
 
@@ -38,12 +43,10 @@
         <div class="Rdetail">
             <div class="inner">
                 <div class="Rhead">
-                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
-                 	<%-- 작성자 회원번호 : ${reviewDto.memNo} <br> --%>
-					<!-- 회원정보 : 프로필 사진, 닉네임, 팔로우버튼(팔로우중:팔로잉)
-									- (사진,닉네임)클릭시 프로필로 이동 
-					-->
 					<div class="reviewWriter">
+						<div class="logo">
+		                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="홈으로"></a>
+						</div>
 						<span class="reviewMem">
 							<span class="attachBox">
 								<c:choose>
@@ -57,41 +60,41 @@
 							</span>
 							<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
 						</span>
-					</div>                                
-                    <ul class="Rhead2">
-                    	 <li>
-                        	<!-- 작성일 -->
-							<c:choose>
-								<c:when test="${today == current}">
-									<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
-								</c:when>
-								<c:otherwise>
-									<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
-								</c:otherwise>
-							</c:choose>	
-                        </li> 
-                        <li>
-                        <!-- 회원 기능 
-						1. 작성자 본인이 아닐 때 : 신고버튼
-							- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
-						2. 작성자 본인일 때 : 수정/삭제
-					-->	
-						<!-- 신고 -->
-						<c:if test="${member}">
-							<input class="btn-report" type="button" value="신고">
-						</c:if>
-					
-
-						<!-- 수정, 삭제 -->
-						<c:if test="${owner}">
-							<!-- 리뷰신고수 5미만(블라인드 아닐때)만 수정가능 -->
-							<c:if test="${reviewDto.reviewReportCnt < 5}">
-								<a href="edit?reviewNo=${reviewDto.reviewNo}" id="Rupdate">수정</a>
-							</c:if>
-							<a href="delete?reviewNo=${reviewDto.reviewNo}" id="Rdelete">삭제</a>
-						</c:if>
-                        </li>                      
-                    </ul>
+						<div class="info-action">
+	                    	 <span>
+	                        	<!-- 작성일 -->
+								<c:choose>
+									<c:when test="${today == current}">
+										<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="HH:mm"/>
+									</c:when>
+									<c:otherwise>
+										<fmt:formatDate value="${reviewDto.reviewWriteTime}" pattern="yyyy-MM-dd"/>
+									</c:otherwise>
+								</c:choose>	
+	                        </span> 
+	                        <span>
+		                        <!-- 회원 기능 
+								1. 작성자 본인이 아닐 때 : 신고버튼
+									- 신고버튼 (확인 팝업 노출: 취소불가능, 불이익 안내, 완료시 완료 팝업)
+								2. 작성자 본인일 때 : 수정/삭제
+							-->	
+								<!-- 신고 -->
+								<c:if test="${member}">
+									<input class="btn-report" type="button" value="신고">
+								</c:if>
+							
+		
+								<!-- 수정, 삭제 -->
+								<c:if test="${owner}">
+									<!-- 리뷰신고수 5미만(블라인드 아닐때)만 수정가능 -->
+									<c:if test="${reviewDto.reviewReportCnt < 5}">
+										<a href="edit?reviewNo=${reviewDto.reviewNo}" id="Rupdate">수정</a>
+									</c:if>
+									<a href="delete?reviewNo=${reviewDto.reviewNo}" id="Rdelete">삭제</a>
+								</c:if>
+		                    </span>                      
+						</div>
+					</div> 
                 </div> <!--Rhead-->
             </div> <!--inner-->
         </div> <!--Rdetail-->
@@ -387,7 +390,7 @@
 			});
 			
 			if(loginNo!=0 && reviewWriterNo!=loginNo) { //본인글이 아닐때 팔로우버튼 생성
-				var follow=$("<button>").attr("data-rno",reviewWriterNo);
+				var follow=$("<span>").attr("data-rno",reviewWriterNo);
 				follow.attr("data-mnick", reviewWriterNick);
 				follow.addClass("follow");
 				$.ajax({
@@ -402,7 +405,8 @@
 					}
 				});
 				
-				$(".reviewWriter").append(reviewMem).append(follow);
+				//$(".reviewWriter").append(reviewMem).append(follow);
+				reviewMem.append(follow);
 			}
 		}
 		
