@@ -393,7 +393,6 @@
 				//$(".reviewWriter").append(reviewMem).append(follow);
 				//reviewMem.append(follow);
                 $(".reviewMemFollow").append(follow);
-                //$(".level-img").append(follow);
 			}
 		}
 		
