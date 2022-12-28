@@ -78,7 +78,8 @@
                     <li><img src="${pageContext.request.contextPath}/images/홈아이콘.png"><a href="${pageContext.request.contextPath}/">홈</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/맛집 탐색.png"><a href="${pageContext.request.contextPath}/search/review">맛집 탐색</a></li>
                     <li><img src="${pageContext.request.contextPath}/images/맛쟁이 탐색.png"><a href="${pageContext.request.contextPath}/search/mem">맛쟁이 탐색</a></li>
-                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a><span class="noti-cnt">${cnt}</span></li>
+                    <li><img src="${pageContext.request.contextPath}/images/알림아이콘.png"><a href="${pageContext.request.contextPath}/mem/noti">알림</a>
+	                    <c:if test="${cnt > 0}"><span class="noti-cnt">${cnt}</span></c:if></li>
                 </ul>
                 </div> <!--sidemenu-->
                 <a href="${pageContext.request.contextPath}/review/write" class="review">리뷰하기</a>
@@ -87,16 +88,13 @@
                 </div>
             </div> <!--header1-->              
             <div class="header3">
+            <div class="header3-fix">
                 <div class="home-title">
 
                     <ul class="title-nickname">                 
                         <li id="nickname1">${loginNick}</li>님을 위한 리뷰 피드                                             
                     </ul> <!--title-nickname-->
                 </div> <!--home-title-->
-            
-                <!-- 관심지역 설정 유도 배너 -->
-                <div class="set-area-banner hide">
-                </div>
             
                 <!-- 리뷰 필터 버튼 -->
                 <div class="filter-btn">
@@ -106,6 +104,10 @@
                     </ul>
                     <!-- 관심지역이 있으면 지역 버튼 노출 -->
                 </div> <!--filter-btn-->         
+            </div>    
+                 <!-- 관심지역 설정 유도 배너 -->
+                <div class="set-area-banner hide">
+                </div>
             </div> <!--header3-->
         </header> <!--header-->
      	<div class="sideW">
@@ -120,7 +122,6 @@
                 <div class="receipt">
                   <div class="title_text">
                     <h1>오늘 뭐 먹 지 ?</h1>
-                    <h3>일단돌려.</h3>
                   </div>
                   <div class="menu_print">
                     <h2></h2>
@@ -337,6 +338,7 @@ $(function() {
 			btn.addClass("label set-area-btn");
 			$(".filter-btn").append(btn); //설정 버튼을 filter-btn 영역에 추가
 		} else {
+			$(".feed").addClass("no-area");
 			$(".set-area-banner").removeClass("hide");
 			var exp1 = $("<span>").text("관심지역을 추가하면 최신 리뷰를 모아보기 쉬워져요.");
 			var exp2 = $("<span>").text("내 관심지역 고르러 가볼까요?");

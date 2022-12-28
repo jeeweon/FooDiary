@@ -57,13 +57,21 @@ li {
 }
 
 .header3{
-    position: fixed;
-    z-index: 999;
-    top: -10px;
-    padding-top: 30px;
-    right: 35%;
-    width: 650px;
-    height: 200px;
+    position: relative;
+    left:350px;
+    width: 700px;
+    height: 120px;
+    box-sizing: border-box;   
+    background-color: #ffffff;
+}
+
+.header3-fix {
+	position: fixed;
+	padding-top: 30px;
+	top:0;
+	z-index: 999;
+	width: 700px;
+    height: 140px;
     box-sizing: border-box;   
     background-color: #ffffff;
 }
@@ -82,13 +90,13 @@ li {
 }
 
 .set-area-banner {
-	width: 100%;
+	width: 600px;
 	border: 1px solid #18253D;
 	border-radius: 6px;
 	color: #18253D;
 	background-color: white;
 	position: relative;
-	margin-top: 10px;
+	margin-top: 150px;
 	cursor: pointer;
 }
 
@@ -473,14 +481,14 @@ li {
     margin: auto 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 300px;
-    height: 350px;
+    height: 300px;
   }
   
   .receipt {
     width: 100%;
-    height: 80%;
+    height: 60%;
     display: flex;
     border-radius: 10%;   
     flex-direction: column;
@@ -519,7 +527,7 @@ li {
   
   .menu_print {
     position: absolute;
-    top: 55%;
+    top: 50%;
     font-size: 20px;
     color: black;
     transition: 0.5s;
@@ -527,7 +535,7 @@ li {
   
   .btn_area {
     position: absolute;
-    bottom: 50px;
+    bottom: 40px;
   }
   
   body:before {
@@ -577,36 +585,42 @@ li {
 
 .follow h3 {
     font-size: 18px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     text-align: center;
 }
 .follow ul li{
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-left: 15px;
 }
 #follow1{
     position: relative;
     border-top: 1px solid gray;
+    padding-top: 10px;
     font-size: 17px;
     text-align: center;    
     white-space: normal;
-    top: 50px;  
+    top: 30px;  
 }
 #follow2{
 	position: relative;
     font-size: 17px;
     text-align: center;    
     white-space: normal;
-    top: 50px;    
+    top: 30px;    
 }
 .feed{
     flex: 1;
     position: relative;
-    top: 180px;
+    top: 120px;
 }
 
+.feed.no-area{
+    flex: 1;
+    position: relative;
+    top: 200px;
+}
 
 .level-img {
 		position: relative;

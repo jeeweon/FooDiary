@@ -66,16 +66,16 @@ li {
 }
 .formdiv{
 	width: 600px;
-	height: 150px;
+	height: 110px;
 	position: fixed;
-	top: -1px;
+	top: 0px;
 	z-index: 999;
 	background-color:#ffffff; 
 }
 .sidemenu {
     padding-left: 15px;
     box-sizing: border-box;
-    margin-bottom: 150px;
+    margin-bottom: 80px;
 }
 
 .sidemenu #sideP{
@@ -137,7 +137,7 @@ li {
     display: flex;
     align-items: center;
     position: absolute;
-    bottom: 0px;
+    bottom: 150px;
     left: 60px;
 }
 #logoutimg{
@@ -225,17 +225,16 @@ li {
     margin: auto 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 300px;
-    height: 350px;
+    height: 300px;
   }
   
   .receipt {
     width: 100%;
-    height: 80%;
-    border-radius: 10%;
-    background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
+    height: 60%;
     display: flex;
+    border-radius: 10%;   
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -255,10 +254,11 @@ li {
   }
   
   .receipt .title_text h3 {
-  	  font-size: 5px;
+ 	  font-size: 5px;
       margin-top: 10px;
       margin-bottom: 15px;
   }
+  
   
   em {
     display: inline-block;
@@ -271,7 +271,7 @@ li {
   
   .menu_print {
     position: absolute;
-    top: 55%;
+    top: 50%;
     font-size: 20px;
     color: black;
     transition: 0.5s;
@@ -279,7 +279,7 @@ li {
   
   .btn_area {
     position: absolute;
-    bottom: 50px;
+    bottom: 40px;
   }
   
   body:before {
@@ -289,7 +289,7 @@ li {
   }
   .btn_area button {
     background: gray;
-    color: ivory;
+    color: #fff;
     border: none;
     position: relative;
     height: 30px;
@@ -329,27 +329,35 @@ li {
 
 .follow h3 {
     font-size: 18px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     text-align: center;
 }
 .follow ul li{
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-left: 15px;
 }
 #follow1{
     position: relative;
-    border-top: 1px dotted black;
+    border-top: 1px solid gray;
+    padding-top: 10px;
     font-size: 17px;
-    text-align: center;
+    text-align: center;    
     white-space: normal;
-    top: 50px;  
+    top: 30px;  
+}
+#follow2{
+	position: relative;
+    font-size: 17px;
+    text-align: center;    
+    white-space: normal;
+    top: 30px;    
 }
 .feed{
     flex: 1;
     position: relative;
-    top: 130px;
+    top: 90px;
 }
 .nick-lev {
 	display: flex;
@@ -438,7 +446,7 @@ li {
 }
 
 .search-form {
-        margin: 0;
+        margin-top: 40px;
 }
     
 .search-view{

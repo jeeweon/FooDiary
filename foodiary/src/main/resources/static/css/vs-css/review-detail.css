@@ -67,9 +67,15 @@
 		outline: none;
 	}
 	
-	        * {
+* {
     margin: 0;
     padding: 0;
+}
+
+.logo {
+	width: 8%;
+	margin-left: 30px;
+	margin-right: 10px;
 }
 .reviewWriter-memNick{
 	position: relative;
@@ -80,22 +86,25 @@
 	position: relative;
 	bottom: 15px;
 }
-.reviewmem:hover{
+
+.reviewMem{
+	margin-right: 700px;
+	width: 200px;
+}
+.reviewMem:hover{
 	cursor: pointer;
 }
 .reviewWriter{
 	position: relative;
-	top: 20px;
-	left: 100px;
+	display: flex;
+	align-items: center;
+	top: 0px;
 }
 
-.reviewWriter button{
+.follow {
+	margin-left: 20px;
 	position: relative;
 	bottom: 20px;
-	margin-left: 20px;
-	border: none;
-	outline: none;
-    background-color: white;
     color: #0095f6;
     cursor: pointer;
 }
@@ -139,9 +148,7 @@
 fieldset {
     border: 0;
 }
-.wrapper{
-	overflow-x:hidden;
-}
+
 a {
     text-decoration: none;
     color: black;
@@ -170,11 +177,7 @@ li {
    position: relative;
 }
  .Rhead a img{
-    position: relative;
-    top: 15px;
-    left: 100px;
-    width: 150px;
-    height: 110px;
+    width: 100%;
 } 
 
 
@@ -190,10 +193,16 @@ li {
     margin-left: 10px;
     margin-right: 10px;
 }
-.Rhead2 li #Rdelete{
+
+.info-action {
+	width: 200px;	
+	text-align: right;
+}
+
+.info-action #Rdelete{
 	color: red;	
 }
-.Rhead2 li #Rupdate{
+.info-action #Rupdate{
 	color: blue;
 }
 .Rbody{
