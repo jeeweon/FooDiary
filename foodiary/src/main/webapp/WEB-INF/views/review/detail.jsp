@@ -51,6 +51,7 @@
 							</span>
 							<span class="reviewWriter-memNick">${reviewWriter.memNick}</span>
 						</span>
+                        <span class="reviewMemFollow"></span>
 						<div class="info-action">
 	                    	 <span>
 	                        	<!-- 작성일 -->
@@ -390,7 +391,8 @@
 				});
 				
 				//$(".reviewWriter").append(reviewMem).append(follow);
-				reviewMem.append(follow);
+				//reviewMem.append(follow);
+                $(".reviewMemFollow").append(follow);
 			}
 		}
 		
