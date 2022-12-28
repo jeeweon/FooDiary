@@ -89,9 +89,9 @@ li {
 }
 .formdiv{
 	width: 600px;
-	height: 150px;
+	height: 100px;
 	position: fixed;
-	top: -1px;
+	top: 20px;
 	z-index: 999;
 	background-color:#ffffff; 
 }
@@ -170,7 +170,7 @@ li {
 
 .mem-list {
 	width: 600px;
-	margin-top: 80px;
+	margin-top: 50px;
 	margin-bottom: 60px;
 }
 

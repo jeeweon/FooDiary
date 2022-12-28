@@ -66,9 +66,9 @@ li {
 }
 .formdiv{
 	width: 600px;
-	height: 150px;
+	height: 100px;
 	position: fixed;
-	top: -1px;
+	top: 20px;
 	z-index: 999;
 	background-color:#ffffff; 
 }
@@ -357,7 +357,7 @@ li {
 .feed{
     flex: 1;
     position: relative;
-    top: 110px;
+    top: 90px;
 }
 .nick-lev {
 	display: flex;
