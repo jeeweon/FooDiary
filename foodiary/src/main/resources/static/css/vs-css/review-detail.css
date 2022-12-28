@@ -88,8 +88,14 @@
 }
 
 .reviewMem{
-	margin-right: 700px;
+	margin-right: 10px;
 	width: 200px;
+}
+.reviewMemFollow{	/* follow 분리를 위해 추가 */
+	position: relative;
+	bottom: -15px;
+	margin-right: 650px;
+	width: 100px;
 }
 .reviewMem:hover{
 	cursor: pointer;
