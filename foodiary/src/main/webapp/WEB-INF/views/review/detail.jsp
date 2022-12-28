@@ -20,15 +20,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/vs-css/review-detail.css"> <!--css 불러오는 링크--> 
 <style type="text/css">
-	.backDiv i {
-		position: realtive;
-		bottom: 20px;
-	}
-	
-	.logo {
-		width: 10%;
-		margin-right: 10px;
-	}
 </style>
 
 
@@ -250,13 +241,6 @@
         </div><!--//bodyContent-->           
   	</div>   
 
-<!-- 뒤로가기 화살표 -->
-<div class="backDiv" style="text-align: center">
-	<i class="fa-solid fa-arrow-left-long goBack" style="font-size: 30px;"></i>
-	<div style="margin: -6px;">&nbsp;back</div>
-</div>
-
-	
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <!-- 별점 -->

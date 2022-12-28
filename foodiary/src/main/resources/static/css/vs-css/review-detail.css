@@ -67,9 +67,15 @@
 		outline: none;
 	}
 	
-	        * {
+* {
     margin: 0;
     padding: 0;
+}
+
+.logo {
+	width: 8%;
+	margin-left: 30px;
+	margin-right: 10px;
 }
 .reviewWriter-memNick{
 	position: relative;
@@ -82,7 +88,8 @@
 }
 
 .reviewMem{
-	margin-right: 870px;	
+	margin-right: 700px;
+	width: 300px;
 }
 .reviewMem:hover{
 	cursor: pointer;
@@ -92,7 +99,6 @@
 	display: flex;
 	align-items: center;
 	top: 0px;
-	left: 30px;
 }
 
 .follow {
@@ -187,6 +193,12 @@ li {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.info-action {
+	width: 200px;	
+	text-align: right;
+}
+
 .info-action #Rdelete{
 	color: red;	
 }
