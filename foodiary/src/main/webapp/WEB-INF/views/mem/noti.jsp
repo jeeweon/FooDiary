@@ -13,11 +13,12 @@
 .fixed-top {
 	position: fixed;
 	width: 100%;
-	height:120px;
+	height:160px;
 	top: 0;
 	box-sizing: border-box;   
     background-color: #ffffff;
 	z-index: 99;
+	text-align: center;
 }
 
 .logo{
@@ -35,10 +36,15 @@
 	margin-top: 65px;
 }
 
+.subtitle {
+	font-size: 18px;
+	color: gray;
+}
+
 .noti-list {
 	width: 600px;
 	margin: 0 auto;
-	margin-top: 120px;
+	margin-top: 160px;
 	margin-bottom: 100px;
 }
 
@@ -102,6 +108,7 @@
 <div class="fixed-top">
 	<h1><a href="${pageContext.request.contextPath}/" class="logo"><img src="${pageContext.request.contextPath}/images/Foodiary-logo.png" alt="로고/홈으로"></a></h1>
 	<h1 class="title">알림</h1>
+	<span class="subtitle">최근 7일 간의 알림을 확인할 수 있어요.</span>
 </div>
 
 <div class="noti-list">
