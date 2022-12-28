@@ -89,15 +89,15 @@ li {
 }
 .formdiv{
 	width: 600px;
-	height: 100px;
+	height: 110px;
 	position: fixed;
-	top: 20px;
+	top: 0px;
 	z-index: 999;
 	background-color:#ffffff; 
 }
 
 .search-form {
-        margin: 0;
+        margin-top: 40px;
 }
     
 .search-view{
