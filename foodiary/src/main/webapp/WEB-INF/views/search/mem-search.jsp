@@ -107,49 +107,45 @@
                </div> <!-- header4 -->
             </header> <!--header-->
             <div class="sideW">
-             <div class="mem-list"></div>	
-                <div class="feed">
-                    <!-- 리뷰 목록 -->
-    				<div class="review-list"></div>
-                </div> <!--feed-->
-                </div> <!--sideW-->
-                <div class="sidebar">
-                    <div class="random">
-                    <div class="container">
-                        <div class="receipt">
-                          <div class="title_text">
-                            <h1>오늘 뭐 먹 지 ?</h1>
-                          </div> <!--title_text-->
-                          <div class="menu_print">
-                            <h2></h2>
-                          </div> <!--menu_print-->
-                          <div class="menu_slot">
-                            <div class="slot_container">
-                              <ul class="slide_box">
-                                <li>카레</li>
-                                <li>우동</li>
-                                <li>햄버거</li>
-                                <li>냉면</li>
-                                <li>삼겹살</li>
-                                <li>쌈밥</li>
-                                <li>감자탕</li>
-                                <li>칼국수</li>
-                                <li>짜장면</li>
-                                <li>국밥</li>
-                              </ul> <!--slide_box-->
-                            </div> <!--slot_container-->
-                          </div> <!--menu_slot-->
-                          <div class="btn_area">
-                            <button onclick="lunchIs()">멈춰!</button>
-                            <button onclick="reset()">추천해줘!</button>
-                          </div> <!--btn_area-->
-                        </div> <!--receipt-->          
-                    </div> <!--container-->
-                         <div class="follow">
-                            <!--  <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p> -->
-                         </div> <!--follow-->
-                     </div> <!--random-->
-                 </div> <!--sidebar-->
+             	<div class="mem-list"></div>	
+            </div> <!--sideW-->
+            <div class="sidebar">
+                <div class="random">
+                <div class="container">
+                    <div class="receipt">
+                      <div class="title_text">
+                        <h1>오늘 뭐 먹 지 ?</h1>
+                      </div> <!--title_text-->
+                      <div class="menu_print">
+                        <h2></h2>
+                      </div> <!--menu_print-->
+                      <div class="menu_slot">
+                        <div class="slot_container">
+                          <ul class="slide_box">
+                            <li>카레</li>
+                            <li>우동</li>
+                            <li>햄버거</li>
+                            <li>냉면</li>
+                            <li>삼겹살</li>
+                            <li>쌈밥</li>
+                            <li>감자탕</li>
+                            <li>칼국수</li>
+                            <li>짜장면</li>
+                            <li>국밥</li>
+                          </ul> <!--slide_box-->
+                        </div> <!--slot_container-->
+                      </div> <!--menu_slot-->
+                      <div class="btn_area">
+                        <button onclick="lunchIs()">멈춰!</button>
+                        <button onclick="reset()">추천해줘!</button>
+                      </div> <!--btn_area-->
+                    </div> <!--receipt-->          
+                </div> <!--container-->
+                     <div class="follow">
+                        <!--  <p id="follow1">이용약관 개인정보처리방침 쿠키정책</p> -->
+                     </div> <!--follow-->
+                 </div> <!--random-->
+             </div> <!--sidebar-->
 
 
 <!-- jquery 라이브러리 -->
