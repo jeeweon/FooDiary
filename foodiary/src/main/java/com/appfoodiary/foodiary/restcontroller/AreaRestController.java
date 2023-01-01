@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@Tag(name = "area rest controller", description = "관심지역")
+@Tag(name = "area-rest-controller", description = "관심지역")
 @RequestMapping("/rest/area")
 public class AreaRestController {
 	@Autowired

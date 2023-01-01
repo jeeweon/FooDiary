@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(origins = {"http://127.0.0.1:5500"})
 @Slf4j
 @RestController
-@Tag(name = "search rest controller", description = "리뷰/유저 탐색")
+@Tag(name = "search-rest-controller", description = "리뷰/유저 탐색")
 @RequestMapping("/rest/search")
 public class SearchRestController {
 	@Autowired

@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@Tag(name = "noti rest controller", description = "실시간 알림")
+@Tag(name = "noti-rest-controller", description = "실시간 알림")
 @RequestMapping("/rest/noti")
 public class NotiRestController {
 	@Autowired
