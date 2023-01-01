@@ -182,7 +182,7 @@
 			<choose>
 		 			<when test="keyword == null">
 		 				<![CDATA[
-							and (sysdate - review_write_time) <= 7
+							and (sysdate - review_write_time) <= 30
 						]]>	
 		 			</when>
 		 			<when test="keyword != null">
@@ -236,7 +236,7 @@
 			<choose>
 		 			<when test="keyword == null">
 		 				<![CDATA[
-							and (sysdate - review_write_time) <= 7
+							and (sysdate - review_write_time) <= 30
 						]]>	
 		 			</when>
 		 			<when test="keyword != null">
