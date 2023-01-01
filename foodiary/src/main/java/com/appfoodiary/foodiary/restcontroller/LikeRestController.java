@@ -36,8 +36,6 @@ public class LikeRestController {
 	@Autowired
 	private BookmarkDao bookmarkDao;
 	@Autowired
-	private FollowDao followDao;
-	@Autowired
 	private LevelPointService levelPointService;
 	@Autowired
 	private ReviewDao reviewDao;
@@ -108,33 +106,6 @@ public class LikeRestController {
 		
 	}
 	
-	// follow 비동기 통신 
-	@PostMapping("/follow")
-	public boolean follow(
-			@RequestParam int passiveMemNo,
-			HttpSession session
-			) {
-		//(1)들어온 데이터값을 있는지 없는지 확인
-		//(2)없다면 추가 있다면 삭제
-		//(3)true false 출력 
-		int activeMemNo=(int)session.getAttribute(SessionConstant.NO);
-		FollowDto dto =FollowDto.builder()
-								.activeMemNo(activeMemNo)
-								.passiveMemNo(passiveMemNo)
-								.build();
-		//데이터가 있는지 없는지 판정 
-		boolean cert=followDao.cert(dto);
-		
-		if(cert) {
-			//데이터값이 있으니까 삭제한다.
-			followDao.delete(dto);
-			return false;
-		}else {
-			//데이터값이 없으니까 삽입한다.
-			followDao.insert(dto);
-			return true;
-		}
-	}
 	//like2
 	@PostMapping("/like2")
 	public int like2(
