@@ -24,10 +24,13 @@ import com.appfoodiary.foodiary.repository.LikeDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.service.LevelPointService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@Tag(name = "like-rest-controller", description = "리뷰 액션 모")
 @RequestMapping("/rest/review")
 public class LikeRestController {
 	
@@ -43,6 +46,7 @@ public class LikeRestController {
 	
 	//좋아요 비동기 통신처리 백인드 
 	@PostMapping("/like")
+	@Operation(summary = "좋아요 설정/해제")
 	public int like(
 			@RequestParam int reviewNo,
 			Model model,
@@ -80,6 +84,7 @@ public class LikeRestController {
 	
 	//북마크 비동기통신 처리 앤드
 	@PostMapping("/bookmark")
+	@Operation(summary = "북마크 설정/해제")
 	public boolean bookmark(
 			@RequestParam int reviewNo,
 			HttpSession session
@@ -108,6 +113,7 @@ public class LikeRestController {
 	
 	//like2
 	@PostMapping("/like2")
+	@Operation(summary = "좋아요 설정/해제 & 활동 점수용 기록 추가")
 	public int like2(
 			@RequestParam int reviewNo,
 			HttpSession session
@@ -152,6 +158,7 @@ public class LikeRestController {
 	}
 	//리뷰 갯수 구하기 
 	@PostMapping("/count")
+	@Operation(summary = "좋아요 수")
 	public int count(@RequestParam int reviewNo) 
 	{
 		return likeDao.count(reviewNo);
