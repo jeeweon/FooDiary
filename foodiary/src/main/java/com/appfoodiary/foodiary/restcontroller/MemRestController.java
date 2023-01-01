@@ -22,7 +22,11 @@ import com.appfoodiary.foodiary.repository.FollowDao;
 import com.appfoodiary.foodiary.repository.MemDao;
 import com.appfoodiary.foodiary.service.EmailService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
+@Tag(name = "mem rest controller", description = "회원")
 @RequestMapping("/rest/mem")
 public class MemRestController {
 	
@@ -84,6 +88,7 @@ public class MemRestController {
 	private FollowDao followDao;
 	// follow 비동기 통신 
 		@PostMapping("/follow")
+		@Operation(summary = "팔로우 설정/해제")
 		public boolean follow(
 				@RequestParam int passiveMemNo,
 				HttpSession session
