@@ -669,7 +669,7 @@ resetNum = 0;
 				button.click(function(){
 					var that=$(this);
 					$.ajax({
-						url:"${pageContext.request.contextPath}/rest/review/follow",
+						url:"${pageContext.request.contextPath}/rest/mem/follow",
 						method:"post",
 						data :{
 							 passiveMemNo : $(this).data("rno")	

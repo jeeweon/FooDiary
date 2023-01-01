@@ -481,7 +481,7 @@ function reset() {
 				var no = $(this).data("mno");
 				var nick =  $(this).data("mnick");
 				$.ajax({
-					url : "${pageContext.request.contextPath}/rest/review/follow",
+					url : "${pageContext.request.contextPath}/rest/mem/follow",
 	                method : "post",
 				    data : {
 				    	passiveMemNo:no
