@@ -87,6 +87,56 @@ li {
     left: 350px; 
     top: 40px;             
 }
+.noti-cnt {
+	width:18px;
+	height:18px;
+	padding: 5px 10px;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 14px;
+	color: #ffffff;
+	background-color: #E27C5E;
+    line-height: 18px;
+    margin: 0 10px;
+}
+.rowbar{
+    position: fixed;
+    font-size: 18px;
+    bottom:0;
+    width: 100%; height: 80px;
+    background-color: #ffe9b1;
+    color: #000;
+    line-height: 80px;
+    text-align: center;
+}
+.rowbar legend{
+    font-weight: lighter;
+}
+#btn-row{
+    border: 1px solid #e27c5e;
+    background-color: white;
+    border-radius: 10px 10px;
+    font-size: 17px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 110px;
+}
+#btn-row a{
+    color: #e27c5e;
+}
+#btn-row2{
+    border: 1px solid #e1e1e1;
+    background-color: #e27c5e;
+    border-radius: 10px 10px;
+    font-size: 17px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    width: 110px;
+}
+#btn-row2 a{
+    color: white;
+}
+
 .formdiv{
 	width: 600px;
 	height: 110px;
@@ -170,8 +220,8 @@ li {
 
 .mem-list {
 	width: 600px;
-	margin-top: 50px;
-	margin-bottom: 60px;
+	margin-top: 80px;
+	margin-bottom: 120px;
 }
 
 .no-mem {
@@ -649,4 +699,7 @@ li {
         font-size: 0;
         
     }
+    
 }
+
+

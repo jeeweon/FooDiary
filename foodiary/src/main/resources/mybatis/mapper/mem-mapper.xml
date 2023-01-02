@@ -118,6 +118,7 @@
 		<if test="memNo != 0"> <!-- 회원이면 검색결과에서 자기자신 제외 -->
 			and M.mem_no not in(#{memNo})
 		</if>
+		order by M.mem_no asc
 	</select>
 	
 	<!-- 활동점수 높은 순 top5 회원 조회 -->

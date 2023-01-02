@@ -1,4 +1,4 @@
-package com.appfoodiary.foodiary.restcontroller;
+package com.appfoodiary.foodiary.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

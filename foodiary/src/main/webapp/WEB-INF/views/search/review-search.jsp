@@ -12,21 +12,6 @@
 .receipt{
 	background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
 }
-.noti-cnt {
-	position: relative;
-	bottom: 4px;
-	width:18px;
-	height:18px;
-	padding: 5px 10px;
-	border-radius: 50%;
-	text-align: center;
-	font-size: 14px;
-	color: #ffffff;
-	background-color: #E27C5E;
-    line-height: 18px;
-    margin: 0 10px;
-    
-}
 </style>
 </head>
 <body>
@@ -155,6 +140,7 @@
                          </c:if>
                      </div> <!--random-->
                  </div> <!--sidebar-->
+        </div><!--//inner-->
             <c:if test = "${!login}">
             <div class="rowbar">
                 <form action="">
@@ -168,7 +154,6 @@
                 </form>  
             </div> <!--rowbar-->
             </c:if>
-        </div><!--//inner-->
         <div class="footer"></div>
     </div> <!--wrapper-->
 
@@ -669,7 +654,7 @@ resetNum = 0;
 				button.click(function(){
 					var that=$(this);
 					$.ajax({
-						url:"${pageContext.request.contextPath}/rest/review/follow",
+						url:"${pageContext.request.contextPath}/rest/mem/follow",
 						method:"post",
 						data :{
 							 passiveMemNo : $(this).data("rno")	

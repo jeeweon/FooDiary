@@ -24,10 +24,13 @@ import com.appfoodiary.foodiary.repository.LikeDao;
 import com.appfoodiary.foodiary.repository.ReviewDao;
 import com.appfoodiary.foodiary.service.LevelPointService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@Tag(name = "like-rest-controller", description = "리뷰 액션 모")
 @RequestMapping("/rest/review")
 public class LikeRestController {
 	
@@ -36,8 +39,6 @@ public class LikeRestController {
 	@Autowired
 	private BookmarkDao bookmarkDao;
 	@Autowired
-	private FollowDao followDao;
-	@Autowired
 	private LevelPointService levelPointService;
 	@Autowired
 	private ReviewDao reviewDao;
@@ -45,6 +46,7 @@ public class LikeRestController {
 	
 	//좋아요 비동기 통신처리 백인드 
 	@PostMapping("/like")
+	@Operation(summary = "좋아요 설정/해제")
 	public int like(
 			@RequestParam int reviewNo,
 			Model model,
@@ -82,6 +84,7 @@ public class LikeRestController {
 	
 	//북마크 비동기통신 처리 앤드
 	@PostMapping("/bookmark")
+	@Operation(summary = "북마크 설정/해제")
 	public boolean bookmark(
 			@RequestParam int reviewNo,
 			HttpSession session
@@ -108,35 +111,9 @@ public class LikeRestController {
 		
 	}
 	
-	// follow 비동기 통신 
-	@PostMapping("/follow")
-	public boolean follow(
-			@RequestParam int passiveMemNo,
-			HttpSession session
-			) {
-		//(1)들어온 데이터값을 있는지 없는지 확인
-		//(2)없다면 추가 있다면 삭제
-		//(3)true false 출력 
-		int activeMemNo=(int)session.getAttribute(SessionConstant.NO);
-		FollowDto dto =FollowDto.builder()
-								.activeMemNo(activeMemNo)
-								.passiveMemNo(passiveMemNo)
-								.build();
-		//데이터가 있는지 없는지 판정 
-		boolean cert=followDao.cert(dto);
-		
-		if(cert) {
-			//데이터값이 있으니까 삭제한다.
-			followDao.delete(dto);
-			return false;
-		}else {
-			//데이터값이 없으니까 삽입한다.
-			followDao.insert(dto);
-			return true;
-		}
-	}
 	//like2
 	@PostMapping("/like2")
+	@Operation(summary = "좋아요 설정/해제 & 활동 점수용 기록 추가")
 	public int like2(
 			@RequestParam int reviewNo,
 			HttpSession session
@@ -181,6 +158,7 @@ public class LikeRestController {
 	}
 	//리뷰 갯수 구하기 
 	@PostMapping("/count")
+	@Operation(summary = "좋아요 수")
 	public int count(@RequestParam int reviewNo) 
 	{
 		return likeDao.count(reviewNo);

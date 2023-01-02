@@ -10,20 +10,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <style>
 .receipt{
- 		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
- 	}
-.noti-cnt {
-	width:18px;
-	height:18px;
-	padding: 5px 10px;
-	border-radius: 50%;
-	text-align: center;
-	font-size: 14px;
-	color: #ffffff;
-	background-color: #E27C5E;
-    line-height: 18px;
-    margin: 0 10px;
-	}
+	background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
+}
 </style>
 </head>
 <body>
@@ -146,6 +134,21 @@
                      </div> <!--follow-->
                  </div> <!--random-->
              </div> <!--sidebar-->
+        </div><!--//inner-->
+ 			<c:if test = "${!login}">
+            <div class="rowbar">
+                <form action="">
+                    <fieldset>
+                        <legend>
+                            로그인하여 내 주변 맛집 리뷰를 확인하고 회원님이 좋아할 만한 계정을 찾아보세요.
+                            <button  id="btn-row"><a href="${pageContext.request.contextPath}/mem/login">로그인</a></button>
+                            <button id="btn-row2"><a href="${pageContext.request.contextPath}/mem/join">회원가입</a></button>
+                        </legend>
+                    </fieldset>
+                </form>  
+            </div> <!--rowbar-->
+            </c:if>
+    </div> <!--wrapper-->
 
 
 <!-- jquery 라이브러리 -->
@@ -481,7 +484,7 @@ function reset() {
 				var no = $(this).data("mno");
 				var nick =  $(this).data("mnick");
 				$.ajax({
-					url : "${pageContext.request.contextPath}/rest/review/follow",
+					url : "${pageContext.request.contextPath}/rest/mem/follow",
 	                method : "post",
 				    data : {
 				    	passiveMemNo:no
