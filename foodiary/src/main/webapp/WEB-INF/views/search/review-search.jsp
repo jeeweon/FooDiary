@@ -155,6 +155,7 @@
                          </c:if>
                      </div> <!--random-->
                  </div> <!--sidebar-->
+        </div><!--//inner-->
             <c:if test = "${!login}">
             <div class="rowbar">
                 <form action="">
@@ -168,7 +169,6 @@
                 </form>  
             </div> <!--rowbar-->
             </c:if>
-        </div><!--//inner-->
         <div class="footer"></div>
     </div> <!--wrapper-->
 
