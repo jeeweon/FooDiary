@@ -10,20 +10,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
 <style>
 .receipt{
- 		background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
- 	}
-.noti-cnt {
-	width:18px;
-	height:18px;
-	padding: 5px 10px;
-	border-radius: 50%;
-	text-align: center;
-	font-size: 14px;
-	color: #ffffff;
-	background-color: #E27C5E;
-    line-height: 18px;
-    margin: 0 10px;
-	}
+	background-image: url("${pageContext.request.contextPath}/images/슬롯머신.jpg");
+}
 </style>
 </head>
 <body>
