@@ -24,4 +24,6 @@ public interface AdminEmailDao {
 	int count(ListSearchVO vo);
 	int listCount(ListSearchVO vo);
 	int searchCount(ListSearchVO vo);
+	//삭제
+	boolean delete(int emailNo);
 }

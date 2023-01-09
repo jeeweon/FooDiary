@@ -75,5 +75,10 @@ public class AdminEmailDaoImpl implements AdminEmailDao{
 	public int searchCount(ListSearchVO vo) {
 		return sqlSession.selectOne("admin-email.searchCount",vo);
 	}
+	
+	@Override
+	public boolean delete(int emailNo) {
+		return sqlSession.delete("admin-email.delete",emailNo)>0;
+	}
 
 }

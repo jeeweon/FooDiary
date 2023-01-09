@@ -52,5 +52,9 @@
 		select count(*) from notice_email where instr(email_subject, #{keyword})>0
 	</select>
 	
+	<delete id="delete" parameterType="int">
+		delete notice_email where email_no=#{emailNo}
+	</delete>
+	
 
 </mapper>
