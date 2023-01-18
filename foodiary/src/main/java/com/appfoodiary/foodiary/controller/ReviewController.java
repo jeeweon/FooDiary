@@ -35,8 +35,9 @@ import com.appfoodiary.foodiary.vo.CheckRpLkBkVO;
 @RequestMapping("/review")
 public class ReviewController {
 	
-	private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
+	//private final File dir = new File("D:\\upload\\kh10g");	//파일 경로
 	//private final File dir = new File(System.getProperty("user.home") + "/upload"); //OS 무관 파일 경로
+	private final File dir = new File("C:\\Windows\\ServiceProfiles\\LocalService\\upload"); //EC2
 	@PostConstruct	//최초 실행 시, 딱 한번만 실행
 	public void prepare() {
 		dir.mkdirs();	//파일 생성
